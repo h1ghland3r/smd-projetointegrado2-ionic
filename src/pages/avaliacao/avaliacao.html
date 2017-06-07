@@ -1,0 +1,109 @@
+<!--
+  Generated template for the AvaliacaoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Avaliação</ion-title>
+    <ion-buttons start>
+      <button ion-button icon-left (click)="prev()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-right (click)="next()">
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<!--<ion-content padding>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 text-center>
+        <div>
+         <button ion-button color="darkgrey" (click)="retornar()">Retornar</button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+</ion-content>-->
+
+<ion-content>
+ 
+    <ion-slides #avaliacaoSlider>
+ 
+      <ion-slide>
+
+        <p *ngIf="submitAttempt" style="color: #ea6153;">Por favor, selecione todos os campos.</p>
+ 
+        <ion-list no-lines>
+        
+            <form [formGroup]="slideOneForm">
+        
+                <ion-item>
+                    <ion-label floating>Escola</ion-label>
+                    <ion-select formControlName="escola" [(ngModel)]="escola">
+                      <ion-option value="a">Escola A</ion-option>
+                      <ion-option value="b">Escola B</ion-option>
+                    </ion-select>
+                </ion-item>
+        
+                <ion-item>
+                    <ion-label floating>Turma</ion-label>
+                    <ion-select formControlName="turma" [(ngModel)]="turma">
+                      <ion-option value="a">Turma A</ion-option>
+                      <ion-option value="b">Turma B</ion-option>
+                    </ion-select>
+                </ion-item>
+        
+                <ion-item>
+                    <ion-label floating>Grupo</ion-label>
+                    <ion-select formControlName="grupo" [(ngModel)]="grupo">
+                      <ion-option value="a">Grupo A</ion-option>
+                      <ion-option value="b">Grupo B</ion-option>
+                    </ion-select>>
+                </ion-item>
+        
+            </form>
+        
+        </ion-list>
+
+      </ion-slide>
+ 
+      <ion-slide>
+
+        <ion-list no-lines>
+ 
+            <form [formGroup]="slideTwoForm">
+
+                <ion-title>1ª Etapa: Construtor</ion-title>
+
+                <ion-item>
+                    <ion-label floating>Selecione o aluno</ion-label>
+                    <ion-select formControlName="alunoConstrutor" [(ngModel)]="alunoConstrutor">
+                      <ion-option value="a">Aluno A</ion-option>
+                      <ion-option value="b">Aluno B</ion-option>
+                      <ion-option value="c">Aluno C</ion-option>
+                      <ion-option value="d">Aluno D</ion-option>
+                    </ion-select>>
+                </ion-item>
+ 
+            </form>
+ 
+        </ion-list>
+ 
+      </ion-slide>
+ 
+    </ion-slides>
+ 
+</ion-content>

@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
-import { AvaliacaoInicioPage } from '../pages/avaliacao-inicio/avaliacao-inicio';
+import { AvaliacaoPage } from '../pages/avaliacao/avaliacao';
 
 @Component({
   templateUrl: 'app.html'
@@ -29,7 +29,7 @@ export class MyApp {
       },
       {
         title: 'Avaliação',
-        component: AvaliacaoInicioPage,
+        component: AvaliacaoPage,
         icon: 'checkbox'
       },
       {
