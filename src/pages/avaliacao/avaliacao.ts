@@ -16,20 +16,25 @@ export class AvaliacaoPage {
 
   @ViewChild('avaliacaoSlider') avaliacaoSlider: any;
 
-  slideOneForm: FormGroup;
-  slideTwoForm: FormGroup;
+  slide1Form: FormGroup;
+  slide2Form: FormGroup;
+  slide3Form: FormGroup;
 
   submitAttempt: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder) {
 
-    this.slideOneForm = formBuilder.group({
+    this.slide1Form = formBuilder.group({
         escola: [''],
         turma: [''],
         grupo: ['']
     });
 
-    this.slideTwoForm = formBuilder.group({
+    this.slide2Form = formBuilder.group({
+        alunoConstrutor: ['']
+    });
+
+    this.slide3Form = formBuilder.group({
         alunoConstrutor: ['']
     });
 
