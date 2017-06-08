@@ -17,8 +17,36 @@
 
 /* Formatting */
 
+.text-center {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
 .vertical-align-content > * {
     display: flex!important;
     align-content: center!important;
     align-items: center!important;
+}
+
+/* Elements */
+
+.content-md {
+    color: color($colors, dark, base);
+}
+
+.button-actions {
+    width: 300px;
+}
+
+h4 {
+    text-transform: uppercase;
+    line-height: 2;
 }
