@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { SQLite } from '@ionic-native/sqlite';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -9,13 +10,17 @@ import { AvaliacaoPage } from '../pages/avaliacao/avaliacao';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { EscolasPage } from "../pages/escolas/escolas";
+
+import { DbServiceProvider } from '../providers/db-service/db-service';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
-    AvaliacaoPage
+    AvaliacaoPage,
+    EscolasPage
   ],
   imports: [
     BrowserModule,
@@ -26,12 +31,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     HomePage,
     ListPage,
-    AvaliacaoPage
+    AvaliacaoPage,
+    EscolasPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    SQLite,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    DbServiceProvider
   ]
 })
 export class AppModule {}
