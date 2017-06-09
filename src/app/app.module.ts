@@ -11,6 +11,7 @@ import { AvaliacaoPage } from '../pages/avaliacao/avaliacao';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { EscolasPage } from "../pages/escolas/escolas";
+import { TurmasPage } from "../pages/turmas/turmas";
 
 import { DbServiceProvider } from '../providers/db-service/db-service';
 
@@ -20,7 +21,8 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     HomePage,
     ListPage,
     AvaliacaoPage,
-    EscolasPage
+    EscolasPage,
+    TurmasPage
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,8 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     HomePage,
     ListPage,
     AvaliacaoPage,
-    EscolasPage
+    EscolasPage,
+    TurmasPage
   ],
   providers: [
     StatusBar,
