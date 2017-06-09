@@ -11,3 +11,23 @@ ion-slide {
     margin: 0 auto !important;
 }
 
+.avatar-name {
+    margin-top: 10px;
+    display: block;
+}
+
+h4.subtitle {
+    text-transform: uppercase;
+    line-height: 2;
+    white-space: normal;
+}
+
+.question-title {
+    margin-top: 2px;
+    font-size: 1.8rem;
+    white-space: normal;
+}
+
+.card-md, .card-header-md, .item-md {
+    background-color: color($colors, lightgrey, base);
+}

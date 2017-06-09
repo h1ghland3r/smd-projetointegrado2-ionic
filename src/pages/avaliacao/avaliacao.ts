@@ -17,8 +17,12 @@ export class AvaliacaoPage {
   @ViewChild('avaliacaoSlider') avaliacaoSlider: any;
 
   slide1Form: FormGroup;
-  slide2Form: FormGroup;
-  slide3Form: FormGroup;
+  slideConstrutorForm: FormGroup;
+  slideConstrutorQst1Form: FormGroup;
+  slideConstrutorQst2Form: FormGroup;
+  slideOrganizadorForm: FormGroup;
+  slideOrganizadorQst1Form: FormGroup;
+  slideOrganizadorQst2Form: FormGroup;
 
   submitAttempt: boolean = false;
 
@@ -30,11 +34,27 @@ export class AvaliacaoPage {
         grupo: ['']
     });
 
-    this.slide2Form = formBuilder.group({
+    this.slideConstrutorForm = formBuilder.group({
         alunoConstrutor: ['']
     });
 
-    this.slide3Form = formBuilder.group({
+    this.slideConstrutorQst1Form = formBuilder.group({
+        alunoConstrutor: ['']
+    });
+
+    this.slideConstrutorQst2Form = formBuilder.group({
+        alunoConstrutor: ['']
+    });
+
+    this.slideOrganizadorForm = formBuilder.group({
+        alunoConstrutor: ['']
+    });
+
+    this.slideOrganizadorQst1Form = formBuilder.group({
+        alunoConstrutor: ['']
+    });
+
+    this.slideOrganizadorQst2Form = formBuilder.group({
         alunoConstrutor: ['']
     });
 
