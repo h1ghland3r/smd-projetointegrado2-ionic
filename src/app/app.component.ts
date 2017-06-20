@@ -10,6 +10,7 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { AvaliacaoPage } from '../pages/avaliacao/avaliacao';
 import { EscolasPage } from '../pages/escolas/escolas';
+import { TurmasPage } from '../pages/turmas/turmas';
 
 @Component({
   templateUrl: 'app.html'
@@ -49,6 +50,11 @@ export class MyApp {
         title: 'Escolas',
         component: EscolasPage,
         icon: 'list'
+      },
+      {
+        title: 'Turmas',
+        component: TurmasPage,
+        icon: 'list'
       }
     ];
 
@@ -73,11 +79,11 @@ export class MyApp {
   private createDatabase(){
     this.sqlite.create({
       name: 'data.db',
-      location: 'default' // the location field is required
+      location: 'default'
     })
       .then((db) => {
         this.dbService.setDatabase(db);
-        return this.dbService.createTable();
+        return this.dbService.createTableEscola();
       })
       .catch(error =>{
         console.error(error);

@@ -3,14 +3,20 @@ import { IonicPage, NavController, AlertController } from 'ionic-angular';
 
 import { DbServiceProvider } from '../../providers/db-service/db-service';
 
+/**
+ * Generated class for the TurmasPage page.
+ *
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
+ */
 @IonicPage()
 @Component({
-  selector: 'page-escolas',
-  templateUrl: 'escolas.html',
+  selector: 'page-turmas',
+  templateUrl: 'turmas.html',
 })
-export class EscolasPage {
+export class TurmasPage {
 
-  escolas: any[] = [];
+  turmas: any[] = [];
 
   constructor(public navCtrl: NavController,
               public dbService: DbServiceProvider,
@@ -18,28 +24,28 @@ export class EscolasPage {
   }
 
   ionViewDidLoad() {
-    this.getAllEscolas();
+    this.getAllTurmas();
   }
 
-  getAllEscolas(){
-    this.dbService.getAllEscolas()
-      .then(escolas => {
-        console.log(escolas);
-        this.escolas = escolas;
+  getAllTurmas(){
+    this.dbService.getAllTurmas()
+      .then(turmas => {
+        console.log(turmas);
+        this.turmas = turmas;
       })
       .catch( error => {
         console.error( error );
       });
   }
 
-  openAlertNewEscola(){
+  openAlertNewTurma(){
     let alert = this.alertCtrl.create({
-      title: 'Criar escola',
-      message: 'Escreva o nome da escola',
+      title: 'Criar turma',
+      message: 'Escreva o nome da turma',
       inputs: [
         {
-          name: 'nome',
-          placeholder: 'Digitar o nome da escola.',
+          name: 'Nome',
+          placeholder: 'Digitar o nome da turma.',
         }
       ],
       buttons: [
@@ -52,10 +58,10 @@ export class EscolasPage {
         {
           text: 'Criar',
           handler: (data)=>{
-            data.completed = false;
-            this.dbService.createEscola(data)
+            this.dbService.createTurma(data)
               .then(response => {
-                this.escolas.unshift( data );
+                console.log("esse é o valor " + data);
+                this.turmas.push( data );
               })
               .catch( error => {
                 console.error( error );
@@ -67,22 +73,22 @@ export class EscolasPage {
     alert.present();
   }
 
-  updateEscola(escola, index){
-    escola = Object.assign({}, escola);
-    this.dbService.updateEscola(escola)
+  updateTurma(turma, index){
+    turma = Object.assign({}, turma);
+    this.dbService.updateTurma(turma)
       .then( response => {
-        this.escolas[index] = escola;
+        this.turmas[index] = turma;
       })
       .catch( error => {
         console.error( error );
       })
   }
 
-  deleteEscola(escola: any, index){
-    this.dbService.deleteEscola(escola)
+  deleteTurma(turma: any, index){
+    this.dbService.deleteTurma(turma)
       .then(response => {
         console.log( response );
-        this.escolas.splice(index, 1);
+        this.turmas.splice(index, 1);
       })
       .catch( error => {
         console.error( error );
