@@ -21,13 +21,14 @@
           <ion-icon name="trash"></ion-icon>
           Delete
         </button>
-        <button ion-button (click)="updateEscola(escola, i)">
+        <button ion-button (click)="openModalEdit(escola, i)">
           Editar
         </button>
       </ion-item-options>
     </ion-item-sliding>
 
-    <button ion-button icon-only (click)="openAlertNewEscola()">
+    <!-- <button ion-button icon-only (click)="openAlertNewEscola()"> -->
+    <button ion-button icon-only (click)="openModalAdd()">
       <ion-icon name="add"></ion-icon>
     </button>
 

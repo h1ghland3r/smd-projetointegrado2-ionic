@@ -12,6 +12,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { EscolasPage } from "../pages/escolas/escolas";
 import { TurmasPage } from "../pages/turmas/turmas";
+import { AddEscolaModalPage } from "../pages/add-escola-modal/add-escola-modal";
+import { EditEscolaModalPage } from "../pages/edit-escola-modal/edit-escola-modal";
+
 
 import { DbServiceProvider } from '../providers/db-service/db-service';
 
@@ -22,7 +25,9 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     ListPage,
     AvaliacaoPage,
     EscolasPage,
-    TurmasPage
+    TurmasPage,
+    AddEscolaModalPage,
+    EditEscolaModalPage
   ],
   imports: [
     BrowserModule,
@@ -35,7 +40,9 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     ListPage,
     AvaliacaoPage,
     EscolasPage,
-    TurmasPage
+    TurmasPage,
+    AddEscolaModalPage,
+    EditEscolaModalPage
   ],
   providers: [
     StatusBar,

@@ -45,6 +45,11 @@ export class DbServiceProvider {
     return this.db.executeSql(sql, [escola.id]);
   }
 
+  getEscolaById(escola: any){
+    let sql = 'SELECT * FROM escolas WHERE id=?';
+    return this.db.executeSql(sql, [escola.id]);
+  }
+
   getAllEscolas(){
     let sql = 'SELECT * FROM escolas';
     return this.db.executeSql(sql, [])
