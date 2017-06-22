@@ -89,6 +89,8 @@
         </ion-list>
 
       </ion-slide>
+
+      <!--Construtor-->
  
       <ion-slide padding>
 
@@ -100,6 +102,12 @@
                   <h4 class="subtitle">
                     1ª Etapa: <strong>Construtor</strong>
                   </h4>
+                  <div class="progressbar">
+                    <div class="bar1 active"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                    <div class="bar4"></div>
+                  </div>
                 </ion-label>
                 <div class="border-bottom">
                   <ion-item class="no-padding-left">
@@ -234,6 +242,8 @@
  
       </ion-slide>
 
+      <!--Organizador-->
+
       <ion-slide padding>
 
         <ion-list no-lines>
@@ -244,13 +254,18 @@
                   <h4 class="subtitle">
                     2ª Etapa: <strong>Organizador</strong>
                   </h4>
+                  <div class="progressbar">
+                    <div class="bar1 active"></div>
+                    <div class="bar2 active"></div>
+                    <div class="bar3"></div>
+                    <div class="bar4"></div>
+                  </div>
                 </ion-label>
 
                 <div class="border-bottom">
                   <ion-item class="no-padding-left">
                       <ion-label margin-top>Selecione o aluno</ion-label>
                       <ion-select formControlName="alunoConstrutor" [(ngModel)]="alunoConstrutor">
-                        <ion-option value="a">Aluno A</ion-option>
                         <ion-option value="b">Aluno B</ion-option>
                         <ion-option value="c">Aluno C</ion-option>
                         <ion-option value="d">Aluno D</ion-option>
@@ -273,7 +288,7 @@
             <form [formGroup]="slideOrganizadorQst1Form">
 
                 <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">Grupo B</h4>
+                  <h4 class="subtitle">Grupo A</h4>
                   <ion-avatar>
                       <!--<img src="../../assets/img/student-girl.png" class="avatar-student" />-->
                       <img src="/android_asset/www/assets/img/student-girl.png" class="avatar-student" />
@@ -329,7 +344,7 @@
             <form [formGroup]="slideOrganizadorQst2Form">
 
                 <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">Grupo B</h4>
+                  <h4 class="subtitle">Grupo A</h4>
                   <ion-avatar>
                       <!--<img src="../../assets/avatars/student-girl.png" class="avatar-student" />-->
                       <img src="/android_asset/www/assets/img/student-girl.png" class="avatar-student" />
@@ -377,7 +392,336 @@
         </ion-list>
  
       </ion-slide>
+
+      <!--Programador-->
+
+      <ion-slide padding>
+
+        <ion-list no-lines>
  
+            <form [formGroup]="slideProgramadorForm">
+                
+                <ion-label margin-vertical color="black">
+                  <h4 class="subtitle">
+                    3ª Etapa: <strong>Programador</strong>
+                  </h4>
+                  <div class="progressbar">
+                    <div class="bar1 active"></div>
+                    <div class="bar2 active"></div>
+                    <div class="bar3 active"></div>
+                    <div class="bar4"></div>
+                  </div>
+                </ion-label>
+
+                <div class="border-bottom">
+                  <ion-item class="no-padding-left">
+                      <ion-label margin-top>Selecione o aluno</ion-label>
+                      <ion-select formControlName="alunoConstrutor" [(ngModel)]="alunoConstrutor">
+                        <ion-option value="c">Aluno C</ion-option>
+                        <ion-option value="d">Aluno D</ion-option>
+                      </ion-select>>
+                  </ion-item>
+                </div>
+
+                <button ion-button color="darkgrey" class="button-top-margin" (click)="next()" full>Iniciar</button>
+
+            </form>
+ 
+        </ion-list>
+ 
+      </ion-slide>
+
+      <ion-slide padding>
+
+        <ion-list no-lines>
+ 
+            <form [formGroup]="slideProgramadorQst1Form">
+
+                <ion-label margin-vertical color="black">
+                  <h4 class="subtitle">Grupo A</h4>
+                  <ion-avatar>
+                      <!--<img src="../../assets/img/student-boy.png" class="avatar-student" />-->
+                      <img src="/android_asset/www/assets/img/student-boy.png" class="avatar-student" />
+                      <span class="avatar-name">Aluno C</span>
+                  </ion-avatar>
+                </ion-label>
+
+
+                <ion-card margin-vertical>
+                  <ion-card-header>
+                    <ion-item>
+                      <button ion-button icon-only item-right clear>
+                        <ion-icon name="md-help"></ion-icon>
+                      </button>
+                      <span class="question-title">1. Conhecia os menus de blocos (nome, utilidade e localização)?</span>
+                    </ion-item>
+                  </ion-card-header>
+
+                  <ion-card-content>  
+                    <ion-list radio-group>
+                      <ion-item text-wrap>
+                        <ion-label>Não</ion-label>
+                        <ion-radio item-left value="nao"></ion-radio>
+                      </ion-item>
+                      <ion-item text-wrap>
+                        <ion-label>Insuficiente</ion-label>
+                        <ion-radio item-left value="insuficiente"></ion-radio>
+                      </ion-item>
+                      <ion-item text-wrap>
+                        <ion-label>Parcialmente</ion-label>
+                        <ion-radio item-left value="parcialmente"></ion-radio>
+                      </ion-item>
+                      <ion-item text-wrap>
+                        <ion-label>Sim</ion-label>
+                        <ion-radio item-left value="sim"></ion-radio>
+                      </ion-item>
+                    </ion-list>
+                    
+                    <button ion-button color="darkgrey" class="button-top-margin" (click)="next()" full>Avançar</button>
+                  </ion-card-content>  
+                </ion-card>                  
+
+            </form>
+ 
+        </ion-list>
+ 
+      </ion-slide>
+
+      <ion-slide padding>
+
+        <ion-list no-lines>
+ 
+            <form [formGroup]="slideProgramadorQst2Form">
+
+                <ion-label margin-vertical color="black">
+                  <h4 class="subtitle">Grupo A</h4>
+                  <ion-avatar>
+                      <!--<img src="../../assets/avatars/student-boy.png" class="avatar-student" />-->
+                      <img src="/android_asset/www/assets/img/student-boy.png" class="avatar-student" />
+                      <span class="avatar-name">Aluno C</span>
+                  </ion-avatar>
+                </ion-label>
+
+
+                <ion-card margin-vertical>
+                  <ion-card-header>
+                    <ion-item>
+                      <button ion-button icon-only item-right clear>
+                        <ion-icon name="md-help"></ion-icon>
+                      </button>
+                      <span class="question-title">2. Entendeu a necessidade da configuração dos blocos?</span>
+                    </ion-item>
+                  </ion-card-header>
+
+                  <ion-card-content>  
+                    <ion-list radio-group>
+                      <ion-item text-wrap>
+                        <ion-label>Não</ion-label>
+                        <ion-radio item-left value="nao"></ion-radio>
+                      </ion-item>
+                      <ion-item text-wrap>
+                        <ion-label>Insuficiente</ion-label>
+                        <ion-radio item-left value="insuficiente"></ion-radio>
+                      </ion-item>
+                      <ion-item text-wrap>
+                        <ion-label>Parcialmente</ion-label>
+                        <ion-radio item-left value="parcialmente"></ion-radio>
+                      </ion-item>
+                      <ion-item text-wrap>
+                        <ion-label>Sim</ion-label>
+                        <ion-radio item-left value="sim"></ion-radio>
+                      </ion-item>
+                    </ion-list>
+                    
+                    <button ion-button color="darkgrey" class="button-top-margin" (click)="next()" full>Concluir etapa</button>
+                  </ion-card-content>  
+                </ion-card>                  
+
+            </form>
+ 
+        </ion-list>
+ 
+      </ion-slide>
+ 
+      <!--Líder-->
+
+      <ion-slide padding>
+
+        <ion-list no-lines>
+ 
+            <form [formGroup]="slideLiderForm">
+                
+                <ion-label margin-vertical color="black">
+                  <h4 class="subtitle">
+                    4ª Etapa: <strong>Líder</strong>
+                  </h4>
+                  <div class="progressbar">
+                    <div class="bar1 active"></div>
+                    <div class="bar2 active"></div>
+                    <div class="bar3 active"></div>
+                    <div class="bar4 active"></div>
+                  </div>
+                </ion-label>
+
+                <div class="border-bottom">
+                  <ion-item class="no-padding-left">
+                      <ion-label margin-top>Selecione o aluno</ion-label>
+                      <ion-select formControlName="alunoConstrutor" [(ngModel)]="alunoConstrutor">
+                        <ion-option value="d">Aluno D</ion-option>
+                      </ion-select>>
+                  </ion-item>
+                </div>
+
+                <button ion-button color="darkgrey" class="button-top-margin" (click)="next()" full>Iniciar</button>
+
+            </form>
+ 
+        </ion-list>
+ 
+      </ion-slide>
+
+      <ion-slide padding>
+
+        <ion-list no-lines>
+ 
+            <form [formGroup]="slideLiderQst1Form">
+
+                <ion-label margin-vertical color="black">
+                  <h4 class="subtitle">Grupo A</h4>
+                  <ion-avatar>
+                      <!--<img src="../../assets/img/student-girl.png" class="avatar-student" />-->
+                      <img src="/android_asset/www/assets/img/student-girl.png" class="avatar-student" />
+                      <span class="avatar-name">Aluno D</span>
+                  </ion-avatar>
+                </ion-label>
+
+
+                <ion-card margin-vertical>
+                  <ion-card-header>
+                    <ion-item>
+                      <button ion-button icon-only item-right clear>
+                        <ion-icon name="md-help"></ion-icon>
+                      </button>
+                      <span class="question-title">1. Teve boa expressão oral (fala articulada, boa entonação etc)?</span>
+                    </ion-item>
+                  </ion-card-header>
+
+                  <ion-card-content>  
+                    <ion-list radio-group>
+                      <ion-item text-wrap>
+                        <ion-label>Não</ion-label>
+                        <ion-radio item-left value="nao"></ion-radio>
+                      </ion-item>
+                      <ion-item text-wrap>
+                        <ion-label>Insuficiente</ion-label>
+                        <ion-radio item-left value="insuficiente"></ion-radio>
+                      </ion-item>
+                      <ion-item text-wrap>
+                        <ion-label>Parcialmente</ion-label>
+                        <ion-radio item-left value="parcialmente"></ion-radio>
+                      </ion-item>
+                      <ion-item text-wrap>
+                        <ion-label>Sim</ion-label>
+                        <ion-radio item-left value="sim"></ion-radio>
+                      </ion-item>
+                    </ion-list>
+                    
+                    <button ion-button color="darkgrey" class="button-top-margin" (click)="next()" full>Avançar</button>
+                  </ion-card-content>  
+                </ion-card>                  
+
+            </form>
+ 
+        </ion-list>
+ 
+      </ion-slide>
+
+      <ion-slide padding>
+
+        <ion-list no-lines>
+ 
+            <form [formGroup]="slideLiderQst2Form">
+
+                <ion-label margin-vertical color="black">
+                  <h4 class="subtitle">Grupo A</h4>
+                  <ion-avatar>
+                      <!--<img src="../../assets/avatars/student-girl.png" class="avatar-student" />-->
+                      <img src="/android_asset/www/assets/img/student-girl.png" class="avatar-student" />
+                      <span class="avatar-name">Aluno D</span>
+                  </ion-avatar>
+                </ion-label>
+
+
+                <ion-card margin-vertical>
+                  <ion-card-header>
+                    <ion-item>
+                      <button ion-button icon-only item-right clear>
+                        <ion-icon name="md-help"></ion-icon>
+                      </button>
+                      <span class="question-title">2. Apresentou o projeto divulgando as informações necessárias?</span>
+                    </ion-item>
+                  </ion-card-header>
+
+                  <ion-card-content>  
+                    <ion-list radio-group>
+                      <ion-item text-wrap>
+                        <ion-label>Não</ion-label>
+                        <ion-radio item-left value="nao"></ion-radio>
+                      </ion-item>
+                      <ion-item text-wrap>
+                        <ion-label>Insuficiente</ion-label>
+                        <ion-radio item-left value="insuficiente"></ion-radio>
+                      </ion-item>
+                      <ion-item text-wrap>
+                        <ion-label>Parcialmente</ion-label>
+                        <ion-radio item-left value="parcialmente"></ion-radio>
+                      </ion-item>
+                      <ion-item text-wrap>
+                        <ion-label>Sim</ion-label>
+                        <ion-radio item-left value="sim"></ion-radio>
+                      </ion-item>
+                    </ion-list>
+                    
+                    <button ion-button color="darkgrey" class="button-top-margin" (click)="next()" full>Finalizar</button>
+                  </ion-card-content>  
+                </ion-card>                  
+
+            </form>
+ 
+        </ion-list>
+ 
+      </ion-slide>
+
+      <!--Resultado-->
+
+      <ion-slide padding>
+
+        <ion-list no-lines>
+ 
+
+                <ion-label margin-vertical color="black">
+                  <h4 class="subtitle">Resultado do Grupo A</h4>
+                </ion-label>
+
+
+                <ion-card margin-vertical>
+                  <ion-card-header>
+                    Gráfico
+                  </ion-card-header>
+
+                  <ion-card-content>  
+                    
+                    <canvas #doughnutCanvas></canvas>
+
+                    <button ion-button color="darkgrey" class="button-top-margin" full>Exportar</button>
+                  </ion-card-content>  
+                </ion-card>                  
+
+ 
+        </ion-list>
+ 
+      </ion-slide>
+
     </ion-slides>
  
 </ion-content>
