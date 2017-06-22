@@ -36,6 +36,65 @@ h4.subtitle {
     margin-top: 32px;
 }
 
+.progressbar {
+  
+  display: inline;
+  margin: 10px 0;
+  
+  .bar1 {
+      display: inline-block;
+      background: color($colors, darkgrey, base) !important;
+      width: 25px;
+      height: 5px;
+      border-radius: 2px;
+      margin: 0 5px;
+
+      &.active {
+          background: color($colors, primary, base) !important;
+      }
+    }
+  
+  .bar2 {
+      display: inline-block;
+      background: color($colors, darkgrey, base) !important;
+      width: 25px;
+      height: 5px;
+      border-radius: 2px;
+      margin: 0 5px;
+
+      &.active {
+          background: color($colors, primary, base) !important;
+      }
+    }
+  
+  .bar3 {
+      display: inline-block;
+      background: color($colors, darkgrey, base) !important;
+      width: 25px;
+      height: 5px;
+      border-radius: 2px;
+      margin: 0 5px;
+
+      &.active {
+          background: color($colors, primary, base) !important;
+      }
+    }
+  
+  .bar4 {
+      display: inline-block;
+      background: color($colors, darkgrey, base) !important;
+      width: 25px;
+      height: 5px;
+      border-radius: 2px;
+      margin: 0 5px;
+
+      &.active {
+          background: color($colors, primary, base) !important;
+      }
+    }
+  
+}
+
 // .item-md {
 //     padding-left: 0 !important;
 // }
