@@ -15,6 +15,25 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+/* Menu */
+
+.menu-header {
+    padding: 120px 0 10px 0;
+}
+
+.menu-list-background {
+    background: #ffffff !important;
+}
+
+.item-icon {
+    color: color($colors, primary, base) !important;
+}
+
+.bar-button-menutoggle-md {
+    margin-left: 0 !important;
+    padding-right: 0 !important;
+}
+
 /* Formatting */
 
 .text-center {
@@ -36,10 +55,14 @@
     align-items: center!important;
 }
 
-/* Elements */
+/* Elements and Inputs */
 
 .content-md {
     color: color($colors, dark, base);
+}
+
+.border-bottom {
+    border-bottom: 1px solid color($colors, primary, base) !important;
 }
 
 .button-actions {

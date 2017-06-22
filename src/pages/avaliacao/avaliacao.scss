@@ -1,3 +1,5 @@
+ion-slides { height: initial; }
+
 ion-slide {
     align-items: flex-start !important;
 }
@@ -28,6 +30,77 @@ h4.subtitle {
     white-space: normal;
 }
 
-.card-md, .card-header-md, .item-md {
-    background-color: color($colors, lightgrey, base);
+.no-padding-left {
+    padding-left: 0 !important;
 }
+
+.button-top-margin {
+    margin-top: 32px;
+}
+
+.progressbar {
+  
+  display: inline;
+  margin: 10px 0;
+  
+  .bar1 {
+      display: inline-block;
+      background: color($colors, darkgrey, base) !important;
+      width: 25px;
+      height: 5px;
+      border-radius: 2px;
+      margin: 0 5px;
+
+      &.active {
+          background: color($colors, primary, base) !important;
+      }
+    }
+  
+  .bar2 {
+      display: inline-block;
+      background: color($colors, darkgrey, base) !important;
+      width: 25px;
+      height: 5px;
+      border-radius: 2px;
+      margin: 0 5px;
+
+      &.active {
+          background: color($colors, primary, base) !important;
+      }
+    }
+  
+  .bar3 {
+      display: inline-block;
+      background: color($colors, darkgrey, base) !important;
+      width: 25px;
+      height: 5px;
+      border-radius: 2px;
+      margin: 0 5px;
+
+      &.active {
+          background: color($colors, primary, base) !important;
+      }
+    }
+  
+  .bar4 {
+      display: inline-block;
+      background: color($colors, darkgrey, base) !important;
+      width: 25px;
+      height: 5px;
+      border-radius: 2px;
+      margin: 0 5px;
+
+      &.active {
+          background: color($colors, primary, base) !important;
+      }
+    }
+  
+}
+
+// .item-md {
+//     padding-left: 0 !important;
+// }
+
+// .card-md, .card-header-md, .item-md {
+//     background-color: color($colors, lightgrey, base);
+// }
