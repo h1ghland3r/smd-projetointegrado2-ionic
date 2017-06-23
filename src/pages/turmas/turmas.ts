@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, AlertController, ModalController } from 'ionic-angular';
 
 import { DbServiceProvider } from '../../providers/db-service/db-service';
-
+import { AddTurmaModalPage } from '../add-turma-modal/add-turma-modal'
 /**
  * Generated class for the TurmasPage page.
  *
@@ -20,11 +20,32 @@ export class TurmasPage {
 
   constructor(public navCtrl: NavController,
               public dbService: DbServiceProvider,
-              public alertCtrl: AlertController,) {
+              public alertCtrl: AlertController,
+              public modalCtrl : ModalController) {
   }
 
   ionViewDidLoad() {
     this.getAllTurmas();
+  }
+
+  public openModalAdd(){
+    var modalPage = this.modalCtrl.create(AddTurmaModalPage);
+    modalPage.onDidDismiss((item) => {
+      if(item){
+        this.saveTurma(item);
+      }
+    });
+    modalPage.present();
+  }
+
+  saveTurma(item){
+    this.dbService.createTurma(item)
+      .then(response => {
+        this.turmas.push( item );
+      })
+      .catch( error => {
+        console.error( error );
+      })
   }
 
   getAllTurmas(){

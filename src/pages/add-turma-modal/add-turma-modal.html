@@ -1,0 +1,36 @@
+<ion-header>
+
+<ion-navbar>
+    <ion-title>ModalPage</ion-title>
+    <ion-buttons end>
+    <button ion-button (click)="closeModal()">Close</button>
+    </ion-buttons>
+</ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+
+  <ion-item>
+    <ion-label floating>Nome</ion-label>
+    <ion-input [(ngModel)]="Nome" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item class="no-padding-left" margin-vertical>
+      <ion-label>Escola</ion-label>
+      <ion-select [(ngModel)]="EscolaId">
+        <ion-option value="1">Escola A</ion-option>
+        <ion-option value="2">Escola B</ion-option>
+      </ion-select>
+  </ion-item>
+
+  <button ion-button icon-only (click)="saveTurma()">
+    <ion-icon name="salvar">Salvar</ion-icon>
+  </button>
+
+</ion-list>
+
+</ion-content>

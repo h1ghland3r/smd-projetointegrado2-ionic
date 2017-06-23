@@ -14,7 +14,7 @@ import { EscolasPage } from "../pages/escolas/escolas";
 import { TurmasPage } from "../pages/turmas/turmas";
 import { AddEscolaModalPage } from "../pages/add-escola-modal/add-escola-modal";
 import { EditEscolaModalPage } from "../pages/edit-escola-modal/edit-escola-modal";
-
+import { AddTurmaModalPage } from "../pages/add-turma-modal/add-turma-modal";
 
 import { DbServiceProvider } from '../providers/db-service/db-service';
 
@@ -27,7 +27,8 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     EscolasPage,
     TurmasPage,
     AddEscolaModalPage,
-    EditEscolaModalPage
+    EditEscolaModalPage,
+    AddTurmaModalPage
   ],
   imports: [
     BrowserModule,
@@ -42,7 +43,8 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     EscolasPage,
     TurmasPage,
     AddEscolaModalPage,
-    EditEscolaModalPage
+    EditEscolaModalPage,
+    AddTurmaModalPage
   ],
   providers: [
     StatusBar,
