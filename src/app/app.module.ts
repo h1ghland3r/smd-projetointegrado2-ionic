@@ -7,6 +7,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { AvaliacaoPage } from '../pages/avaliacao/avaliacao';
+import { SobrePage } from '../pages/sobre/sobre';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -22,7 +23,8 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     ListPage,
     AvaliacaoPage,
     EscolasPage,
-    TurmasPage
+    TurmasPage,
+    SobrePage
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,8 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     ListPage,
     AvaliacaoPage,
     EscolasPage,
-    TurmasPage
+    TurmasPage,
+    SobrePage
   ],
   providers: [
     StatusBar,
