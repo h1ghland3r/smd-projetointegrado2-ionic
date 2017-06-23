@@ -11,6 +11,7 @@ import { ListPage } from '../pages/list/list';
 import { AvaliacaoPage } from '../pages/avaliacao/avaliacao';
 import { EscolasPage } from '../pages/escolas/escolas';
 import { TurmasPage } from '../pages/turmas/turmas';
+import { SobrePage } from '../pages/sobre/sobre';
 
 @Component({
   templateUrl: 'app.html'
@@ -29,7 +30,7 @@ export class MyApp {
               public sqlite: SQLite) {
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
+    
     this.pages = [
       {
         title: 'Home',
@@ -41,20 +42,25 @@ export class MyApp {
         component: AvaliacaoPage,
         icon: 'checkbox'
       },
+      // {
+      //   title: 'List',
+      //   component: ListPage,
+      //   icon: 'list'
+      // },
+      // {
+      //   title: 'Escolas',
+      //   component: EscolasPage,
+      //   icon: 'list'
+      // },
+      // {
+      //   title: 'Turmas',
+      //   component: TurmasPage,
+      //   icon: 'list'
+      // },
       {
-        title: 'List',
-        component: ListPage,
-        icon: 'list'
-      },
-      {
-        title: 'Escolas',
-        component: EscolasPage,
-        icon: 'list'
-      },
-      {
-        title: 'Turmas',
-        component: TurmasPage,
-        icon: 'list'
+        title: 'Sobre',
+        component: SobrePage,
+        icon: 'people'
       }
     ];
 
@@ -65,7 +71,9 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      setTimeout(() => {
+        this.splashScreen.hide();
+      }, 300);
       this.createDatabase();
     });
   }

@@ -17,6 +17,10 @@
 
 /* Menu */
 
+.bar-button-menutoggle-md {
+    margin-top: -1px !important;
+}
+
 .menu-header {
     padding: 120px 0 10px 0;
 }
@@ -32,6 +36,12 @@
 .bar-button-menutoggle-md {
     margin-left: 0 !important;
     padding-right: 0 !important;
+}
+
+.menu-list-background {
+    .item-inner {
+        border-bottom: none !important;
+    }
 }
 
 /* Formatting */
