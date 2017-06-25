@@ -4,21 +4,24 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import { DbServiceProvider } from '../../providers/db-service/db-service';
 
 /**
- * Generated class for the AddTurmaModalPage page.
+ * Generated class for the AddGrupoModalPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
 @IonicPage()
 @Component({
-  selector: 'page-add-turma-modal',
-  templateUrl: 'add-turma-modal.html',
+  selector: 'page-add-grupo-modal',
+  templateUrl: 'add-grupo-modal.html',
 })
-export class AddTurmaModalPage {
+export class AddGrupoModalPage {
 
   Nome;
-  EscolaId;
-  escolas: any[] = [];
+  AlunoId1;
+  AlunoId2;
+  AlunoId3;
+  AlunoId4;
+  alunos: any[] = [];
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -30,28 +33,27 @@ export class AddTurmaModalPage {
     this.viewCtrl.dismiss();
   }
 
-  public getAllEscolas(){
-    this.dbService.getAllEscolas()
-      .then(escolas => {
-        console.log(escolas);
-        this.escolas = escolas;
+  getAllAlunos(){
+    this.dbService.getAllAlunos()
+      .then(alunos => {
+        console.log(alunos);
+        this.alunos = alunos;
       })
       .catch( error => {
         console.error( error );
       });
   }
 
-  public saveTurma(){
-    let turma = {
+  public saveGrupo(){
+    let grupo = {
       Nome: this.Nome,
-      EscolaId: this.EscolaId
+      AlunoId1: this.AlunoId1,
+      AlunoId2: this.AlunoId2,
+      AlunoId3: this.AlunoId3,
+      AlunoId4: this.AlunoId4
     };
 
-    this.viewCtrl.dismiss(turma);
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddTurmaModalPage');
+    this.viewCtrl.dismiss(aluno);
   }
 
 }

@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Alunos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngIf="alunos.length == 0">
+      Nenhum aluno cadastrado.
+    </ion-item>
+    <ion-item-sliding *ngFor="let aluno of alunos; let i = index">
+      <ion-item >
+        <ion-label>{{ aluno.Nome }}</ion-label>
+      </ion-item>
+      <ion-item-options side="right" icon-left>
+        <button ion-button color="danger" (click)="deleteAluno(aluno, i)">
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </button>
+        <button ion-button (click)="updateAluno(aluno, i)">
+          Editar
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+
+    <button ion-button icon-only (click)="openModalAdd()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+
+  </ion-list>
+</ion-content>
