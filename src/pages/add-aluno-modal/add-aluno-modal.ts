@@ -4,21 +4,21 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import { DbServiceProvider } from '../../providers/db-service/db-service';
 
 /**
- * Generated class for the AddTurmaModalPage page.
+ * Generated class for the AddAlunoModalPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
 @IonicPage()
 @Component({
-  selector: 'page-add-turma-modal',
-  templateUrl: 'add-turma-modal.html',
+  selector: 'page-add-aluno-modal',
+  templateUrl: 'add-aluno-modal.html',
 })
-export class AddTurmaModalPage {
+export class AddAlunoModalPage {
 
   Nome;
-  EscolaId;
-  escolas: any[] = [];
+  TurmaId;
+  turmas: any[] = [];
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -30,24 +30,24 @@ export class AddTurmaModalPage {
     this.viewCtrl.dismiss();
   }
 
-  public getAllEscolas(){
-    this.dbService.getAllEscolas()
-      .then(escolas => {
-        console.log(escolas);
-        this.escolas = escolas;
+  getAllTurmas(){
+    this.dbService.getAllTurmas()
+      .then(turmas => {
+        console.log(turmas);
+        this.turmas = turmas;
       })
       .catch( error => {
         console.error( error );
       });
   }
 
-  public saveTurma(){
-    let turma = {
+  public saveAluno(){
+    let aluno = {
       Nome: this.Nome,
       EscolaId: this.EscolaId
     };
 
-    this.viewCtrl.dismiss(turma);
+    this.viewCtrl.dismiss(aluno);
   }
 
   ionViewDidLoad() {

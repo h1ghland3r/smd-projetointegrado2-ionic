@@ -13,9 +13,13 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { EscolasPage } from "../pages/escolas/escolas";
 import { TurmasPage } from "../pages/turmas/turmas";
+import { AlunosPage } from "../pages/alunos/alunos";
+import { GruposPage } from "../pages/grupos/grupos";
 import { AddEscolaModalPage } from "../pages/add-escola-modal/add-escola-modal";
 import { EditEscolaModalPage } from "../pages/edit-escola-modal/edit-escola-modal";
 import { AddTurmaModalPage } from "../pages/add-turma-modal/add-turma-modal";
+import { AddAlunoModalPage } from '../add-aluno-modal/add-aluno-modal';
+import { AddGrupoModalPage } from '../add-grupo-modal/add-grupo-modal';
 
 import { DbServiceProvider } from '../providers/db-service/db-service';
 
@@ -27,10 +31,18 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     AvaliacaoPage,
     EscolasPage,
     TurmasPage,
+    GruposPage,
     AddEscolaModalPage,
+<<<<<<< HEAD
     EditEscolaModalPage,
     AddTurmaModalPage,
     SobrePage
+=======
+    AddTurmaModalPage,
+    AddAlunoModalPage,
+    AddGrupoModalPage,
+    EditEscolaModalPage
+>>>>>>> 061f8e8494175a19dd82283b39fb3216e584e241
   ],
   imports: [
     BrowserModule,
@@ -44,10 +56,18 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     AvaliacaoPage,
     EscolasPage,
     TurmasPage,
+    GruposPage,
     AddEscolaModalPage,
+<<<<<<< HEAD
     EditEscolaModalPage,
     AddTurmaModalPage,
     SobrePage
+=======
+    AddTurmaModalPage,
+    AddAlunoModalPage,
+    AddGrupoModalPage,
+    EditEscolaModalPage
+>>>>>>> 061f8e8494175a19dd82283b39fb3216e584e241
   ],
   providers: [
     StatusBar,
