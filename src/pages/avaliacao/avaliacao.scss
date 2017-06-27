@@ -41,63 +41,152 @@ h4.subtitle {
 
 .progressbar {
   
-  display: inline;
-  margin: 10px 0;
+  margin: 20px 0 40px 0;
   
   .bar1 {
       display: inline-block;
+      position: relative;
       background: color($colors, darkgrey, base) !important;
       width: 25px;
-      height: 5px;
+      height: 4px;
       border-radius: 2px;
-      margin: 0 5px;
+      margin: 0 10px;
 
       &.active {
-          background: color($colors, primary, base) !important;
+        background: color($colors, primary, base) !important;
+
+        &.bar1:after {
+            border-left-color: color($colors, primary, base) !important;
+        }
+
+      }
+
+      &.bar1:after {
+        left: 100%;
+        top: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        border-left-color: color($colors, darkgrey, base);
+        border-width: 5px;
+        margin-top: -5px;
+        margin-left: -2px;
       }
     }
-  
+
   .bar2 {
       display: inline-block;
+      position: relative;
       background: color($colors, darkgrey, base) !important;
       width: 25px;
-      height: 5px;
+      height: 4px;
       border-radius: 2px;
-      margin: 0 5px;
+      margin: 0 10px;
 
       &.active {
-          background: color($colors, primary, base) !important;
+        background: color($colors, primary, base) !important;
+
+        &.bar2:after {
+            border-left-color: color($colors, primary, base) !important;
+        }
+
+      }
+
+      &.bar2:after {
+        left: 100%;
+        top: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        border-left-color: color($colors, darkgrey, base);
+        border-width: 5px;
+        margin-top: -5px;
+        margin-left: -2px;
       }
     }
   
   .bar3 {
       display: inline-block;
+      position: relative;
       background: color($colors, darkgrey, base) !important;
       width: 25px;
-      height: 5px;
+      height: 4px;
       border-radius: 2px;
-      margin: 0 5px;
+      margin: 0 10px;
 
       &.active {
           background: color($colors, primary, base) !important;
+
+        &.bar3:after {
+            border-left-color: color($colors, primary, base) !important;
+        }
+
       }
     }
+
+   .bar3:after {
+	left: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-left-color: color($colors, darkgrey, base);
+	border-width: 5px;
+	margin-top: -5px;
+    margin-left: -2px;
+  }
   
   .bar4 {
       display: inline-block;
+      position: relative;
       background: color($colors, darkgrey, base) !important;
       width: 25px;
-      height: 5px;
+      height: 4px;
       border-radius: 2px;
-      margin: 0 5px;
+      margin: 0 10px;
 
       &.active {
           background: color($colors, primary, base) !important;
+
+        &.bar4:after {
+            border-left-color: color($colors, primary, base) !important;
+        }
+
       }
     }
+
+   .bar4:after {
+	left: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-left-color: color($colors, darkgrey, base);
+	border-width: 5px;
+	margin-top: -5px;
+    margin-left: -2px;
+  }
   
 }
 
+.legenda-progresso {
+    position: absolute;
+    margin-top: -20px;
+    font-size: 14px;
+    left: 8px;
+}
 // .item-md {
 //     padding-left: 0 !important;
 // }
