@@ -14,15 +14,18 @@
     </ion-item>
     <ion-item-sliding *ngFor="let turma of turmas; let i = index">
       <ion-item >
-        <ion-label>{{ turma.Nome }}</ion-label>
+        <ion-label>{{ turma.nome }}</ion-label>
       </ion-item>
       <ion-item-options side="right" icon-left>
         <button ion-button color="danger" (click)="deleteTurma(turma, i)">
           <ion-icon name="trash"></ion-icon>
           Delete
         </button>
-        <button ion-button (click)="updateTurma(turma, i)">
+        <button ion-button (click)="openModalEdit(turma, i)">
           Editar
+        </button>
+        <button ion-button color="secondary" (click)="openModalView(turma, i)">
+          Visualizar
         </button>
       </ion-item-options>
     </ion-item-sliding>

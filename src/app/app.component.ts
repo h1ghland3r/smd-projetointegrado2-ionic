@@ -11,6 +11,8 @@ import { ListPage } from '../pages/list/list';
 import { AvaliacaoPage } from '../pages/avaliacao/avaliacao';
 import { EscolasPage } from '../pages/escolas/escolas';
 import { TurmasPage } from '../pages/turmas/turmas';
+import { AlunosPage } from '../pages/alunos/alunos';
+import { GruposPage } from '../pages/grupos/grupos';
 import { SobrePage } from '../pages/sobre/sobre';
 
 @Component({
@@ -30,7 +32,7 @@ export class MyApp {
               public sqlite: SQLite) {
     this.initializeApp();
 
-    
+
     this.pages = [
       {
         title: 'Home',
@@ -47,16 +49,26 @@ export class MyApp {
       //   component: ListPage,
       //   icon: 'list'
       // },
-      // {
-      //   title: 'Escolas',
-      //   component: EscolasPage,
-      //   icon: 'list'
-      // },
-      // {
-      //   title: 'Turmas',
-      //   component: TurmasPage,
-      //   icon: 'list'
-      // },
+      {
+         title: 'Escolas',
+         component: EscolasPage,
+         icon: 'list'
+      },
+      {
+         title: 'Turmas',
+         component: TurmasPage,
+         icon: 'list'
+      },
+      {
+         title: 'Alunos',
+         component: AlunosPage,
+         icon: 'list'
+      },
+      {
+         title: 'Grupos',
+         component: GruposPage,
+         icon: 'list'
+      },
       {
         title: 'Sobre',
         component: SobrePage,

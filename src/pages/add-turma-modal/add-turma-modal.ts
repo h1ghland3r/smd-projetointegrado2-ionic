@@ -16,8 +16,8 @@ import { DbServiceProvider } from '../../providers/db-service/db-service';
 })
 export class AddTurmaModalPage {
 
-  Nome;
-  EscolaId;
+  nome;
+  escolaId;
   escolas: any[] = [];
 
   constructor(public navCtrl: NavController,
@@ -43,8 +43,8 @@ export class AddTurmaModalPage {
 
   public saveTurma(){
     let turma = {
-      Nome: this.Nome,
-      EscolaId: this.EscolaId
+      nome: this.nome,
+      escolaId: this.escolaId
     };
 
     this.viewCtrl.dismiss(turma);
@@ -52,6 +52,7 @@ export class AddTurmaModalPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddTurmaModalPage');
+    this.getAllEscolas();
   }
 
 }

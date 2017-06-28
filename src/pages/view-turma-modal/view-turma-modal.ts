@@ -2,50 +2,51 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
 import { DbServiceProvider } from '../../providers/db-service/db-service';
+
 /**
- * Generated class for the EditEscolaModalPage page.
+ * Generated class for the ViewTurmaModalPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
 @IonicPage()
 @Component({
-  selector: 'page-edit-escola-modal',
-  templateUrl: 'edit-escola-modal.html',
+  selector: 'page-view-turma-modal',
+  templateUrl: 'view-turma-modal.html',
 })
-export class EditEscolaModalPage {
+export class ViewTurmaModalPage {
 
   nome: string = this.navParams.get('nome');
   id: string = this.navParams.get('id');
   index: string = this.navParams.get('index');
+  escolaId: string = this.navParams.get('escolaId');
+
+  escolaNome;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public dbService: DbServiceProvider,
               public viewCtrl : ViewController) {
-
-        console.log('Nome da Escola: ', this.nome);
-        console.log('Id da Escola: ', this.id);
   }
 
   public closeModal(){
     this.viewCtrl.dismiss();
   }
 
-
-  public saveEscolaEdit(){
-    let escola = {
-      nome: this.nome,
-      id: this.id,
-      index: this.index
-    };
-
-    this.viewCtrl.dismiss(escola);
+  public getEscolaById(escolaId){
+    this.dbService.getEscolaById(escolaId)
+      .then(escola => {
+        console.log(escola[0]);
+        this.escolaNome = escola[0].nome;
+      })
+      .catch( error => {
+        console.error( error );
+      });
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ModalPage');
-    console.log(this.navParams.get('escola'));
+    console.log('ionViewDidLoad ViewTurmaModalPage');
+    this.getEscolaById(this.escolaId);
   }
 
 }

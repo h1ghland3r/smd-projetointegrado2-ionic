@@ -15,8 +15,8 @@
   <ion-list>
 
   <ion-item>
-    <ion-label floating>Nome do Aluno</ion-label>
-    <ion-input [(ngModel)]="nome" type="text">{{nome}}</ion-input>
+    <ion-label floating>Nome do Aluno:</ion-label>
+    <ion-input [(ngModel)]="nome" type="text"></ion-input>
   </ion-item>
 
   <ion-item class="no-padding-left" margin-vertical>
@@ -26,7 +26,7 @@
       </ion-select>
   </ion-item>
 
-  <button ion-button icon-only (click)="saveAluno()">
+  <button ion-button icon-only (click)="saveAlunoEdit()">
     <ion-icon name="salvar">Salvar</ion-icon>
   </button>
 

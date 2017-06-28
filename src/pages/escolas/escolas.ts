@@ -4,6 +4,7 @@ import { IonicPage, NavController, AlertController, ModalController } from 'ioni
 import { DbServiceProvider } from '../../providers/db-service/db-service';
 import { AddEscolaModalPage } from '../add-escola-modal/add-escola-modal'
 import { EditEscolaModalPage } from '../edit-escola-modal/edit-escola-modal'
+import { ViewEscolaModalPage } from '../view-escola-modal/view-escola-modal'
 
 
 @IonicPage()
@@ -14,6 +15,8 @@ import { EditEscolaModalPage } from '../edit-escola-modal/edit-escola-modal'
 export class EscolasPage {
 
   escolas: any[] = [];
+  nomeEscola;
+  idEscola;
 
   constructor(public navCtrl: NavController,
               public dbService: DbServiceProvider,
@@ -38,7 +41,7 @@ export class EscolasPage {
   saveEscola(item){
     this.dbService.createEscola(item)
       .then(response => {
-        this.escolas.push( item );
+        this.getAllEscolas();
       })
       .catch( error => {
         console.error( error );
@@ -46,16 +49,36 @@ export class EscolasPage {
   }
 
   public openModalEdit(escola, index){
-    var modalPage = this.modalCtrl.create(EditEscolaModalPage);
 
-    this.dbService.getEscolaById(escola)
-      .then( response => {
-        console.log( response );
-        this.escolas[index] = escola;
-      })
-      .catch( error => {
-        console.error( error );
-      })
+    let obj = {id: escola.id, nome: escola.nome, index: index};
+    var modalPage = this.modalCtrl.create(EditEscolaModalPage, obj);
+    modalPage.onDidDismiss((item) => {
+      if(item){
+        this.saveEscolaEdit(item);
+      }
+    });
+    modalPage.present();
+  }
+
+  saveEscolaEdit(item){
+      this.dbService.updateEscola(item)
+        .then( response => {
+          console.log( response );
+          let escola = {
+            nome: item.nome,
+            id: item.id
+          }
+          this.escolas[item.index] = escola;
+        })
+        .catch( error => {
+          console.error( error );
+        })
+  }
+
+  public openModalView(escola, index){
+
+    let obj = {id: escola.id, nome: escola.nome, index: index};
+    var modalPage = this.modalCtrl.create(ViewEscolaModalPage, obj);
 
     modalPage.present();
   }
@@ -69,18 +92,6 @@ export class EscolasPage {
       .catch( error => {
         console.error( error );
       });
-  }
-
-  updateEscola(escola, index){
-    escola = Object.assign({}, escola);
-    this.dbService.getEscolaById(escola)
-      .then( response => {
-        console.log( response );
-        this.escolas[index] = escola;
-      })
-      .catch( error => {
-        console.error( error );
-      })
   }
 
   deleteEscola(escola: any, index){

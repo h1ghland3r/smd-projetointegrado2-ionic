@@ -4,24 +4,27 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import { DbServiceProvider } from '../../providers/db-service/db-service';
 
 /**
- * Generated class for the AddGrupoModalPage page.
+ * Generated class for the EditGrupoModalPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
 @IonicPage()
 @Component({
-  selector: 'page-add-grupo-modal',
-  templateUrl: 'add-grupo-modal.html',
+  selector: 'page-edit-grupo-modal',
+  templateUrl: 'edit-grupo-modal.html',
 })
-export class AddGrupoModalPage {
+export class EditGrupoModalPage {
 
-  nome;
-  alunoId1;
-  alunoId2;
-  alunoId3;
-  alunoId4;
-  turmaId;
+  nome: string = this.navParams.get('nome');
+  id: string = this.navParams.get('id');
+  index: string = this.navParams.get('index');
+  alunoId1: string = this.navParams.get('alunoId1');
+  alunoId2: string = this.navParams.get('alunoId2');
+  alunoId3: string = this.navParams.get('alunoId3');
+  alunoId4: string = this.navParams.get('alunoId4');
+  turmaId: string = this.navParams.get('turmaId');
+
   alunos: any[] = [];
   turmas: any[] = [];
 
@@ -35,11 +38,27 @@ export class AddGrupoModalPage {
     this.viewCtrl.dismiss();
   }
 
+  public saveGrupoEdit(){
+    let aluno = {
+      id: this.id,
+      nome: this.nome,
+      turmaId: this.turmaId,
+      alunoId1: this.alunoId1,
+      alunoId2: this.alunoId2,
+      alunoId3: this.alunoId3,
+      alunoId4: this.alunoId4,
+      index: this.index
+    };
+
+    this.viewCtrl.dismiss(aluno);
+  }
+
   public getAllTurmas(){
     this.dbService.getAllTurmas()
       .then(turmas => {
         console.log(turmas);
         this.turmas = turmas;
+        this.getAlunosByTurmaId(this.turmaId);
       })
       .catch( error => {
         console.error( error );
@@ -58,21 +77,8 @@ export class AddGrupoModalPage {
 
   }
 
-  public saveGrupo(){
-    let grupo = {
-      nome: this.nome,
-      turmaId: this.turmaId,
-      alunoId1: this.alunoId1,
-      alunoId2: this.alunoId2,
-      alunoId3: this.alunoId3,
-      alunoId4: this.alunoId4
-    };
-
-    this.viewCtrl.dismiss(grupo);
-  }
-
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AddGrupoModalPage');
+    console.log('ionViewDidLoad EditGrupoModalPage');
     this.getAllTurmas();
   }
 

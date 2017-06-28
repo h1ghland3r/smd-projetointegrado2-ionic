@@ -15,16 +15,14 @@
   <ion-list>
 
   <ion-item>
-    <ion-label floating>Nome</ion-label>
-    <ion-input [(ngModel)]="Nome" type="text">{{Nome}}</ion-input>
+    <ion-label floating>Nome da Turma:</ion-label>
+    <ion-input [(ngModel)]="nome" type="text"></ion-input>
   </ion-item>
 
   <ion-item class="no-padding-left" margin-vertical>
       <ion-label>Escola</ion-label>
-      <ion-select [(ngModel)]="EscolaId">
-        <ion-option value="1">Escola A</ion-option>
-        <ion-option value="2">Escola B</ion-option>
-        <ion-option *ngFor="let empresa of empresas" [value]="empresa.Nome"></ion-option>
+      <ion-select [(ngModel)]="escolaId">
+        <ion-option *ngFor="let escola of escolas" [value]="escola.id">{{escola.nome}}</ion-option>
       </ion-select>
   </ion-item>
 

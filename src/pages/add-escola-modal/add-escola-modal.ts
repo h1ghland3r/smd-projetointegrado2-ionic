@@ -39,7 +39,6 @@ export class AddEscolaModalPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ModalPage');
-    console.log(this.navParams.get('message'));
   }
 
 }

@@ -2,18 +2,19 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
 import { DbServiceProvider } from '../../providers/db-service/db-service';
+
 /**
- * Generated class for the EditEscolaModalPage page.
+ * Generated class for the ViewEscolaModalPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
 @IonicPage()
 @Component({
-  selector: 'page-edit-escola-modal',
-  templateUrl: 'edit-escola-modal.html',
+  selector: 'page-view-escola-modal',
+  templateUrl: 'view-escola-modal.html',
 })
-export class EditEscolaModalPage {
+export class ViewEscolaModalPage {
 
   nome: string = this.navParams.get('nome');
   id: string = this.navParams.get('id');
@@ -32,20 +33,8 @@ export class EditEscolaModalPage {
     this.viewCtrl.dismiss();
   }
 
-
-  public saveEscolaEdit(){
-    let escola = {
-      nome: this.nome,
-      id: this.id,
-      index: this.index
-    };
-
-    this.viewCtrl.dismiss(escola);
-  }
-
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ModalPage');
-    console.log(this.navParams.get('escola'));
+    console.log('ionViewDidLoad ViewEscolaModalPage');
   }
 
 }
