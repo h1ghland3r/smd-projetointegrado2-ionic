@@ -1,0 +1,49 @@
+<ion-header>
+
+<ion-navbar>
+    <ion-title>View ModalPage</ion-title>
+    <ion-buttons end>
+    <button ion-button (click)="closeModal()">Close</button>
+    </ion-buttons>
+</ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+
+  <ion-item>
+    <ion-label>Nome do Grupo:</ion-label>
+    <ion-input [readonly]="true" [(ngModel)]="nome" type="text">{{nome}}</ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Nome da Turma</ion-label>
+    <ion-input [readonly]="true" [(ngModel)]="turmaNome" type="text">{{turmaNome}}</ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Aluno 1</ion-label>
+    <ion-input [readonly]="true" [(ngModel)]="alunoNome1" type="text">{{alunoNome1}}</ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Aluno 2</ion-label>
+    <ion-input [readonly]="true" [(ngModel)]="alunoNome2" type="text">{{alunoNome2}}</ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Aluno 3</ion-label>
+    <ion-input [readonly]="true" [(ngModel)]="alunoNome3" type="text">{{alunoNome3}}</ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Aluno 4</ion-label>
+    <ion-input [readonly]="true" [(ngModel)]="alunoNome4" type="text">{{alunoNome4}}</ion-input>
+  </ion-item>
+
+</ion-list>
+
+</ion-content>

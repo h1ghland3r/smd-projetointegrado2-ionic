@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, AlertController, ModalController } from 'ionic-angular';
 
 import { DbServiceProvider } from '../../providers/db-service/db-service';
+import { AddTurmaModalPage } from '../add-turma-modal/add-turma-modal'
+import { EditTurmaModalPage } from '../edit-turma-modal/edit-turma-modal'
+import { ViewTurmaModalPage } from '../view-turma-modal/view-turma-modal'
 
-/**
- * Generated class for the TurmasPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+
+
 @IonicPage()
 @Component({
   selector: 'page-turmas',
@@ -20,14 +19,70 @@ export class TurmasPage {
 
   constructor(public navCtrl: NavController,
               public dbService: DbServiceProvider,
-              public alertCtrl: AlertController,) {
+              public alertCtrl: AlertController,
+              public modalCtrl : ModalController) {
   }
 
   ionViewDidLoad() {
     this.getAllTurmas();
   }
 
-  getAllTurmas(){
+  public openModalAdd(){
+    var modalPage = this.modalCtrl.create(AddTurmaModalPage);
+    modalPage.onDidDismiss((item) => {
+      if(item){
+        this.saveTurma(item);
+      }
+    });
+    modalPage.present();
+  }
+
+  saveTurma(item){
+    this.dbService.createTurma(item)
+      .then(response => {
+        this.getAllTurmas();
+      })
+      .catch( error => {
+        console.error( error );
+      })
+  }
+
+  public openModalEdit(turma, index){
+
+    let obj = {id: turma.id, nome: turma.nome, escolaId: turma.escolaId, index: index};
+    var modalPage = this.modalCtrl.create(EditTurmaModalPage, obj);
+    modalPage.onDidDismiss((item) => {
+      if(item){
+        this.saveTurmaEdit(item);
+      }
+    });
+    modalPage.present();
+  }
+
+  saveTurmaEdit(item){
+      this.dbService.updateTurma(item)
+        .then( response => {
+          console.log( response );
+          let turma = {
+            nome: item.nome,
+            escolaId: item.escolaId
+          }
+          this.turmas[item.index] = turma;
+        })
+        .catch( error => {
+          console.error( error );
+        })
+  }
+
+  public openModalView(turma, index){
+
+    let obj = {id: turma.id, nome: turma.nome, escolaId: turma.escolaId, index: index};
+    var modalPage = this.modalCtrl.create(ViewTurmaModalPage, obj);
+
+    modalPage.present();
+  }
+
+  public getAllTurmas(){
     this.dbService.getAllTurmas()
       .then(turmas => {
         console.log(turmas);
@@ -36,52 +91,6 @@ export class TurmasPage {
       .catch( error => {
         console.error( error );
       });
-  }
-
-  openAlertNewTurma(){
-    let alert = this.alertCtrl.create({
-      title: 'Criar turma',
-      message: 'Escreva o nome da turma',
-      inputs: [
-        {
-          name: 'Nome',
-          placeholder: 'Digitar o nome da turma.',
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancelar',
-          handler: () =>{
-            console.log('cancelar');
-          }
-        },
-        {
-          text: 'Criar',
-          handler: (data)=>{
-            this.dbService.createTurma(data)
-              .then(response => {
-                console.log("esse é o valor " + data);
-                this.turmas.push( data );
-              })
-              .catch( error => {
-                console.error( error );
-              })
-          }
-        }
-      ]
-    });
-    alert.present();
-  }
-
-  updateTurma(turma, index){
-    turma = Object.assign({}, turma);
-    this.dbService.updateTurma(turma)
-      .then( response => {
-        this.turmas[index] = turma;
-      })
-      .catch( error => {
-        console.error( error );
-      })
   }
 
   deleteTurma(turma: any, index){

@@ -1,0 +1,34 @@
+<ion-header>
+
+<ion-navbar>
+    <ion-title>View ModalPage</ion-title>
+    <ion-buttons end>
+    <button ion-button (click)="closeModal()">Close</button>
+    </ion-buttons>
+</ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+
+  <ion-item>
+    <ion-label>Nome do Aluno:</ion-label>
+    <ion-input [readonly]="true" [(ngModel)]="nome" type="text">{{nome}}</ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Turma</ion-label>
+    <ion-input [readonly]="true" [(ngModel)]="turmaNome" type="text">{{turmaNome}}</ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Escola</ion-label>
+    <ion-input [readonly]="true" [(ngModel)]="escolaNome" type="text">{{escolaNome}}</ion-input>
+  </ion-item>
+
+</ion-list>
+
+</ion-content>

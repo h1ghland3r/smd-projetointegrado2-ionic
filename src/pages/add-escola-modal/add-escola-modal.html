@@ -1,0 +1,28 @@
+<ion-header>
+
+<ion-navbar>
+    <ion-title>ModalPage</ion-title>
+    <ion-buttons end>
+    <button ion-button (click)="closeModal()">Close</button>
+    </ion-buttons>
+</ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+
+  <ion-item>
+    <ion-label floating>Nome da Escola:</ion-label>
+    <ion-input [(ngModel)]="nome" type="text"></ion-input>
+  </ion-item>
+
+  <button ion-button icon-only (click)="saveEscola()">
+    <ion-icon name="salvar">Salvar</ion-icon>
+  </button>
+
+</ion-list>
+
+</ion-content>

@@ -3,28 +3,28 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Turmas</ion-title>
+    <ion-title>Alunos</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-item *ngIf="turmas.length == 0">
-      Nenhuma turma cadastrada.
+    <ion-item *ngIf="alunos.length == 0">
+      Nenhum aluno cadastrado.
     </ion-item>
-    <ion-item-sliding *ngFor="let turma of turmas; let i = index">
+    <ion-item-sliding *ngFor="let aluno of alunos; let i = index">
       <ion-item >
-        <ion-label>{{ turma.nome }}</ion-label>
+        <ion-label>{{ aluno.nome }}</ion-label>
       </ion-item>
       <ion-item-options side="right" icon-left>
-        <button ion-button color="danger" (click)="deleteTurma(turma, i)">
+        <button ion-button color="danger" (click)="deleteAluno(aluno, i)">
           <ion-icon name="trash"></ion-icon>
           Delete
         </button>
-        <button ion-button (click)="openModalEdit(turma, i)">
+        <button ion-button (click)="openModalEdit(aluno, i)">
           Editar
         </button>
-        <button ion-button color="secondary" (click)="openModalView(turma, i)">
+        <button ion-button color="secondary" (click)="openModalView(aluno, i)">
           Visualizar
         </button>
       </ion-item-options>
