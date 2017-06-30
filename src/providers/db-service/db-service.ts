@@ -21,16 +21,57 @@ export class DbServiceProvider {
     }
   }
 
-  //Inicio CRUD - Table Escolas
-
   createTableEscola(){
-    //let sql = 'CREATE TABLE IF NOT EXISTS escolas(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT ); CREATE TABLE IF NOT EXISTS turmas(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, escolaId INTEGER, FOREIGN KEY(escolaId) REFERENCES escolas(id))';
-    //let sql = 'CREATE TABLE IF NOT EXISTS turmas(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, escolaId INTEGER, FOREIGN KEY(escolaId) REFERENCES escolas(id))';
-    //let sql = 'CREATE TABLE IF NOT EXISTS alunos(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, turmaId INTEGER, FOREIGN KEY(turmaId) REFERENCES turmas(id))';
-    let sql = 'CREATE TABLE IF NOT EXISTS grupos(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, alunoId1 INTEGER, alunoId2 INTEGER, alunoId3 INTEGER, alunoId4 INTEGER, turmaId INTEGER, FOREIGN KEY(alunoId1) REFERENCES alunos(Id), FOREIGN KEY(alunoId2) REFERENCES alunos(Id), FOREIGN KEY(alunoId3) REFERENCES alunos(Id), FOREIGN KEY(alunoId4) REFERENCES alunos(Id), FOREIGN KEY(turmaId) REFERENCES turmas(id))';
-    //let sql = 'DROP TABLE grupos';
+    let sql = 'CREATE TABLE IF NOT EXISTS escolas(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT ); CREATE TABLE IF NOT EXISTS turmas(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, escolaId INTEGER, FOREIGN KEY(escolaId) REFERENCES escolas(id))';
     return this.db.executeSql(sql, []);
   }
+
+  createTableTurma(){
+    let sql = 'CREATE TABLE IF NOT EXISTS turmas(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, escolaId INTEGER, FOREIGN KEY(escolaId) REFERENCES escolas(id))';
+    return this.db.executeSql(sql, []);
+  }
+
+  createTableAlunos(){
+    let sql = 'CREATE TABLE IF NOT EXISTS alunos(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, turmaId INTEGER, FOREIGN KEY(turmaId) REFERENCES turmas(id))';
+    return this.db.executeSql(sql, []);
+  }
+
+  createTableGrupos(){
+    let sql = 'CREATE TABLE IF NOT EXISTS grupos(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, alunoId1 INTEGER, alunoId2 INTEGER, alunoId3 INTEGER, alunoId4 INTEGER, turmaId INTEGER, FOREIGN KEY(alunoId1) REFERENCES alunos(Id), FOREIGN KEY(alunoId2) REFERENCES alunos(Id), FOREIGN KEY(alunoId3) REFERENCES alunos(Id), FOREIGN KEY(alunoId4) REFERENCES alunos(Id), FOREIGN KEY(turmaId) REFERENCES turmas(id))';
+    return this.db.executeSql(sql, []);
+  }
+
+  createTableAvaliacoes(){
+    //let sql = 'DROP TABLE avaliacoes'
+    let sql = 'CREATE TABLE IF NOT EXISTS avaliacoes(id INTEGER PRIMARY KEY AUTOINCREMENT, resposta1 TEXT, resposta2 TEXT, funcao INTEGER, alunoId INTEGER, grupoId INTEGER, FOREIGN KEY(alunoId) REFERENCES alunos(Id), FOREIGN KEY(grupoId) REFERENCES grupos(id))';
+    return this.db.executeSql(sql, []);
+  }
+
+  createAvaliacao(avaliacoes: any[]){
+    for (let index = 0; index < avaliacoes.length; index++) {
+      let sql = 'INSERT INTO avaliacoes(resposta1, resposta2, funcao, alunoId, grupoId) VALUES(?,?,?,?,?)';
+      if(index == avaliacoes.length-1){
+        return this.db.executeSql(sql, [avaliacoes[index].resposta1, avaliacoes[index].resposta2, avaliacoes[index].funcao, avaliacoes[index].alunoId, avaliacoes[index].grupoId]);
+      }else{
+        this.db.executeSql(sql, [avaliacoes[index].resposta1, avaliacoes[index].resposta2, avaliacoes[index].funcao, avaliacoes[index].alunoId, avaliacoes[index].grupoId]);
+      }
+    }
+  }
+
+  getAllAvaliacoes(){
+    let sql = 'SELECT * FROM avaliacoes';
+    return this.db.executeSql(sql, [])
+      .then(response => {
+        let avaliacoes = [];
+        for (let index = 0; index < response.rows.length; index++) {
+          avaliacoes.push( response.rows.item(index) );
+        }
+        return Promise.resolve( avaliacoes );
+      })
+      .catch(error => Promise.reject(error));
+  }
+
+  //Inicio CRUD - Table Escolas
 
   createEscola(escola: any){
     let sql = 'INSERT INTO escolas(nome) VALUES(?)';
@@ -104,6 +145,18 @@ export class DbServiceProvider {
       });
   }
 
+  getTurmasByEscolaId(escolaId: any){
+    let sql = 'SELECT * FROM turmas WHERE escolaId=?';
+    return this.db.executeSql(sql, [escolaId])
+      .then( response => {
+        let turmas = [];
+        for (let index = 0; index < response.rows.length; index++) {
+          turmas.push( response.rows.item(index) );
+        }
+        return Promise.resolve( turmas );
+      });
+  }
+
   getAllTurmas(){
     let sql = 'SELECT * FROM turmas';
     return this.db.executeSql(sql, [])
@@ -139,6 +192,18 @@ export class DbServiceProvider {
  getAlunoById(id: any){
    let sql = 'SELECT * FROM alunos WHERE id=?';
    return this.db.executeSql(sql, [id])
+     .then( response => {
+       let aluno = [];
+       for (let index = 0; index < response.rows.length; index++) {
+         aluno.push( response.rows.item(index) );
+       }
+       return Promise.resolve( aluno );
+     });
+ }
+
+ getAlunosDoGrupo(alunoId1: any, alunoId2: any, alunoId3: any, alunoId4: any){
+   let sql = 'SELECT * FROM alunos WHERE id=? OR id=? OR id=? OR id=?';
+   return this.db.executeSql(sql, [alunoId1, alunoId2, alunoId3, alunoId4])
      .then( response => {
        let aluno = [];
        for (let index = 0; index < response.rows.length; index++) {
@@ -203,6 +268,30 @@ getAllGrupos(){
       return Promise.resolve( grupos );
     })
     .catch(error => Promise.reject(error));
+}
+
+getGrupoById(id: any){
+  let sql = 'SELECT * FROM grupos WHERE id=?';
+  return this.db.executeSql(sql, [id])
+    .then( response => {
+      let grupo = [];
+      for (let index = 0; index < response.rows.length; index++) {
+        grupo.push( response.rows.item(index) );
+      }
+      return Promise.resolve( grupo );
+    });
+}
+
+getGruposByTurmaId(turmaId: any){
+  let sql = 'SELECT * FROM grupos WHERE turmaId=?';
+  return this.db.executeSql(sql, [turmaId])
+    .then( response => {
+      let grupos = [];
+      for (let index = 0; index < response.rows.length; index++) {
+        grupos.push( response.rows.item(index) );
+      }
+      return Promise.resolve( grupos );
+    });
 }
 
 //Fim CRUD - Table Grupos
