@@ -125,7 +125,7 @@ export class DbServiceProvider {
 
   updateTurma(turma: any){
     let sql = 'UPDATE turmas SET nome=?, escolaId=? WHERE id=?';
-    return this.db.executeSql(sql, [turma.Nome, turma.escolaId]);
+    return this.db.executeSql(sql, [turma.nome, turma.escolaId, turma.id]);
   }
 
   deleteTurma(turma: any){
@@ -181,7 +181,7 @@ export class DbServiceProvider {
 
  updateAluno(aluno: any){
    let sql = 'UPDATE alunos SET nome=?, turmaId=? WHERE id=?';
-   return this.db.executeSql(sql, [aluno.nome, aluno.turmaId]);
+   return this.db.executeSql(sql, [aluno.nome, aluno.turmaId, aluno.id]);
  }
 
  deleteAluno(aluno: any){
@@ -249,7 +249,7 @@ createGrupo(grupo: any){
 
 updateGrupo(grupo: any){
   let sql = 'UPDATE grupos SET nome=?, alunoId1=?, alunoId2=?, alunoId3=?, alunoId4=?, turmaId=? WHERE Id=?';
-  return this.db.executeSql(sql, [grupo.nome, grupo.alunoId1, grupo.alunoId2, grupo.alunoId3, grupo.alunoId4, grupo.turmaId]);
+  return this.db.executeSql(sql, [grupo.nome, grupo.alunoId1, grupo.alunoId2, grupo.alunoId3, grupo.alunoId4, grupo.turmaId, grupo.id]);
 }
 
 deleteGrupo(grupo: any){

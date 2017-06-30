@@ -700,17 +700,20 @@
                     <canvas #barCanvas></canvas><br>
 
                     <h2>Organizador</h2>
-                    <canvas #barCanvas></canvas><br>
+                    <canvas #barCanvasOrgan></canvas><br>
 
                     <h2>Programador</h2>
-                    <canvas #barCanvas></canvas><br>
+                    <canvas #barCanvasProg></canvas><br>
 
                     <h2>Líder</h2>
-                    <canvas #barCanvas></canvas><br>
+                    <canvas #barCanvasLider></canvas><br>
 
                     <button ion-button icon-right color="darkgrey" class="button-top-margin" full>
                       Exportar
                       <ion-icon name="share"></ion-icon>
+                    </button>
+                    <button ion-button icon-right color="darkgrey" (click)="realizarOutraAvaliacao()" class="button-top-margin" full>
+                      Realizar outra avaliação
                     </button>
                   </ion-card-content>
                 </ion-card>

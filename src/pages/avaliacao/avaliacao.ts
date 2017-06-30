@@ -109,10 +109,97 @@ export class AvaliacaoPage {
   // Graphics
 
   @ViewChild('barCanvas') barCanvas: ElementRef;
+  @ViewChild('barCanvasOrgan') barCanvasOrgan: ElementRef;
+  @ViewChild('barCanvasProg') barCanvasProg: ElementRef;
+  @ViewChild('barCanvasLider') barCanvasLider: ElementRef;
   barChart: any;
+  barChartOrgan: any;
+  barChartProg: any;
+  barChartLider: any;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AvaliacaoPage');
+
+    this.getAllEscolas();
+
+  }
+
+    respConstrutor = {
+      respNao: 0,
+      respInsuficiente: 0,
+      respParcialmente: 0,
+      respSim: 0
+    };
+
+    respOrganizador = {
+      respNao: 0,
+      respInsuficiente: 0,
+      respParcialmente: 0,
+      respSim: 0
+    };
+
+    respProgramador = {
+      respNao: 0,
+      respInsuficiente: 0,
+      respParcialmente: 0,
+      respSim: 0
+    };
+
+    respLider = {
+      respNao: 0,
+      respInsuficiente: 0,
+      respParcialmente: 0,
+      respSim: 0
+    };
+
+  verificaRepostas(respostas: any[], tipoAluno: number){
+    let respNaoCount = 0;
+    let respInsuficienteCount = 0;
+    let respParcialmenteCount = 0;
+    let respSimCount = 0;
+
+    for (let index = 0; index < respostas.length; index++) {
+      if(respostas[index] == 'nao'){
+        respNaoCount += 1;
+      } else if(respostas[index] == 'insuficiente'){
+        respInsuficienteCount += 1;
+      } else if(respostas[index] == 'parcialmente'){
+        respParcialmenteCount += 1;
+      } else if(respostas[index] == 'sim'){
+        respSimCount += 1;
+      }
+    }
+
+    if(tipoAluno == 1){
+      this.respConstrutor.respNao = respNaoCount;
+      this.respConstrutor.respInsuficiente = respInsuficienteCount;
+      this.respConstrutor.respParcialmente = respParcialmenteCount;
+      this.respConstrutor.respSim = respSimCount;
+    } else if(tipoAluno == 2){
+      this.respOrganizador.respNao = respNaoCount;
+      this.respOrganizador.respInsuficiente = respInsuficienteCount;
+      this.respOrganizador.respParcialmente = respParcialmenteCount;
+      this.respOrganizador.respSim = respSimCount;
+    } else if(tipoAluno == 3){
+      this.respProgramador.respNao = respNaoCount;
+      this.respProgramador.respInsuficiente = respInsuficienteCount;
+      this.respProgramador.respParcialmente = respParcialmenteCount;
+      this.respProgramador.respSim = respSimCount;
+    } else if(tipoAluno == 4){
+      this.respLider.respNao = respNaoCount;
+      this.respLider.respInsuficiente = respInsuficienteCount;
+      this.respLider.respParcialmente = respParcialmenteCount;
+      this.respLider.respSim = respSimCount;
+    }
+
+  }
+
+  graficoConstrutor(){
+    let respostasConstrutor: any[] = [];
+    respostasConstrutor.push(this.slideConstrutorQst1Form.value.construtorResposta1);
+    respostasConstrutor.push(this.slideConstrutorQst2Form.value.construtorResposta2);
+
+    this.verificaRepostas(respostasConstrutor, 1);
 
     this.barChart = new Chart(this.barCanvas.nativeElement, {
 
@@ -121,7 +208,7 @@ export class AvaliacaoPage {
                 labels: ["Não", "Insuficiente", "Parcialmente", "Sim"],
                 datasets: [{
                     label: 'Porcentagem de respostas',
-                    data: [1, 2, 4, 4],
+                    data: [this.respConstrutor.respNao, this.respConstrutor.respInsuficiente, this.respConstrutor.respParcialmente, this.respConstrutor.respSim],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -153,9 +240,157 @@ export class AvaliacaoPage {
             }
 
     });
+  }
 
-    this.getAllEscolas();
+  graficoOrganizador(){
+    let respostasOrganizador: any[] = [];
+    respostasOrganizador.push(this.slideOrganizadorQst1Form.value.organizadorResposta1);
+    respostasOrganizador.push(this.slideOrganizadorQst2Form.value.organizadorResposta2);
 
+    this.verificaRepostas(respostasOrganizador, 2);
+
+    this.barChartOrgan = new Chart(this.barCanvasOrgan.nativeElement, {
+
+        type: 'bar',
+            data: {
+                labels: ["Não", "Insuficiente", "Parcialmente", "Sim"],
+                datasets: [{
+                    label: 'Porcentagem de respostas',
+                    data: [this.respOrganizador.respNao, this.respOrganizador.respInsuficiente, this.respOrganizador.respParcialmente, this.respOrganizador.respSim],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            offsetGridLines: true
+                        }
+                    }]
+                }
+            }
+
+    });
+  }
+
+  graficoProgramador(){
+    let respostasProgramador: any[] = [];
+    respostasProgramador.push(this.slideProgramadorQst1Form.value.programadorResposta1);
+    respostasProgramador.push(this.slideProgramadorQst2Form.value.programadorResposta2);
+
+    this.verificaRepostas(respostasProgramador, 3);
+
+    this.barChartProg = new Chart(this.barCanvasProg.nativeElement, {
+
+        type: 'bar',
+            data: {
+                labels: ["Não", "Insuficiente", "Parcialmente", "Sim"],
+                datasets: [{
+                    label: 'Porcentagem de respostas',
+                    data: [this.respProgramador.respNao, this.respProgramador.respInsuficiente, this.respProgramador.respParcialmente, this.respProgramador.respSim],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            offsetGridLines: true
+                        }
+                    }]
+                }
+            }
+
+    });
+  }
+
+  graficoLider(){
+    let respostasLider: any[] = [];
+    respostasLider.push(this.slideLiderQst1Form.value.liderResposta1);
+    respostasLider.push(this.slideLiderQst2Form.value.liderResposta2);
+
+    this.verificaRepostas(respostasLider, 4);
+
+    this.barChartLider = new Chart(this.barCanvasLider.nativeElement, {
+
+        type: 'bar',
+            data: {
+                labels: ["Não", "Insuficiente", "Parcialmente", "Sim"],
+                datasets: [{
+                    label: 'Porcentagem de respostas',
+                    data: [this.respLider.respNao, this.respLider.respInsuficiente, this.respLider.respParcialmente, this.respLider.respSim],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            offsetGridLines: true
+                        }
+                    }]
+                }
+            }
+
+    });
+  }
+
+  graficos(){
+    this.graficoConstrutor();
+    this.graficoOrganizador();
+    this.graficoProgramador();
+    this.graficoLider();
   }
 
   // Navigation
@@ -207,6 +442,7 @@ export class AvaliacaoPage {
       }
       else if(this.avaliacaoSlider.getActiveIndex() == 13){
         this.save();
+        this.graficos();
       }
   }
 
@@ -259,7 +495,7 @@ export class AvaliacaoPage {
     avaliacoes.push( avaliacaoOrganizador );
     avaliacoes.push( avaliacaoProgramador );
     avaliacoes.push( avaliacaoLider );
-    
+
     this.dbService.createAvaliacao(avaliacoes)
       .then(response => {
         console.log(response);
@@ -351,6 +587,10 @@ export class AvaliacaoPage {
           this.alunoLiderNome = aluno[0].nome;
         }
       })
+  }
+
+  realizarOutraAvaliacao(){
+    this.navCtrl.setRoot(AvaliacaoPage);
   }
 
 }
