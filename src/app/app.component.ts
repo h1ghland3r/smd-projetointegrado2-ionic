@@ -103,7 +103,11 @@ export class MyApp {
     })
       .then((db) => {
         this.dbService.setDatabase(db);
-        return this.dbService.createTableEscola();
+        this.dbService.createTableEscola();
+        this.dbService.createTableTurma();
+        this.dbService.createTableAlunos();
+        this.dbService.createTableGrupos();
+        this.dbService.createTableAvaliacoes();
       })
       .catch(error =>{
         console.error(error);
