@@ -1,13 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, App, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SQLite } from '@ionic-native/sqlite';
-
 import { DbServiceProvider } from '../providers/db-service/db-service';
 
+
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { AvaliacaoPage } from '../pages/avaliacao/avaliacao';
 import { EscolasPage } from '../pages/escolas/escolas';
 import { TurmasPage } from '../pages/turmas/turmas';
@@ -20,7 +19,6 @@ import { SobrePage } from '../pages/sobre/sobre';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
   rootPage: any = HomePage;
 
   pages: Array<{title: string, component: any, icon: string}>;
@@ -28,6 +26,8 @@ export class MyApp {
   constructor(public platform: Platform,
               public statusBar: StatusBar,
               public splashScreen: SplashScreen,
+              public app: App,
+              public alertCtrl: AlertController,
               public dbService: DbServiceProvider,
               public sqlite: SQLite) {
     this.initializeApp();
@@ -44,31 +44,31 @@ export class MyApp {
         component: AvaliacaoPage,
         icon: 'checkbox'
       },
+      {
+        title: 'Cadastros',
+        component: EscolasPage,
+        icon: 'filing'
+      },
       // {
-      //   title: 'List',
-      //   component: ListPage,
-      //   icon: 'list'
+      //    title: 'Escolas',
+      //    component: EscolasPage,
+      //    icon: 'list'
       // },
-      {
-         title: 'Escolas',
-         component: EscolasPage,
-         icon: 'list'
-      },
-      {
-         title: 'Turmas',
-         component: TurmasPage,
-         icon: 'list'
-      },
-      {
-         title: 'Alunos',
-         component: AlunosPage,
-         icon: 'list'
-      },
-      {
-         title: 'Grupos',
-         component: GruposPage,
-         icon: 'list'
-      },
+      // {
+      //    title: 'Turmas',
+      //    component: TurmasPage,
+      //    icon: 'list'
+      // },
+      // {
+      //    title: 'Alunos',
+      //    component: AlunosPage,
+      //    icon: 'list'
+      // },
+      // {
+      //    title: 'Grupos',
+      //    component: GruposPage,
+      //    icon: 'list'
+      // },
       {
         title: 'Sobre',
         component: SobrePage,
@@ -86,6 +86,32 @@ export class MyApp {
       setTimeout(() => {
         this.splashScreen.hide();
       }, 300);
+      this.platform.registerBackButtonAction(() => {
+        let nav = this.app.getActiveNav();
+
+        if (nav.canGoBack()) {
+          this.nav.setRoot(HomePage);
+        } else {
+        
+        let confirm = this.alertCtrl.create({
+          title: 'Deseja sair da aplicação?',
+          message: 'O progresso não finalizado será perdido.',
+          buttons: [
+            {
+              text: 'Sair',
+                handler: () => {
+                this.platform.exitApp();
+                }
+              },
+            {
+              text: 'Cancelar',
+              handler: () => { }
+            }
+          ]
+        });
+          confirm.present();
+        }
+      });
       this.createDatabase();
     });
   }
@@ -93,7 +119,8 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    // this.nav.setRoot(page.component);
+    this.nav.push(page.component);
   }
 
   private createDatabase(){
