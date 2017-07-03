@@ -8,6 +8,7 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
 
 import { HomePage } from '../pages/home/home';
 import { AvaliacaoPage } from '../pages/avaliacao/avaliacao';
+import { CadastrosPage } from '../pages/cadastros/cadastros';
 import { EscolasPage } from '../pages/escolas/escolas';
 import { TurmasPage } from '../pages/turmas/turmas';
 import { AlunosPage } from '../pages/alunos/alunos';
@@ -46,7 +47,7 @@ export class MyApp {
       },
       {
         title: 'Cadastros',
-        component: EscolasPage,
+        component: CadastrosPage,
         icon: 'filing'
       },
       // {
@@ -92,7 +93,7 @@ export class MyApp {
         if (nav.canGoBack()) {
           this.nav.setRoot(HomePage);
         } else {
-        
+
         let confirm = this.alertCtrl.create({
           title: 'Deseja sair da aplicação?',
           message: 'O progresso não finalizado será perdido.',

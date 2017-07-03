@@ -15,6 +15,7 @@ import { EscolasPage } from "../pages/escolas/escolas";
 import { TurmasPage } from "../pages/turmas/turmas";
 import { AlunosPage } from "../pages/alunos/alunos";
 import { GruposPage } from "../pages/grupos/grupos";
+import { CadastrosPage } from '../pages/cadastros/cadastros';
 
 import { AddEscolaModalPage } from '../pages/add-escola-modal/add-escola-modal';
 import { AddTurmaModalPage } from '../pages/add-turma-modal/add-turma-modal';
@@ -43,6 +44,7 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     TurmasPage,
     AlunosPage,
     GruposPage,
+    CadastrosPage,
     AddEscolaModalPage,
     AddTurmaModalPage,
     AddAlunoModalPage,
@@ -71,6 +73,7 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     TurmasPage,
     AlunosPage,
     GruposPage,
+    CadastrosPage,
     AddEscolaModalPage,
     AddTurmaModalPage,
     AddAlunoModalPage,
