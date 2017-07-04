@@ -21,6 +21,8 @@ export class EditAlunoModalPage {
   turmaId: string = this.navParams.get('turmaId');
 
   turmas: any[] = [];
+  escolas: any[] = [];
+  escolaId;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -43,20 +45,36 @@ export class EditAlunoModalPage {
     this.viewCtrl.dismiss(aluno);
   }
 
-  getAllTurmas(){
-    this.dbService.getAllTurmas()
-      .then(turmas => {
-        console.log(turmas);
-        this.turmas = turmas;
+  getAllEscolas(){
+    this.dbService.getAllEscolas()
+      .then(escolas => {
+        console.log(escolas);
+        this.escolas = escolas;
       })
       .catch( error => {
         console.error( error );
       });
   }
 
+  getEscolaByTurmaId(turmaId){
+    this.dbService.getTurmaById(turmaId)
+      .then( result => {
+        this.escolaId = result[0].escolaId;
+        this.getTurmasByEscolaId(this.escolaId);
+      })
+  }
+
+  getTurmasByEscolaId(escolaId){
+    this.dbService.getTurmasByEscolaId(escolaId)
+      .then(turmas => {
+        this.turmas = turmas;
+      })
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditAlunoModalPage');
-    this.getAllTurmas();
+    this.getAllEscolas();
+    this.getEscolaByTurmaId(this.turmaId);
   }
 
 }

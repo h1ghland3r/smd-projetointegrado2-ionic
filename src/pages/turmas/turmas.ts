@@ -16,15 +16,29 @@ import { ViewTurmaModalPage } from '../view-turma-modal/view-turma-modal'
 export class TurmasPage {
 
   turmas: any[] = [];
+  escolas: any[] = [];
+  escolaId;
 
   constructor(public navCtrl: NavController,
               public dbService: DbServiceProvider,
               public alertCtrl: AlertController,
-              public modalCtrl : ModalController) {
+              public modalCtrl: ModalController) {
   }
 
   ionViewDidLoad() {
     this.getAllTurmas();
+    this.getAllEscolas();
+  }
+
+  getAllEscolas(){
+    this.dbService.getAllEscolas()
+      .then(escolas => {
+        console.log(escolas);
+        this.escolas = escolas;
+      })
+      .catch( error => {
+        console.error( error );
+      });
   }
 
   public openModalAdd(){
@@ -35,6 +49,18 @@ export class TurmasPage {
       }
     });
     modalPage.present();
+  }
+
+  pesquisar(escolaId: any){
+    this.dbService.getTurmasByEscolaId(escolaId)
+      .then( response => {
+        this.turmas = response;
+      })
+  }
+
+  limpar(){
+    this.getAllTurmas();
+    this.escolaId = null;
   }
 
   saveTurma(item){

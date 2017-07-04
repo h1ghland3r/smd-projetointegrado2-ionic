@@ -28,6 +28,9 @@ export class EditGrupoModalPage {
   alunos: any[] = [];
   turmas: any[] = [];
 
+  escolas: any[] = [];
+  escolaId;
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public dbService: DbServiceProvider,
@@ -53,16 +56,36 @@ export class EditGrupoModalPage {
     this.viewCtrl.dismiss(aluno);
   }
 
-  public getAllTurmas(){
-    this.dbService.getAllTurmas()
-      .then(turmas => {
-        console.log(turmas);
-        this.turmas = turmas;
-        this.getAlunosByTurmaId(this.turmaId);
+  getAllEscolas(){
+    this.dbService.getAllEscolas()
+      .then(escolas => {
+        console.log(escolas);
+        this.escolas = escolas;
       })
       .catch( error => {
         console.error( error );
       });
+  }
+
+  getEscolaByTurmaId(turmaId){
+    this.dbService.getTurmaById(turmaId)
+      .then( result => {
+        this.escolaId = result[0].escolaId;
+        this.dbService.getTurmasByEscolaId(this.escolaId)
+          .then(turmas => {
+            this.turmas = turmas;
+          })
+      })
+  }
+
+  getTurmasByEscolaId(escolaId){
+    this.dbService.getTurmasByEscolaId(escolaId)
+      .then(turmas => {
+        this.turmas = turmas;
+        if(this.alunos.length > 0){
+          this.alunos = [];
+        }
+      })
   }
 
   getAlunosByTurmaId(turmaId){
@@ -79,7 +102,9 @@ export class EditGrupoModalPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditGrupoModalPage');
-    this.getAllTurmas();
+    this.getAllEscolas();
+    this.getEscolaByTurmaId(this.turmaId);
+    this.getAlunosByTurmaId(this.turmaId);
   }
 
 }

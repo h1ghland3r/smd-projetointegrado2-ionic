@@ -18,7 +18,9 @@ export class AddAlunoModalPage {
 
   nome;
   turmaId;
+  escolaId;
   turmas: any[] = [];
+  escolas: any[] = [];
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -30,15 +32,22 @@ export class AddAlunoModalPage {
     this.viewCtrl.dismiss();
   }
 
-  public getAllTurmas(){
-    this.dbService.getAllTurmas()
-      .then(turmas => {
-        console.log(turmas);
-        this.turmas = turmas;
+  getAllEscolas(){
+    this.dbService.getAllEscolas()
+      .then(escolas => {
+        console.log(escolas);
+        this.escolas = escolas;
       })
       .catch( error => {
         console.error( error );
       });
+  }
+
+  getTurmasByEscolaId(escolaId){
+    this.dbService.getTurmasByEscolaId(escolaId)
+      .then(turmas => {
+        this.turmas = turmas;
+      })
   }
 
   public saveAluno(){
@@ -52,7 +61,7 @@ export class AddAlunoModalPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddTurmaModalPage');
-    this.getAllTurmas();
+    this.getAllEscolas();
   }
 
 }

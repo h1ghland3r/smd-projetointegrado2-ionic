@@ -8,6 +8,24 @@
 </ion-header>
 
 <ion-content>
+
+  <ion-list>
+    <ion-label>Filtros</ion-label>
+    <ion-item class="no-padding-left" margin-vertical>
+      <ion-label>Escola</ion-label>
+      <ion-select [(ngModel)]="escolaId">
+        <ion-option *ngFor="let escola of escolas" [value]="escola.id">{{escola.nome}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <button ion-button (click)="pesquisar(escolaId)">
+      Pesquisar
+    </button>
+    <button ion-button (click)="limpar()">
+      Limpar
+    </button>
+
+  </ion-list>
+
   <ion-list>
     <ion-item *ngIf="turmas.length == 0">
       Nenhuma turma cadastrada.

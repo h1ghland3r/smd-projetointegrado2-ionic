@@ -20,6 +20,13 @@
   </ion-item>
 
   <ion-item class="no-padding-left" margin-vertical>
+    <ion-label>Escola</ion-label>
+    <ion-select [(ngModel)]="escolaId" (ngModelChange)="getTurmasByEscolaId($event)">
+      <ion-option *ngFor="let escola of escolas" [value]="escola.id">{{escola.nome}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item class="no-padding-left" margin-vertical>
       <ion-label>Turma</ion-label>
       <ion-select [(ngModel)]="turmaId">
         <ion-option *ngFor="let turma of turmas" [value]="turma.id">{{turma.nome}}</ion-option>

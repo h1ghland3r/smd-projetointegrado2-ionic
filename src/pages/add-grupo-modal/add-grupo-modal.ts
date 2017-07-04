@@ -22,8 +22,10 @@ export class AddGrupoModalPage {
   alunoId3;
   alunoId4;
   turmaId;
+  escolaId;
   alunos: any[] = [];
   turmas: any[] = [];
+  escolas: any[] = [];
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -35,15 +37,22 @@ export class AddGrupoModalPage {
     this.viewCtrl.dismiss();
   }
 
-  public getAllTurmas(){
-    this.dbService.getAllTurmas()
-      .then(turmas => {
-        console.log(turmas);
-        this.turmas = turmas;
+  getAllEscolas(){
+    this.dbService.getAllEscolas()
+      .then(escolas => {
+        console.log(escolas);
+        this.escolas = escolas;
       })
       .catch( error => {
         console.error( error );
       });
+  }
+
+  getTurmasByEscolaId(escolaId){
+    this.dbService.getTurmasByEscolaId(escolaId)
+      .then(turmas => {
+        this.turmas = turmas;
+      })
   }
 
   getAlunosByTurmaId(turmaId){
@@ -73,7 +82,7 @@ export class AddGrupoModalPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddGrupoModalPage');
-    this.getAllTurmas();
+    this.getAllEscolas();
   }
 
 }

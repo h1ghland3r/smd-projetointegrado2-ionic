@@ -20,6 +20,11 @@
   </ion-item>
 
   <ion-item>
+    <ion-label>Nome da Escola</ion-label>
+    <ion-input [readonly]="true" [(ngModel)]="escolaNome" type="text">{{escolaNome}}</ion-input>
+  </ion-item>
+
+  <ion-item>
     <ion-label>Nome da Turma</ion-label>
     <ion-input [readonly]="true" [(ngModel)]="turmaNome" type="text">{{turmaNome}}</ion-input>
   </ion-item>
