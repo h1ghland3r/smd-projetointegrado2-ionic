@@ -14,6 +14,8 @@ import { ViewGrupoModalPage } from '../view-grupo-modal/view-grupo-modal';
 })
 export class GruposPage {
 
+  isExpand: Boolean = false;
+
   grupos: any[] = [];
 
   turmas: any[] = [];
@@ -31,6 +33,14 @@ export class GruposPage {
   ionViewDidLoad() {
     this.getAllGrupos();
     this.getAllEscolas();
+  }
+
+  toggleBusca(state){
+    if(state == false){
+      this.isExpand = true;
+    }else{
+      this.isExpand = false;
+    }
   }
 
   getAllEscolas(){

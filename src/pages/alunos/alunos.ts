@@ -22,6 +22,8 @@ export class AlunosPage {
   escolas: any[] = [];
   escolaId;
 
+  isExpand: Boolean = false;
+
   constructor(public navCtrl: NavController,
               public dbService: DbServiceProvider,
               public alertCtrl: AlertController,
@@ -31,6 +33,14 @@ export class AlunosPage {
   ionViewDidLoad() {
     this.getAllAlunos();
     this.getAllEscolas();
+  }
+  
+  toggleBusca(state){
+    if(state == false){
+      this.isExpand = true;
+    }else{
+      this.isExpand = false;
+    }
   }
 
   getAllEscolas(){

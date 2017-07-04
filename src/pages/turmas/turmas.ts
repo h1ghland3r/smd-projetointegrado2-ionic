@@ -19,6 +19,8 @@ export class TurmasPage {
   escolas: any[] = [];
   escolaId;
 
+  isExpand: Boolean = false;
+
   constructor(public navCtrl: NavController,
               public dbService: DbServiceProvider,
               public alertCtrl: AlertController,
@@ -28,6 +30,14 @@ export class TurmasPage {
   ionViewDidLoad() {
     this.getAllTurmas();
     this.getAllEscolas();
+  }
+
+  toggleBusca(state){
+    if(state == false){
+      this.isExpand = true;
+    }else{
+      this.isExpand = false;
+    }
   }
 
   getAllEscolas(){
