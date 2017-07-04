@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AvaliacaoPage } from '../avaliacao/avaliacao';
-import { EscolasPage } from '../escolas/escolas';
+import { CadastrosPage } from '../cadastros/cadastros';
 
 @Component({
   selector: 'page-home',
@@ -19,7 +19,7 @@ export class HomePage {
   }
 
   iniciarCadastros() {
-    this.navCtrl.push(EscolasPage);
+    this.navCtrl.push(CadastrosPage);
     //this.navCtrl.setRoot(AvaliacaoPage);
   }
 }
