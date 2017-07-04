@@ -105,4 +105,27 @@ export class EscolasPage {
       })
   }
 
+  confirmDelete(escola: any, index) {
+    let alert = this.alertCtrl.create({
+      title: 'Excluir escola',
+      message: 'Confirma a exclusão da escola?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: () => {
+            console.log('ação cancelada');
+          }
+        },
+        {
+          text: 'Excluir',
+          handler: () => {
+            this.deleteEscola(escola, index);
+            console.log('escola deletada');
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
 }
