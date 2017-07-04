@@ -43,17 +43,17 @@ export class DbServiceProvider {
 
   createTableAvaliacoes(){
     //let sql = 'DROP TABLE avaliacoes'
-    let sql = 'CREATE TABLE IF NOT EXISTS avaliacoes(id INTEGER PRIMARY KEY AUTOINCREMENT, resposta1 TEXT, resposta2 TEXT, funcao INTEGER, alunoId INTEGER, grupoId INTEGER, FOREIGN KEY(alunoId) REFERENCES alunos(Id), FOREIGN KEY(grupoId) REFERENCES grupos(id))';
+    let sql = 'CREATE TABLE IF NOT EXISTS avaliacoes(id INTEGER PRIMARY KEY AUTOINCREMENT, date DATETIME, resposta1 TEXT, resposta2 TEXT, resposta3 TEXT, resposta4 TEXT, resposta5 TEXT, funcao INTEGER, alunoId INTEGER, grupoId INTEGER, FOREIGN KEY(alunoId) REFERENCES alunos(Id), FOREIGN KEY(grupoId) REFERENCES grupos(id))';
     return this.db.executeSql(sql, []);
   }
 
   createAvaliacao(avaliacoes: any[]){
     for (let index = 0; index < avaliacoes.length; index++) {
-      let sql = 'INSERT INTO avaliacoes(resposta1, resposta2, funcao, alunoId, grupoId) VALUES(?,?,?,?,?)';
+      let sql = 'INSERT INTO avaliacoes(date, resposta1, resposta2, resposta3, resposta4, resposta5, funcao, alunoId, grupoId) VALUES(?,?,?,?,?,?,?,?,?)';
       if(index == avaliacoes.length-1){
-        return this.db.executeSql(sql, [avaliacoes[index].resposta1, avaliacoes[index].resposta2, avaliacoes[index].funcao, avaliacoes[index].alunoId, avaliacoes[index].grupoId]);
+        return this.db.executeSql(sql, [avaliacoes[index].date, avaliacoes[index].resposta1, avaliacoes[index].resposta2, avaliacoes[index].resposta3, avaliacoes[index].resposta4, avaliacoes[index].resposta5, avaliacoes[index].funcao, avaliacoes[index].alunoId, avaliacoes[index].grupoId]);
       }else{
-        this.db.executeSql(sql, [avaliacoes[index].resposta1, avaliacoes[index].resposta2, avaliacoes[index].funcao, avaliacoes[index].alunoId, avaliacoes[index].grupoId]);
+        this.db.executeSql(sql, [avaliacoes[index].date, avaliacoes[index].resposta1, avaliacoes[index].resposta2, avaliacoes[index].resposta3, avaliacoes[index].resposta4, avaliacoes[index].resposta5, avaliacoes[index].funcao, avaliacoes[index].alunoId, avaliacoes[index].grupoId]);
       }
     }
   }
