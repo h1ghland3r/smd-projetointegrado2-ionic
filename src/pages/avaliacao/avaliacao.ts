@@ -18,18 +18,34 @@ export class AvaliacaoPage {
   @ViewChild('avaliacaoSlider') avaliacaoSlider: any;
 
   slide1Form: FormGroup;
+
   slideConstrutorForm: FormGroup;
   slideConstrutorQst1Form: FormGroup;
   slideConstrutorQst2Form: FormGroup;
+  slideConstrutorQst3Form: FormGroup;
+  slideConstrutorQst4Form: FormGroup;
+  slideConstrutorQst5Form: FormGroup;
+
   slideOrganizadorForm: FormGroup;
   slideOrganizadorQst1Form: FormGroup;
   slideOrganizadorQst2Form: FormGroup;
+  slideOrganizadorQst3Form: FormGroup;
+  slideOrganizadorQst4Form: FormGroup;
+  slideOrganizadorQst5Form: FormGroup;
+
   slideProgramadorForm: FormGroup;
   slideProgramadorQst1Form: FormGroup;
   slideProgramadorQst2Form: FormGroup;
+  slideProgramadorQst3Form: FormGroup;
+  slideProgramadorQst4Form: FormGroup;
+  slideProgramadorQst5Form: FormGroup;
+
   slideLiderForm: FormGroup;
   slideLiderQst1Form: FormGroup;
   slideLiderQst2Form: FormGroup;
+  slideLiderQst3Form: FormGroup;
+  slideLiderQst4Form: FormGroup;
+  slideLiderQst5Form: FormGroup;
 
   submitAttempt: boolean = false;
 
@@ -56,6 +72,8 @@ export class AvaliacaoPage {
         grupo: ['']
     });
 
+    //Respostas do Aluno Construtor
+
     this.slideConstrutorForm = formBuilder.group({
         alunoConstrutor: ['']
     });
@@ -67,6 +85,20 @@ export class AvaliacaoPage {
     this.slideConstrutorQst2Form = formBuilder.group({
         construtorResposta2: ['']
     });
+
+    this.slideConstrutorQst3Form = formBuilder.group({
+        construtorResposta3: ['']
+    });
+
+    this.slideConstrutorQst4Form = formBuilder.group({
+        construtorResposta4: ['']
+    });
+
+    this.slideConstrutorQst5Form = formBuilder.group({
+        construtorResposta5: ['']
+    });
+
+    //Respostas do Aluno Organizador
 
     this.slideOrganizadorForm = formBuilder.group({
         alunoOrganizador: ['']
@@ -80,6 +112,20 @@ export class AvaliacaoPage {
         organizadorResposta2: ['']
     });
 
+    this.slideOrganizadorQst3Form = formBuilder.group({
+        organizadorResposta3: ['']
+    });
+
+    this.slideOrganizadorQst4Form = formBuilder.group({
+        organizadorResposta4: ['']
+    });
+
+    this.slideOrganizadorQst5Form = formBuilder.group({
+        organizadorResposta5: ['']
+    });
+
+    //Respostas do Aluno Programador
+
     this.slideProgramadorForm = formBuilder.group({
         alunoProgramador: ['']
     });
@@ -92,6 +138,20 @@ export class AvaliacaoPage {
         programadorResposta2: ['']
     });
 
+    this.slideProgramadorQst3Form = formBuilder.group({
+        programadorResposta3: ['']
+    });
+
+    this.slideProgramadorQst4Form = formBuilder.group({
+        programadorResposta4: ['']
+    });
+
+    this.slideProgramadorQst5Form = formBuilder.group({
+        programadorResposta5: ['']
+    });
+
+    //Respostas do Aluno lider
+
     this.slideLiderForm = formBuilder.group({
         alunoLider: ['']
     });
@@ -102,6 +162,18 @@ export class AvaliacaoPage {
 
     this.slideLiderQst2Form = formBuilder.group({
         liderResposta2: ['']
+    });
+
+    this.slideLiderQst3Form = formBuilder.group({
+        liderResposta3: ['']
+    });
+
+    this.slideLiderQst4Form = formBuilder.group({
+        liderResposta4: ['']
+    });
+
+    this.slideLiderQst5Form = formBuilder.group({
+        liderResposta5: ['']
     });
 
   }
@@ -198,6 +270,9 @@ export class AvaliacaoPage {
     let respostasConstrutor: any[] = [];
     respostasConstrutor.push(this.slideConstrutorQst1Form.value.construtorResposta1);
     respostasConstrutor.push(this.slideConstrutorQst2Form.value.construtorResposta2);
+    respostasConstrutor.push(this.slideConstrutorQst3Form.value.construtorResposta3);
+    respostasConstrutor.push(this.slideConstrutorQst4Form.value.construtorResposta4);
+    respostasConstrutor.push(this.slideConstrutorQst5Form.value.construtorResposta5);
 
     this.verificaRepostas(respostasConstrutor, 1);
 
@@ -246,6 +321,9 @@ export class AvaliacaoPage {
     let respostasOrganizador: any[] = [];
     respostasOrganizador.push(this.slideOrganizadorQst1Form.value.organizadorResposta1);
     respostasOrganizador.push(this.slideOrganizadorQst2Form.value.organizadorResposta2);
+    respostasOrganizador.push(this.slideOrganizadorQst3Form.value.organizadorResposta3);
+    respostasOrganizador.push(this.slideOrganizadorQst4Form.value.organizadorResposta4);
+    respostasOrganizador.push(this.slideOrganizadorQst5Form.value.organizadorResposta5);
 
     this.verificaRepostas(respostasOrganizador, 2);
 
@@ -294,6 +372,9 @@ export class AvaliacaoPage {
     let respostasProgramador: any[] = [];
     respostasProgramador.push(this.slideProgramadorQst1Form.value.programadorResposta1);
     respostasProgramador.push(this.slideProgramadorQst2Form.value.programadorResposta2);
+    respostasProgramador.push(this.slideProgramadorQst3Form.value.programadorResposta3);
+    respostasProgramador.push(this.slideProgramadorQst4Form.value.programadorResposta4);
+    respostasProgramador.push(this.slideProgramadorQst5Form.value.programadorResposta5);
 
     this.verificaRepostas(respostasProgramador, 3);
 
@@ -342,6 +423,9 @@ export class AvaliacaoPage {
     let respostasLider: any[] = [];
     respostasLider.push(this.slideLiderQst1Form.value.liderResposta1);
     respostasLider.push(this.slideLiderQst2Form.value.liderResposta2);
+    respostasLider.push(this.slideLiderQst3Form.value.liderResposta3);
+    respostasLider.push(this.slideLiderQst4Form.value.liderResposta4);
+    respostasLider.push(this.slideLiderQst5Form.value.liderResposta5);
 
     this.verificaRepostas(respostasLider, 4);
 
@@ -410,7 +494,7 @@ export class AvaliacaoPage {
         console.log(this.alunos);
         this.getAlunoNome(1, this.slideConstrutorForm.value.alunoConstrutor);
       }
-      else if(this.avaliacaoSlider.getActiveIndex() == 5){
+      else if(this.avaliacaoSlider.getActiveIndex() == 8){
         console.log(this.slideOrganizadorForm.value.alunoOrganizador);
         for (let i = 0; i < this.alunos.length; i++) {
           if(this.alunos[i].id == this.slideOrganizadorForm.value.alunoOrganizador){
@@ -420,7 +504,7 @@ export class AvaliacaoPage {
         console.log(this.alunos);
         this.getAlunoNome(2, this.slideOrganizadorForm.value.alunoOrganizador);
       }
-      else if(this.avaliacaoSlider.getActiveIndex() == 8){
+      else if(this.avaliacaoSlider.getActiveIndex() == 14){
         console.log(this.slideProgramadorForm.value.alunoProgramador);
         for (let i = 0; i < this.alunos.length; i++) {
           if(this.alunos[i].id == this.slideProgramadorForm.value.alunoProgramador){
@@ -430,7 +514,7 @@ export class AvaliacaoPage {
         console.log(this.alunos);
         this.getAlunoNome(3, this.slideProgramadorForm.value.alunoProgramador);
       }
-      else if(this.avaliacaoSlider.getActiveIndex() == 11){
+      else if(this.avaliacaoSlider.getActiveIndex() == 20){
         console.log(this.slideLiderForm.value.alunoLider);
         for (let i = 0; i < this.alunos.length; i++) {
           if(this.alunos[i].id == this.slideLiderForm.value.alunoLider){
@@ -440,7 +524,7 @@ export class AvaliacaoPage {
         console.log(this.alunos);
         this.getAlunoNome(4, this.slideLiderForm.value.alunoLider);
       }
-      else if(this.avaliacaoSlider.getActiveIndex() == 13){
+      else if(this.avaliacaoSlider.getActiveIndex() == 25){
         this.save();
         this.graficos();
       }
@@ -454,34 +538,50 @@ export class AvaliacaoPage {
 
     let avaliacaoConstrutor = {
       alunoId: this.slideConstrutorForm.value.alunoConstrutor,
+      date: new Date().toISOString(),
       grupoId: this.slide1Form.value.grupo,
       funcao: 1,
       resposta1: this.slideConstrutorQst1Form.value.construtorResposta1,
       resposta2: this.slideConstrutorQst2Form.value.construtorResposta2,
+      resposta3: this.slideConstrutorQst3Form.value.construtorResposta3,
+      resposta4: this.slideConstrutorQst4Form.value.construtorResposta4,
+      resposta5: this.slideConstrutorQst5Form.value.construtorResposta5
     }
 
     let avaliacaoOrganizador = {
       alunoId: this.slideOrganizadorForm.value.alunoOrganizador,
+      date: new Date().toISOString(),
       grupoId: this.slide1Form.value.grupo,
       funcao: 2,
       resposta1: this.slideOrganizadorQst1Form.value.organizadorResposta1,
       resposta2: this.slideOrganizadorQst2Form.value.organizadorResposta2,
+      resposta3: this.slideOrganizadorQst3Form.value.organizadorResposta3,
+      resposta4: this.slideOrganizadorQst4Form.value.organizadorResposta4,
+      resposta5: this.slideOrganizadorQst5Form.value.organizadorResposta5
     }
 
     let avaliacaoProgramador = {
       alunoId: this.slideProgramadorForm.value.alunoProgramador,
+      date: new Date().toISOString(),
       grupoId: this.slide1Form.value.grupo,
       funcao: 3,
       resposta1: this.slideProgramadorQst1Form.value.programadorResposta1,
       resposta2: this.slideProgramadorQst2Form.value.programadorResposta2,
+      resposta3: this.slideProgramadorQst3Form.value.programadorResposta3,
+      resposta4: this.slideProgramadorQst4Form.value.programadorResposta4,
+      resposta5: this.slideProgramadorQst5Form.value.programadorResposta5
     }
 
     let avaliacaoLider = {
       alunoId: this.slideLiderForm.value.alunoLider,
+      date: new Date().toISOString(),
       grupoId: this.slide1Form.value.grupo,
       funcao: 4,
       resposta1: this.slideLiderQst1Form.value.liderResposta1,
       resposta2: this.slideLiderQst2Form.value.liderResposta2,
+      resposta3: this.slideLiderQst3Form.value.liderResposta3,
+      resposta4: this.slideLiderQst4Form.value.liderResposta4,
+      resposta5: this.slideLiderQst5Form.value.liderResposta5
     }
 
     console.log(avaliacaoConstrutor);
