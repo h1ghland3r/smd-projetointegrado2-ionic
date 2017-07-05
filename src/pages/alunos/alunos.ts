@@ -16,6 +16,14 @@ export class AlunosPage {
 
   alunos: any[] = [];
 
+  turmas: any[] = [];
+  turmaId;
+
+  escolas: any[] = [];
+  escolaId;
+
+  isExpand: Boolean = false;
+
   constructor(public navCtrl: NavController,
               public dbService: DbServiceProvider,
               public alertCtrl: AlertController,
@@ -24,6 +32,46 @@ export class AlunosPage {
 
   ionViewDidLoad() {
     this.getAllAlunos();
+    this.getAllEscolas();
+  }
+  
+  toggleBusca(state){
+    if(state == false){
+      this.isExpand = true;
+    }else{
+      this.isExpand = false;
+    }
+  }
+
+  getAllEscolas(){
+    this.dbService.getAllEscolas()
+      .then(escolas => {
+        console.log(escolas);
+        this.escolas = escolas;
+      })
+      .catch( error => {
+        console.error( error );
+      });
+  }
+
+  getTurmasByEscolaId(escolaId){
+    this.dbService.getTurmasByEscolaId(escolaId)
+      .then(turmas => {
+        this.turmas = turmas;
+      })
+  }
+
+  pesquisar(turmaId: any){
+    this.dbService.getAlunosByTurmaId(turmaId)
+      .then( response => {
+        this.alunos = response;
+      })
+  }
+
+  limpar(){
+    this.getAllAlunos();
+    this.turmaId = null;
+    this.escolaId = null;
   }
 
   public openModalAdd(){
@@ -48,7 +96,6 @@ export class AlunosPage {
   }
 
   public openModalEdit(aluno, index){
-
     let obj = {id: aluno.id, nome: aluno.nome, turmaId: aluno.turmaId, index: index};
     var modalPage = this.modalCtrl.create(EditAlunoModalPage, obj);
     modalPage.onDidDismiss((item) => {
@@ -75,7 +122,6 @@ export class AlunosPage {
   }
 
   public openModalView(aluno, index){
-
     let obj = {id: aluno.id, nome: aluno.nome, turmaId: aluno.turmaId, index: index};
     var modalPage = this.modalCtrl.create(ViewAlunoModalPage, obj);
 

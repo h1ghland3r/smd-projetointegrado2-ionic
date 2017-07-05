@@ -30,6 +30,7 @@ export class ViewGrupoModalPage {
   alunoNome3;
   alunoNome4;
   turmaNome;
+  escolaNome;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -47,6 +48,10 @@ export class ViewGrupoModalPage {
       .then(turma => {
         console.log(turma[0]);
         this.turmaNome = turma[0].nome;
+        this.dbService.getEscolaById(turma[0].escolaId)
+          .then(escola => {
+            this.escolaNome = escola[0].nome;
+          })
       })
       .catch( error => {
         console.error( error );

@@ -14,7 +14,15 @@ import { ViewGrupoModalPage } from '../view-grupo-modal/view-grupo-modal';
 })
 export class GruposPage {
 
+  isExpand: Boolean = false;
+
   grupos: any[] = [];
+
+  turmas: any[] = [];
+  turmaId;
+
+  escolas: any[] = [];
+  escolaId;
 
   constructor(public navCtrl: NavController,
               public dbService: DbServiceProvider,
@@ -24,6 +32,46 @@ export class GruposPage {
 
   ionViewDidLoad() {
     this.getAllGrupos();
+    this.getAllEscolas();
+  }
+
+  toggleBusca(state){
+    if(state == false){
+      this.isExpand = true;
+    }else{
+      this.isExpand = false;
+    }
+  }
+
+  getAllEscolas(){
+    this.dbService.getAllEscolas()
+      .then(escolas => {
+        console.log(escolas);
+        this.escolas = escolas;
+      })
+      .catch( error => {
+        console.error( error );
+      });
+  }
+
+  getTurmasByEscolaId(escolaId){
+    this.dbService.getTurmasByEscolaId(escolaId)
+      .then(turmas => {
+        this.turmas = turmas;
+      })
+  }
+
+  pesquisar(turmaId: any){
+    this.dbService.getGruposByTurmaId(turmaId)
+      .then( response => {
+        this.grupos = response;
+      })
+  }
+
+  limpar(){
+    this.getAllGrupos();
+    this.turmaId = null;
+    this.escolaId = null;
   }
 
   public openModalAdd(){
