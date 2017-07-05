@@ -104,4 +104,27 @@ export class TurmasPage {
       })
   }
 
+  confirmDelete(turma: any, index) {
+    let alert = this.alertCtrl.create({
+      title: 'Excluir turma',
+      message: 'Confirma a exclusão da turma?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: () => {
+            console.log('ação cancelada');
+          }
+        },
+        {
+          text: 'Excluir',
+          handler: () => {
+            this.deleteTurma(turma, index);
+            console.log('turma deletada');
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
 }

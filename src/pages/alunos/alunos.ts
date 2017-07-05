@@ -104,4 +104,28 @@ export class AlunosPage {
       })
   }
 
+  confirmDelete(aluno: any, index) {
+    let alert = this.alertCtrl.create({
+      title: 'Excluir aluno',
+      message: 'Confirma a exclusão do aluno?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: () => {
+            console.log('ação cancelada');
+          }
+        },
+        {
+          text: 'Excluir',
+          handler: () => {
+            this.deleteAluno(aluno, index);
+            console.log('aluno deletado');
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+
 }

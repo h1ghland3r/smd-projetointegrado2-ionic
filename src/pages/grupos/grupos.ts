@@ -126,4 +126,27 @@ export class GruposPage {
       })
   }
 
+  confirmDelete(grupo: any, index) {
+    let alert = this.alertCtrl.create({
+      title: 'Excluir grupo',
+      message: 'Confirma a exclusão do grupo?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: () => {
+            console.log('ação cancelada');
+          }
+        },
+        {
+          text: 'Excluir',
+          handler: () => {
+            this.deleteGrupo(grupo, index);
+            console.log('grupo deletado');
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
 }
