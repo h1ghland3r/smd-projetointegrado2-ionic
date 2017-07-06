@@ -225,6 +225,29 @@ export class DbServiceProvider {
      });
  }
 
+ getAlunosByEscola(escolaId: any){
+   let sql = 'SELECT * FROM turmas WHERE escolaId=?'
+   return this.db.executeSql(sql, [escolaId])
+     .then( response => {
+       let turmas = [];
+       for (let index = 0; index < response.rows.length; index++) {
+         turmas.push( response.rows.item(index) );
+       }
+
+       let alunos = [];
+       for (let i = 0; i < turmas.length; i++) {
+         let sqlAlunos = 'SELECT * FROM alunos WHERE turmaId=?'
+         this.db.executeSql(sqlAlunos, [turmas[i].id])
+          .then (response => {
+            for (let index = 0; index < response.rows.length; index++) {
+              alunos.push( response.rows.item(index) );
+            }
+          })
+       }
+       return Promise.resolve( alunos );
+     });
+ }
+
  getAllAlunos(){
    let sql = 'SELECT * FROM alunos';
    return this.db.executeSql(sql, [])
@@ -294,6 +317,28 @@ getGruposByTurmaId(turmaId: any){
     });
 }
 
+getGruposByEscola(escolaId: any){
+  let sql = 'SELECT * FROM turmas WHERE escolaId=?'
+  return this.db.executeSql(sql, [escolaId])
+    .then( response => {
+      let turmas = [];
+      for (let index = 0; index < response.rows.length; index++) {
+        turmas.push( response.rows.item(index) );
+      }
+
+      let grupos = [];
+      for (let i = 0; i < turmas.length; i++) {
+        let sqlGrupos = 'SELECT * FROM grupos WHERE turmaId=?'
+        this.db.executeSql(sqlGrupos, [turmas[i].id])
+         .then (response => {
+           for (let index = 0; index < response.rows.length; index++) {
+             grupos.push( response.rows.item(index) );
+           }
+         })
+      }
+      return Promise.resolve( grupos );
+    });
+}
 //Fim CRUD - Table Grupos
 
 }

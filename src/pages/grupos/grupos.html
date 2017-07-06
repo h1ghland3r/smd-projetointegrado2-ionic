@@ -27,7 +27,7 @@
           <ion-option *ngFor="let turma of turmas" [value]="turma.id">{{turma.nome}}</ion-option>
         </ion-select>
       </ion-item>
-      <button ion-button (click)="pesquisar(turmaId)">
+      <button ion-button (click)="pesquisar(turmaId, escolaId)">
         Pesquisar
       </button>
       <button ion-button (click)="limpar()">
