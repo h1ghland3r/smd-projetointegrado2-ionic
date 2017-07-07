@@ -54,6 +54,8 @@ export class AvaliacaoPage {
   grupos: any[] = [];
   alunos: any[] = [];
 
+  avaliacao: any;
+
   grupoNome;
 
   alunoContrutorNome;
@@ -541,6 +543,7 @@ export class AvaliacaoPage {
       date: new Date().toISOString(),
       grupoId: this.slide1Form.value.grupo,
       funcao: 1,
+      avaliacaoId: this.avaliacao.id,
       resposta1: this.slideConstrutorQst1Form.value.construtorResposta1,
       resposta2: this.slideConstrutorQst2Form.value.construtorResposta2,
       resposta3: this.slideConstrutorQst3Form.value.construtorResposta3,
@@ -553,6 +556,7 @@ export class AvaliacaoPage {
       date: new Date().toISOString(),
       grupoId: this.slide1Form.value.grupo,
       funcao: 2,
+      avaliacaoId: this.avaliacao.id,
       resposta1: this.slideOrganizadorQst1Form.value.organizadorResposta1,
       resposta2: this.slideOrganizadorQst2Form.value.organizadorResposta2,
       resposta3: this.slideOrganizadorQst3Form.value.organizadorResposta3,
@@ -565,6 +569,7 @@ export class AvaliacaoPage {
       date: new Date().toISOString(),
       grupoId: this.slide1Form.value.grupo,
       funcao: 3,
+      avaliacaoId: this.avaliacao.id,
       resposta1: this.slideProgramadorQst1Form.value.programadorResposta1,
       resposta2: this.slideProgramadorQst2Form.value.programadorResposta2,
       resposta3: this.slideProgramadorQst3Form.value.programadorResposta3,
@@ -577,6 +582,7 @@ export class AvaliacaoPage {
       date: new Date().toISOString(),
       grupoId: this.slide1Form.value.grupo,
       funcao: 4,
+      avaliacaoId: this.avaliacao.id,
       resposta1: this.slideLiderQst1Form.value.liderResposta1,
       resposta2: this.slideLiderQst2Form.value.liderResposta2,
       resposta3: this.slideLiderQst3Form.value.liderResposta3,
@@ -596,10 +602,10 @@ export class AvaliacaoPage {
     avaliacoes.push( avaliacaoProgramador );
     avaliacoes.push( avaliacaoLider );
 
-    this.dbService.createAvaliacao(avaliacoes)
+    this.dbService.createAvaliacaoAlunos(avaliacoes)
       .then(response => {
         console.log(response);
-        this.getAllAvaliacoes();
+        this.getAllAvaliacoesAlunos();
       })
       .catch( error => {
         console.error( error );
@@ -607,11 +613,48 @@ export class AvaliacaoPage {
 
   }
 
+  createAvaliacao(){
+
+    let date = new Date().toLocaleString().substring(0,8);
+    console.log(date);
+
+    let nome = this.grupoNome + " - " + date;
+
+    let avaliacao = {
+      nome: nome,
+      date: new Date().toLocaleString()
+    }
+
+    this.dbService.createAvaliacao(avaliacao)
+      .then( response => {
+
+        let avaliacao = {
+          nome: nome,
+          date: new Date().toLocaleString(),
+          id: response.insertId
+        }
+
+        this.avaliacao = avaliacao;
+        console.log(this.avaliacao);
+        this.getAllAvaliacoes();
+      })
+
+  }
+
+  getAllAvaliacoesAlunos(){
+    this.dbService.getAllAvaliacoesAlunos()
+      .then(avaliacoesAlunos => {
+        console.log(avaliacoesAlunos);
+      })
+      .catch( error => {
+        console.error( error );
+      });
+  }
+
   getAllAvaliacoes(){
     this.dbService.getAllAvaliacoes()
       .then(avaliacoes => {
         console.log(avaliacoes);
-        //this.grupos = grupos;
       })
       .catch( error => {
         console.error( error );
@@ -657,6 +700,7 @@ export class AvaliacaoPage {
         console.log(grupo);
         this.grupoNome = grupo[0].nome;
         this.getAlunosDoGrupo(grupo[0].alunoId1, grupo[0].alunoId2, grupo[0].alunoId3, grupo[0].alunoId4);
+        this.createAvaliacao();
       })
   }
 

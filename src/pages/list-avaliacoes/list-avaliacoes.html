@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Avaliações</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngFor="let av of avaliacoes; let i = index">
+    <ion-item *ngIf="avaliacoes.length == 0">
+      Nenhuma avaliação cadastrada.
+    </ion-item>
+    <ion-item >
+      <ion-label>{{ av.nome }}</ion-label>
+      <ion-icon item-right name="md-eye" (click)="openModalView(av, i)"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>
