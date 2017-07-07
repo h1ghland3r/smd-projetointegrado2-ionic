@@ -34,7 +34,7 @@ export class AlunosPage {
     this.getAllAlunos();
     this.getAllEscolas();
   }
-  
+
   toggleBusca(state){
     if(state == false){
       this.isExpand = true;
@@ -61,11 +61,19 @@ export class AlunosPage {
       })
   }
 
-  pesquisar(turmaId: any){
-    this.dbService.getAlunosByTurmaId(turmaId)
-      .then( response => {
-        this.alunos = response;
-      })
+  pesquisar(turmaId: any, escolaId: any){
+    if(escolaId != null && turmaId != null){
+      this.dbService.getAlunosByTurmaId(turmaId)
+        .then( response => {
+          this.alunos = response;
+        })
+    } else if (escolaId != null && turmaId == null){
+        this.dbService.getAlunosByEscola(escolaId)
+        .then( response => {
+          this.alunos = response;
+        })
+    }
+
   }
 
   limpar(){

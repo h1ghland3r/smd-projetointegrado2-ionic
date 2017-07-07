@@ -61,11 +61,18 @@ export class GruposPage {
       })
   }
 
-  pesquisar(turmaId: any){
-    this.dbService.getGruposByTurmaId(turmaId)
-      .then( response => {
-        this.grupos = response;
-      })
+  pesquisar(turmaId: any, escolaId: any){
+    if(escolaId != null && turmaId != null){
+      this.dbService.getGruposByTurmaId(turmaId)
+        .then( response => {
+          this.grupos = response;
+        })
+    } else if (escolaId != null && turmaId == null){
+        this.dbService.getGruposByEscola(escolaId)
+        .then( response => {
+          this.grupos = response;
+        })
+    }
   }
 
   limpar(){
