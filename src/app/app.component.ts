@@ -14,6 +14,7 @@ import { TurmasPage } from '../pages/turmas/turmas';
 import { AlunosPage } from '../pages/alunos/alunos';
 import { GruposPage } from '../pages/grupos/grupos';
 import { SobrePage } from '../pages/sobre/sobre';
+import { ListAvaliacoesPage } from '../pages/list-avaliacoes/list-avaliacoes';
 
 @Component({
   templateUrl: 'app.html'
@@ -50,30 +51,15 @@ export class MyApp {
         component: CadastrosPage,
         icon: 'filing'
       },
-      // {
-      //    title: 'Escolas',
-      //    component: EscolasPage,
-      //    icon: 'list'
-      // },
-      // {
-      //    title: 'Turmas',
-      //    component: TurmasPage,
-      //    icon: 'list'
-      // },
-      // {
-      //    title: 'Alunos',
-      //    component: AlunosPage,
-      //    icon: 'list'
-      // },
-      // {
-      //    title: 'Grupos',
-      //    component: GruposPage,
-      //    icon: 'list'
-      // },
       {
         title: 'Sobre',
         component: SobrePage,
         icon: 'people'
+      },
+      {
+        title: 'Ver avaliações',
+        component: ListAvaliacoesPage,
+        icon: 'list'
       }
     ];
 
@@ -136,6 +122,7 @@ export class MyApp {
         this.dbService.createTableAlunos();
         this.dbService.createTableGrupos();
         this.dbService.createTableAvaliacoes();
+        this.dbService.createTableAvaliacoesAlunos();
       })
       .catch(error =>{
         console.error(error);

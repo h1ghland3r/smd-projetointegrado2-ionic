@@ -1,0 +1,46 @@
+<ion-header>
+
+<ion-navbar>
+    <ion-title>{{nome}}</ion-title>
+    <ion-buttons end>
+    <button ion-button (click)="closeModal()">Fechar</button>
+    </ion-buttons>
+</ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-item>
+    <ion-label>Data da avaliação:</ion-label>
+    <ion-input [readonly]="true" [(ngModel)]="date" type="text">{{date}}</ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Nome da Escola</ion-label>
+    <ion-input [readonly]="true" [(ngModel)]="escolaNome" type="text">{{escolaNome}}</ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Nome da Turma</ion-label>
+    <ion-input [readonly]="true" [(ngModel)]="turmaNome" type="text">{{turmaNome}}</ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Nome do Grupo</ion-label>
+    <ion-input [readonly]="true" [(ngModel)]="grupoNome" type="text">{{grupoNome}}</ion-input>
+  </ion-item>
+
+  <ion-list *ngFor="let av of avaliacoesAlunos; let i = index">
+    <ion-item *ngIf="avAlunos.length == 0">
+      Nenhuma avaliação cadastrada.
+    </ion-item>
+    <ion-item >
+      <ion-label>{{ av.alunoNome }}: {{ av.funcaoNome }}</ion-label>
+      <ion-icon item-right name="md-eye" (click)="openModalView(av, i)"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+
+</ion-content>

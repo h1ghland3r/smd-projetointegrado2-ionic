@@ -16,6 +16,7 @@ import { TurmasPage } from "../pages/turmas/turmas";
 import { AlunosPage } from "../pages/alunos/alunos";
 import { GruposPage } from "../pages/grupos/grupos";
 import { CadastrosPage } from '../pages/cadastros/cadastros';
+import { ListAvaliacoesPage } from '../pages/list-avaliacoes/list-avaliacoes';
 
 import { AddEscolaModalPage } from '../pages/add-escola-modal/add-escola-modal';
 import { AddTurmaModalPage } from '../pages/add-turma-modal/add-turma-modal';
@@ -31,6 +32,8 @@ import { ViewEscolaModalPage } from '../pages/view-escola-modal/view-escola-moda
 import { ViewTurmaModalPage } from '../pages/view-turma-modal/view-turma-modal';
 import { ViewAlunoModalPage } from '../pages/view-aluno-modal/view-aluno-modal';
 import { ViewGrupoModalPage } from '../pages/view-grupo-modal/view-grupo-modal';
+import { ViewAvaliacoesModalPage } from '../pages/view-avaliacoes-modal/view-avaliacoes-modal';
+import { ViewAvaliacaoAlunoModalPage } from '../pages/view-avaliacao-aluno-modal/view-avaliacao-aluno-modal';
 
 import { DbServiceProvider } from '../providers/db-service/db-service';
 
@@ -45,6 +48,7 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     AlunosPage,
     GruposPage,
     CadastrosPage,
+    ListAvaliacoesPage,
     AddEscolaModalPage,
     AddTurmaModalPage,
     AddAlunoModalPage,
@@ -57,6 +61,8 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     ViewTurmaModalPage,
     ViewAlunoModalPage,
     ViewGrupoModalPage,
+    ViewAvaliacoesModalPage,
+    ViewAvaliacaoAlunoModalPage,
     SobrePage
   ],
   imports: [
@@ -74,6 +80,7 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     AlunosPage,
     GruposPage,
     CadastrosPage,
+    ListAvaliacoesPage,
     AddEscolaModalPage,
     AddTurmaModalPage,
     AddAlunoModalPage,
@@ -86,6 +93,8 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     ViewTurmaModalPage,
     ViewAlunoModalPage,
     ViewGrupoModalPage,
+    ViewAvaliacoesModalPage,
+    ViewAvaliacaoAlunoModalPage,
     SobrePage
   ],
   providers: [
