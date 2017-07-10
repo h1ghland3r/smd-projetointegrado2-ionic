@@ -1,3 +1,29 @@
-page-cadastros {
+.button-block {
+    background-color: color($colors, primary, base);
+    padding: 15px 0 120px 0;
 
+    button {
+        box-shadow: none;
+    }
+}
+
+.icon-big {
+    font-size: 70px;
+    color: white;
+}
+
+@media all and (orientation:landscape) {
+
+    .button-block {
+        padding: 10px 0 80px 0;
+
+        button {
+            margin-top: -10%;
+        }
+    }
+
+    .icon-big {
+        font-size: 50px;
+        padding-top: 15px;
+    }
 }

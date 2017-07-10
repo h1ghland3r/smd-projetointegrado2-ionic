@@ -1,28 +1,28 @@
 <ion-header>
-
-<ion-navbar>
-    <ion-title>Editar escola</ion-title>
-    <ion-buttons end>
-    <button ion-button (click)="closeModal()">Fechar</button>
-    </ion-buttons>
-</ion-navbar>
-
+  <ion-navbar>
+      <!--<ion-buttons left>
+        <button ion-button icon-left (click)="closeModal()" >
+          <ion-icon name="arrow-back" class="icon-left-side"></ion-icon>
+        </button>
+      </ion-buttons>-->
+      <ion-title>Editar escola</ion-title>
+      <ion-buttons end>
+        <button ion-button (click)="closeModal()">Fechar</button>
+      </ion-buttons>
+  </ion-navbar>
 </ion-header>
-
 
 <ion-content padding>
 
   <ion-list>
+    <div class="border-bottom">
+      <ion-item class="no-padding-left"> 
+        <ion-label>Nome da Escola:</ion-label>
+        <ion-input [(ngModel)]="nome" type="text">{{nome}}</ion-input>
+      </ion-item>
+    </div>
+    <button ion-button color="darkgrey" class="button-top-margin" (click)="saveEscolaEdit()" full>Salvar</button>
 
-  <ion-item>
-    <ion-label floating>Nome da Escola:</ion-label>
-    <ion-input [(ngModel)]="nome" type="text">{{nome}}</ion-input>
-  </ion-item>
-
-  <button ion-button icon-only (click)="saveEscolaEdit()">
-    <ion-icon name="salvar">Salvar</ion-icon>
-  </button>
-
-</ion-list>
+  </ion-list>
 
 </ion-content>
