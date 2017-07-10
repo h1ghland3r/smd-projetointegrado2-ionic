@@ -7,9 +7,9 @@
 <ion-content>
 
   <ion-card>
-    <ion-card-header (click)="toggleBusca(isExpand)">Busca
-      <ion-icon item-right name="add" *ngIf="!isExpand"></ion-icon>
-      <ion-icon item-right name="remove" *ngIf="isExpand"></ion-icon>
+    <ion-card-header class="titleSearch" (click)="toggleBusca(isExpand)">Busca
+      <ion-icon item-right class="iconRight" name="add" *ngIf="!isExpand"></ion-icon>
+      <ion-icon item-right class="iconRight" name="remove" *ngIf="isExpand"></ion-icon>
     </ion-card-header>
     <ion-card-content *ngIf="isExpand">
       <ion-item class="no-padding-left" margin-vertical>
@@ -24,12 +24,14 @@
           <ion-option *ngFor="let turma of turmas" [value]="turma.id">{{turma.nome}}</ion-option>
         </ion-select>
       </ion-item>
-      <button ion-button (click)="pesquisar(turmaId, escolaId)">
-        Pesquisar
-      </button>
-      <button ion-button (click)="limpar()">
-        Limpar
-      </button>
+      <div class="buttonsSearch">
+        <button ion-button class="buttonPesquisar" (click)="pesquisar(turmaId, escolaId)">
+          Pesquisar
+        </button>
+        <button class="buttonLimpar" ion-button color="darkgrey" (click)="limpar()">
+          Limpar
+        </button>
+      </div>      
     </ion-card-content>
   </ion-card>
 
@@ -54,10 +56,13 @@
         </button>
       </ion-item-options>
     </ion-item-sliding>
-
-    <button ion-button icon-only (click)="openModalAdd()">
-      <ion-icon name="add"></ion-icon>
-    </button>
-
   </ion-list>
+
+  <ion-content padding>
+    <button ion-button icon-left color="darkgrey" class="button-top-margin" (click)="openModalAdd()" full>
+      <ion-icon name="add"></ion-icon>
+      Cadastrar aluno
+    </button>
+  </ion-content>
+
 </ion-content>

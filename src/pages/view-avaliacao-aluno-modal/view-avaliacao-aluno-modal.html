@@ -1,7 +1,7 @@
 <ion-header>
 
 <ion-navbar>
-    <ion-title>Teste</ion-title>
+    <ion-title>Avaliação</ion-title>
     <ion-buttons end>
     <button ion-button (click)="closeModal()">Fechar</button>
     </ion-buttons>
@@ -12,52 +12,66 @@
 
 <ion-content padding>
 
-  <ion-item>
-    <ion-label>Nome da Aluno</ion-label>
-    <ion-input [readonly]="true" [(ngModel)]="alunoNome" type="text">{{alunoNome}}</ion-input>
-  </ion-item>
+  <ion-card>
+    <ion-card-header class="titleGraphic">
+      Informações Gerais
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Aluno:</ion-label>
+        <ion-input [readonly]="true" [(ngModel)]="alunoNome" type="text">{{alunoNome}}</ion-input>
+      </ion-item>
 
-  <ion-item>
-    <ion-label>Função</ion-label>
-    <ion-input [readonly]="true" [(ngModel)]="funcaoNome" type="text">{{funcaoNome}}</ion-input>
-  </ion-item>
+      <ion-item>
+        <ion-label>Função:</ion-label>
+        <ion-input [readonly]="true" [(ngModel)]="funcaoNome" type="text">{{funcaoNome}}</ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 
   <ion-card margin-vertical>
+    <ion-card-header class="titleGraphic">
+      Questões
+    </ion-card-header>
     <ion-card-content>
       <ion-item>
         <span class="question-title">{{perguntas[0]}}</span>
       </ion-item>
-      <ion-input [readonly]="true" [(ngModel)]="respostaNome1" type="text">{{respostaNome1}}</ion-input>
-    </ion-card-content>
+      <ion-input class="answer" [readonly]="true" [(ngModel)]="respostaNome1" type="text">{{respostaNome1}}</ion-input>
 
-    <ion-card-content>
       <ion-item>
         <span class="question-title">{{perguntas[1]}}</span>
       </ion-item>
-      <ion-input [readonly]="true" [(ngModel)]="respostaNome2" type="text">{{respostaNome2}}</ion-input>
-    </ion-card-content>
+      <ion-input class="answer" [readonly]="true" [(ngModel)]="respostaNome2" type="text">{{respostaNome2}}</ion-input>
 
-    <ion-card-content>
       <ion-item>
         <span class="question-title">{{perguntas[2]}}</span>
       </ion-item>
-      <ion-input [readonly]="true" [(ngModel)]="respostaNome3" type="text">{{respostaNome3}}</ion-input>
-    </ion-card-content>
+      <ion-input class="answer" [readonly]="true" [(ngModel)]="respostaNome3" type="text">{{respostaNome3}}</ion-input>
 
-    <ion-card-content>
       <ion-item>
         <span class="question-title">{{perguntas[3]}}</span>
       </ion-item>
-      <ion-input [readonly]="true" [(ngModel)]="respostaNome4" type="text">{{respostaNome4}}</ion-input>
-    </ion-card-content>
+      <ion-input class="answer" [readonly]="true" [(ngModel)]="respostaNome4" type="text">{{respostaNome4}}</ion-input>
 
-    <ion-card-content>
       <ion-item>
         <span class="question-title">{{perguntas[4]}}</span>
       </ion-item>
-      <ion-input [readonly]="true" [(ngModel)]="respostaNome5" type="text">{{respostaNome5}}</ion-input>
+      <ion-input class="answer" [readonly]="true" [(ngModel)]="respostaNome5" type="text">{{respostaNome5}}</ion-input>
     </ion-card-content>
   </ion-card>
 
+  <ion-card margin-vertical>
+    <ion-card-header class="titleGraphic">
+      <ion-icon name="pie"></ion-icon>
+      Gráfico
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <canvas #barCanvas></canvas><br>
+
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

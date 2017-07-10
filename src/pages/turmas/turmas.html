@@ -7,9 +7,9 @@
 <ion-content>
 
   <ion-card>
-    <ion-card-header (click)="toggleBusca(isExpand)">Busca
-      <ion-icon item-right name="add" *ngIf="!isExpand"></ion-icon>
-      <ion-icon item-right name="remove" *ngIf="isExpand"></ion-icon>
+    <ion-card-header class="titleSearch" (click)="toggleBusca(isExpand)">Busca
+      <ion-icon item-right class="iconRight" name="add" *ngIf="!isExpand"></ion-icon>
+      <ion-icon item-right class="iconRight" name="remove" *ngIf="isExpand"></ion-icon>
     </ion-card-header>
     <ion-card-content *ngIf="isExpand">
       <ion-item class="no-padding-left" margin-vertical>
@@ -18,12 +18,14 @@
           <ion-option *ngFor="let escola of escolas" [value]="escola.id">{{escola.nome}}</ion-option>
         </ion-select>
       </ion-item>
-      <button ion-button (click)="pesquisar(escolaId)">
-        Pesquisar
-      </button>
-      <button ion-button (click)="limpar()">
-        Limpar
-      </button>
+      <div class="buttonsSearch">
+        <button ion-button (click)="pesquisar(escolaId)">
+          Pesquisar
+        </button>
+        <button ion-button color="darkgrey" (click)="limpar()">
+          Limpar
+        </button>
+      </div>
   </ion-card-content>
 </ion-card>
 

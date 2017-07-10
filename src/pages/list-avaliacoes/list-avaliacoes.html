@@ -5,6 +5,43 @@
 </ion-header>
 
 <ion-content>
+
+  <ion-card>
+    <ion-card-header class="titleSearch" (click)="toggleBusca(isExpand)">Busca
+      <ion-icon item-right class="iconRight" name="add" *ngIf="!isExpand"></ion-icon>
+      <ion-icon item-right class="iconRight" name="remove" *ngIf="isExpand"></ion-icon>
+    </ion-card-header>
+    <ion-card-content *ngIf="isExpand">
+      <ion-item class="no-padding-left" margin-vertical>
+        <ion-label>Escola</ion-label>
+        <ion-select [(ngModel)]="escolaId" (ngModelChange)="getTurmasByEscolaId($event)">
+          <ion-option *ngFor="let escola of escolas" [value]="escola.id">{{escola.nome}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="no-padding-left" margin-vertical>
+        <ion-label>Turma</ion-label>
+        <ion-select [(ngModel)]="turmaId" (ngModelChange)="getGruposByTurmaId($event)">
+          <ion-option *ngFor="let turma of turmas" [value]="turma.id">{{turma.nome}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="no-padding-left" margin-vertical>
+        <ion-label>Grupo</ion-label>
+        <ion-select [(ngModel)]="grupoId">
+          <ion-option *ngFor="let grupo of grupos" [value]="grupo.id">{{grupo.nome}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <div class="buttonsSearch">
+        <button ion-button (click)="pesquisar(turmaId, escolaId, grupoId)">
+          Pesquisar
+        </button>
+        <button ion-button color="darkgrey" (click)="limpar()">
+          Limpar
+        </button>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+
   <ion-list *ngFor="let av of avaliacoes; let i = index">
     <ion-item *ngIf="avaliacoes.length == 0">
       Nenhuma avaliação cadastrada.

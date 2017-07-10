@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { Chart, ElementRef } from 'chart.js';
 
 import { DbServiceProvider } from '../../providers/db-service/db-service';
 
@@ -28,6 +29,8 @@ export class ViewAvaliacaoAlunoModalPage {
   resposta4: string = this.navParams.get('resposta4');
   resposta5: string = this.navParams.get('resposta5');
 
+
+
   respostaNome1;
   respostaNome2;
   respostaNome3;
@@ -42,6 +45,92 @@ export class ViewAvaliacaoAlunoModalPage {
               public viewCtrl : ViewController,
               public modalCtrl : ModalController) {
   }
+
+  @ViewChild('barCanvas') barCanvas: ElementRef;
+  barChart: any;
+
+  respostas = {
+    respNao: 0,
+    respInsuficiente: 0,
+    respParcialmente: 0,
+    respSim: 0
+  };
+
+verificaRepostas(respostas: any[]){
+  let respNaoCount = 0;
+  let respInsuficienteCount = 0;
+  let respParcialmenteCount = 0;
+  let respSimCount = 0;
+
+  for (let index = 0; index < respostas.length; index++) {
+    if(respostas[index] == 'nao'){
+      respNaoCount += 1;
+    } else if(respostas[index] == 'insuficiente'){
+      respInsuficienteCount += 1;
+    } else if(respostas[index] == 'parcialmente'){
+      respParcialmenteCount += 1;
+    } else if(respostas[index] == 'sim'){
+      respSimCount += 1;
+    }
+  }
+
+  this.respostas.respNao = respNaoCount;
+  this.respostas.respInsuficiente = respInsuficienteCount;
+  this.respostas.respParcialmente = respParcialmenteCount;
+  this.respostas.respSim = respSimCount;
+
+}
+
+grafico(){
+  let respostas: any[] = [];
+  respostas.push(this.resposta1);
+  respostas.push(this.resposta2);
+  respostas.push(this.resposta3);
+  respostas.push(this.resposta4);
+  respostas.push(this.resposta5);
+
+  this.verificaRepostas(respostas);
+
+  this.barChart = new Chart(this.barCanvas.nativeElement, {
+
+      type: 'bar',
+          data: {
+              labels: ["Não", "Insuficiente", "Parcialmente", "Sim"],
+              datasets: [{
+                  label: 'Porcentagem de respostas',
+                  data: [this.respostas.respNao, this.respostas.respInsuficiente, this.respostas.respParcialmente, this.respostas.respSim],
+                  backgroundColor: [
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(255, 206, 86, 0.2)',
+                      'rgba(75, 192, 192, 0.2)'
+                  ],
+                  borderColor: [
+                      'rgba(255,99,132,1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)'
+                  ],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero: true
+                      }
+                  }],
+                  xAxes: [{
+                      gridLines: {
+                          offsetGridLines: true
+                      }
+                  }]
+              }
+          }
+
+  });
+}
 
   public closeModal(){
     this.viewCtrl.dismiss();
@@ -146,6 +235,7 @@ export class ViewAvaliacaoAlunoModalPage {
     this.verificaValorDaResposta(this.resposta4, 4);
     this.verificaValorDaResposta(this.resposta5, 5);
     this.verificaQuestoesPorFuncao(this.funcao);
+    this.grafico();
   }
 
 }

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Chart, ElementRef } from 'chart.js';
+import moment from 'moment'
 import { DbServiceProvider } from '../../providers/db-service/db-service';
 
 @IonicPage()
@@ -481,55 +482,57 @@ export class AvaliacaoPage {
 
   // Navigation
   next(){
-      this.avaliacaoSlider.slideNext();
-      if(this.avaliacaoSlider.getActiveIndex() == 1){
-        console.log(this.slide1Form.value.grupo);
-        this.getGrupoById(this.slide1Form.value.grupo);
-      }
-      else if(this.avaliacaoSlider.getActiveIndex() == 2){
-        console.log(this.slideConstrutorForm.value.alunoConstrutor);
-        for (let i = 0; i < this.alunos.length; i++) {
-          if(this.alunos[i].id == this.slideConstrutorForm.value.alunoConstrutor){
-            this.alunos.splice(i, 1);
-          }
+
+    this.avaliacaoSlider.slideNext();
+
+    if(this.avaliacaoSlider.getActiveIndex() == 1){
+      console.log(this.slide1Form.value.grupo);
+      this.getGrupoById(this.slide1Form.value.grupo);
+    }
+    else if(this.avaliacaoSlider.getActiveIndex() == 2){
+      console.log(this.slideConstrutorForm.value.alunoConstrutor);
+      for (let i = 0; i < this.alunos.length; i++) {
+        if(this.alunos[i].id == this.slideConstrutorForm.value.alunoConstrutor){
+          this.alunos.splice(i, 1);
         }
-        console.log(this.alunos);
-        this.getAlunoNome(1, this.slideConstrutorForm.value.alunoConstrutor);
       }
-      else if(this.avaliacaoSlider.getActiveIndex() == 8){
-        console.log(this.slideOrganizadorForm.value.alunoOrganizador);
-        for (let i = 0; i < this.alunos.length; i++) {
-          if(this.alunos[i].id == this.slideOrganizadorForm.value.alunoOrganizador){
-            this.alunos.splice(i, 1);
-          }
+      console.log(this.alunos);
+      this.getAlunoNome(1, this.slideConstrutorForm.value.alunoConstrutor);
+    }
+    else if(this.avaliacaoSlider.getActiveIndex() == 8){
+      console.log(this.slideOrganizadorForm.value.alunoOrganizador);
+      for (let i = 0; i < this.alunos.length; i++) {
+        if(this.alunos[i].id == this.slideOrganizadorForm.value.alunoOrganizador){
+          this.alunos.splice(i, 1);
         }
-        console.log(this.alunos);
-        this.getAlunoNome(2, this.slideOrganizadorForm.value.alunoOrganizador);
       }
-      else if(this.avaliacaoSlider.getActiveIndex() == 14){
-        console.log(this.slideProgramadorForm.value.alunoProgramador);
-        for (let i = 0; i < this.alunos.length; i++) {
-          if(this.alunos[i].id == this.slideProgramadorForm.value.alunoProgramador){
-            this.alunos.splice(i, 1);
-          }
+      console.log(this.alunos);
+      this.getAlunoNome(2, this.slideOrganizadorForm.value.alunoOrganizador);
+    }
+    else if(this.avaliacaoSlider.getActiveIndex() == 14){
+      console.log(this.slideProgramadorForm.value.alunoProgramador);
+      for (let i = 0; i < this.alunos.length; i++) {
+        if(this.alunos[i].id == this.slideProgramadorForm.value.alunoProgramador){
+          this.alunos.splice(i, 1);
         }
-        console.log(this.alunos);
-        this.getAlunoNome(3, this.slideProgramadorForm.value.alunoProgramador);
       }
-      else if(this.avaliacaoSlider.getActiveIndex() == 20){
-        console.log(this.slideLiderForm.value.alunoLider);
-        for (let i = 0; i < this.alunos.length; i++) {
-          if(this.alunos[i].id == this.slideLiderForm.value.alunoLider){
-            this.alunos.splice(i, 1);
-          }
+      console.log(this.alunos);
+      this.getAlunoNome(3, this.slideProgramadorForm.value.alunoProgramador);
+    }
+    else if(this.avaliacaoSlider.getActiveIndex() == 20){
+      console.log(this.slideLiderForm.value.alunoLider);
+      for (let i = 0; i < this.alunos.length; i++) {
+        if(this.alunos[i].id == this.slideLiderForm.value.alunoLider){
+          this.alunos.splice(i, 1);
         }
-        console.log(this.alunos);
-        this.getAlunoNome(4, this.slideLiderForm.value.alunoLider);
       }
-      else if(this.avaliacaoSlider.getActiveIndex() == 25){
-        this.save();
-        this.graficos();
-      }
+      console.log(this.alunos);
+      this.getAlunoNome(4, this.slideLiderForm.value.alunoLider);
+    }
+    else if(this.avaliacaoSlider.getActiveIndex() == 25){
+      this.save();
+      this.graficos();
+    }
   }
 
   prev(){
@@ -541,7 +544,6 @@ export class AvaliacaoPage {
     let avaliacaoConstrutor = {
       alunoId: this.slideConstrutorForm.value.alunoConstrutor,
       date: new Date().toISOString(),
-      grupoId: this.slide1Form.value.grupo,
       funcao: 1,
       avaliacaoId: this.avaliacao.id,
       resposta1: this.slideConstrutorQst1Form.value.construtorResposta1,
@@ -554,7 +556,6 @@ export class AvaliacaoPage {
     let avaliacaoOrganizador = {
       alunoId: this.slideOrganizadorForm.value.alunoOrganizador,
       date: new Date().toISOString(),
-      grupoId: this.slide1Form.value.grupo,
       funcao: 2,
       avaliacaoId: this.avaliacao.id,
       resposta1: this.slideOrganizadorQst1Form.value.organizadorResposta1,
@@ -567,7 +568,6 @@ export class AvaliacaoPage {
     let avaliacaoProgramador = {
       alunoId: this.slideProgramadorForm.value.alunoProgramador,
       date: new Date().toISOString(),
-      grupoId: this.slide1Form.value.grupo,
       funcao: 3,
       avaliacaoId: this.avaliacao.id,
       resposta1: this.slideProgramadorQst1Form.value.programadorResposta1,
@@ -580,7 +580,6 @@ export class AvaliacaoPage {
     let avaliacaoLider = {
       alunoId: this.slideLiderForm.value.alunoLider,
       date: new Date().toISOString(),
-      grupoId: this.slide1Form.value.grupo,
       funcao: 4,
       avaliacaoId: this.avaliacao.id,
       resposta1: this.slideLiderQst1Form.value.liderResposta1,
@@ -615,14 +614,15 @@ export class AvaliacaoPage {
 
   createAvaliacao(){
 
-    let date = new Date().toLocaleString().substring(0,8);
+    let date = moment().format('DD/MM/YYYY');
     console.log(date);
 
     let nome = this.grupoNome + " - " + date;
 
     let avaliacao = {
       nome: nome,
-      date: new Date().toLocaleString()
+      date: moment().format('DD/MM/YYYY'),
+      grupoId: this.slide1Form.value.grupo
     }
 
     this.dbService.createAvaliacao(avaliacao)
@@ -630,7 +630,7 @@ export class AvaliacaoPage {
 
         let avaliacao = {
           nome: nome,
-          date: new Date().toLocaleString(),
+          date: moment().format('DD/MM/YYYY'),
           id: response.insertId
         }
 
@@ -734,7 +734,7 @@ export class AvaliacaoPage {
   }
 
   realizarOutraAvaliacao(){
-    this.navCtrl.setRoot(AvaliacaoPage);
+    this.navCtrl.push(AvaliacaoPage);
   }
 
 }

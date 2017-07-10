@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, ViewController, ModalController } 
 import { DbServiceProvider } from '../../providers/db-service/db-service';
 
 import { ViewAvaliacaoAlunoModalPage } from '../view-avaliacao-aluno-modal/view-avaliacao-aluno-modal';
+import { ViewAvaliacoesGraficoPage } from '../view-avaliacoes-grafico/view-avaliacoes-grafico';
 /**
  * Generated class for the ViewAvaliacoesModalPage page.
  *
@@ -21,6 +22,7 @@ export class ViewAvaliacoesModalPage {
   id: string = this.navParams.get('id');
   index: string = this.navParams.get('index');
   date: string = this.navParams.get('date');
+  grupoId: string = this.navParams.get('grupoId');
 
   avAlunos: any[] = [];
 
@@ -43,12 +45,18 @@ export class ViewAvaliacoesModalPage {
     this.viewCtrl.dismiss();
   }
 
+  public openModalViewGrafico(avaliacoesAlunos: any){
+
+    var modalPage = this.modalCtrl.create(ViewAvaliacoesGraficoPage, avaliacoesAlunos);
+
+    modalPage.present();
+  }
+
   public openModalView(avaliacaoAluno, index){
 
     let obj = {
       id: avaliacaoAluno.id,
       funcao: avaliacaoAluno.funcao,
-      grupoId: avaliacaoAluno.grupoId,
       alunoId: avaliacaoAluno.alunoId,
       resposta1: avaliacaoAluno.resposta1,
       resposta2: avaliacaoAluno.resposta2,
@@ -102,7 +110,7 @@ export class ViewAvaliacoesModalPage {
       .then( response => {
         this.avAlunos = response;
         console.log(this.avAlunos)
-        this.getTurmaById(response[0].grupoId);
+        this.getTurmaById(this.grupoId);
         for(let i = 0; i < response.length; i++){
           this.avaliacoesComNomes(response[i]);
         }
@@ -114,7 +122,6 @@ export class ViewAvaliacoesModalPage {
     let avaliacao = {
       id: avaliacaoAluno.id,
       funcao: avaliacaoAluno.funcao,
-      grupoId: avaliacaoAluno.grupoId,
       alunoId: avaliacaoAluno.alunoId,
       resposta1: avaliacaoAluno.resposta1,
       resposta2: avaliacaoAluno.resposta2,
