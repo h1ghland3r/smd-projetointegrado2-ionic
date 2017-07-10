@@ -20,6 +20,17 @@ export class ListAvaliacoesPage {
 
   avaliacoes: any[] = [];
 
+  turmas: any[] = [];
+  turmaId;
+
+  escolas: any[] = [];
+  escolaId;
+
+  grupos: any[] = [];
+  grupoId;
+
+  isExpand: Boolean = false;
+
   constructor(public navCtrl: NavController,
               public dbService: DbServiceProvider,
               public alertCtrl: AlertController,
@@ -29,11 +40,72 @@ export class ListAvaliacoesPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListAvaliacoesPage');
     this.getAllAvaliacoes();
+    this.getAllEscolas();
   }
+
+  toggleBusca(state){
+    if(state == false){
+      this.isExpand = true;
+    }else{
+      this.isExpand = false;
+    }
+  }
+
+  getAllEscolas(){
+    this.dbService.getAllEscolas()
+      .then(escolas => {
+        console.log(escolas);
+        this.escolas = escolas;
+      })
+      .catch( error => {
+        console.error( error );
+      });
+  }
+
+  getTurmasByEscolaId(escolaId){
+    this.dbService.getTurmasByEscolaId(escolaId)
+      .then(turmas => {
+        this.turmas = turmas;
+      })
+  }
+
+  getGruposByTurmaId(turmaId){
+    this.dbService.getGruposByTurmaId(turmaId)
+      .then(grupos => {
+        console.log(grupos);
+        this.grupos = grupos;
+      })
+      .catch( error => {
+        console.error( error );
+      });
+  }
+
+
+  pesquisar(turmaId: any, escolaId: any, grupoId: any){
+    if(escolaId != null && turmaId != null && grupoId != null){
+      this.dbService.getAvaliacoesByGrupoId(grupoId)
+        .then( response => {
+          this.avaliacoes = response;
+        })
+    } else if (escolaId != null && turmaId == null){
+        this.dbService.getGruposByEscola(escolaId)
+        .then( response => {
+          this.grupos = response;
+        })
+    }
+  }
+
+  limpar(){
+    this.getAllAvaliacoes();
+    this.turmaId = null;
+    this.grupoId = null;
+    this.escolaId = null;
+  }
+
 
   public openModalView(avaliacao, index){
 
-    let obj = {id: avaliacao.id, nome: avaliacao.nome, date: avaliacao.date, index: index};
+    let obj = {id: avaliacao.id, nome: avaliacao.nome, date: avaliacao.date, grupoId: avaliacao.grupoId, index: index};
     var modalPage = this.modalCtrl.create(ViewAvaliacoesModalPage, obj);
 
     modalPage.present();

@@ -1,0 +1,45 @@
+
+<ion-header>
+  <ion-navbar>
+      <ion-title>Gráficos</ion-title>
+      <ion-buttons end>
+      <button ion-button (click)="closeModal()">Fechar</button>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <!--Resultado-->
+
+  <ion-list no-lines>
+
+    <ion-label margin-vertical color="black">
+      <h4 class="subtitleGraphics">Gráficos da avaliação</h4>
+    </ion-label>
+
+    <ion-card margin-vertical>
+      <ion-card-header class="titleGraphic">
+        Análise de resultados
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <h2 class="subtitleGraphics">{{aluno1.alunoNome}} - {{aluno1.funcaoNome}}</h2>
+        <canvas #barCanvas></canvas><br>
+
+        <h2 class="subtitleGraphics">{{aluno2.alunoNome}} - {{aluno2.funcaoNome}}</h2>
+        <canvas #barCanvasOrgan></canvas><br>
+
+        <h2 class="subtitleGraphics">{{aluno3.alunoNome}} - {{aluno3.funcaoNome}}</h2>
+        <canvas #barCanvasProg></canvas><br>
+
+        <h2 class="subtitleGraphics">{{aluno4.alunoNome}} - {{aluno4.funcaoNome}}</h2>
+        <canvas #barCanvasLider></canvas><br>
+
+      </ion-card-content>
+    </ion-card>
+
+  </ion-list>
+
+</ion-content>

@@ -43,13 +43,13 @@ export class DbServiceProvider {
 
   createTableAvaliacoes(){
     //let sql = 'DROP TABLE avaliacoes'
-    let sql = 'CREATE TABLE IF NOT EXISTS avaliacoes(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, date DATETIME)';
+    let sql = 'CREATE TABLE IF NOT EXISTS avaliacoes(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, date DATETIME, grupoId INTEGER, FOREIGN KEY(grupoId) REFERENCES grupos(id))';
     return this.db.executeSql(sql, []);
   }
 
   createAvaliacao(avaliacao: any){
-    let sql = 'INSERT INTO avaliacoes(nome, date) VALUES(?,?)';
-    return this.db.executeSql(sql, [avaliacao.nome, avaliacao.date]);
+    let sql = 'INSERT INTO avaliacoes(nome, date, grupoId) VALUES(?,?,?)';
+    return this.db.executeSql(sql, [avaliacao.nome, avaliacao.date, avaliacao.grupoId]);
   }
 
   getAllAvaliacoes(){
@@ -65,19 +65,31 @@ export class DbServiceProvider {
       .catch(error => Promise.reject(error));
   }
 
+  getAvaliacaoById(id: any){
+    let sql = 'SELECT * FROM avaliacoes WHERE id=?';
+    return this.db.executeSql(sql, [id])
+      .then( response => {
+        let avaliacoes = [];
+        for (let index = 0; index < response.rows.length; index++) {
+          avaliacoes.push( response.rows.item(index) );
+        }
+        return Promise.resolve( avaliacoes );
+      });
+  }
+
   createTableAvaliacoesAlunos(){
-    //let sql = 'DROP TABLE avaliacoes'
-    let sql = 'CREATE TABLE IF NOT EXISTS avaliacoesAlunos(id INTEGER PRIMARY KEY AUTOINCREMENT, date DATETIME, resposta1 TEXT, resposta2 TEXT, resposta3 TEXT, resposta4 TEXT, resposta5 TEXT, funcao INTEGER, alunoId INTEGER, grupoId INTEGER, avaliacaoId INTEGER, FOREIGN KEY(alunoId) REFERENCES alunos(Id), FOREIGN KEY(grupoId) REFERENCES grupos(id), FOREIGN KEY(avaliacaoId) REFERENCES avaliacoes(id))';
+    //let sql = 'DROP TABLE avaliacoesAlunos'
+    let sql = 'CREATE TABLE IF NOT EXISTS avaliacoesAlunos(id INTEGER PRIMARY KEY AUTOINCREMENT, date DATETIME, resposta1 TEXT, resposta2 TEXT, resposta3 TEXT, resposta4 TEXT, resposta5 TEXT, funcao INTEGER, alunoId INTEGER, avaliacaoId INTEGER, FOREIGN KEY(alunoId) REFERENCES alunos(Id), FOREIGN KEY(avaliacaoId) REFERENCES avaliacoes(id))';
     return this.db.executeSql(sql, []);
   }
 
   createAvaliacaoAlunos(avaliacoes: any[]){
     for (let index = 0; index < avaliacoes.length; index++) {
-      let sql = 'INSERT INTO avaliacoesAlunos(date, resposta1, resposta2, resposta3, resposta4, resposta5, funcao, alunoId, grupoId, avaliacaoId) VALUES(?,?,?,?,?,?,?,?,?,?)';
+      let sql = 'INSERT INTO avaliacoesAlunos(date, resposta1, resposta2, resposta3, resposta4, resposta5, funcao, alunoId, avaliacaoId) VALUES(?,?,?,?,?,?,?,?,?)';
       if(index == avaliacoes.length-1){
-        return this.db.executeSql(sql, [avaliacoes[index].date, avaliacoes[index].resposta1, avaliacoes[index].resposta2, avaliacoes[index].resposta3, avaliacoes[index].resposta4, avaliacoes[index].resposta5, avaliacoes[index].funcao, avaliacoes[index].alunoId, avaliacoes[index].grupoId, avaliacoes[index].avaliacaoId]);
+        return this.db.executeSql(sql, [avaliacoes[index].date, avaliacoes[index].resposta1, avaliacoes[index].resposta2, avaliacoes[index].resposta3, avaliacoes[index].resposta4, avaliacoes[index].resposta5, avaliacoes[index].funcao, avaliacoes[index].alunoId, avaliacoes[index].avaliacaoId]);
       }else{
-        this.db.executeSql(sql, [avaliacoes[index].date, avaliacoes[index].resposta1, avaliacoes[index].resposta2, avaliacoes[index].resposta3, avaliacoes[index].resposta4, avaliacoes[index].resposta5, avaliacoes[index].funcao, avaliacoes[index].alunoId, avaliacoes[index].grupoId, avaliacoes[index].avaliacaoId]);
+        this.db.executeSql(sql, [avaliacoes[index].date, avaliacoes[index].resposta1, avaliacoes[index].resposta2, avaliacoes[index].resposta3, avaliacoes[index].resposta4, avaliacoes[index].resposta5, avaliacoes[index].funcao, avaliacoes[index].alunoId, avaliacoes[index].avaliacaoId]);
       }
     }
   }
@@ -103,7 +115,21 @@ export class DbServiceProvider {
         for (let index = 0; index < response.rows.length; index++) {
           avAlunos.push( response.rows.item(index) );
         }
+
         return Promise.resolve( avAlunos );
+      });
+  }
+
+  getAvaliacoesByGrupoId(grupoId: any){
+    let sql = 'SELECT * FROM avaliacoes WHERE grupoId=?';
+    return this.db.executeSql(sql, [grupoId])
+      .then( response => {
+        let avaliacoes = [];
+        for (let index = 0; index < response.rows.length; index++) {
+          avaliacoes.push( response.rows.item(index) );
+        }
+
+        return Promise.resolve( avaliacoes );
       });
   }
 

@@ -34,6 +34,7 @@ import { ViewAlunoModalPage } from '../pages/view-aluno-modal/view-aluno-modal';
 import { ViewGrupoModalPage } from '../pages/view-grupo-modal/view-grupo-modal';
 import { ViewAvaliacoesModalPage } from '../pages/view-avaliacoes-modal/view-avaliacoes-modal';
 import { ViewAvaliacaoAlunoModalPage } from '../pages/view-avaliacao-aluno-modal/view-avaliacao-aluno-modal';
+import { ViewAvaliacoesGraficoPage } from '../pages/view-avaliacoes-grafico/view-avaliacoes-grafico';
 
 import { DbServiceProvider } from '../providers/db-service/db-service';
 
@@ -63,6 +64,7 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     ViewGrupoModalPage,
     ViewAvaliacoesModalPage,
     ViewAvaliacaoAlunoModalPage,
+    ViewAvaliacoesGraficoPage,
     SobrePage
   ],
   imports: [
@@ -95,6 +97,7 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     ViewGrupoModalPage,
     ViewAvaliacoesModalPage,
     ViewAvaliacaoAlunoModalPage,
+    ViewAvaliacoesGraficoPage,
     SobrePage
   ],
   providers: [
