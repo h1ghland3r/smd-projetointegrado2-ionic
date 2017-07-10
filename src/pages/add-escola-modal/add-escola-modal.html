@@ -14,14 +14,13 @@
 
   <ion-list>
 
-  <ion-item>
-    <ion-label floating>Nome da Escola:</ion-label>
+  <ion-item class="no-padding-left">
+    <ion-label>Nome da Escola:</ion-label>
     <ion-input [(ngModel)]="nome" type="text"></ion-input>
   </ion-item>
 
-  <button ion-button icon-only (click)="saveEscola()">
-    <ion-icon name="salvar">Salvar</ion-icon>
-  </button>
+  <button ion-button color="darkgrey" class="button-top-margin" (click)="saveEscola()" full>Salvar</button>
+
 
 </ion-list>
 

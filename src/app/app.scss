@@ -38,6 +38,10 @@
     color: color($colors, primary, base) !important;
 }
 
+.list-icon {
+    color: color($colors, primary, base);
+}
+
 .bar-button-menutoggle-md {
     margin-left: 0 !important;
     padding-right: 0 !important;
@@ -70,6 +74,10 @@
     align-items: center!important;
 }
 
+.sm-margin-bottom {
+    margin-bottom: 10px;
+}
+
 /* Elements and Inputs */
 
 .content-md {
@@ -86,4 +94,14 @@
 
 .button-cadastros {
     width: 150px;
+}
+
+/* Modal custom */
+
+ion-buttons button[icon-only].icon-left-side {
+   margin: 0 6px;
+   min-width: 36px;
+   text-align: start;
+   font-size: 2.4rem;
+   font-weight: normal;
 }

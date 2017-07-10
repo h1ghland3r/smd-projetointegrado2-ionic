@@ -52,14 +52,14 @@ export class MyApp {
         icon: 'filing'
       },
       {
-        title: 'Sobre',
-        component: SobrePage,
-        icon: 'people'
-      },
-      {
         title: 'Ver avaliações',
         component: ListAvaliacoesPage,
         icon: 'list'
+      },
+      {
+        title: 'Sobre',
+        component: SobrePage,
+        icon: 'people'
       }
     ];
 

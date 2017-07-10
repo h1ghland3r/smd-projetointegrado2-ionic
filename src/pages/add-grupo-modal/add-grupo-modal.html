@@ -14,8 +14,8 @@
 
   <ion-list>
 
-  <ion-item>
-    <ion-label floating>Nome do Grupo:</ion-label>
+  <ion-item class="no-padding-left">
+    <ion-label>Nome do Grupo:</ion-label>
     <ion-input [(ngModel)]="nome" type="text">{{nome}}</ion-input>
   </ion-item>
 
@@ -61,9 +61,8 @@
       </ion-select>
   </ion-item>
 
-  <button ion-button icon-only (click)="saveGrupo()">
-    <ion-icon name="salvar">Salvar</ion-icon>
-  </button>
+  <button ion-button color="darkgrey" class="button-top-margin" (click)="saveGrupo()" full>Salvar</button>
+
 
 </ion-list>
 

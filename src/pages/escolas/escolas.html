@@ -1,8 +1,5 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
     <ion-title>Escolas</ion-title>
   </ion-navbar>
 </ion-header>
@@ -14,26 +11,30 @@
     </ion-item>
     <ion-item-sliding *ngFor="let escola of escolas; let i = index">
       <ion-item >
+        <ion-icon name="school" class="list-icon" item-start></ion-icon>
         <ion-label>{{ escola.nome }}</ion-label>
       </ion-item>
       <ion-item-options side="right" icon-left>
         <button ion-button color="danger" (click)="confirmDelete(escola, i)">
           <ion-icon name="trash"></ion-icon>
-          Delete
+          Excluir
         </button>
         <button ion-button (click)="openModalEdit(escola, i)">
+          <ion-icon name="create"></ion-icon>
           Editar
         </button>
-        <button ion-button color="secondary" (click)="openModalView(escola, i)">
+        <!--<button ion-button color="secondary" (click)="openModalView(escola, i)">
           Visualizar
-        </button>
+        </button>-->
       </ion-item-options>
     </ion-item-sliding>
-
-    <!-- <button ion-button icon-only (click)="openAlertNewEscola()"> -->
-    <button ion-button icon-only (click)="openModalAdd()">
-      <ion-icon name="add"></ion-icon>
-    </button>
-
   </ion-list>
+
+  <ion-content padding>
+    <button ion-button icon-left color="darkgrey" class="button-top-margin" (click)="openModalAdd()" full>
+      <ion-icon name="add"></ion-icon>
+      Cadastrar escola
+    </button>
+  </ion-content>
+  
 </ion-content>

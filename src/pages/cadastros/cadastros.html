@@ -15,19 +15,23 @@
 <ion-content padding class="vertical-align-content">
   <ion-grid>
     <ion-row>
-      <ion-col col-6 text-center>
-        <div margin-bottom>
+      <ion-col col-md-6 text-center>
+        <div class="button-block sm-margin-bottom">
+         <ion-icon name="school" class="icon-big" (click)="cadastroEscolas()"></ion-icon> 
          <button ion-button color="primary" (click)="cadastroEscolas()" class="button-cadastros">Escolas</button>
         </div>
-        <div margin-bottom>
+        <div class="button-block sm-margin-bottom">
+         <ion-icon name="people" class="icon-big" (click)="cadastroTurmas()"></ion-icon> 
          <button ion-button color="primary" (click)="cadastroTurmas()" class="button-cadastros">Turmas</button>
         </div>
       </ion-col>
       <ion-col col-6 text-center>
-        <div margin-bottom>
+        <div class="button-block sm-margin-bottom">
+         <ion-icon name="person" class="icon-big" (click)="cadastroAlunos()"></ion-icon> 
          <button ion-button color="primary" (click)="cadastroAlunos()" class="button-cadastros">Alunos</button>
         </div>
-        <div margin-bottom>
+        <div class="button-block sm-margin-bottom">
+         <ion-icon name="ios-color-filter-outline" class="icon-big" (click)="cadastroGrupos()"></ion-icon> 
          <button ion-button color="primary" (click)="cadastroGrupos()" class="button-cadastros">Grupos</button>
         </div>
       </ion-col>

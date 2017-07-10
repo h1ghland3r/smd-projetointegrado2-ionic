@@ -14,8 +14,8 @@
 
   <ion-list>
 
-  <ion-item>
-    <ion-label floating>Nome da Turma:</ion-label>
+  <ion-item class="no-padding-left">
+    <ion-label>Nome da Turma:</ion-label>
     <ion-input [(ngModel)]="nome" type="text"></ion-input>
   </ion-item>
 
@@ -26,9 +26,8 @@
       </ion-select>
   </ion-item>
 
-  <button ion-button icon-only (click)="saveTurma()">
-    <ion-icon name="salvar">Salvar</ion-icon>
-  </button>
+  <button ion-button color="darkgrey" class="button-top-margin" (click)="saveTurma()" full>Salvar</button>
+
 
 </ion-list>
 

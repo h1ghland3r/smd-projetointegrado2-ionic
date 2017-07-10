@@ -6,7 +6,7 @@ ion-slide {
 }
 
 .border-bottom {
-    border-bottom: 1px solid color($colors, lightgrey, base);
+    border-bottom: 1px solid color($colors, lightgrey, base) !important;
 }
 
 .avatar-student {
@@ -187,10 +187,3 @@ h4.subtitle {
     font-size: 14px;
     left: 8px;
 }
-// .item-md {
-//     padding-left: 0 !important;
-// }
-
-// .card-md, .card-header-md, .item-md {
-//     background-color: color($colors, lightgrey, base);
-// }
