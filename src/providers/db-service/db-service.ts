@@ -120,6 +120,33 @@ export class DbServiceProvider {
       });
   }
 
+  getAvAlunosByAlunoId(alunoId: any){
+    let sql = 'SELECT * FROM avaliacoesAlunos WHERE alunoId=?';
+    return this.db.executeSql(sql, [alunoId])
+      .then( response => {
+        let avAlunos = [];
+        for (let index = 0; index < response.rows.length; index++) {
+          avAlunos.push( response.rows.item(index) );
+        }
+
+        return Promise.resolve( avAlunos );
+      });
+  }
+
+  getAvAlunosByFuncao(funcao: any){
+    let sql = 'SELECT * FROM avaliacoesAlunos WHERE funcao=?';
+    return this.db.executeSql(sql, [funcao])
+      .then( response => {
+        let avAlunos = [];
+        for (let index = 0; index < response.rows.length; index++) {
+          avAlunos.push( response.rows.item(index) );
+        }
+
+        return Promise.resolve( avAlunos );
+      });
+  }
+
+
   getAvaliacoesByGrupoId(grupoId: any){
     let sql = 'SELECT * FROM avaliacoes WHERE grupoId=?';
     return this.db.executeSql(sql, [grupoId])
@@ -378,6 +405,32 @@ getGruposByTurmaId(turmaId: any){
       return Promise.resolve( grupos );
     });
 }
+
+/*
+getTesteFuncao(turmaId: any, funcao: any){
+  let sql = 'SELECT * FROM grupos AS G JOIN avaliacoes AS A ON G.id = A.grupoId JOIN avaliacoesAlunos AS av ON av.avaliacaoId = A.id WHERE G.turmaId=? AND avaliacaoId=? AND funcao=?';
+  return this.db.executeSql(sql, [turmaId])
+    .then( response => {
+      let result = [];
+      //let avAlunosByFuncao = [];
+      for (let index = 0; index < response.rows.length; index++) {
+        result.push( response.rows.item(index) );
+      }
+      // for (let i = 0; i < result.length; i++) {
+      //   let sqlAvAlunos = 'SELECT * FROM avaliacoesAlunos WHERE '
+      //   this.db.executeSql(sqlAvAlunos, [result[i].id, funcao])
+      //    .then (response => {
+      //      for (let index = 0; index < response.rows.length; index++) {
+      //        avAlunosByFuncao.push( response.rows.item(index) );
+      //      }
+      //    })
+      // }
+
+      return Promise.resolve( result );
+    })
+}
+*/
+
 
 getGruposByEscola(escolaId: any){
   let sql = 'SELECT * FROM turmas WHERE escolaId=?'

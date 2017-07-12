@@ -1,10 +1,11 @@
+
 <ion-header>
   <ion-navbar>
-    <ion-title>Grupos</ion-title>
+    <ion-title>Gráfico por função</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
 
   <ion-card>
     <ion-card-header class="titleSearch" (click)="toggleBusca(isExpand)">Busca
@@ -20,12 +21,21 @@
       </ion-item>
       <ion-item class="no-padding-left" margin-vertical>
         <ion-label>Turma</ion-label>
-        <ion-select [(ngModel)]="turmaId">
+        <ion-select [(ngModel)]="turmaId" (ngModelChange)="getGruposByTurmaId($event)">
           <ion-option *ngFor="let turma of turmas" [value]="turma.id">{{turma.nome}}</ion-option>
         </ion-select>
       </ion-item>
+      <ion-item class="no-padding-left" margin-vertical>
+        <ion-label>Funçao</ion-label>
+        <ion-select [(ngModel)]="funcao">
+          <ion-option [value]="1">Construtor</ion-option>
+          <ion-option [value]="2">Organizador</ion-option>
+          <ion-option [value]="3">Programador</ion-option>
+          <ion-option [value]="4">Líder</ion-option>
+        </ion-select>
+      </ion-item>
       <div class="buttonsSearch">
-        <button ion-button (click)="pesquisar(turmaId, escolaId)">
+        <button ion-button (click)="pesquisar(turmaId, funcao)">
           Pesquisar
         </button>
         <button ion-button color="darkgrey" (click)="limpar()">
@@ -36,34 +46,17 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-list>
-    <ion-item *ngIf="grupos.length == 0">
-      Nenhum grupo cadastrado.
-    </ion-item>
-    <ion-item-sliding *ngFor="let grupo of grupos; let i = index">
-      <ion-item >
-        <ion-label>{{ grupo.nome }}</ion-label>
-      </ion-item>
-      <ion-item-options side="right" icon-left>
-        <button ion-button color="danger" (click)="confirmDelete(grupo, i)">
-          <ion-icon name="trash"></ion-icon>
-          Delete
-        </button>
-        <button ion-button (click)="openModalEdit(grupo, i)">
-          Editar
-        </button>
-        <button ion-button color="secondary" (click)="openModalView(grupo, i)">
-          Visualizar
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+  <ion-card margin-vertical >
+    <ion-card-header class="titleGraphic">
+      <ion-icon name="pie"></ion-icon>
+      Gráfico
+    </ion-card-header>
 
-  <ion-content padding>
-    <button ion-button icon-left color="darkgrey" class="button-graphic" (click)="openModalAdd()" full>
-    <ion-icon name="add"></ion-icon>
-      Cadastrar grupo
-    </button>
-  </ion-content>
+    <ion-card-content >
+
+      <canvas #barCanvas ></canvas><br>
+
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
