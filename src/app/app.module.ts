@@ -17,6 +17,9 @@ import { AlunosPage } from "../pages/alunos/alunos";
 import { GruposPage } from "../pages/grupos/grupos";
 import { CadastrosPage } from '../pages/cadastros/cadastros';
 import { ListAvaliacoesPage } from '../pages/list-avaliacoes/list-avaliacoes';
+import { GraficosPage } from "../pages/graficos/graficos";
+import { GraficoPorAlunoPage } from "../pages/grafico-por-aluno/grafico-por-aluno";
+import { GraficoPorFuncaoPage } from "../pages/grafico-por-funcao/grafico-por-funcao";
 
 import { AddEscolaModalPage } from '../pages/add-escola-modal/add-escola-modal';
 import { AddTurmaModalPage } from '../pages/add-turma-modal/add-turma-modal';
@@ -49,6 +52,9 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     AlunosPage,
     GruposPage,
     CadastrosPage,
+    GraficosPage,
+    GraficoPorAlunoPage,
+    GraficoPorFuncaoPage,
     ListAvaliacoesPage,
     AddEscolaModalPage,
     AddTurmaModalPage,
@@ -82,6 +88,9 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     AlunosPage,
     GruposPage,
     CadastrosPage,
+    GraficosPage,
+    GraficoPorAlunoPage,
+    GraficoPorFuncaoPage,
     ListAvaliacoesPage,
     AddEscolaModalPage,
     AddTurmaModalPage,

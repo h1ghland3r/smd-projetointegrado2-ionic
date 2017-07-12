@@ -9,11 +9,8 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
 import { HomePage } from '../pages/home/home';
 import { AvaliacaoPage } from '../pages/avaliacao/avaliacao';
 import { CadastrosPage } from '../pages/cadastros/cadastros';
-import { EscolasPage } from '../pages/escolas/escolas';
-import { TurmasPage } from '../pages/turmas/turmas';
-import { AlunosPage } from '../pages/alunos/alunos';
-import { GruposPage } from '../pages/grupos/grupos';
 import { SobrePage } from '../pages/sobre/sobre';
+import { GraficosPage } from '../pages/graficos/graficos';
 import { ListAvaliacoesPage } from '../pages/list-avaliacoes/list-avaliacoes';
 
 @Component({
@@ -55,6 +52,11 @@ export class MyApp {
         title: 'Ver avaliações',
         component: ListAvaliacoesPage,
         icon: 'list'
+      },
+      {
+        title: 'Gráficos',
+        component: GraficosPage,
+        icon: 'pie'
       },
       {
         title: 'Sobre',
