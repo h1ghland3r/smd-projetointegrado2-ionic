@@ -96,6 +96,13 @@
     width: 150px;
 }
 
+ion-select {
+  max-width: 100%!important;
+  right: auto!important;
+  direction: ltr!important;
+  padding-left: 0!important;
+}
+
 /* Modal custom */
 
 ion-buttons button[icon-only].icon-left-side {
