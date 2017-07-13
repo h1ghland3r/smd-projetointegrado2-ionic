@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Chart, ElementRef } from 'chart.js';
@@ -15,7 +15,6 @@ import { DbServiceProvider } from '../../providers/db-service/db-service';
 export class AvaliacaoPage {
 
   // Forms
-
   @ViewChild('avaliacaoSlider') avaliacaoSlider: any;
 
   slide1Form: FormGroup;
@@ -194,9 +193,8 @@ export class AvaliacaoPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AvaliacaoPage');
-
     this.getAllEscolas();
-
+    this.avaliacaoSlider.lockSwipes(true);
   }
 
     respConstrutor = {
@@ -481,10 +479,12 @@ export class AvaliacaoPage {
   }
 
   // Navigation
+
   next(){
-
+    this.avaliacaoSlider.lockSwipes(false);
     this.avaliacaoSlider.slideNext();
-
+    this.avaliacaoSlider.lockSwipes(true);
+    
     if(this.avaliacaoSlider.getActiveIndex() == 1){
       console.log(this.slide1Form.value.grupo);
       this.getGrupoById(this.slide1Form.value.grupo);
@@ -738,10 +738,3 @@ export class AvaliacaoPage {
   }
 
 }
-
-
-  // retornar() {
-  //   //this.navCtrl.pop();
-  //   this.navCtrl.setRoot(HomePage);
-  //   this.navCtrl.popToRoot();
-  // }
