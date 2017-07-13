@@ -13,22 +13,21 @@
 <ion-content padding>
 
   <ion-list>
+    <div class="border-bottom">
+      <ion-item class="no-padding-left">
+        <ion-label>Nome da Turma:</ion-label>
+        <ion-input [(ngModel)]="nome" type="text" text-right></ion-input>
+      </ion-item>
 
-  <ion-item>
-    <ion-label floating>Nome da Turma:</ion-label>
-    <ion-input [(ngModel)]="nome" type="text"></ion-input>
-  </ion-item>
+      <ion-item class="no-padding-left" margin-vertical>
+          <ion-label>Escola</ion-label>
+          <ion-select [(ngModel)]="escolaId">
+            <ion-option *ngFor="let escola of escolas" [value]="escola.id">{{escola.nome}}</ion-option>
+          </ion-select>
+      </ion-item>
+    </div>
+  <button ion-button color="darkgrey" class="button-top-margin" (click)="saveTurmaEdit()" full>Salvar</button>
 
-  <ion-item class="no-padding-left" margin-vertical>
-      <ion-label>Escola</ion-label>
-      <ion-select [(ngModel)]="escolaId">
-        <ion-option *ngFor="let escola of escolas" [value]="escola.id">{{escola.nome}}</ion-option>
-      </ion-select>
-  </ion-item>
-
-  <button ion-button icon-only (click)="saveTurmaEdit()">
-    <ion-icon name="salvar">Salvar</ion-icon>
-  </button>
 
 </ion-list>
 

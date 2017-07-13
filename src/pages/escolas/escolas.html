@@ -6,6 +6,9 @@
 
 <ion-content>
   <ion-list>
+    <ion-list-header *ngIf="escolas.length != 0">
+      Deslize para visualizar as opções.
+    </ion-list-header>
     <ion-item *ngIf="escolas.length == 0">
       Nenhuma escola cadastrada.
     </ion-item>
