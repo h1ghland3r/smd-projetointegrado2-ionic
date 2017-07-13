@@ -74,6 +74,14 @@
     align-items: center!important;
 }
 
+.no-padding-left {
+    padding-left: 0 !important;
+}
+
+.no-padding-right {
+    padding-right: 0 !important;
+}
+
 .sm-margin-bottom {
     margin-bottom: 10px;
 }
@@ -94,6 +102,13 @@
 
 .button-cadastros {
     width: 150px;
+}
+
+ion-select {
+  max-width: 100%!important;
+  right: auto!important;
+  direction: ltr!important;
+  padding-left: 0!important;
 }
 
 /* Modal custom */
