@@ -79,7 +79,7 @@ export class MyApp {
         let nav = this.app.getActiveNav();
 
         if (nav.canGoBack()) {
-          this.nav.setRoot(HomePage);
+          this.nav.pop();
         } else {
 
         let confirm = this.alertCtrl.create({

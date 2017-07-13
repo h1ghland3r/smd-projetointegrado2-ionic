@@ -35,32 +35,15 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-list>
-    <ion-list-header *ngIf="alunos.length != 0">
-      Deslize para visualizar as opções.
-    </ion-list-header>
+  <ion-list *ngFor="let aluno of alunos; let i = index">
     <ion-item *ngIf="alunos.length == 0">
       Nenhum aluno cadastrado.
     </ion-item>
-    <ion-item-sliding *ngFor="let aluno of alunos; let i = index">
-      <ion-item >
-        <ion-icon name="person" class="list-icon" item-start></ion-icon>
-        <ion-label>{{ aluno.nome }}</ion-label>
-      </ion-item>
-      <ion-item-options side="right" icon-left>
-        <button ion-button color="danger" (click)="confirmDelete(aluno, i)">
-          <ion-icon name="trash"></ion-icon>
-          Excluir
-        </button>
-        <button ion-button (click)="openModalEdit(aluno, i)">
-          <ion-icon name="create"></ion-icon>
-          Editar
-        </button>
-        <!-- <button ion-button color="secondary" (click)="openModalView(aluno, i)">
-          Visualizar
-        </button> -->
-      </ion-item-options>
-    </ion-item-sliding>
+    <ion-item >
+      <ion-label>{{ aluno.nome }}</ion-label>
+      <ion-icon item-right class="delete" name="trash" (click)="confirmDelete(aluno, i)"></ion-icon>
+      <ion-icon item-right name="create" (click)="openModalEdit(aluno, i)"></ion-icon>
+    </ion-item>
   </ion-list>
 
   <ion-content padding>
