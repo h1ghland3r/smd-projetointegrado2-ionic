@@ -13,56 +13,57 @@
 <ion-content padding>
 
   <ion-list>
+    <div class="border-bottom">
+      <ion-item class="no-padding-left">
+        <ion-label>Nome do Grupo:</ion-label>
+        <ion-input [(ngModel)]="nome" type="text" text-right></ion-input>
+      </ion-item>
 
-  <ion-item>
-    <ion-label floating>Nome do Grupo:</ion-label>
-    <ion-input [(ngModel)]="nome" type="text"></ion-input>
-  </ion-item>
+      <ion-item class="no-padding-left" margin-vertical>
+        <ion-label>Escola</ion-label>
+        <ion-select [(ngModel)]="escolaId" (ngModelChange)="getTurmasByEscolaId($event)">
+          <ion-option *ngFor="let escola of escolas" [value]="escola.id">{{escola.nome}}</ion-option>
+        </ion-select>
+      </ion-item>
 
-  <ion-item class="no-padding-left" margin-vertical>
-    <ion-label>Escola</ion-label>
-    <ion-select [(ngModel)]="escolaId" (ngModelChange)="getTurmasByEscolaId($event)">
-      <ion-option *ngFor="let escola of escolas" [value]="escola.id">{{escola.nome}}</ion-option>
-    </ion-select>
-  </ion-item>
+      <ion-item class="no-padding-left" margin-vertical>
+          <ion-label>Turma</ion-label>
+          <ion-select [(ngModel)]="turmaId" (ngModelChange)="getAlunosByTurmaId($event)">
+            <ion-option *ngFor="let turma of turmas" [value]="turma.id" >{{turma.nome}}</ion-option>
+          </ion-select>
+      </ion-item>
 
-  <ion-item class="no-padding-left" margin-vertical>
-      <ion-label>Turma</ion-label>
-      <ion-select [(ngModel)]="turmaId" (ngModelChange)="getAlunosByTurmaId($event)">
-        <ion-option *ngFor="let turma of turmas" [value]="turma.id" >{{turma.nome}}</ion-option>
-      </ion-select>
-  </ion-item>
+      <ion-item class="no-padding-left" margin-vertical>
+          <ion-label>Aluno 1</ion-label>
+          <ion-select [(ngModel)]="alunoId1">
+            <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
+          </ion-select>
+      </ion-item>
 
-  <ion-item class="no-padding-left" margin-vertical>
-      <ion-label>Aluno 1</ion-label>
-      <ion-select [(ngModel)]="alunoId1">
-        <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
-      </ion-select>
-  </ion-item>
+      <ion-item class="no-padding-left" margin-vertical>
+          <ion-label>Aluno 2</ion-label>
+          <ion-select [(ngModel)]="alunoId2">
+            <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
+          </ion-select>
+      </ion-item>
 
-  <ion-item class="no-padding-left" margin-vertical>
-      <ion-label>Aluno 2</ion-label>
-      <ion-select [(ngModel)]="alunoId2">
-        <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
-      </ion-select>
-  </ion-item>
+      <ion-item class="no-padding-left" margin-vertical>
+          <ion-label>Aluno 3</ion-label>
+          <ion-select [(ngModel)]="alunoId3">
+            <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
+          </ion-select>
+      </ion-item>
 
-  <ion-item class="no-padding-left" margin-vertical>
-      <ion-label>Aluno 3</ion-label>
-      <ion-select [(ngModel)]="alunoId3">
-        <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
-      </ion-select>
-  </ion-item>
+      <ion-item class="no-padding-left" margin-vertical>
+          <ion-label>Aluno 4</ion-label>
+          <ion-select [(ngModel)]="alunoId4">
+            <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
+          </ion-select>
+      </ion-item>
+    </div>
 
-  <ion-item class="no-padding-left" margin-vertical>
-      <ion-label>Aluno 4</ion-label>
-      <ion-select [(ngModel)]="alunoId4">
-        <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
-      </ion-select>
-  </ion-item>
-  <button ion-button icon-only (click)="saveGrupoEdit()">
-    <ion-icon name="salvar">Salvar</ion-icon>
-  </button>
+  <button ion-button color="darkgrey" class="button-top-margin" (click)="saveGrupoEdit()" full>Salvar</button>
+
 
 </ion-list>
 
