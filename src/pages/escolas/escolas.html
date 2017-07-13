@@ -5,29 +5,16 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
+  <ion-list *ngFor="let escola of escolas; let i = index" >
     <ion-item *ngIf="escolas.length == 0">
       Nenhuma escola cadastrada.
     </ion-item>
-    <ion-item-sliding *ngFor="let escola of escolas; let i = index">
       <ion-item >
         <ion-icon name="school" class="list-icon" item-start></ion-icon>
         <ion-label>{{ escola.nome }}</ion-label>
+        <ion-icon item-right class="delete" name="trash" (click)="confirmDelete(escola, i)"></ion-icon>
+        <ion-icon item-right name="create" (click)="openModalEdit(escola, i)"></ion-icon>
       </ion-item>
-      <ion-item-options side="right" icon-left>
-        <button ion-button color="danger" (click)="confirmDelete(escola, i)">
-          <ion-icon name="trash"></ion-icon>
-          Excluir
-        </button>
-        <button ion-button (click)="openModalEdit(escola, i)">
-          <ion-icon name="create"></ion-icon>
-          Editar
-        </button>
-        <!--<button ion-button color="secondary" (click)="openModalView(escola, i)">
-          Visualizar
-        </button>-->
-      </ion-item-options>
-    </ion-item-sliding>
   </ion-list>
 
   <ion-content padding>
