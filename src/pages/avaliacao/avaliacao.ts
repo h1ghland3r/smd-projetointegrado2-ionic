@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
-import { HomePage } from '../home/home';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ListAvaliacoesPage } from '../list-avaliacoes/list-avaliacoes';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Chart, ElementRef } from 'chart.js';
 import moment from 'moment'
@@ -69,113 +69,113 @@ export class AvaliacaoPage {
               public dbService: DbServiceProvider) {
 
     this.slide1Form = formBuilder.group({
-        escola: [''],
-        turma: [''],
-        grupo: ['']
+        escola: ['', Validators.required],
+        turma: ['', Validators.required],
+        grupo: ['', Validators.required]
     });
 
     //Respostas do Aluno Construtor
 
     this.slideConstrutorForm = formBuilder.group({
-        alunoConstrutor: ['']
+        alunoConstrutor: ['', Validators.required]
     });
 
     this.slideConstrutorQst1Form = formBuilder.group({
-        construtorResposta1: ['']
+        construtorResposta1: ['', Validators.required]
     });
 
     this.slideConstrutorQst2Form = formBuilder.group({
-        construtorResposta2: ['']
+        construtorResposta2: ['', Validators.required]
     });
 
     this.slideConstrutorQst3Form = formBuilder.group({
-        construtorResposta3: ['']
+        construtorResposta3: ['', Validators.required]
     });
 
     this.slideConstrutorQst4Form = formBuilder.group({
-        construtorResposta4: ['']
+        construtorResposta4: ['', Validators.required]
     });
 
     this.slideConstrutorQst5Form = formBuilder.group({
-        construtorResposta5: ['']
+        construtorResposta5: ['', Validators.required]
     });
 
     //Respostas do Aluno Organizador
 
     this.slideOrganizadorForm = formBuilder.group({
-        alunoOrganizador: ['']
+        alunoOrganizador: ['', Validators.required]
     });
 
     this.slideOrganizadorQst1Form = formBuilder.group({
-        organizadorResposta1: ['']
+        organizadorResposta1: ['', Validators.required]
     });
 
     this.slideOrganizadorQst2Form = formBuilder.group({
-        organizadorResposta2: ['']
+        organizadorResposta2: ['', Validators.required]
     });
 
     this.slideOrganizadorQst3Form = formBuilder.group({
-        organizadorResposta3: ['']
+        organizadorResposta3: ['', Validators.required]
     });
 
     this.slideOrganizadorQst4Form = formBuilder.group({
-        organizadorResposta4: ['']
+        organizadorResposta4: ['', Validators.required]
     });
 
     this.slideOrganizadorQst5Form = formBuilder.group({
-        organizadorResposta5: ['']
+        organizadorResposta5: ['', Validators.required]
     });
 
     //Respostas do Aluno Programador
 
     this.slideProgramadorForm = formBuilder.group({
-        alunoProgramador: ['']
+        alunoProgramador: ['', Validators.required]
     });
 
     this.slideProgramadorQst1Form = formBuilder.group({
-        programadorResposta1: ['']
+        programadorResposta1: ['', Validators.required]
     });
 
     this.slideProgramadorQst2Form = formBuilder.group({
-        programadorResposta2: ['']
+        programadorResposta2: ['', Validators.required]
     });
 
     this.slideProgramadorQst3Form = formBuilder.group({
-        programadorResposta3: ['']
+        programadorResposta3: ['', Validators.required]
     });
 
     this.slideProgramadorQst4Form = formBuilder.group({
-        programadorResposta4: ['']
+        programadorResposta4: ['', Validators.required]
     });
 
     this.slideProgramadorQst5Form = formBuilder.group({
-        programadorResposta5: ['']
+        programadorResposta5: ['', Validators.required]
     });
 
     //Respostas do Aluno lider
 
     this.slideLiderForm = formBuilder.group({
-        alunoLider: ['']
+        alunoLider: ['', Validators.required]
     });
 
     this.slideLiderQst1Form = formBuilder.group({
-        liderResposta1: ['']
+        liderResposta1: ['', Validators.required]
     });
 
     this.slideLiderQst2Form = formBuilder.group({
-        liderResposta2: ['']
+        liderResposta2: ['', Validators.required]
     });
 
     this.slideLiderQst3Form = formBuilder.group({
-        liderResposta3: ['']
+        liderResposta3: ['', Validators.required]
     });
 
     this.slideLiderQst4Form = formBuilder.group({
-        liderResposta4: ['']
+        liderResposta4: ['', Validators.required]
     });
 
     this.slideLiderQst5Form = formBuilder.group({
-        liderResposta5: ['']
+        liderResposta5: ['', Validators.required]
     });
 
   }
@@ -735,6 +735,10 @@ export class AvaliacaoPage {
 
   realizarOutraAvaliacao(){
     this.navCtrl.push(AvaliacaoPage);
+  }
+
+  verAvaliacoes(){
+    this.navCtrl.push(ListAvaliacoesPage);
   }
 
 }

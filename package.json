@@ -1,8 +1,7 @@
 {
     "name": "SARE",
-    "version": "0.0.5",
-    "author": "Ionic Framework",
-    "homepage": "http://ionicframework.com/",
+    "version": "1.0",
+    "author": "Elizabeth Santos, Everton Azevedo, Hareta Alves, Railan Barbosa",
     "private": true,
     "scripts": {
         "clean": "ionic-app-scripts clean",

@@ -183,3 +183,7 @@ h4.subtitle {
     font-size: 14px;
     left: 8px;
 }
+
+button:disabled {
+    background-color: color($colors, darkgrey, base) !important;
+}
