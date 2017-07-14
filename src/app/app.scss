@@ -55,6 +55,10 @@
 
 /* Formatting */
 
+.text-bold {
+    font-weight: bold;
+}
+
 .text-center {
     text-align: center;
     margin: 0 auto;
@@ -120,3 +124,9 @@ ion-buttons button[icon-only].icon-left-side {
    font-size: 2.4rem;
    font-weight: normal;
 }
+
+/* Custom colors icons */
+
+// ion-icon.delete, ion-cion.edit {
+//     color: color($colors, secondary, base) !important;
+// }

@@ -1,6 +1,7 @@
 .button-block {
     background-color: color($colors, primary, base);
     padding: 15px 0 120px 0;
+    border-radius: 4px;
 
     button {
         box-shadow: none;
