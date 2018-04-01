@@ -19,10 +19,22 @@ ion-slide {
     display: block;
 }
 
+h4, h5 {
+    font-size: 1.8rem;
+}
+
 h4.subtitle {
     text-transform: uppercase;
-    line-height: 2;
+    line-height: 1.5;
     white-space: normal;
+}
+
+h5.subtitle-note {
+    color: color($colors, darkgrey, base);
+    font-size: 0.8em;
+    font-style: italic;
+    font-weight: 100;
+    margin: 0.2rem;
 }
 
 .question-title {
@@ -186,4 +198,22 @@ h4.subtitle {
 
 button:disabled {
     background-color: color($colors, darkgrey, base) !important;
+}
+
+.divider {
+    display: block;
+    height: 10px;
+    border-bottom: solid 1px #BCC3CA;
+    text-align: center;
+    margin: 15% 0;
+
+    span {
+        display: inline-block;
+        background-color: #FFFFFF;
+        color: #BCC3CA;
+        text-transform: uppercase;
+        padding: 0 5px;
+        font-size: 1em;
+    }
+
 }

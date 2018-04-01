@@ -14,7 +14,7 @@
         <p *ngIf="submitAttempt" style="color: #ea6153;">Por favor, selecione todos os campos.</p>
 
         <ion-label margin-vertical color="black">
-          <h4 class="subtitle">critérios iniciais para avaliação</h4>
+          <h4 class="subtitle">iniciar avaliação a partir de dados cadastrados</h4>
         </ion-label>
 
         <ion-list no-lines margin-top>
@@ -48,6 +48,21 @@
                 </div>
             </form>
             <button ion-button color="primary" class="button-top-margin" [disabled]="slide1Form.invalid" (click)="next()" full>Avançar</button>
+
+        </ion-list>
+
+        <ion-list no-lines margin-top>
+          <div class="divider">
+            <span>ou</span>
+          </div>
+
+          <ion-label margin-vertical color="black">
+              <h4 class="subtitle">iniciar avaliação sem cadastros</h4>
+              <h5 class="subtitle-note">Os dados serão inseridos durante a avaliação</h5>
+          </ion-label>
+
+          <!--atualizar metodo do botao abaixo -->
+          <button ion-button color="primary" class="" (click)="next()" full>Avançar</button>
 
         </ion-list>
 
