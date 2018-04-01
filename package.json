@@ -1,7 +1,12 @@
 {
     "name": "SARE",
-    "version": "1.0",
-    "author": "Elizabeth Santos, Everton Azevedo, Hareta Alves, Railan Barbosa",
+    "version": "2.0.0",
+    "contributors": [
+        "Elizabeth Santos",
+        "Everton Azevedo",
+        "Hareta Alves",
+        "Railan Barbosa"
+    ],
     "private": true,
     "scripts": {
         "clean": "ionic-app-scripts clean",
@@ -25,7 +30,7 @@
         "@ionic-native/status-bar": "3.10.2",
         "@ionic/storage": "2.0.1",
         "chart.js": "^2.6.0",
-        "cordova-android": "^6.2.3",
+        "cordova-android": "6.2.3",
         "cordova-plugin-console": "^1.0.5",
         "cordova-plugin-device": "^1.1.4",
         "cordova-plugin-splashscreen": "^4.0.3",
@@ -36,17 +41,16 @@
         "ionic-plugin-keyboard": "^2.2.1",
         "ionicons": "3.0.0",
         "moment": "^2.18.1",
+        "npm": "^5.8.0",
         "rxjs": "5.1.1",
         "sw-toolbox": "3.6.0",
         "zone.js": "0.8.11"
     },
     "devDependencies": {
         "@ionic/app-scripts": "1.3.7",
-        "@ionic/cli-plugin-cordova": "1.3.0",
-        "@ionic/cli-plugin-ionic-angular": "1.3.0",
         "typescript": "2.3.3"
     },
-    "description": "An Ionic project",
+    "description": "Sistema avaliativo de robótica educacional",
     "cordova": {
         "plugins": {
             "cordova-sqlite-storage": {},
