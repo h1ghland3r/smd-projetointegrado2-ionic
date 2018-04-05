@@ -9,14 +9,56 @@ ion-slide {
     border-bottom: 1px solid color($colors, lightgrey, base) !important;
 }
 
-.avatar-student {
-    width: 100px !important;
-    margin: 0 auto !important;
+.top-registered-user {
+    display: none;
 }
 
-.avatar-name {
-    margin-top: 10px;
-    display: block;
+.top-registered-user, 
+.top-new-user {
+    background: #ececec;
+    margin: -30px -15px 0 -15px;
+
+    .user-details{
+        text-align: left;
+        height: 55px;
+        img {
+            display: inline-block;
+        }
+        .avatar-student {
+            width: 35px !important;
+            padding: 1rem 0;
+            margin-left: 2.25rem;
+            margin-right: -1rem;
+            vertical-align: middle;
+        }
+        .avatar-name {
+            display: inline-block;
+            font-size: 1.4rem;
+            margin-left: 0.5rem;
+            padding: 2rem;
+            padding-right: 0.5rem;
+        }
+        .button-right-action {
+            vertical-align: middle;
+            float: right;
+            line-height: 42px;
+
+            button {
+                height: 2.8rem;
+                font-size: 1.3rem;
+                font-weight: 400;
+            }
+        }
+    }
+}
+
+.topo-aluno-sem-cadastro {
+    .usuario-nome {
+        text-align: left;
+        img {
+            display: none;
+        }
+    }
 }
 
 h4, h5 {
