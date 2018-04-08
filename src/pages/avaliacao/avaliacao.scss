@@ -13,6 +13,10 @@ ion-slide {
     display: none;
 }
 
+.top-new-user {
+    display: none;
+}
+
 .top-registered-user, 
 .top-new-user {
     background: #ececec;
@@ -89,9 +93,13 @@ h5.subtitle-note {
     margin-top: 32px;
 }
 
+.question-wrapper {
+    margin-top: 4rem;
+}
+
 .progressbar {
   
-  margin: 20px 0 40px 0;
+  margin: 20px 0;
   
   .bar1 {
       display: inline-block;

@@ -74,6 +74,10 @@
         
         <ion-list no-lines>
 
+          <!-- Ambos os metodos tem display NONE como default, precisa inserir uma
+            condicao dependendo do botao selecionado na pagina anterior setar
+            display BLOCK em uma das divs 'top-registed-user' ou 'top-new-user' -->
+
           <!-- Metodo tradicional -->
           <div class="top-registered-user">
               <ion-label margin-vertical color="black">
@@ -81,6 +85,9 @@
                   <img src="../../assets/img/avatar-sare.png" class="avatar-student" />
                   <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
                   <span class="avatar-name">{{alunoContrutorNome}}</span>
+                  <div class="button-right-action">
+                      <button ion-button color="primary">Escolher aluno(a)</button>
+                    </div>
                 </ion-avatar>
               </ion-label>
           </div>
@@ -99,20 +106,22 @@
               </ion-label>
           </div>
 
-          
-          <ion-label margin-vertical color="black">
-              <h4 class="subtitle">
-                  1ª Etapa: <strong>Construtor</strong>
-              </h4>
-              <div class="progressbar">
-                  <div class="bar1 active"><span class="legenda-progresso">1ª</span></div>
-                  <div class="bar2"><span class="legenda-progresso">2ª</span></div>
-                  <div class="bar3"><span class="legenda-progresso">3ª</span></div>
-                  <div class="bar4"><span class="legenda-progresso">4ª</span></div>
-              </div>
-          </ion-label>
+          <!-- Questao -->
+          <div class="question-wrapper">
+            <ion-label margin-vertical color="black">
+                <h4 class="subtitle">
+                    1ª Etapa: <strong>Construtor</strong>
+                </h4>
+                <div class="progressbar">
+                    <div class="bar1 active"><span class="legenda-progresso">1ª</span></div>
+                    <div class="bar2"><span class="legenda-progresso">2ª</span></div>
+                    <div class="bar3"><span class="legenda-progresso">3ª</span></div>
+                    <div class="bar4"><span class="legenda-progresso">4ª</span></div>
+                </div>
+            </ion-label>
+          </div>
 
-       <!-- <form [formGroup]="slideConstrutorForm">
+          <!-- <form [formGroup]="slideConstrutorForm">
                 <div class="border-bottom">
                   <ion-item class="no-padding-left">
                       <ion-label margin-top>Selecione o aluno</ion-label>
@@ -172,7 +181,7 @@
 
 
 
-      <ion-slide padding> <!-- Slide 4 -->
+      <ion-slide padding> <!-- Slide 3 -->
 
         <ion-list no-lines>
 
@@ -228,7 +237,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 5 -->
+      <ion-slide padding> <!-- Slide 4 -->
 
         <ion-list no-lines>
 
@@ -285,7 +294,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 6 -->
+      <ion-slide padding> <!-- Slide 5 -->
 
         <ion-list no-lines>
 
@@ -342,7 +351,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 7 -->
+      <ion-slide padding> <!-- Slide 6 -->
 
         <ion-list no-lines>
 
@@ -398,9 +407,10 @@
         </ion-list>
 
       </ion-slide>
-      <!--Organizador-->
 
-      <ion-slide padding> <!-- Slide 8 -->
+      <!--Organizador--> <!-- Slide 7 -->
+
+      <ion-slide padding> 
 
         <ion-list no-lines>
 
@@ -435,7 +445,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 9 -->
+      <ion-slide padding> <!-- Slide 8 -->
 
         <ion-list no-lines>
 
@@ -491,7 +501,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 10 -->
+      <ion-slide padding> <!-- Slide 9 -->
 
         <ion-list no-lines>
 
@@ -547,7 +557,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 11 -->
+      <ion-slide padding> <!-- Slide 10 -->
 
         <ion-list no-lines>
 
@@ -603,7 +613,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 12 -->
+      <ion-slide padding> <!-- Slide 11 -->
 
         <ion-list no-lines>
 
@@ -659,7 +669,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 13 -->
+      <ion-slide padding> <!-- Slide 12 -->
 
         <ion-list no-lines>
 
@@ -715,9 +725,9 @@
 
       </ion-slide>
 
-      <!--Programador-->
+      <!--Programador--> <!-- Slide 13 -->
 
-      <ion-slide padding> <!-- Slide 14 -->
+      <ion-slide padding> 
 
         <ion-list no-lines>
 
@@ -752,7 +762,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 15 -->
+      <ion-slide padding> <!-- Slide 14 -->
 
         <ion-list no-lines>
 
@@ -808,7 +818,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 16 -->
+      <ion-slide padding> <!-- Slide 15 -->
 
         <ion-list no-lines>
 
@@ -864,7 +874,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 17 -->
+      <ion-slide padding> <!-- Slide 16 -->
 
         <ion-list no-lines>
 
@@ -920,7 +930,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 18 -->
+      <ion-slide padding> <!-- Slide 17 -->
 
         <ion-list no-lines>
 
@@ -976,7 +986,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 19 -->
+      <ion-slide padding> <!-- Slide 18 -->
 
         <ion-list no-lines>
 
@@ -1032,9 +1042,9 @@
 
       </ion-slide>
 
-      <!--Líder-->
+      <!--Líder--> <!-- Slide 19 -->
 
-      <ion-slide padding> <!-- Slide 20 -->
+      <ion-slide padding> 
 
         <ion-list no-lines>
 
@@ -1069,7 +1079,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 21 -->
+      <ion-slide padding> <!-- Slide 20 -->
 
         <ion-list no-lines>
 
@@ -1125,7 +1135,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 22 -->
+      <ion-slide padding> <!-- Slide 21 -->
 
         <ion-list no-lines>
 
@@ -1181,7 +1191,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 23 -->
+      <ion-slide padding> <!-- Slide 22 -->
 
         <ion-list no-lines>
 
@@ -1237,7 +1247,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 24 -->
+      <ion-slide padding> <!-- Slide 23 -->
 
         <ion-list no-lines>
 
@@ -1293,7 +1303,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 25 -->
+      <ion-slide padding> <!-- Slide 24 -->
 
         <ion-list no-lines>
 
@@ -1349,9 +1359,9 @@
 
       </ion-slide>
 
-      <!--Resultado-->
+      <!--Resultado--> <!-- Slide 25 -->
 
-      <ion-slide padding> <!-- Slide 26 -->
+      <ion-slide padding> 
 
         <ion-list no-lines>
 
