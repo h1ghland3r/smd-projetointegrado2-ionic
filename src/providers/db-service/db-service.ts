@@ -21,34 +21,79 @@ export class DbServiceProvider {
     }
   }
 
+  //INICIO DA CRIAÇÃO DAS TABELAS
+
+  createTableUsuarios(){
+    //let sql = 'DROP TABLE usuarios'
+    let sql = 'CREATE TABLE IF NOT EXISTS usuarios(id INTEGER PRIMARY KEY, nome TEXT, email TEXT, login TEXT, senha TEXT, status TEXT, lastModifiedDate DATETIME)';
+    return this.db.executeSql(sql, []);
+  }
+
   createTableEscola(){
-    let sql = 'CREATE TABLE IF NOT EXISTS escolas(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT ); CREATE TABLE IF NOT EXISTS turmas(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, escolaId INTEGER, FOREIGN KEY(escolaId) REFERENCES escolas(id))';
+    //let sql = 'DROP TABLE escola'
+    let sql = 'CREATE TABLE IF NOT EXISTS escola(id INTEGER PRIMARY KEY, nome TEXT, status TEXT, lastModifiedDate DATETIME, userId INTEGER, FOREIGN KEY(userId) REFERENCES usuarios(id))';
     return this.db.executeSql(sql, []);
   }
 
   createTableTurma(){
-    let sql = 'CREATE TABLE IF NOT EXISTS turmas(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, escolaId INTEGER, FOREIGN KEY(escolaId) REFERENCES escolas(id))';
+    //let sql = 'DROP TABLE turma'
+    let sql = 'CREATE TABLE IF NOT EXISTS turma(id INTEGER PRIMARY KEY, nome TEXT, status TEXT, lastModifiedDate DATETIME, escolaId INTEGER, userId INTEGER, FOREIGN KEY(userId) REFERENCES usuarios(id), FOREIGN KEY(escolaId) REFERENCES escola(id))';
     return this.db.executeSql(sql, []);
   }
 
   createTableAlunos(){
-    let sql = 'CREATE TABLE IF NOT EXISTS alunos(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, turmaId INTEGER, FOREIGN KEY(turmaId) REFERENCES turmas(id))';
+    //let sql = 'DROP TABLE aluno'
+    let sql = 'CREATE TABLE IF NOT EXISTS aluno(id INTEGER PRIMARY KEY, nome TEXT, dataNascimento DATETIME, status TEXT, lastModifiedDate DATETIME, turmaId INTEGER, userId INTEGER, FOREIGN KEY(turmaId) REFERENCES turma(id), FOREIGN KEY(userId) REFERENCES usuarios(id))';
+    return this.db.executeSql(sql, []);
+  }
+
+  createTableFotos(){
+    //let sql = 'DROP TABLE fotos'
+    let sql = 'CREATE TABLE IF NOT EXISTS fotos(id INTEGER PRIMARY KEY, fotoUrl TEXT, status TEXT, lastModifiedDate DATETIME, alunoId INTEGER, FOREIGN KEY(alunoId) REFERENCES aluno(id))';
     return this.db.executeSql(sql, []);
   }
 
   createTableGrupos(){
-    let sql = 'CREATE TABLE IF NOT EXISTS grupos(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, alunoId1 INTEGER, alunoId2 INTEGER, alunoId3 INTEGER, alunoId4 INTEGER, turmaId INTEGER, FOREIGN KEY(alunoId1) REFERENCES alunos(Id), FOREIGN KEY(alunoId2) REFERENCES alunos(Id), FOREIGN KEY(alunoId3) REFERENCES alunos(Id), FOREIGN KEY(alunoId4) REFERENCES alunos(Id), FOREIGN KEY(turmaId) REFERENCES turmas(id))';
+    //let sql = 'DROP TABLE grupo'
+    let sql = 'CREATE TABLE IF NOT EXISTS grupo(id INTEGER PRIMARY KEY, nome TEXT, status TEXT, lastModifiedDate DATETIME, alunoId1 INTEGER, alunoId2 INTEGER, alunoId3 INTEGER, alunoId4 INTEGER, turmaId INTEGER, userId INTEGER, FOREIGN KEY(userId) REFERENCES usuarios(id), FOREIGN KEY(alunoId1) REFERENCES aluno(id), FOREIGN KEY(alunoId2) REFERENCES aluno(id), FOREIGN KEY(alunoId3) REFERENCES aluno(id), FOREIGN KEY(alunoId4) REFERENCES aluno(id), FOREIGN KEY(turmaId) REFERENCES turma(id))';
     return this.db.executeSql(sql, []);
   }
 
-  createTableAvaliacoes(){
-    //let sql = 'DROP TABLE avaliacoes'
-    let sql = 'CREATE TABLE IF NOT EXISTS avaliacoes(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, date DATETIME, grupoId INTEGER, FOREIGN KEY(grupoId) REFERENCES grupos(id))';
+  createTableAvaliacaoGrupo(){
+    //let sql = 'DROP TABLE avaliacaoGrupo'
+    let sql = 'CREATE TABLE IF NOT EXISTS avaliacaoGrupo(id INTEGER PRIMARY KEY, nome TEXT, status TEXT, createdDate DATETIME, lastModifiedDate DATETIME, userId INTEGER, grupoId INTEGER, FOREIGN KEY(userId) REFERENCES usuarios(id), FOREIGN KEY(grupoId) REFERENCES grupo(id))';
     return this.db.executeSql(sql, []);
   }
 
-  createAvaliacao(avaliacao: any){
-    let sql = 'INSERT INTO avaliacoes(nome, date, grupoId) VALUES(?,?,?)';
+  createTableAvaliacaoAluno(){
+    //let sql = 'DROP TABLE avaliacaoAluno'
+    let sql = 'CREATE TABLE IF NOT EXISTS avaliacaoAluno(id INTEGER PRIMARY KEY, funcao INTEGER, createdDate DATETIME, status TEXT, lastModifiedDate DATETIME, respostas TEXT, alunoId INTEGER, avaliacaoGrupoId INTEGER, FOREIGN KEY(alunoId) REFERENCES aluno(id), FOREIGN KEY(avaliacaoGrupoId) REFERENCES avaliacaoGrupo(id))';
+    return this.db.executeSql(sql, []);
+  }
+
+  createTableAvaliacao(){
+    //let sql = 'DROP TABLE avaliacao'
+    let sql = 'CREATE TABLE IF NOT EXISTS avaliacao(id INTEGER PRIMARY KEY, nome TEXT, status TEXT, lastModifiedDate DATETIME, userId INTEGER, FOREIGN KEY(userId) REFERENCES usuarios(id))';
+    return this.db.executeSql(sql, []);
+  }
+
+  createTableAvaliacaoPerguntas(){
+    //let sql = 'DROP TABLE avaliacaoPerguntas'
+    let sql = 'CREATE TABLE IF NOT EXISTS avaliacaoPerguntas(id INTEGER PRIMARY KEY, pergunta TEXT, status TEXT, lastModifiedDate DATETIME, avaliacaoId INTEGER, FOREIGN KEY(avaliacaoId) REFERENCES avaliacao(id))';
+    return this.db.executeSql(sql, []);
+  }
+
+  createTableAvaliacaoRespostas(){
+    //let sql = 'DROP TABLE avaliacaoRespostas'
+    let sql = 'CREATE TABLE IF NOT EXISTS avaliacaoRespostas(id INTEGER PRIMARY KEY, status TEXT, lastModifiedDate DATETIME, resposta TEXT, perguntaId INTEGER, FOREIGN KEY(perguntaId) REFERENCES avaliacaoPerguntas(Id))';
+    return this.db.executeSql(sql, []);
+  }
+
+  //FIM DA CRIAÇÃO DAS TABELAS
+
+  //INICIO DA INSERÇÃO DE DADOS
+  createAvaliacaoGrupo(avaliacao: any){
+    let sql = 'INSERT INTO avaliacaoGrupo(nome, date, grupoId) VALUES(?,?,?)';
     return this.db.executeSql(sql, [avaliacao.nome, avaliacao.date, avaliacao.grupoId]);
   }
 
@@ -75,12 +120,6 @@ export class DbServiceProvider {
         }
         return Promise.resolve( avaliacoes );
       });
-  }
-
-  createTableAvaliacoesAlunos(){
-    //let sql = 'DROP TABLE avaliacoesAlunos'
-    let sql = 'CREATE TABLE IF NOT EXISTS avaliacoesAlunos(id INTEGER PRIMARY KEY AUTOINCREMENT, date DATETIME, resposta1 TEXT, resposta2 TEXT, resposta3 TEXT, resposta4 TEXT, resposta5 TEXT, funcao INTEGER, alunoId INTEGER, avaliacaoId INTEGER, FOREIGN KEY(alunoId) REFERENCES alunos(Id), FOREIGN KEY(avaliacaoId) REFERENCES avaliacoes(id))';
-    return this.db.executeSql(sql, []);
   }
 
   createAvaliacaoAlunos(avaliacoes: any[]){
