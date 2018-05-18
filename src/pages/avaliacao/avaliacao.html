@@ -14,7 +14,7 @@
         <p *ngIf="submitAttempt" style="color: #ea6153;">Por favor, selecione todos os campos.</p>
 
         <ion-label margin-vertical color="black">
-          <h4 class="subtitle">critérios iniciais para avaliação</h4>
+          <h4 class="subtitle">iniciar avaliação a partir de dados cadastrados</h4>
         </ion-label>
 
         <ion-list no-lines margin-top>
@@ -51,27 +51,77 @@
 
         </ion-list>
 
+        <ion-list no-lines margin-top>
+          <div class="divider">
+            <span>ou</span>
+          </div>
+
+          <ion-label margin-vertical color="black">
+              <h4 class="subtitle">iniciar avaliação sem cadastros</h4>
+              <h5 class="subtitle-note">Os dados serão inseridos durante a avaliação</h5>
+          </ion-label>
+
+          <!--atualizar metodo do botao abaixo -->
+          <button ion-button color="primary" class="" (click)="next()" full>Avançar</button>
+
+        </ion-list>
+
       </ion-slide>
-
+      
       <!--Construtor--> <!-- Slide 2 -->
-
+      
       <ion-slide padding>
-
+        
         <ion-list no-lines>
 
-            <form [formGroup]="slideConstrutorForm">
+          <!-- Ambos os metodos tem display NONE como default, precisa inserir uma
+            condicao dependendo do botao selecionado na pagina anterior setar
+            display BLOCK em uma das divs 'top-registed-user' ou 'top-new-user' -->
 
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">
+          <!-- Metodo tradicional -->
+          <div class="top-registered-user">
+              <ion-label margin-vertical color="black">
+                <ion-avatar class="user-details">
+                  <img src="../../assets/img/avatar-sare.png" class="avatar-student" />
+                  <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                  <span class="avatar-name">{{alunoContrutorNome}}</span>
+                  <div class="button-right-action">
+                      <button ion-button color="primary">Escolher aluno(a)</button>
+                    </div>
+                </ion-avatar>
+              </ion-label>
+          </div>
+
+          <!-- Inicio rapido -->
+          <div class="top-new-user">
+              <ion-label margin-vertical color="black">
+                  <ion-avatar class="user-details">
+                    <img src="../../assets/img/avatar-sare.png" class="avatar-student" />
+                    <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                    <span class="avatar-name">Aluno(a) construtor(a)</span>
+                    <div class="button-right-action">
+                      <button ion-button color="primary">Cadastrar Nome</button>
+                    </div>
+                  </ion-avatar>
+              </ion-label>
+          </div>
+
+          <!-- Questao -->
+          <div class="question-wrapper">
+            <ion-label margin-vertical color="black">
+                <h4 class="subtitle">
                     1ª Etapa: <strong>Construtor</strong>
-                  </h4>
-                  <div class="progressbar">
+                </h4>
+                <div class="progressbar">
                     <div class="bar1 active"><span class="legenda-progresso">1ª</span></div>
                     <div class="bar2"><span class="legenda-progresso">2ª</span></div>
                     <div class="bar3"><span class="legenda-progresso">3ª</span></div>
                     <div class="bar4"><span class="legenda-progresso">4ª</span></div>
-                  </div>
-                </ion-label>
+                </div>
+            </ion-label>
+          </div>
+
+          <!-- <form [formGroup]="slideConstrutorForm">
                 <div class="border-bottom">
                   <ion-item class="no-padding-left">
                       <ion-label margin-top>Selecione o aluno</ion-label>
@@ -83,27 +133,9 @@
 
                 <button ion-button color="primary" class="button-top-margin" [disabled]="slideConstrutorForm.invalid" (click)="next()" full>Iniciar</button>
 
-            </form>
-
-        </ion-list>
-
-      </ion-slide>
-
-      <ion-slide padding> <!-- Slide 3 -->
-
-        <ion-list no-lines>
+            </form> -->
 
             <form [formGroup]="slideConstrutorQst1Form">
-
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/img/avatar-sare.png" class="avatar-student" />-->
-                      <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoContrutorNome}}</span>
-                  </ion-avatar>
-                </ion-label>
-
 
                 <ion-card margin-vertical>
                   <ion-card-header>
@@ -114,7 +146,7 @@
                       <span class="question-title">1. Interpretou corretamente as instruções do manual?</span>
                     </ion-item>
                   </ion-card-header>
-
+      
                   <ion-card-content>
                     <ion-list radio-group formControlName="construtorResposta1" [(ngModel)]="construtorResposta1">
                       <ion-item text-wrap>
@@ -139,14 +171,17 @@
 
                   </ion-card-content>
                 </ion-card>
-
+      
             </form>
 
         </ion-list>
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 4 -->
+
+
+
+      <ion-slide padding> <!-- Slide 3 -->
 
         <ion-list no-lines>
 
@@ -202,7 +237,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 5 -->
+      <ion-slide padding> <!-- Slide 4 -->
 
         <ion-list no-lines>
 
@@ -259,7 +294,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 6 -->
+      <ion-slide padding> <!-- Slide 5 -->
 
         <ion-list no-lines>
 
@@ -316,7 +351,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 7 -->
+      <ion-slide padding> <!-- Slide 6 -->
 
         <ion-list no-lines>
 
@@ -372,9 +407,10 @@
         </ion-list>
 
       </ion-slide>
-      <!--Organizador-->
 
-      <ion-slide padding> <!-- Slide 8 -->
+      <!--Organizador--> <!-- Slide 7 -->
+
+      <ion-slide padding> 
 
         <ion-list no-lines>
 
@@ -409,7 +445,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 9 -->
+      <ion-slide padding> <!-- Slide 8 -->
 
         <ion-list no-lines>
 
@@ -465,7 +501,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 10 -->
+      <ion-slide padding> <!-- Slide 9 -->
 
         <ion-list no-lines>
 
@@ -521,7 +557,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 11 -->
+      <ion-slide padding> <!-- Slide 10 -->
 
         <ion-list no-lines>
 
@@ -577,7 +613,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 12 -->
+      <ion-slide padding> <!-- Slide 11 -->
 
         <ion-list no-lines>
 
@@ -633,7 +669,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 13 -->
+      <ion-slide padding> <!-- Slide 12 -->
 
         <ion-list no-lines>
 
@@ -689,9 +725,9 @@
 
       </ion-slide>
 
-      <!--Programador-->
+      <!--Programador--> <!-- Slide 13 -->
 
-      <ion-slide padding> <!-- Slide 14 -->
+      <ion-slide padding> 
 
         <ion-list no-lines>
 
@@ -726,7 +762,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 15 -->
+      <ion-slide padding> <!-- Slide 14 -->
 
         <ion-list no-lines>
 
@@ -782,7 +818,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 16 -->
+      <ion-slide padding> <!-- Slide 15 -->
 
         <ion-list no-lines>
 
@@ -838,7 +874,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 17 -->
+      <ion-slide padding> <!-- Slide 16 -->
 
         <ion-list no-lines>
 
@@ -894,7 +930,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 18 -->
+      <ion-slide padding> <!-- Slide 17 -->
 
         <ion-list no-lines>
 
@@ -950,7 +986,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 19 -->
+      <ion-slide padding> <!-- Slide 18 -->
 
         <ion-list no-lines>
 
@@ -1006,9 +1042,9 @@
 
       </ion-slide>
 
-      <!--Líder-->
+      <!--Líder--> <!-- Slide 19 -->
 
-      <ion-slide padding> <!-- Slide 20 -->
+      <ion-slide padding> 
 
         <ion-list no-lines>
 
@@ -1043,7 +1079,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 21 -->
+      <ion-slide padding> <!-- Slide 20 -->
 
         <ion-list no-lines>
 
@@ -1099,7 +1135,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 22 -->
+      <ion-slide padding> <!-- Slide 21 -->
 
         <ion-list no-lines>
 
@@ -1155,7 +1191,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 23 -->
+      <ion-slide padding> <!-- Slide 22 -->
 
         <ion-list no-lines>
 
@@ -1211,7 +1247,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 24 -->
+      <ion-slide padding> <!-- Slide 23 -->
 
         <ion-list no-lines>
 
@@ -1267,7 +1303,7 @@
 
       </ion-slide>
 
-      <ion-slide padding> <!-- Slide 25 -->
+      <ion-slide padding> <!-- Slide 24 -->
 
         <ion-list no-lines>
 
@@ -1323,9 +1359,9 @@
 
       </ion-slide>
 
-      <!--Resultado-->
+      <!--Resultado--> <!-- Slide 25 -->
 
-      <ion-slide padding> <!-- Slide 26 -->
+      <ion-slide padding> 
 
         <ion-list no-lines>
 

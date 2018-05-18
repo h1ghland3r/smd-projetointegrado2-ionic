@@ -9,20 +9,78 @@ ion-slide {
     border-bottom: 1px solid color($colors, lightgrey, base) !important;
 }
 
-.avatar-student {
-    width: 100px !important;
-    margin: 0 auto !important;
+.top-registered-user {
+    display: none;
 }
 
-.avatar-name {
-    margin-top: 10px;
-    display: block;
+.top-new-user {
+    display: none;
+}
+
+.top-registered-user, 
+.top-new-user {
+    background: #ececec;
+    margin: -30px -15px 0 -15px;
+
+    .user-details{
+        text-align: left;
+        height: 55px;
+        img {
+            display: inline-block;
+        }
+        .avatar-student {
+            width: 35px !important;
+            padding: 1rem 0;
+            margin-left: 2.25rem;
+            margin-right: -1rem;
+            vertical-align: middle;
+        }
+        .avatar-name {
+            display: inline-block;
+            font-size: 1.4rem;
+            margin-left: 0.5rem;
+            padding: 2rem;
+            padding-right: 0.5rem;
+        }
+        .button-right-action {
+            vertical-align: middle;
+            float: right;
+            line-height: 42px;
+
+            button {
+                height: 2.8rem;
+                font-size: 1.3rem;
+                font-weight: 400;
+            }
+        }
+    }
+}
+
+.topo-aluno-sem-cadastro {
+    .usuario-nome {
+        text-align: left;
+        img {
+            display: none;
+        }
+    }
+}
+
+h4, h5 {
+    font-size: 1.8rem;
 }
 
 h4.subtitle {
     text-transform: uppercase;
-    line-height: 2;
+    line-height: 1.5;
     white-space: normal;
+}
+
+h5.subtitle-note {
+    color: color($colors, darkgrey, base);
+    font-size: 0.8em;
+    font-style: italic;
+    font-weight: 100;
+    margin: 0.2rem;
 }
 
 .question-title {
@@ -35,9 +93,13 @@ h4.subtitle {
     margin-top: 32px;
 }
 
+.question-wrapper {
+    margin-top: 4rem;
+}
+
 .progressbar {
   
-  margin: 20px 0 40px 0;
+  margin: 20px 0;
   
   .bar1 {
       display: inline-block;
@@ -186,4 +248,22 @@ h4.subtitle {
 
 button:disabled {
     background-color: color($colors, darkgrey, base) !important;
+}
+
+.divider {
+    display: block;
+    height: 10px;
+    border-bottom: solid 1px #BCC3CA;
+    text-align: center;
+    margin: 15% 0;
+
+    span {
+        display: inline-block;
+        background-color: #FFFFFF;
+        color: #BCC3CA;
+        text-transform: uppercase;
+        padding: 0 5px;
+        font-size: 1em;
+    }
+
 }
