@@ -7,6 +7,7 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
 
 
 import { HomePage } from '../pages/home/home';
+import { LoginPage } from '../pages/login/login';
 import { AvaliacaoPage } from '../pages/avaliacao/avaliacao';
 import { CadastrosPage } from '../pages/cadastros/cadastros';
 import { SobrePage } from '../pages/sobre/sobre';
@@ -18,7 +19,7 @@ import { ListAvaliacoesPage } from '../pages/list-avaliacoes/list-avaliacoes';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage: any = HomePage;
+  rootPage: any = LoginPage;
 
   pages: Array<{title: string, component: any, icon: string}>;
 
