@@ -1,55 +1,81 @@
 page-login {
-
-  .login-content {
-    background: #FFF;
-
-    .row-logo {
-      padding: 8% 0;
-      .login-logo {
-        border: 2px solid color($colors, primary, base);
-        border-radius: 50%;
-        padding: 5px;
-      }
-    }
-
-  }
-
-  .login-box {
-
-    .login-inputs {
-        .login-input-wrapper {
-            border: 0;
-        }
-        input {
-            border-bottom: 1px solid color($colors, primary, base);
-            margin-bottom: 20px;
-            padding: 0 5px 5px 5px;
-            color: color($colors, primary, base);
-        }
-        
-    }
-  }
-
-    .login-bottom-wrapper {
-        .login-bottom-password {
-            position: relative;
-            bottom: 0;
-
-            .button-forgot-password {
-                background-color: #FFF;
-                color: color($colors, darkgrey, base);
-                border-bottom: 1px solid color($colors, darkgrey, base);
-                border-radius: 0;
+    .login-content {
+        .row-logo {
+            position: relative; 
+            top: 10vw; 
+            padding: 0;
+            .login-logo {
+                border: 2px solid color($colors, primary, base);
+                border-radius: 50%;
+                padding: 5px;
             }
         }
     }
-
-    @media screen and (orientation : landscape){
+    .login-box {
+        position: relative; 
+        top: 30vw; 
+        .login-inputs {
+            .login-input-wrapper {
+                border: 0;
+                padding: 0;
+            }
+            .icon {
+                text-align: center;
+                min-width: 24px;
+                font-size: 1.75em;
+                color: color($colors, primary, base);
+            }
+            .item-input ion-label {
+                margin: 0;
+            }
+            input {
+                border-bottom: 1px solid color($colors, primary, base);
+                padding: 5px 0;
+                color: color($colors, primary, base);
+            }
+            .login-forgot-password-wrapper {
+                position: relative;
+                top: 0px;
+                .forgot-password-modal {
+                    color: color($colors, primary, base);
+                    text-transform: initial;
+                    font-size: 0.85em;
+                    padding-right: 10px;
+                }
+            }
+        }
+        .button-actions {
+            height: 3.2em;
+        }
+        .row-signup {
+            padding-top: 5%;
+        }
+        .login-signup--action {
+            margin-top: 10%;
+            color: color($colors, darkgrey, base);
+            span {
+                display: block;
+                margin: 5px 0 10px 0;
+            }
+            div {
+                color: color($colors, primary, base);
+                text-transform: uppercase;
+                font-size: 1.2em;
+            }
+        }
+    }
+    @media screen and (orientation: landscape) {
         .login-content {
-            .row-logo {
-              padding: 0;
+            .row-logo,
+            .row-signup,
+            .login-box {
+                position: relative; 
+                top: 0vw; 
+                padding: 0;
+            }
+            .login-signup--action {
+                margin-top: 2.5%; 
             }
         }
     }
-
 }
