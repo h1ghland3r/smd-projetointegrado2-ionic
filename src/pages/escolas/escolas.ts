@@ -6,6 +6,9 @@ import { AddEscolaModalPage } from '../add-escola-modal/add-escola-modal'
 import { EditEscolaModalPage } from '../edit-escola-modal/edit-escola-modal'
 import { ViewEscolaModalPage } from '../view-escola-modal/view-escola-modal'
 
+import { EscolasPageModule } from './escolas.module';
+
+
 
 @IonicPage()
 @Component({
@@ -30,6 +33,7 @@ export class EscolasPage {
 
   public openModalAdd(){
     var modalPage = this.modalCtrl.create(AddEscolaModalPage);
+
     modalPage.onDidDismiss((item) => {
       if(item){
         this.saveEscola(item);
@@ -39,7 +43,7 @@ export class EscolasPage {
   }
 
   saveEscola(item){
-    this.dbService.createEscola(item)
+    this.dbService.insertEscola(item)
       .then(response => {
         this.getAllEscolas();
       })
@@ -50,8 +54,9 @@ export class EscolasPage {
 
   public openModalEdit(escola, index){
 
-    let obj = {id: escola.id, nome: escola.nome, index: index};
+    let obj = {id: escola.id, nome: escola.nome, status: escola.status, lastModifiedDate: escola.lastModifiedDate, userId: escola.userId, index: index};
     var modalPage = this.modalCtrl.create(EditEscolaModalPage, obj);
+
     modalPage.onDidDismiss((item) => {
       if(item){
         this.saveEscolaEdit(item);
@@ -65,8 +70,11 @@ export class EscolasPage {
         .then( response => {
           console.log( response );
           let escola = {
+            id: item.id,
             nome: item.nome,
-            id: item.id
+            status: item.status,
+            lastModifiedDate: item.lastModifiedDate,
+            userId: item.userId
           }
           this.escolas[item.index] = escola;
         })

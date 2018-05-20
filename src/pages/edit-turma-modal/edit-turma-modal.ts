@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
 import { DbServiceProvider } from '../../providers/db-service/db-service';
+
+import { TurmasPageModule } from '../turmas/turmas.module';
+
+import moment from 'moment'
 /**
  * Generated class for the EditTurmaModalPage page.
  *
@@ -19,6 +23,9 @@ export class EditTurmaModalPage {
   id: string = this.navParams.get('id');
   index: string = this.navParams.get('index');
   escolaId: string = this.navParams.get('escolaId');
+  status: string = this.navParams.get('status');
+  lastModifiedDate: string = this.navParams.get('lastModifiedDate');
+  userId: string = this.navParams.get('userId');
 
   escolas: any[] = [];
 
@@ -36,6 +43,9 @@ export class EditTurmaModalPage {
     let turma = {
       id: this.id,
       nome: this.nome,
+      status: "UPDATED",
+      userId: 1,
+      lastModifiedDate: moment().toDate(),
       escolaId: this.escolaId,
       index: this.index
     };

@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
 import { DbServiceProvider } from '../../providers/db-service/db-service';
+
+import { AlunosPageModule } from '../alunos/alunos.module';
+
+import moment from 'moment'
 /**
  * Generated class for the EditAlunoModalPage page.
  *
@@ -16,9 +20,14 @@ import { DbServiceProvider } from '../../providers/db-service/db-service';
 export class EditAlunoModalPage {
 
   nome: string = this.navParams.get('nome');
+  dataNascimento: string = this.navParams.get('dataNascimento');
   id: string = this.navParams.get('id');
   index: string = this.navParams.get('index');
   turmaId: string = this.navParams.get('turmaId');
+  status: string = this.navParams.get('status');
+  lastModifiedDate: string = this.navParams.get('lastModifiedDate');
+  userId: string = this.navParams.get('userId');
+
 
   turmas: any[] = [];
   escolas: any[] = [];
@@ -38,6 +47,10 @@ export class EditAlunoModalPage {
     let aluno = {
       id: this.id,
       nome: this.nome,
+      dataNascimento: this.dataNascimento,
+      status: "UPDATED",
+      userId: 1,
+      lastModifiedDate: moment().toDate(),
       turmaId: this.turmaId,
       index: this.index
     };

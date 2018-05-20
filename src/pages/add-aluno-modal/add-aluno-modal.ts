@@ -3,6 +3,9 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 
 import { DbServiceProvider } from '../../providers/db-service/db-service';
 
+import { AlunosPageModule } from '../alunos/alunos.module';
+
+import moment from 'moment'
 /**
  * Generated class for the AddAlunoModalPage page.
  *
@@ -17,6 +20,7 @@ import { DbServiceProvider } from '../../providers/db-service/db-service';
 export class AddAlunoModalPage {
 
   nome;
+  dataNascimento;
   turmaId;
   escolaId;
   turmas: any[] = [];
@@ -51,12 +55,16 @@ export class AddAlunoModalPage {
   }
 
   public saveAluno(){
-    let aluno = {
-      nome: this.nome,
-      turmaId: this.turmaId
-    };
+    var itemDb = new AlunosPageModule();
 
-    this.viewCtrl.dismiss(aluno);
+    itemDb.nome = this.nome;
+    itemDb.dataNascimento = this.dataNascimento;
+    itemDb.status = "ADDED";
+    itemDb.userId = 1;
+    itemDb.lastModifiedDate = moment().toDate();
+    itemDb.turmaId = this.turmaId;
+
+    this.viewCtrl.dismiss(itemDb);
   }
 
   ionViewDidLoad() {

@@ -484,7 +484,7 @@ export class AvaliacaoPage {
     this.avaliacaoSlider.lockSwipes(false);
     this.avaliacaoSlider.slideNext();
     this.avaliacaoSlider.lockSwipes(true);
-    
+
     if(this.avaliacaoSlider.getActiveIndex() == 1){
       console.log(this.slide1Form.value.grupo);
       this.getGrupoById(this.slide1Form.value.grupo);
@@ -625,6 +625,7 @@ export class AvaliacaoPage {
       grupoId: this.slide1Form.value.grupo
     }
 
+    /*
     this.dbService.createAvaliacao(avaliacao)
       .then( response => {
 
@@ -638,6 +639,7 @@ export class AvaliacaoPage {
         console.log(this.avaliacao);
         this.getAllAvaliacoes();
       })
+      */
 
   }
 
