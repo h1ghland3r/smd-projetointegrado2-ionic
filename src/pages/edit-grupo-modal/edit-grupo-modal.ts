@@ -3,6 +3,9 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 
 import { DbServiceProvider } from '../../providers/db-service/db-service';
 
+import { GruposPageModule } from '../grupos/grupos.module';
+
+import moment from 'moment'
 /**
  * Generated class for the EditGrupoModalPage page.
  *
@@ -24,6 +27,9 @@ export class EditGrupoModalPage {
   alunoId3: string = this.navParams.get('alunoId3');
   alunoId4: string = this.navParams.get('alunoId4');
   turmaId: string = this.navParams.get('turmaId');
+  status: string = this.navParams.get('status');
+  lastModifiedDate: string = this.navParams.get('lastModifiedDate');
+  userId: string = this.navParams.get('userId');
 
   alunos: any[] = [];
   turmas: any[] = [];
@@ -46,6 +52,9 @@ export class EditGrupoModalPage {
       id: this.id,
       nome: this.nome,
       turmaId: this.turmaId,
+      status: "UPDATED",
+      userId: 1,
+      lastModifiedDate: moment().toDate(),
       alunoId1: this.alunoId1,
       alunoId2: this.alunoId2,
       alunoId3: this.alunoId3,

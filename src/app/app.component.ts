@@ -120,12 +120,17 @@ export class MyApp {
     })
       .then((db) => {
         this.dbService.setDatabase(db);
+        this.dbService.createTableUsuarios();
         this.dbService.createTableEscola();
         this.dbService.createTableTurma();
         this.dbService.createTableAlunos();
         this.dbService.createTableGrupos();
-        this.dbService.createTableAvaliacoes();
-        this.dbService.createTableAvaliacoesAlunos();
+        this.dbService.createTableFotos();
+        this.dbService.createTableAvaliacaoGrupo();
+        this.dbService.createTableAvaliacaoAluno();
+        this.dbService.createTableAvaliacao();
+        this.dbService.createTableAvaliacaoPerguntas();
+        this.dbService.createTableAvaliacaoRespostas();
       })
       .catch(error =>{
         console.error(error);
