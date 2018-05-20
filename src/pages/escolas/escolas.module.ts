@@ -13,4 +13,10 @@ import { EscolasPage } from './escolas';
     EscolasPage
   ]
 })
-export class EscolasPageModule {}
+export class EscolasPageModule {
+    id: number;
+    nome: string;
+    status: string;
+    lastModifiedDate: Date;
+    userId: number;
+}

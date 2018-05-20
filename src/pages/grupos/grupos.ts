@@ -6,6 +6,7 @@ import { AddGrupoModalPage } from '../add-grupo-modal/add-grupo-modal';
 import { EditGrupoModalPage } from '../edit-grupo-modal/edit-grupo-modal';
 import { ViewGrupoModalPage } from '../view-grupo-modal/view-grupo-modal';
 
+import { GruposPageModule } from './grupos.module';
 
 @IonicPage()
 @Component({
@@ -92,7 +93,7 @@ export class GruposPage {
   }
 
   saveGrupo(item){
-    this.dbService.createGrupo(item)
+    this.dbService.insertGrupo(item)
       .then(response => {
         this.getAllGrupos();
       })
@@ -106,6 +107,9 @@ export class GruposPage {
     let obj = {
       id: grupo.id,
       nome: grupo.nome,
+      status: grupo.status,
+      lastModifiedDate: grupo.lastModifiedDate,
+      userId: grupo.userId,
       turmaId: grupo.turmaId,
       alunoId1: grupo.alunoId1,
       alunoId2: grupo.alunoId2,
