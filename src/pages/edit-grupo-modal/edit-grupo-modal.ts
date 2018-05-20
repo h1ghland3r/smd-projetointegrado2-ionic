@@ -137,6 +137,7 @@ export class EditGrupoModalPage {
         this.dbService.getTurmasByEscolaId(this.editGrupoForm.controls.escolaId.value)
           .then(turmas => {
             this.turmas = turmas;
+            this.alunos = [];
             this.getAlunosByTurmaId(turmaId);
           })
       })
