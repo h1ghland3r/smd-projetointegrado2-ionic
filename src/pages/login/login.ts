@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
+import { ModalController } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { PasswordPage } from '../password/password';
 
 /**
  * Generated class for the LoginPage page.
@@ -16,7 +18,7 @@ import { HomePage } from '../home/home';
 })
 export class LoginPage {
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private nativePageTransitions: NativePageTransitions) {}
+    constructor(public navCtrl: NavController, public navParams: NavParams, private nativePageTransitions: NativePageTransitions, private modalCtrl: ModalController) {}
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad LoginPage');
@@ -31,6 +33,11 @@ export class LoginPage {
         }
         this.nativePageTransitions.slide(options);
         this.navCtrl.setRoot(HomePage);
+    }
+
+    public openModalPassword() {
+        let modal = this.modalCtrl.create(PasswordPage);
+        modal.present();
     }
 
 }
