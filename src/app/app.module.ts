@@ -6,6 +6,7 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
 
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
+import { PasswordPage } from '../pages/password/password'
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { AvaliacaoPage } from '../pages/avaliacao/avaliacao';
@@ -47,6 +48,7 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
   declarations: [
     MyApp,
     LoginPage,
+    PasswordPage,
     HomePage,
     ListPage,
     AvaliacaoPage,
@@ -84,6 +86,7 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
   entryComponents: [
     MyApp,
     LoginPage,
+    PasswordPage,
     HomePage,
     ListPage,
     AvaliacaoPage,
