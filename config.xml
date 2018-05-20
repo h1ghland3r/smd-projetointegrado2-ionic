@@ -87,5 +87,4 @@
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="com.telerik.plugins.nativepagetransitions" spec="^0.6.5" />
     <engine name="android" spec="6.2.3" />
-    <allow-navigation href="http://192.168.15.21:8101" />
 </widget>

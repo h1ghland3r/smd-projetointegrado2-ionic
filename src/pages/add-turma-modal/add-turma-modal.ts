@@ -3,6 +3,10 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 
 import { DbServiceProvider } from '../../providers/db-service/db-service';
 
+import { TurmasPageModule } from '../turmas/turmas.module';
+
+import moment from 'moment'
+
 /**
  * Generated class for the AddTurmaModalPage page.
  *
@@ -42,12 +46,15 @@ export class AddTurmaModalPage {
   }
 
   public saveTurma(){
-    let turma = {
-      nome: this.nome,
-      escolaId: this.escolaId
-    };
+    var itemDb = new TurmasPageModule();
 
-    this.viewCtrl.dismiss(turma);
+    itemDb.nome = this.nome;
+    itemDb.status = "ADDED";
+    itemDb.userId = 1;
+    itemDb.lastModifiedDate = moment().toDate();
+    itemDb.escolaId = this.escolaId;
+    
+    this.viewCtrl.dismiss(itemDb);
   }
 
   ionViewDidLoad() {

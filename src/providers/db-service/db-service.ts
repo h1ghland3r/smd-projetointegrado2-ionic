@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { SQLiteObject } from '@ionic-native/sqlite';
 import 'rxjs/add/operator/map';
 
+import { EscolasPageModule } from '../../pages/escolas/escolas.module';
+import { TurmasPageModule } from '../../pages/turmas/turmas.module';
+import { AlunosPageModule } from '../../pages/alunos/alunos.module';
+import { GruposPageModule } from '../../pages/grupos/grupos.module';
 /*
  Generated class for the DbServiceProvider provider.
 
@@ -21,34 +25,79 @@ export class DbServiceProvider {
     }
   }
 
+  //INICIO DA CRIAÇÃO DAS TABELAS
+
+  createTableUsuarios(){
+    //let sql = 'DROP TABLE usuarios'
+    let sql = 'CREATE TABLE IF NOT EXISTS usuarios(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, email TEXT, login TEXT, senha TEXT, status TEXT, lastModifiedDate DATETIME)';
+    return this.db.executeSql(sql, []);
+  }
+
   createTableEscola(){
-    let sql = 'CREATE TABLE IF NOT EXISTS escolas(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT ); CREATE TABLE IF NOT EXISTS turmas(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, escolaId INTEGER, FOREIGN KEY(escolaId) REFERENCES escolas(id))';
+    //let sql = 'DROP TABLE escola'
+    let sql = 'CREATE TABLE IF NOT EXISTS escola(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, status TEXT, lastModifiedDate DATETIME, userId INTEGER, FOREIGN KEY(userId) REFERENCES usuarios(id))';
     return this.db.executeSql(sql, []);
   }
 
   createTableTurma(){
-    let sql = 'CREATE TABLE IF NOT EXISTS turmas(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, escolaId INTEGER, FOREIGN KEY(escolaId) REFERENCES escolas(id))';
+    //let sql = 'DROP TABLE turma'
+    let sql = 'CREATE TABLE IF NOT EXISTS turma(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, status TEXT, lastModifiedDate DATETIME, escolaId INTEGER, userId INTEGER, FOREIGN KEY(userId) REFERENCES usuarios(id), FOREIGN KEY(escolaId) REFERENCES escola(id))';
     return this.db.executeSql(sql, []);
   }
 
   createTableAlunos(){
-    let sql = 'CREATE TABLE IF NOT EXISTS alunos(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, turmaId INTEGER, FOREIGN KEY(turmaId) REFERENCES turmas(id))';
+    //let sql = 'DROP TABLE aluno'
+    let sql = 'CREATE TABLE IF NOT EXISTS aluno(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, dataNascimento DATETIME, status TEXT, lastModifiedDate DATETIME, turmaId INTEGER, userId INTEGER, FOREIGN KEY(turmaId) REFERENCES turma(id), FOREIGN KEY(userId) REFERENCES usuarios(id))';
+    return this.db.executeSql(sql, []);
+  }
+
+  createTableFotos(){
+    //let sql = 'DROP TABLE fotos'
+    let sql = 'CREATE TABLE IF NOT EXISTS fotos(id INTEGER PRIMARY KEY AUTOINCREMENT, fotoUrl TEXT, status TEXT, lastModifiedDate DATETIME, alunoId INTEGER, FOREIGN KEY(alunoId) REFERENCES aluno(id))';
     return this.db.executeSql(sql, []);
   }
 
   createTableGrupos(){
-    let sql = 'CREATE TABLE IF NOT EXISTS grupos(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, alunoId1 INTEGER, alunoId2 INTEGER, alunoId3 INTEGER, alunoId4 INTEGER, turmaId INTEGER, FOREIGN KEY(alunoId1) REFERENCES alunos(Id), FOREIGN KEY(alunoId2) REFERENCES alunos(Id), FOREIGN KEY(alunoId3) REFERENCES alunos(Id), FOREIGN KEY(alunoId4) REFERENCES alunos(Id), FOREIGN KEY(turmaId) REFERENCES turmas(id))';
+    //let sql = 'DROP TABLE grupo'
+    let sql = 'CREATE TABLE IF NOT EXISTS grupo(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, status TEXT, lastModifiedDate DATETIME, alunoId1 INTEGER, alunoId2 INTEGER, alunoId3 INTEGER, alunoId4 INTEGER, turmaId INTEGER, userId INTEGER, FOREIGN KEY(userId) REFERENCES usuarios(id), FOREIGN KEY(alunoId1) REFERENCES aluno(id), FOREIGN KEY(alunoId2) REFERENCES aluno(id), FOREIGN KEY(alunoId3) REFERENCES aluno(id), FOREIGN KEY(alunoId4) REFERENCES aluno(id), FOREIGN KEY(turmaId) REFERENCES turma(id))';
     return this.db.executeSql(sql, []);
   }
 
-  createTableAvaliacoes(){
-    //let sql = 'DROP TABLE avaliacoes'
-    let sql = 'CREATE TABLE IF NOT EXISTS avaliacoes(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, date DATETIME, grupoId INTEGER, FOREIGN KEY(grupoId) REFERENCES grupos(id))';
+  createTableAvaliacaoGrupo(){
+    //let sql = 'DROP TABLE avaliacaoGrupo'
+    let sql = 'CREATE TABLE IF NOT EXISTS avaliacaoGrupo(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, status TEXT, createdDate DATETIME, lastModifiedDate DATETIME, userId INTEGER, grupoId INTEGER, FOREIGN KEY(userId) REFERENCES usuarios(id), FOREIGN KEY(grupoId) REFERENCES grupo(id))';
     return this.db.executeSql(sql, []);
   }
 
-  createAvaliacao(avaliacao: any){
-    let sql = 'INSERT INTO avaliacoes(nome, date, grupoId) VALUES(?,?,?)';
+  createTableAvaliacaoAluno(){
+    //let sql = 'DROP TABLE avaliacaoAluno'
+    let sql = 'CREATE TABLE IF NOT EXISTS avaliacaoAluno(id INTEGER PRIMARY KEY AUTOINCREMENT, funcao INTEGER, createdDate DATETIME, status TEXT, lastModifiedDate DATETIME, respostas TEXT, alunoId INTEGER, avaliacaoGrupoId INTEGER, FOREIGN KEY(alunoId) REFERENCES aluno(id), FOREIGN KEY(avaliacaoGrupoId) REFERENCES avaliacaoGrupo(id))';
+    return this.db.executeSql(sql, []);
+  }
+
+  createTableAvaliacao(){
+    //let sql = 'DROP TABLE avaliacao'
+    let sql = 'CREATE TABLE IF NOT EXISTS avaliacao(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, status TEXT, lastModifiedDate DATETIME, userId INTEGER, FOREIGN KEY(userId) REFERENCES usuarios(id))';
+    return this.db.executeSql(sql, []);
+  }
+
+  createTableAvaliacaoPerguntas(){
+    //let sql = 'DROP TABLE avaliacaoPerguntas'
+    let sql = 'CREATE TABLE IF NOT EXISTS avaliacaoPerguntas(id INTEGER PRIMARY KEY AUTOINCREMENT, pergunta TEXT, status TEXT, lastModifiedDate DATETIME, avaliacaoId INTEGER, FOREIGN KEY(avaliacaoId) REFERENCES avaliacao(id))';
+    return this.db.executeSql(sql, []);
+  }
+
+  createTableAvaliacaoRespostas(){
+    //let sql = 'DROP TABLE avaliacaoRespostas'
+    let sql = 'CREATE TABLE IF NOT EXISTS avaliacaoRespostas(id INTEGER PRIMARY KEY AUTOINCREMENT, status TEXT, lastModifiedDate DATETIME, resposta TEXT, perguntaId INTEGER, FOREIGN KEY(perguntaId) REFERENCES avaliacaoPerguntas(Id))';
+    return this.db.executeSql(sql, []);
+  }
+
+  //FIM DA CRIAÇÃO DAS TABELAS
+
+  //INICIO DA INSERÇÃO DE DADOS
+  createAvaliacaoGrupo(avaliacao: any){
+    let sql = 'INSERT INTO avaliacaoGrupo(nome, date, grupoId) VALUES(?,?,?)';
     return this.db.executeSql(sql, [avaliacao.nome, avaliacao.date, avaliacao.grupoId]);
   }
 
@@ -75,12 +124,6 @@ export class DbServiceProvider {
         }
         return Promise.resolve( avaliacoes );
       });
-  }
-
-  createTableAvaliacoesAlunos(){
-    //let sql = 'DROP TABLE avaliacoesAlunos'
-    let sql = 'CREATE TABLE IF NOT EXISTS avaliacoesAlunos(id INTEGER PRIMARY KEY AUTOINCREMENT, date DATETIME, resposta1 TEXT, resposta2 TEXT, resposta3 TEXT, resposta4 TEXT, resposta5 TEXT, funcao INTEGER, alunoId INTEGER, avaliacaoId INTEGER, FOREIGN KEY(alunoId) REFERENCES alunos(Id), FOREIGN KEY(avaliacaoId) REFERENCES avaliacoes(id))';
-    return this.db.executeSql(sql, []);
   }
 
   createAvaliacaoAlunos(avaliacoes: any[]){
@@ -162,23 +205,23 @@ export class DbServiceProvider {
 
   //Inicio CRUD - Table Escolas
 
-  createEscola(escola: any){
-    let sql = 'INSERT INTO escolas(nome) VALUES(?)';
-    return this.db.executeSql(sql, [escola.nome]);
+  insertEscola(escola: EscolasPageModule){
+    let sql = 'INSERT INTO escola(nome, status, lastModifiedDate, userId) VALUES(?,?,?,?)';
+    return this.db.executeSql(sql, [escola.nome, escola.status, escola.lastModifiedDate, escola.userId]);
   }
 
   updateEscola(escola: any){
-    let sql = 'UPDATE escolas SET nome=? WHERE id=?';
-    return this.db.executeSql(sql, [escola.nome, escola.id]);
+    let sql = 'UPDATE escola SET nome=?, status=?, lastModifiedDate=?, userId=? WHERE id=?';
+    return this.db.executeSql(sql, [escola.nome, escola.status, escola.lastModifiedDate, escola.userId, escola.id]);
   }
 
-  deleteEscola(escola: any){
-    let sql = 'DELETE FROM escolas WHERE id=?';
+  deleteEscola(escola: EscolasPageModule){
+    let sql = 'DELETE FROM escola WHERE id=?';
     return this.db.executeSql(sql, [escola.id]);
   }
 
   getEscolaById(id: any){
-    let sql = 'SELECT id, nome FROM escolas WHERE id=?';
+    let sql = 'SELECT id, nome, status, lastModifiedDate, userId FROM escola WHERE id=?';
     return this.db.executeSql(sql, [id])
       .then( response => {
         let escola = [];
@@ -190,7 +233,7 @@ export class DbServiceProvider {
   }
 
   getAllEscolas(){
-    let sql = 'SELECT * FROM escolas';
+    let sql = 'SELECT * FROM escola';
     return this.db.executeSql(sql, [])
       .then(response => {
         let escolas = [];
@@ -207,23 +250,23 @@ export class DbServiceProvider {
 
   //Inicio CRUD - Table Turmas
 
-  createTurma(turma: any){
-    let sql = 'INSERT INTO turmas(nome, escolaId) VALUES(?,?)';
-    return this.db.executeSql(sql, [turma.nome, turma.escolaId]);
+  insertTurma(turma: TurmasPageModule){
+    let sql = 'INSERT INTO turma(nome, status, lastModifiedDate, userId, escolaId) VALUES(?,?,?,?,?)';
+    return this.db.executeSql(sql, [turma.nome, turma.status, turma.lastModifiedDate, turma.userId, turma.escolaId]);
   }
 
   updateTurma(turma: any){
-    let sql = 'UPDATE turmas SET nome=?, escolaId=? WHERE id=?';
-    return this.db.executeSql(sql, [turma.nome, turma.escolaId, turma.id]);
+    let sql = 'UPDATE turma SET nome=?, status=?, lastModifiedDate=?, userId=?, escolaId=? WHERE id=?';
+    return this.db.executeSql(sql, [turma.nome, turma.status, turma.lastModifiedDate, turma.userId, turma.escolaId, turma.id]);
   }
 
-  deleteTurma(turma: any){
-    let sql = 'DELETE FROM turmas WHERE id=?';
+  deleteTurma(turma: TurmasPageModule){
+    let sql = 'DELETE FROM turma WHERE id=?';
     return this.db.executeSql(sql, [turma.id]);
   }
 
   getTurmaById(id: any){
-    let sql = 'SELECT * FROM turmas WHERE id=?';
+    let sql = 'SELECT * FROM turma WHERE id=?';
     return this.db.executeSql(sql, [id])
       .then( response => {
         let turma = [];
@@ -235,7 +278,7 @@ export class DbServiceProvider {
   }
 
   getTurmasByEscolaId(escolaId: any){
-    let sql = 'SELECT * FROM turmas WHERE escolaId=?';
+    let sql = 'SELECT * FROM turma WHERE escolaId=?';
     return this.db.executeSql(sql, [escolaId])
       .then( response => {
         let turmas = [];
@@ -247,7 +290,7 @@ export class DbServiceProvider {
   }
 
   getAllTurmas(){
-    let sql = 'SELECT * FROM turmas';
+    let sql = 'SELECT * FROM turma';
     return this.db.executeSql(sql, [])
       .then(response => {
         let turmas = [];
@@ -263,23 +306,23 @@ export class DbServiceProvider {
 
  //Inicio CRUD - Table Alunos
 
- createAluno(aluno: any){
-   let sql = 'INSERT INTO alunos(nome, turmaId) VALUES(?,?)';
-   return this.db.executeSql(sql, [aluno.nome, aluno.turmaId]);
+ insertAluno(aluno: AlunosPageModule){
+   let sql = 'INSERT INTO aluno(nome, dataNascimento, status, lastModifiedDate, userId, turmaId) VALUES(?,?,?,?,?,?)';
+   return this.db.executeSql(sql, [aluno.nome, aluno.dataNascimento, aluno.status, aluno.lastModifiedDate, aluno.userId, aluno.turmaId]);
  }
 
  updateAluno(aluno: any){
-   let sql = 'UPDATE alunos SET nome=?, turmaId=? WHERE id=?';
-   return this.db.executeSql(sql, [aluno.nome, aluno.turmaId, aluno.id]);
+   let sql = 'UPDATE aluno SET nome=?, dataNascimento=?, status=?, lastModifiedDate=?, userId=?, turmaId=? WHERE id=?';
+   return this.db.executeSql(sql, [aluno.nome, aluno.dataNascimento, aluno.status, aluno.lastModifiedDate, aluno.userId, aluno.turmaId, aluno.id]);
  }
 
- deleteAluno(aluno: any){
-   let sql = 'DELETE FROM alunos WHERE id=?';
+ deleteAluno(aluno: AlunosPageModule){
+   let sql = 'DELETE FROM aluno WHERE id=?';
    return this.db.executeSql(sql, [aluno.id]);
  }
 
  getAlunoById(id: any){
-   let sql = 'SELECT * FROM alunos WHERE id=?';
+   let sql = 'SELECT * FROM aluno WHERE id=?';
    return this.db.executeSql(sql, [id])
      .then( response => {
        let aluno = [];
@@ -291,7 +334,7 @@ export class DbServiceProvider {
  }
 
  getAlunosDoGrupo(alunoId1: any, alunoId2: any, alunoId3: any, alunoId4: any){
-   let sql = 'SELECT * FROM alunos WHERE id=? OR id=? OR id=? OR id=?';
+   let sql = 'SELECT * FROM aluno WHERE id=? OR id=? OR id=? OR id=?';
    return this.db.executeSql(sql, [alunoId1, alunoId2, alunoId3, alunoId4])
      .then( response => {
        let aluno = [];
@@ -303,7 +346,7 @@ export class DbServiceProvider {
  }
 
  getAlunosByTurmaId(turmaId: any){
-   let sql = 'SELECT * FROM alunos WHERE turmaId=?';
+   let sql = 'SELECT * FROM aluno WHERE turmaId=?';
    return this.db.executeSql(sql, [turmaId])
      .then( response => {
        let alunos = [];
@@ -315,7 +358,7 @@ export class DbServiceProvider {
  }
 
  getAlunosByEscola(escolaId: any){
-   let sql = 'SELECT * FROM turmas WHERE escolaId=?'
+   let sql = 'SELECT * FROM turma WHERE escolaId=?'
    return this.db.executeSql(sql, [escolaId])
      .then( response => {
        let turmas = [];
@@ -325,7 +368,7 @@ export class DbServiceProvider {
 
        let alunos = [];
        for (let i = 0; i < turmas.length; i++) {
-         let sqlAlunos = 'SELECT * FROM alunos WHERE turmaId=?'
+         let sqlAlunos = 'SELECT * FROM aluno WHERE turmaId=?'
          this.db.executeSql(sqlAlunos, [turmas[i].id])
           .then (response => {
             for (let index = 0; index < response.rows.length; index++) {
@@ -338,7 +381,7 @@ export class DbServiceProvider {
  }
 
  getAllAlunos(){
-   let sql = 'SELECT * FROM alunos';
+   let sql = 'SELECT * FROM aluno';
    return this.db.executeSql(sql, [])
      .then(response => {
        let alunos = [];
@@ -354,23 +397,23 @@ export class DbServiceProvider {
 
 //Inicio CRUD - Table Grupos
 
-createGrupo(grupo: any){
-  let sql = 'INSERT INTO grupos(nome, alunoId1, alunoId2, alunoId3, alunoId4, turmaId) VALUES(?,?,?,?,?,?)';
-  return this.db.executeSql(sql, [grupo.nome, grupo.alunoId1, grupo.alunoId2, grupo.alunoId3, grupo.alunoId4, grupo.turmaId]);
+insertGrupo(grupo: GruposPageModule){
+  let sql = 'INSERT INTO grupo(nome, status, lastModifiedDate, userId, alunoId1, alunoId2, alunoId3, alunoId4, turmaId) VALUES(?,?,?,?,?,?,?,?,?)';
+  return this.db.executeSql(sql, [grupo.nome, grupo.status, grupo.lastModifiedDate, grupo.userId, grupo.alunoId1, grupo.alunoId2, grupo.alunoId3, grupo.alunoId4, grupo.turmaId]);
 }
 
 updateGrupo(grupo: any){
-  let sql = 'UPDATE grupos SET nome=?, alunoId1=?, alunoId2=?, alunoId3=?, alunoId4=?, turmaId=? WHERE Id=?';
-  return this.db.executeSql(sql, [grupo.nome, grupo.alunoId1, grupo.alunoId2, grupo.alunoId3, grupo.alunoId4, grupo.turmaId, grupo.id]);
+  let sql = 'UPDATE grupo SET nome=?, status=?, lastModifiedDate=?, userId=?, alunoId1=?, alunoId2=?, alunoId3=?, alunoId4=?, turmaId=? WHERE Id=?';
+  return this.db.executeSql(sql, [grupo.nome, grupo.status, grupo.lastModifiedDate, grupo.userId, grupo.alunoId1, grupo.alunoId2, grupo.alunoId3, grupo.alunoId4, grupo.turmaId, grupo.id]);
 }
 
-deleteGrupo(grupo: any){
-  let sql = 'DELETE FROM grupos WHERE id=?';
+deleteGrupo(grupo: GruposPageModule){
+  let sql = 'DELETE FROM grupo WHERE id=?';
   return this.db.executeSql(sql, [grupo.id]);
 }
 
 getAllGrupos(){
-  let sql = 'SELECT * FROM grupos';
+  let sql = 'SELECT * FROM grupo';
   return this.db.executeSql(sql, [])
     .then(response => {
       let grupos = [];
@@ -383,7 +426,7 @@ getAllGrupos(){
 }
 
 getGrupoById(id: any){
-  let sql = 'SELECT * FROM grupos WHERE id=?';
+  let sql = 'SELECT * FROM grupo WHERE id=?';
   return this.db.executeSql(sql, [id])
     .then( response => {
       let grupo = [];
@@ -395,7 +438,7 @@ getGrupoById(id: any){
 }
 
 getGruposByTurmaId(turmaId: any){
-  let sql = 'SELECT * FROM grupos WHERE turmaId=?';
+  let sql = 'SELECT * FROM grupo WHERE turmaId=?';
   return this.db.executeSql(sql, [turmaId])
     .then( response => {
       let grupos = [];
@@ -406,34 +449,8 @@ getGruposByTurmaId(turmaId: any){
     });
 }
 
-/*
-getTesteFuncao(turmaId: any, funcao: any){
-  let sql = 'SELECT * FROM grupos AS G JOIN avaliacoes AS A ON G.id = A.grupoId JOIN avaliacoesAlunos AS av ON av.avaliacaoId = A.id WHERE G.turmaId=? AND avaliacaoId=? AND funcao=?';
-  return this.db.executeSql(sql, [turmaId])
-    .then( response => {
-      let result = [];
-      //let avAlunosByFuncao = [];
-      for (let index = 0; index < response.rows.length; index++) {
-        result.push( response.rows.item(index) );
-      }
-      // for (let i = 0; i < result.length; i++) {
-      //   let sqlAvAlunos = 'SELECT * FROM avaliacoesAlunos WHERE '
-      //   this.db.executeSql(sqlAvAlunos, [result[i].id, funcao])
-      //    .then (response => {
-      //      for (let index = 0; index < response.rows.length; index++) {
-      //        avAlunosByFuncao.push( response.rows.item(index) );
-      //      }
-      //    })
-      // }
-
-      return Promise.resolve( result );
-    })
-}
-*/
-
-
 getGruposByEscola(escolaId: any){
-  let sql = 'SELECT * FROM turmas WHERE escolaId=?'
+  let sql = 'SELECT * FROM turma WHERE escolaId=?'
   return this.db.executeSql(sql, [escolaId])
     .then( response => {
       let turmas = [];
@@ -443,7 +460,7 @@ getGruposByEscola(escolaId: any){
 
       let grupos = [];
       for (let i = 0; i < turmas.length; i++) {
-        let sqlGrupos = 'SELECT * FROM grupos WHERE turmaId=?'
+        let sqlGrupos = 'SELECT * FROM grupo WHERE turmaId=?'
         this.db.executeSql(sqlGrupos, [turmas[i].id])
          .then (response => {
            for (let index = 0; index < response.rows.length; index++) {

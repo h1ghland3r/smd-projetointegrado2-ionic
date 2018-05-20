@@ -13,4 +13,12 @@ import { AlunosPage } from './alunos';
     AlunosPage
   ]
 })
-export class AlunosPageModule {}
+export class AlunosPageModule {
+  id: number;
+  nome: string;
+  dataNascimento: Date;
+  status: string;
+  lastModifiedDate: Date;
+  userId: number;
+  turmaId: number;
+}

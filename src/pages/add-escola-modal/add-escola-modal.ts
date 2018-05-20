@@ -3,6 +3,10 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 
 import { DbServiceProvider } from '../../providers/db-service/db-service';
 
+import { EscolasPageModule } from '../escolas/escolas.module';
+
+import moment from 'moment'
+
 
 /** * Generated class for the AddEscolaModalPage page.
  *
@@ -30,11 +34,14 @@ export class AddEscolaModalPage {
 
 
   public saveEscola(){
-    let escola = {
-      nome: this.nome
-    };
+    var itemDb = new EscolasPageModule();
 
-    this.viewCtrl.dismiss(escola);
+    itemDb.nome = this.nome;
+    itemDb.status = "ADDED";
+    itemDb.userId = 1;
+    itemDb.lastModifiedDate = moment().toDate();
+
+    this.viewCtrl.dismiss(itemDb);
   }
 
   ionViewDidLoad() {
