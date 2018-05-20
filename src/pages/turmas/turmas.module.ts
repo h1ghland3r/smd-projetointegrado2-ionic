@@ -13,4 +13,11 @@ import { TurmasPage } from './turmas';
     TurmasPage
   ]
 })
-export class TurmasPageModule {}
+export class TurmasPageModule {
+  id: number;
+  nome: string;
+  status: string;
+  lastModifiedDate: Date;
+  userId: number;
+  escolaId: number;
+}

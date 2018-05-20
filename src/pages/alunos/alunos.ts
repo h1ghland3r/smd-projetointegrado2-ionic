@@ -6,6 +6,7 @@ import { AddAlunoModalPage } from '../add-aluno-modal/add-aluno-modal';
 import { EditAlunoModalPage } from '../edit-aluno-modal/edit-aluno-modal';
 import { ViewAlunoModalPage } from '../view-aluno-modal/view-aluno-modal';
 
+import { AlunosPageModule } from './alunos.module';
 
 @IonicPage()
 @Component({
@@ -93,7 +94,7 @@ export class AlunosPage {
   }
 
   saveAluno(item){
-    this.dbService.createAluno(item)
+    this.dbService.insertAluno(item)
       .then(response => {
         this.getAllAlunos();
         console.log(this.alunos);
@@ -104,7 +105,17 @@ export class AlunosPage {
   }
 
   public openModalEdit(aluno, index){
-    let obj = {id: aluno.id, nome: aluno.nome, turmaId: aluno.turmaId, index: index};
+    let obj = {
+      id: aluno.id,
+      nome: aluno.nome,
+      dataNascimento: aluno.dataNascimento,
+      status: aluno.status,
+      lastModifiedDate: aluno.lastModifiedDate,
+      userId: aluno.userId,
+      turmaId: aluno.turmaId,
+      index: index
+    };
+    
     var modalPage = this.modalCtrl.create(EditAlunoModalPage, obj);
     modalPage.onDidDismiss((item) => {
       if(item){
@@ -120,6 +131,10 @@ export class AlunosPage {
           console.log( response );
           let aluno = {
             nome: item.nome,
+            dataNascimento: item.dataNascimento,
+            status: item.status,
+            lastModifiedDate: item.lastModifiedDate,
+            userId: item.userId,
             turmaId: item.turmaId
           }
           this.alunos[item.index] = aluno;

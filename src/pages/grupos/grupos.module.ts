@@ -13,4 +13,15 @@ import { GruposPage } from './grupos';
     GruposPage
   ]
 })
-export class GruposPageModule {}
+export class GruposPageModule {
+  id: number;
+  nome: string;
+  status: string;
+  lastModifiedDate: Date;
+  userId: number;
+  turmaId: number;
+  alunoId1: number;
+	alunoId2: number;
+	alunoId3: number;
+	alunoId4: number; 
+}

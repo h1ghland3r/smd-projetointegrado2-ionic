@@ -20,6 +20,11 @@
       </ion-item>
 
       <ion-item class="no-padding-left" margin-vertical>
+        <ion-label>Data de Nascimento</ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="dataNascimento"></ion-datetime>
+      </ion-item>
+
+      <ion-item class="no-padding-left" margin-vertical>
         <ion-label>Escola</ion-label>
         <ion-select [(ngModel)]="escolaId" (ngModelChange)="getTurmasByEscolaId($event)">
           <ion-option *ngFor="let escola of escolas" [value]="escola.id">{{escola.nome}}</ion-option>
