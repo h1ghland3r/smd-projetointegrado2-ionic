@@ -1,10 +1,5 @@
 <ion-header>
   <ion-navbar>
-      <!--<ion-buttons left>
-        <button ion-button icon-left (click)="closeModal()" >
-          <ion-icon name="arrow-back" class="icon-left-side"></ion-icon>
-        </button>
-      </ion-buttons>-->
       <ion-title>Editar escola</ion-title>
       <ion-buttons end>
         <button ion-button (click)="closeModal()">Fechar</button>
@@ -15,12 +10,23 @@
 <ion-content padding>
 
   <ion-list>
-    <div class="border-bottom">
-      <ion-item class="no-padding-left"> 
-        <ion-label>Nome da Escola:</ion-label>
-        <ion-input [(ngModel)]="nome" type="text" text-right>{{nome}}</ion-input>
+    <form [formGroup]="editEscolaForm">
+
+      <p *ngIf="submitAttempt" style="color: #ea6153;">Por favor preencha todos os campos abaixo.</p>
+
+      <div class="border-bottom">
+        <ion-item class="no-padding-left">
+          <ion-label>Nome da Escola:</ion-label>
+          <ion-input formControlName="nome" type="text" text-right>{{nome}}</ion-input>
+        </ion-item>
+      </div>
+
+      <ion-item *ngIf="(errorNome && submitAttempt)">
+        <p>O campo "Nome" é obrigatório.</p>
       </ion-item>
-    </div>
+
+    </form>
+
     <button ion-button color="darkgrey" class="button-top-margin" (click)="saveEscolaEdit()" full>Salvar</button>
 
   </ion-list>

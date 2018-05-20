@@ -6,7 +6,6 @@ import { AddAlunoModalPage } from '../add-aluno-modal/add-aluno-modal';
 import { EditAlunoModalPage } from '../edit-aluno-modal/edit-aluno-modal';
 import { ViewAlunoModalPage } from '../view-aluno-modal/view-aluno-modal';
 
-import { AlunosPageModule } from './alunos.module';
 
 @IonicPage()
 @Component({
@@ -115,7 +114,7 @@ export class AlunosPage {
       turmaId: aluno.turmaId,
       index: index
     };
-    
+
     var modalPage = this.modalCtrl.create(EditAlunoModalPage, obj);
     modalPage.onDidDismiss((item) => {
       if(item){
