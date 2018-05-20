@@ -13,31 +13,55 @@
 <ion-content padding>
 
   <ion-list>
-    <div class="border-bottom">
-      <ion-item class="no-padding-left">
-        <ion-label>Nome do Aluno:</ion-label>
-        <ion-input [(ngModel)]="nome" type="text" text-right></ion-input>
-      </ion-item>
 
-      <ion-item class="no-padding-left" margin-vertical>
-        <ion-label>Data de Nascimento</ion-label>
-        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="dataNascimento"></ion-datetime>
-      </ion-item>
+    <form [formGroup]="editAlunoForm">
 
-      <ion-item class="no-padding-left" margin-vertical>
-        <ion-label>Escola</ion-label>
-        <ion-select [(ngModel)]="escolaId" (ngModelChange)="getTurmasByEscolaId($event)">
-          <ion-option *ngFor="let escola of escolas" [value]="escola.id">{{escola.nome}}</ion-option>
-        </ion-select>
-      </ion-item>
+      <p *ngIf="submitAttempt" style="color: #ea6153;">Por favor preencha todos os campos abaixo.</p>
 
-      <ion-item class="no-padding-left" margin-vertical>
-          <ion-label>Turma</ion-label>
-          <ion-select [(ngModel)]="turmaId">
-            <ion-option *ngFor="let turma of turmas" [value]="turma.id">{{turma.nome}}</ion-option>
+      <div class="border-bottom">
+        <ion-item class="no-padding-left">
+          <ion-label>Nome do Aluno:</ion-label>
+          <ion-input formControlName="nome" type="text" text-right></ion-input>
+        </ion-item>
+
+        <ion-item *ngIf="(errorNome && submitAttempt)">
+          <p>O campo "Nome" é obrigatório.</p>
+        </ion-item>
+
+        <ion-item class="no-padding-left" margin-vertical>
+          <ion-label>Data de Nascimento</ion-label>
+          <ion-datetime displayFormat="DD/MM/YYYY" formControlName="dataNascimento" type="dataNascimento"></ion-datetime>
+        </ion-item>
+
+        <ion-item *ngIf="(errorDataNascimento && submitAttempt)">
+          <p>O campo "Data de Nascimento" é obrigatório.</p>
+        </ion-item>
+
+        <ion-item class="no-padding-left" margin-vertical>
+          <ion-label>Escola</ion-label>
+          <ion-select formControlName="escolaId" type="number" (ngModelChange)="getTurmasByEscolaId($event)">
+            <ion-option *ngFor="let escola of escolas" [value]="escola.id">{{escola.nome}}</ion-option>
           </ion-select>
-      </ion-item>
-    </div>
+        </ion-item>
+
+        <ion-item *ngIf="(errorEscolaId && submitAttempt)">
+          <p>Selecione uma escola.</p>
+        </ion-item>
+
+        <ion-item class="no-padding-left" margin-vertical>
+            <ion-label>Turma</ion-label>
+            <ion-select formControlName="turmaId" type="number">
+              <ion-option *ngFor="let turma of turmas" [value]="turma.id">{{turma.nome}}</ion-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item *ngIf="(errorTurmaId && submitAttempt)">
+          <p>Selecione uma turma.</p>
+        </ion-item>
+
+      </div>
+
+    </form>
 
     <button ion-button color="darkgrey" class="button-top-margin" (click)="saveAlunoEdit()" full>Salvar</button>
 

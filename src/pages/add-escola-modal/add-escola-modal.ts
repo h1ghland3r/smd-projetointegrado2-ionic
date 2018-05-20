@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DbServiceProvider } from '../../providers/db-service/db-service';
 
 import { EscolasPageModule } from '../escolas/escolas.module';
@@ -21,11 +21,20 @@ import moment from 'moment'
 export class AddEscolaModalPage {
 
   nome;
+  addEscolaForm: FormGroup;
+
+  submitAttempt = false;
+  errorNome = false;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              public formBuilder: FormBuilder,
               public dbService: DbServiceProvider,
               public viewCtrl : ViewController) {
+
+              this.addEscolaForm = formBuilder.group({
+                nome: ['', Validators.required],
+              });
   }
 
   public closeModal(){
@@ -34,18 +43,33 @@ export class AddEscolaModalPage {
 
 
   public saveEscola(){
-    var itemDb = new EscolasPageModule();
+    this.errorNome = false;
 
-    itemDb.nome = this.nome;
-    itemDb.status = "ADDED";
-    itemDb.userId = 1;
-    itemDb.lastModifiedDate = moment().toDate();
+    if(this.addEscolaForm.valid){
+      var itemDb = new EscolasPageModule();
 
-    this.viewCtrl.dismiss(itemDb);
+      itemDb.nome = this.addEscolaForm.controls.nome.value;
+      itemDb.status = "ADDED";
+      itemDb.userId = 1;
+      itemDb.lastModifiedDate = moment().toDate();
+
+      this.viewCtrl.dismiss(itemDb);
+    } else {
+      this.submitAttempt = true;
+      this.validarCampos();
+    }
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ModalPage');
+  }
+
+  validarCampos(){
+    if (!this.addEscolaForm.valid) {
+      if (this.addEscolaForm.controls.nome.value == "") {
+        this.errorNome = true;
+      }
+    }
   }
 
 }

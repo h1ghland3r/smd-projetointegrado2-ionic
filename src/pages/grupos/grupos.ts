@@ -6,7 +6,6 @@ import { AddGrupoModalPage } from '../add-grupo-modal/add-grupo-modal';
 import { EditGrupoModalPage } from '../edit-grupo-modal/edit-grupo-modal';
 import { ViewGrupoModalPage } from '../view-grupo-modal/view-grupo-modal';
 
-import { GruposPageModule } from './grupos.module';
 
 @IonicPage()
 @Component({
