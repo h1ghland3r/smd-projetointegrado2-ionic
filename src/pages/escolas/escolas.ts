@@ -6,8 +6,6 @@ import { AddEscolaModalPage } from '../add-escola-modal/add-escola-modal'
 import { EditEscolaModalPage } from '../edit-escola-modal/edit-escola-modal'
 import { ViewEscolaModalPage } from '../view-escola-modal/view-escola-modal'
 
-import { EscolasPageModule } from './escolas.module';
-
 
 
 @IonicPage()

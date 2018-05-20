@@ -1,3 +1,34 @@
-page-edit-aluno-modal {
+
+.ios, .md {
+
+    page-edit-aluno-modal {
+
+        p {
+            font-size: 0.8em;
+            color: #d2d2d2;
+        }
+
+        .swiper-slide {
+            display: block;
+        }
+
+        ion-label, .select-text {
+            margin-left: 10px;
+        }
+
+        ion-input, ion-select, ion-textarea, ion-datetime {
+            background-color: #f2f2f2;
+            padding: 5px 10px;
+        }
+
+        .invalid {
+            border: 1px solid #ea6153;
+        }
+
+    }
+
+    .button-graphic {
+      margin-top: 0 !important;
+    }
 
 }

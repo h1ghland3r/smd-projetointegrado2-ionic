@@ -6,7 +6,6 @@ import { AddTurmaModalPage } from '../add-turma-modal/add-turma-modal'
 import { EditTurmaModalPage } from '../edit-turma-modal/edit-turma-modal'
 import { ViewTurmaModalPage } from '../view-turma-modal/view-turma-modal'
 
-import { TurmasPageModule } from './turmas.module';
 
 @IonicPage()
 @Component({

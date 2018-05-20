@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DbServiceProvider } from '../../providers/db-service/db-service';
-
-import { AlunosPageModule } from '../alunos/alunos.module';
 
 import moment from 'moment'
 /**
@@ -19,11 +17,8 @@ import moment from 'moment'
 })
 export class EditAlunoModalPage {
 
-  nome: string = this.navParams.get('nome');
-  dataNascimento: string = this.navParams.get('dataNascimento');
   id: string = this.navParams.get('id');
   index: string = this.navParams.get('index');
-  turmaId: string = this.navParams.get('turmaId');
   status: string = this.navParams.get('status');
   lastModifiedDate: string = this.navParams.get('lastModifiedDate');
   userId: string = this.navParams.get('userId');
@@ -33,10 +28,26 @@ export class EditAlunoModalPage {
   escolas: any[] = [];
   escolaId;
 
+  editAlunoForm: FormGroup;
+
+  submitAttempt = false;
+  errorNome = false;
+  errorDataNascimento= false;
+  errorTurmaId = false;
+  errorEscolaId = false;
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              public formBuilder: FormBuilder,
               public dbService: DbServiceProvider,
               public viewCtrl : ViewController) {
+
+              this.editAlunoForm = formBuilder.group({
+                nome: [this.navParams.get('nome'), Validators.required],
+                dataNascimento: [this.navParams.get('dataNascimento'), Validators.required],
+                escolaId: [this.escolaId, Validators.required],
+                turmaId: [this.navParams.get('turmaId'), Validators.required],
+              });
   }
 
   public closeModal(){
@@ -44,18 +55,48 @@ export class EditAlunoModalPage {
   }
 
   public saveAlunoEdit(){
-    let aluno = {
-      id: this.id,
-      nome: this.nome,
-      dataNascimento: this.dataNascimento,
-      status: "UPDATED",
-      userId: 1,
-      lastModifiedDate: moment().toDate(),
-      turmaId: this.turmaId,
-      index: this.index
-    };
 
-    this.viewCtrl.dismiss(aluno);
+    this.errorNome = false;
+    this.errorDataNascimento= false;
+    this.errorTurmaId = false;
+    this.errorEscolaId = false;
+
+    if(this.editAlunoForm.valid){
+      let aluno = {
+        index: this.index,
+        id: this.id,
+        nome: this.editAlunoForm.controls.nome.value,
+        dataNascimento: this.editAlunoForm.controls.dataNascimento.value,
+        status: "UPDATED",
+        userId: 1,
+        lastModifiedDate: moment().toDate(),
+        turmaId: this.editAlunoForm.controls.turmaId.value
+      };
+
+      this.viewCtrl.dismiss(aluno);
+
+    } else {
+      this.submitAttempt = true;
+      this.validarCampos();
+    }
+
+  }
+
+  validarCampos(){
+    if (!this.editAlunoForm.valid) {
+      if (this.editAlunoForm.controls.nome.value == "") {
+        this.errorNome = true;
+      }
+      if (this.editAlunoForm.controls.dataNascimento.value == "") {
+        this.errorDataNascimento = true;
+      }
+      if (this.editAlunoForm.controls.turmaId.value == "") {
+        this.errorTurmaId = true;
+      }
+      if (this.editAlunoForm.controls.escolaId.value == "") {
+        this.errorEscolaId = true;
+      }
+    }
   }
 
   getAllEscolas(){
@@ -72,7 +113,7 @@ export class EditAlunoModalPage {
   getEscolaByTurmaId(turmaId){
     this.dbService.getTurmaById(turmaId)
       .then( result => {
-        this.escolaId = result[0].escolaId;
+        this.editAlunoForm.controls['escolaId'].setValue(result[0].escolaId);     
         this.getTurmasByEscolaId(this.escolaId);
       })
   }
@@ -87,7 +128,7 @@ export class EditAlunoModalPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditAlunoModalPage');
     this.getAllEscolas();
-    this.getEscolaByTurmaId(this.turmaId);
+    this.getEscolaByTurmaId(this.editAlunoForm.controls.turmaId.value);
   }
 
 }
