@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SQLite } from '@ionic-native/sqlite';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
@@ -115,6 +116,7 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
   providers: [
     StatusBar,
     SplashScreen,
+    NativePageTransitions,
     SQLite,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DbServiceProvider
