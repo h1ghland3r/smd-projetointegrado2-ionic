@@ -33,10 +33,10 @@
 
             <ion-row class="row-signup">
                 <ion-col col-12 text-center>
-                    <button ion-button color="primary" class="button-actions" type="submit" (click)="abrirHome()">Login</button>
+                    <button ion-button color="primary" class="button-actions" type="submit" (click)="abrirHome()">Entrar</button>
                     <div class="login-signup--action">
-                        <span>Ainda não tem uma conta?</span>
-                        <div>Cadastre-se</div>
+                        <span (click)="openModalSignup()">Ainda não tem uma conta?</span>
+                        <div (click)="openModalSignup()">Cadastre-se</div>
                     </div>
                 </ion-col>
             </ion-row>

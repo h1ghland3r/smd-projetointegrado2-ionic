@@ -4,6 +4,7 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
 import { ModalController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { PasswordPage } from '../password/password';
+import { RegisterPage } from '../register/register'
 
 /**
  * Generated class for the LoginPage page.
@@ -33,6 +34,11 @@ export class LoginPage {
         }
         this.nativePageTransitions.slide(options);
         this.navCtrl.setRoot(HomePage);
+    }
+
+    public openModalSignup() {
+        let modal = this.modalCtrl.create(RegisterPage);
+        modal.present();
     }
 
     public openModalPassword() {
