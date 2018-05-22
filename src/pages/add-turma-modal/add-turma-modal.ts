@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DbServiceProvider } from '../../providers/db-service/db-service';
+
+import { TurmasPageModule } from '../turmas/turmas.module';
+
+import moment from 'moment'
 
 /**
  * Generated class for the AddTurmaModalPage page.
@@ -20,10 +24,22 @@ export class AddTurmaModalPage {
   escolaId;
   escolas: any[] = [];
 
+  addTurmaForm: FormGroup;
+
+  submitAttempt = false;
+  errorNome = false;
+  errorEscolaId = false;
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              public formBuilder: FormBuilder,
               public dbService: DbServiceProvider,
               public viewCtrl : ViewController) {
+
+              this.addTurmaForm = formBuilder.group({
+                  nome: ['', Validators.required],
+                  escolaId: ['', Validators.required],
+              });
   }
 
   public closeModal(){
@@ -42,12 +58,35 @@ export class AddTurmaModalPage {
   }
 
   public saveTurma(){
-    let turma = {
-      nome: this.nome,
-      escolaId: this.escolaId
-    };
+    this.errorNome = false;
+    this.errorEscolaId = false;
 
-    this.viewCtrl.dismiss(turma);
+    if(this.addTurmaForm.valid){
+      var itemDb = new TurmasPageModule();
+
+      itemDb.nome = this.addTurmaForm.controls.nome.value;
+      itemDb.status = "ADDED";
+      itemDb.userId = 1;
+      itemDb.lastModifiedDate = moment().toDate();
+      itemDb.escolaId = this.addTurmaForm.controls.escolaId.value;
+
+      this.viewCtrl.dismiss(itemDb);
+    } else {
+      this.submitAttempt = true;
+      this.validarCampos();
+    }
+
+  }
+
+  validarCampos(){
+    if (!this.addTurmaForm.valid) {
+      if (this.addTurmaForm.controls.nome.value == "") {
+        this.errorNome = true;
+      }
+      if (this.addTurmaForm.controls.escolaId.value == "") {
+        this.errorEscolaId = true;
+      }
+    }
   }
 
   ionViewDidLoad() {

@@ -2,8 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SQLite } from '@ionic-native/sqlite';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
 import { MyApp } from './app.component';
+import { LoginPage } from '../pages/login/login';
+import { PasswordPage } from '../pages/password/password'
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { AvaliacaoPage } from '../pages/avaliacao/avaliacao';
@@ -44,6 +47,8 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
 @NgModule({
   declarations: [
     MyApp,
+    LoginPage,
+    PasswordPage,
     HomePage,
     ListPage,
     AvaliacaoPage,
@@ -80,6 +85,8 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    LoginPage,
+    PasswordPage,
     HomePage,
     ListPage,
     AvaliacaoPage,
@@ -112,6 +119,7 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
   providers: [
     StatusBar,
     SplashScreen,
+    NativePageTransitions,
     SQLite,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DbServiceProvider

@@ -7,7 +7,6 @@ import { EditTurmaModalPage } from '../edit-turma-modal/edit-turma-modal'
 import { ViewTurmaModalPage } from '../view-turma-modal/view-turma-modal'
 
 
-
 @IonicPage()
 @Component({
   selector: 'page-turmas',
@@ -74,7 +73,7 @@ export class TurmasPage {
   }
 
   saveTurma(item){
-    this.dbService.createTurma(item)
+    this.dbService.insertTurma(item)
       .then(response => {
         this.getAllTurmas();
       })
@@ -85,7 +84,7 @@ export class TurmasPage {
 
   public openModalEdit(turma, index){
 
-    let obj = {id: turma.id, nome: turma.nome, escolaId: turma.escolaId, index: index};
+    let obj = {id: turma.id, nome: turma.nome, status: turma.status, lastModifiedDate: turma.lastModifiedDate, userId: turma.userId, escolaId: turma.escolaId, index: index};
     var modalPage = this.modalCtrl.create(EditTurmaModalPage, obj);
     modalPage.onDidDismiss((item) => {
       if(item){
@@ -101,6 +100,9 @@ export class TurmasPage {
           console.log( response );
           let turma = {
             nome: item.nome,
+            status: item.status,
+            lastModifiedDate: item.lastModifiedDate,
+            userId: item.userId,
             escolaId: item.escolaId
           }
           this.turmas[item.index] = turma;

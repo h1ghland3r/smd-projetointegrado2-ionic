@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DbServiceProvider } from '../../providers/db-service/db-service';
+
+import moment from 'moment'
+
 /**
  * Generated class for the EditEscolaModalPage page.
  *
@@ -15,17 +18,26 @@ import { DbServiceProvider } from '../../providers/db-service/db-service';
 })
 export class EditEscolaModalPage {
 
-  nome: string = this.navParams.get('nome');
-  id: string = this.navParams.get('id');
   index: string = this.navParams.get('index');
+  id: string = this.navParams.get('id');
+  status: string = this.navParams.get('status');
+  lastModifiedDate: string = this.navParams.get('lastModifiedDate');
+  userId: string = this.navParams.get('userId');
+
+  editEscolaForm: FormGroup;
+
+  submitAttempt = false;
+  errorNome = false;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              public formBuilder: FormBuilder,
               public dbService: DbServiceProvider,
               public viewCtrl : ViewController) {
 
-        console.log('Nome da Escola: ', this.nome);
-        console.log('Id da Escola: ', this.id);
+        this.editEscolaForm = formBuilder.group({
+          nome: [this.navParams.get('nome'), Validators.required],
+        });
   }
 
   public closeModal(){
@@ -34,13 +46,31 @@ export class EditEscolaModalPage {
 
 
   public saveEscolaEdit(){
-    let escola = {
-      nome: this.nome,
-      id: this.id,
-      index: this.index
-    };
+    this.errorNome = false;
 
-    this.viewCtrl.dismiss(escola);
+    if(this.editEscolaForm.valid){
+      let escola = {
+        id: this.id,
+        index: this.index,
+        nome: this.editEscolaForm.controls.nome.value,
+        status: "UPDATED",
+        userId: 1,
+        lastModifiedDate: moment().toDate()
+      };
+
+      this.viewCtrl.dismiss(escola);
+    } else {
+      this.submitAttempt = true;
+      this.validarCampos();
+    }
+  }
+
+  validarCampos(){
+    if (!this.editEscolaForm.valid) {
+      if (this.editEscolaForm.controls.nome.value == "") {
+        this.errorNome = true;
+      }
+    }
   }
 
   ionViewDidLoad() {

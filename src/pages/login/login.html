@@ -1,0 +1,48 @@
+<ion-content class="login-content" center padding>
+
+    <ion-row class="row-logo">
+        <ion-col col-12 text-center>
+            <img src="../../assets/img/logo.png" class="login-logo" />
+            <!-- <img src="/android_asset/www/assets/img/logo.png" class="login-logo" /> -->
+        </ion-col>
+    </ion-row>
+
+    <div class="login-box">
+        <form>
+            <ion-row>
+                <ion-col col-12 text-center class="form-inputs">
+                    <ion-list>
+
+                        <ion-item no-line margin-bottom class="login-input-wrapper">
+                            <ion-label><ion-icon name="mail" text-center></ion-icon></ion-label>
+                            <ion-input type="text" placeholder="Email" name="email" maxlength="50" required></ion-input>
+                        </ion-item>
+
+                        <ion-item margin-bottom class="login-input-wrapper">
+                            <ion-label><ion-icon name="lock" text-center></ion-icon></ion-label>
+                            <ion-input type="password" placeholder="Senha" name="password" maxlength="30" required></ion-input>
+                        </ion-item>
+
+                        <div text-right class="login-forgot-password-wrapper">
+                            <div class="forgot-password-modal" (click)="openModalPassword()">Esqueceu sua senha?</div>
+                        </div>
+
+                    </ion-list>
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="row-signup">
+                <ion-col col-12 text-center>
+                    <button ion-button color="primary" class="button-actions" type="submit" (click)="abrirHome()">Login</button>
+                    <div class="login-signup--action">
+                        <span>Ainda não tem uma conta?</span>
+                        <div>Cadastre-se</div>
+                    </div>
+                </ion-col>
+            </ion-row>
+
+        </form>
+
+    </div>
+
+</ion-content>

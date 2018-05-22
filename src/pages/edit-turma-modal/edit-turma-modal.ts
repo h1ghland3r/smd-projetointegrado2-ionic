@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DbServiceProvider } from '../../providers/db-service/db-service';
+
+import moment from 'moment'
 /**
  * Generated class for the EditTurmaModalPage page.
  *
@@ -15,17 +17,30 @@ import { DbServiceProvider } from '../../providers/db-service/db-service';
 })
 export class EditTurmaModalPage {
 
-  nome: string = this.navParams.get('nome');
   id: string = this.navParams.get('id');
   index: string = this.navParams.get('index');
-  escolaId: string = this.navParams.get('escolaId');
+  status: string = this.navParams.get('status');
+  lastModifiedDate: string = this.navParams.get('lastModifiedDate');
+  userId: string = this.navParams.get('userId');
 
   escolas: any[] = [];
 
+  editTurmaForm: FormGroup;
+
+  submitAttempt = false;
+  errorNome = false;
+  errorEscolaId = false;
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              public formBuilder: FormBuilder,
               public dbService: DbServiceProvider,
               public viewCtrl : ViewController) {
+
+            this.editTurmaForm = formBuilder.group({
+                nome: [this.navParams.get('nome'), Validators.required],
+                escolaId: [this.navParams.get('escolaId'), Validators.required],
+            });
   }
 
   public closeModal(){
@@ -33,14 +48,36 @@ export class EditTurmaModalPage {
   }
 
   public saveTurmaEdit(){
-    let turma = {
-      id: this.id,
-      nome: this.nome,
-      escolaId: this.escolaId,
-      index: this.index
-    };
+    this.errorNome = false;
+    this.errorEscolaId = false;
 
-    this.viewCtrl.dismiss(turma);
+    if(this.editTurmaForm.valid){
+      let turma = {
+        index: this.index,
+        id: this.id,
+        nome: this.editTurmaForm.controls.nome.value,
+        status: "UPDATED",
+        userId: 1,
+        lastModifiedDate: moment().toDate(),
+        escolaId: this.editTurmaForm.controls.escolaId.value
+      };
+
+      this.viewCtrl.dismiss(turma);
+    } else {
+      this.submitAttempt = true;
+      this.validarCampos();
+    }
+  }
+
+  validarCampos(){
+    if (!this.editTurmaForm.valid) {
+      if (this.editTurmaForm.controls.nome.value == "") {
+        this.errorNome = true;
+      }
+      if (this.editTurmaForm.controls.escolaId.value == "") {
+        this.errorEscolaId = true;
+      }
+    }
   }
 
   getAllEscolas(){

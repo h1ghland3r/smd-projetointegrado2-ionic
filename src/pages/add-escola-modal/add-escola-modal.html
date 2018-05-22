@@ -14,10 +14,20 @@
 
   <ion-list>
 
-  <ion-item class="no-padding-left">
-    <ion-label>Nome da Escola:</ion-label>
-    <ion-input [(ngModel)]="nome" type="text" text-right></ion-input>
-  </ion-item>
+    <form [formGroup]="addEscolaForm">
+
+      <p *ngIf="submitAttempt" style="color: #ea6153;">Por favor preencha todos os campos abaixo.</p>
+
+      <ion-item class="no-padding-left">
+        <ion-label>Nome da Escola*</ion-label>
+        <ion-input formControlName="nome" type="text" text-right></ion-input>
+      </ion-item>
+
+      <ion-item *ngIf="(errorNome && submitAttempt)">
+        <p>O campo "Nome" é obrigatório.</p>
+      </ion-item>
+
+    </form>
 
   <button ion-button color="darkgrey" class="button-top-margin" (click)="saveEscola()" full>Salvar</button>
 
