@@ -3,17 +3,17 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SQLite } from '@ionic-native/sqlite';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { PasswordPage } from '../pages/password/password'
+import { RegisterPage } from '../pages/register/register'
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { AvaliacaoPage } from '../pages/avaliacao/avaliacao';
 import { SobrePage } from '../pages/sobre/sobre';
-
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
 import { EscolasPage } from "../pages/escolas/escolas";
 import { TurmasPage } from "../pages/turmas/turmas";
 import { AlunosPage } from "../pages/alunos/alunos";
@@ -49,6 +49,7 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     MyApp,
     LoginPage,
     PasswordPage,
+    RegisterPage,
     HomePage,
     ListPage,
     AvaliacaoPage,
@@ -87,6 +88,7 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     MyApp,
     LoginPage,
     PasswordPage,
+    RegisterPage,
     HomePage,
     ListPage,
     AvaliacaoPage,

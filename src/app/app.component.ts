@@ -8,6 +8,7 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
 
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
+import { RegisterPage } from '../pages/register/register'
 import { AvaliacaoPage } from '../pages/avaliacao/avaliacao';
 import { CadastrosPage } from '../pages/cadastros/cadastros';
 import { SobrePage } from '../pages/sobre/sobre';
