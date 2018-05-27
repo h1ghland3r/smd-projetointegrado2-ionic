@@ -13,6 +13,8 @@ import { RegisterPage } from '../pages/register/register'
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { AvaliacaoPage } from '../pages/avaliacao/avaliacao';
+import { AvaliacaoComCadastrosPage } from '../pages/avaliacao-com-cadastros/avaliacao-com-cadastros';
+import { AvaliacaoSemCadastrosPage } from '../pages/avaliacao-sem-cadastros/avaliacao-sem-cadastros';
 import { SobrePage } from '../pages/sobre/sobre';
 import { EscolasPage } from "../pages/escolas/escolas";
 import { TurmasPage } from "../pages/turmas/turmas";
@@ -53,6 +55,8 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     HomePage,
     ListPage,
     AvaliacaoPage,
+    AvaliacaoComCadastrosPage,
+    AvaliacaoSemCadastrosPage,
     EscolasPage,
     TurmasPage,
     AlunosPage,
@@ -92,6 +96,8 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     HomePage,
     ListPage,
     AvaliacaoPage,
+    AvaliacaoComCadastrosPage,
+    AvaliacaoSemCadastrosPage,
     EscolasPage,
     TurmasPage,
     AlunosPage,
