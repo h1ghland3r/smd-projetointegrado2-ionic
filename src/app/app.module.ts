@@ -36,8 +36,6 @@ import { EditTurmaModalPage } from '../pages/edit-turma-modal/edit-turma-modal';
 import { EditAlunoModalPage } from '../pages/edit-aluno-modal/edit-aluno-modal';
 import { EditGrupoModalPage } from '../pages/edit-grupo-modal/edit-grupo-modal';
 
-import { ViewEscolaModalPage } from '../pages/view-escola-modal/view-escola-modal'
-import { ViewTurmaModalPage } from '../pages/view-turma-modal/view-turma-modal';
 import { ViewAlunoModalPage } from '../pages/view-aluno-modal/view-aluno-modal';
 import { ViewGrupoModalPage } from '../pages/view-grupo-modal/view-grupo-modal';
 import { ViewAvaliacoesModalPage } from '../pages/view-avaliacoes-modal/view-avaliacoes-modal';
@@ -74,8 +72,6 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     EditTurmaModalPage,
     EditAlunoModalPage,
     EditGrupoModalPage,
-    ViewEscolaModalPage,
-    ViewTurmaModalPage,
     ViewAlunoModalPage,
     ViewGrupoModalPage,
     ViewAvaliacoesModalPage,
@@ -115,8 +111,6 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     EditTurmaModalPage,
     EditAlunoModalPage,
     EditGrupoModalPage,
-    ViewEscolaModalPage,
-    ViewTurmaModalPage,
     ViewAlunoModalPage,
     ViewGrupoModalPage,
     ViewAvaliacoesModalPage,

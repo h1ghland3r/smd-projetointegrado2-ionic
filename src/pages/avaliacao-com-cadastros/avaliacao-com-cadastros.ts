@@ -623,7 +623,7 @@ export class AvaliacaoComCadastrosPage {
       status: Status.added,
       funcao: TipoAluno.construtor,
       alunoId: this.slideConstrutorForm.value.alunoConstrutor,
-      avaliacaoId: this.avaliacao.id,
+      avaliacaoGrupoId: this.avaliacao.id,
       respostas: this.slideConstrutorQst1Form.value.construtorResposta1 + ";" +
                  this.slideConstrutorQst2Form.value.construtorResposta2 + ";" +
                  this.slideConstrutorQst3Form.value.construtorResposta3 + ";" +
@@ -636,8 +636,8 @@ export class AvaliacaoComCadastrosPage {
       lastModifiedDate: new Date().toISOString(),
       status: Status.added,
       funcao: TipoAluno.organizador,
-      alunoId: this.slideConstrutorForm.value.alunoOrganizador,
-      avaliacaoId: this.avaliacao.id,
+      alunoId: this.slideOrganizadorForm.value.alunoOrganizador,
+      avaliacaoGrupoId: this.avaliacao.id,
       respostas: this.slideOrganizadorQst1Form.value.organizadorResposta1 + ";" +
                  this.slideOrganizadorQst2Form.value.organizadorResposta2 + ";" +
                  this.slideOrganizadorQst3Form.value.organizadorResposta3 + ";" +
@@ -651,7 +651,7 @@ export class AvaliacaoComCadastrosPage {
       status: Status.added,
       funcao: TipoAluno.programador,
       alunoId: this.slideProgramadorForm.value.alunoProgramador,
-      avaliacaoId: this.avaliacao.id,
+      avaliacaoGrupoId: this.avaliacao.id,
       respostas: this.slideProgramadorQst1Form.value.programadorResposta1 + ";" +
                  this.slideProgramadorQst2Form.value.programadorResposta2 + ";" +
                  this.slideProgramadorQst3Form.value.programadorResposta3 + ";" +

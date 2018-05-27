@@ -151,7 +151,7 @@ export class DbServiceProvider {
   }
 
   getAvAlunosByAvaliacaoId(avaliacaoId: any){
-    let sql = 'SELECT * FROM avaliacaoAluno WHERE avaliacaoId=?';
+    let sql = 'SELECT * FROM avaliacaoAluno WHERE avaliacaoGrupoId=?';
     return this.db.executeSql(sql, [avaliacaoId])
       .then( response => {
         let avAlunos = [];
@@ -471,7 +471,7 @@ export class DbServiceProvider {
         return Promise.resolve( grupos );
       });
   }
-  
+
 //Fim CRUD - Table Grupos
 
 }
