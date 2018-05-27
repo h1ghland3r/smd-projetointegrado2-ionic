@@ -18,10 +18,12 @@ import { ViewAvaliacoesGraficoPage } from '../view-avaliacoes-grafico/view-avali
 })
 export class ViewAvaliacoesModalPage {
 
-  nome: string = this.navParams.get('nome');
   id: string = this.navParams.get('id');
   index: string = this.navParams.get('index');
-  date: string = this.navParams.get('date');
+  nome: string = this.navParams.get('nome');
+  createdDate: string = this.navParams.get('createdDate');
+  status: string = this.navParams.get('status');
+  lastModifiedDate: string = this.navParams.get('lastModifiedDate');
   grupoId: string = this.navParams.get('grupoId');
 
   avAlunos: any[] = [];
@@ -31,14 +33,20 @@ export class ViewAvaliacoesModalPage {
   turmaNome;
   escolaNome;
   grupoNome;
-
-
+  statusNome;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public dbService: DbServiceProvider,
               public viewCtrl : ViewController,
               public modalCtrl : ModalController) {
+
+        if(this.status == "1" || this.status == "2"){
+          this.statusNome = "Não sincronizado"
+        }
+        else if(this.status == "3"){
+          this.statusNome = "Sincronizado"
+        }
   }
 
   public closeModal(){
@@ -55,18 +63,19 @@ export class ViewAvaliacoesModalPage {
   public openModalView(avaliacaoAluno, index){
 
     let obj = {
+      index: index,
       id: avaliacaoAluno.id,
       funcao: avaliacaoAluno.funcao,
+      funcaoNome: avaliacaoAluno.funcaoNome,
+      status: avaliacaoAluno.status,
       alunoId: avaliacaoAluno.alunoId,
+      createdDate: avaliacaoAluno.date,
       resposta1: avaliacaoAluno.resposta1,
       resposta2: avaliacaoAluno.resposta2,
       resposta3: avaliacaoAluno.resposta3,
       resposta4: avaliacaoAluno.resposta4,
       resposta5: avaliacaoAluno.resposta5,
-      date: avaliacaoAluno.date,
-      alunoNome: avaliacaoAluno.alunoNome,
-      funcaoNome: avaliacaoAluno.funcaoNome,
-      index: index
+      alunoNome: avaliacaoAluno.alunoNome
     };
     var modalPage = this.modalCtrl.create(ViewAvaliacaoAlunoModalPage, obj);
 
@@ -118,20 +127,24 @@ export class ViewAvaliacoesModalPage {
   }
 
   avaliacoesComNomes(avaliacaoAluno){
+    let respostas = avaliacaoAluno.respostas.split(';');
+
     console.log(avaliacaoAluno);
     let avaliacao = {
-      id: avaliacaoAluno.id,
-      funcao: avaliacaoAluno.funcao,
-      alunoId: avaliacaoAluno.alunoId,
-      resposta1: avaliacaoAluno.resposta1,
-      resposta2: avaliacaoAluno.resposta2,
-      resposta3: avaliacaoAluno.resposta3,
-      resposta4: avaliacaoAluno.resposta4,
-      resposta5: avaliacaoAluno.resposta5,
-      date: avaliacaoAluno.date,
-      alunoNome: '',
-      funcaoNome: ''
+        id: avaliacaoAluno.id,
+        funcao: avaliacaoAluno.funcao,
+        funcaoNome: '',
+        status: avaliacaoAluno.status,
+        alunoId: avaliacaoAluno.alunoId,
+        createdDate: avaliacaoAluno.createdDate,
+        resposta1: respostas[0],
+        resposta2: respostas[1],
+        resposta3: respostas[2],
+        resposta4: respostas[3],
+        resposta5: respostas[4],
+        alunoNome: ''
     }
+
     this.dbService.getAlunoById(avaliacao.alunoId)
       .then( response => {
         console.log(response);

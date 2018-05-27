@@ -1,0 +1,62 @@
+<!--
+  Generated template for the RegisterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-buttons start>
+            <button ion-button block (click)="closeModal()">
+                <ion-icon name="close"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>Cadastro</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <div class="signup-box">
+        <form>
+            <ion-row>
+                <ion-col col-12 text-center class="form-inputs">
+                    <ion-list>
+
+                        <ion-item no-line margin-bottom class="signup-input-wrapper">
+                            <ion-label><ion-icon name="person" text-center></ion-icon></ion-label>
+                            <ion-input type="text" placeholder="Nome" name="name" maxlength="70" required></ion-input>
+                        </ion-item>
+
+                        <ion-item no-line margin-bottom class="signup-input-wrapper">
+                            <ion-label><ion-icon name="mail" text-center></ion-icon></ion-label>
+                            <ion-input type="text" placeholder="Email" name="email" maxlength="50" required></ion-input>
+                        </ion-item>
+
+                        <ion-item margin-bottom class="signup-input-wrapper">
+                            <ion-label><ion-icon name="lock" text-center></ion-icon></ion-label>
+                            <ion-input type="password" placeholder="Senha" name="password" maxlength="30" required></ion-input>
+                        </ion-item>
+
+                        <div class="signup-password-description">
+                            Use pelo menos seis (6) dígitos.
+                        </div>
+
+                    </ion-list>
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="row-signup">
+                <ion-col col-12 text-center>
+                    <button ion-button color="primary" class="button-actions" type="submit">Cadastrar</button>
+                </ion-col>
+            </ion-row>
+
+        </form>
+
+    </div>
+
+</ion-content>

@@ -1,0 +1,44 @@
+page-register {
+    ion-header ion-icon {
+        font-size: 2em;
+    }
+
+    .signup-box {
+        position: relative; 
+        padding-top: 30px;
+        .form-inputs {
+            .signup-input-wrapper {
+                border: 0;
+                padding: 0;
+            }
+            .icon {
+                text-align: center;
+                min-width: 24px;
+                font-size: 1.75em;
+                color: color($colors, primary, base);
+            }
+            .item-input ion-label {
+                margin: 0;
+            }
+            input {
+                border-bottom: 1px solid color($colors, primary, base);
+                padding: 5px 0;
+                color: color($colors, primary, base);
+            }
+        }
+        .signup-password-description {
+            color: #666;
+            margin-top: -10px;
+            padding-right: 12px;
+            font-size: 0.8em;
+            text-align: right;
+            width: 100%;
+        }
+        .button-actions {
+            height: 3.2em;
+        }
+        .row-signup {
+            padding-top: 5%;
+        }
+    }
+}

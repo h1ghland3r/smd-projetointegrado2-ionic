@@ -3,16 +3,19 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SQLite } from '@ionic-native/sqlite';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
+import { PasswordPage } from '../pages/password/password'
+import { RegisterPage } from '../pages/register/register'
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { AvaliacaoPage } from '../pages/avaliacao/avaliacao';
+import { AvaliacaoComCadastrosPage } from '../pages/avaliacao-com-cadastros/avaliacao-com-cadastros';
+import { AvaliacaoSemCadastrosPage } from '../pages/avaliacao-sem-cadastros/avaliacao-sem-cadastros';
 import { SobrePage } from '../pages/sobre/sobre';
-
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
 import { EscolasPage } from "../pages/escolas/escolas";
 import { TurmasPage } from "../pages/turmas/turmas";
 import { AlunosPage } from "../pages/alunos/alunos";
@@ -33,8 +36,6 @@ import { EditTurmaModalPage } from '../pages/edit-turma-modal/edit-turma-modal';
 import { EditAlunoModalPage } from '../pages/edit-aluno-modal/edit-aluno-modal';
 import { EditGrupoModalPage } from '../pages/edit-grupo-modal/edit-grupo-modal';
 
-import { ViewEscolaModalPage } from '../pages/view-escola-modal/view-escola-modal'
-import { ViewTurmaModalPage } from '../pages/view-turma-modal/view-turma-modal';
 import { ViewAlunoModalPage } from '../pages/view-aluno-modal/view-aluno-modal';
 import { ViewGrupoModalPage } from '../pages/view-grupo-modal/view-grupo-modal';
 import { ViewAvaliacoesModalPage } from '../pages/view-avaliacoes-modal/view-avaliacoes-modal';
@@ -47,9 +48,13 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
   declarations: [
     MyApp,
     LoginPage,
+    PasswordPage,
+    RegisterPage,
     HomePage,
     ListPage,
     AvaliacaoPage,
+    AvaliacaoComCadastrosPage,
+    AvaliacaoSemCadastrosPage,
     EscolasPage,
     TurmasPage,
     AlunosPage,
@@ -67,8 +72,6 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     EditTurmaModalPage,
     EditAlunoModalPage,
     EditGrupoModalPage,
-    ViewEscolaModalPage,
-    ViewTurmaModalPage,
     ViewAlunoModalPage,
     ViewGrupoModalPage,
     ViewAvaliacoesModalPage,
@@ -84,9 +87,13 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
   entryComponents: [
     MyApp,
     LoginPage,
+    PasswordPage,
+    RegisterPage,
     HomePage,
     ListPage,
     AvaliacaoPage,
+    AvaliacaoComCadastrosPage,
+    AvaliacaoSemCadastrosPage,
     EscolasPage,
     TurmasPage,
     AlunosPage,
@@ -104,8 +111,6 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     EditTurmaModalPage,
     EditAlunoModalPage,
     EditGrupoModalPage,
-    ViewEscolaModalPage,
-    ViewTurmaModalPage,
     ViewAlunoModalPage,
     ViewGrupoModalPage,
     ViewAvaliacoesModalPage,
