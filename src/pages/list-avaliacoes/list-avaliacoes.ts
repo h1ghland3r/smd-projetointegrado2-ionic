@@ -16,7 +16,7 @@ import { ViewAvaliacoesModalPage } from '../view-avaliacoes-modal/view-avaliacoe
   selector: 'page-list-avaliacoes',
   templateUrl: 'list-avaliacoes.html',
 })
-export class ListAvaliacoesPage {
+  export class ListAvaliacoesPage {
 
   avaliacoes: any[] = [];
 
@@ -105,7 +105,16 @@ export class ListAvaliacoesPage {
 
   public openModalView(avaliacao, index){
 
-    let obj = {id: avaliacao.id, nome: avaliacao.nome, date: avaliacao.date, grupoId: avaliacao.grupoId, index: index};
+    let obj = {
+      index: index,
+      id: avaliacao.id,
+      nome: avaliacao.nome,
+      createdDate: avaliacao.createdDate,
+      status: avaliacao.status,
+      lastModifiedDate: avaliacao.lastModifiedDate,
+      grupoId: avaliacao.grupoId
+    }
+
     var modalPage = this.modalCtrl.create(ViewAvaliacoesModalPage, obj);
 
     modalPage.present();

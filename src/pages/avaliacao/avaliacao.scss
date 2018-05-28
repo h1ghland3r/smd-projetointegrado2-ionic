@@ -10,14 +10,14 @@ ion-slide {
 }
 
 .top-registered-user {
-    display: none;
+    //display: none;
 }
 
 .top-new-user {
-    display: none;
+    //display: none;
 }
 
-.top-registered-user, 
+.top-registered-user,
 .top-new-user {
     background: #ececec;
     margin: -30px -15px 0 -15px;
@@ -98,9 +98,9 @@ h5.subtitle-note {
 }
 
 .progressbar {
-  
+
   margin: 20px 0;
-  
+
   .bar1 {
       display: inline-block;
       position: relative;
@@ -168,7 +168,7 @@ h5.subtitle-note {
         margin-left: -2px;
       }
     }
-  
+
   .bar3 {
       display: inline-block;
       position: relative;
@@ -202,7 +202,7 @@ h5.subtitle-note {
 	margin-top: -5px;
     margin-left: -2px;
   }
-  
+
   .bar4 {
       display: inline-block;
       position: relative;
@@ -236,7 +236,7 @@ h5.subtitle-note {
 	margin-top: -5px;
     margin-left: -2px;
   }
-  
+
 }
 
 .legenda-progresso {

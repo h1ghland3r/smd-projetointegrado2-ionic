@@ -96,13 +96,13 @@ export class DbServiceProvider {
   //FIM DA CRIAÇÃO DAS TABELAS
 
   //INICIO DA INSERÇÃO DE DADOS
-  createAvaliacaoGrupo(avaliacao: any){
-    let sql = 'INSERT INTO avaliacaoGrupo(nome, date, grupoId) VALUES(?,?,?)';
-    return this.db.executeSql(sql, [avaliacao.nome, avaliacao.date, avaliacao.grupoId]);
+  insertAvaliacaoGrupo(avaliacao: any){
+    let sql = 'INSERT INTO avaliacaoGrupo(nome, createdDate, status, lastModifiedDate, userId, grupoId) VALUES(?,?,?,?,?,?)';
+    return this.db.executeSql(sql, [avaliacao.nome, avaliacao.createdDate, avaliacao.status, avaliacao.lastModifiedDate, avaliacao.userId, avaliacao.grupoId]);
   }
 
   getAllAvaliacoes(){
-    let sql = 'SELECT * FROM avaliacoes';
+    let sql = 'SELECT * FROM avaliacaoGrupo';
     return this.db.executeSql(sql, [])
       .then(response => {
         let avaliacoes = [];
@@ -115,7 +115,7 @@ export class DbServiceProvider {
   }
 
   getAvaliacaoById(id: any){
-    let sql = 'SELECT * FROM avaliacoes WHERE id=?';
+    let sql = 'SELECT * FROM avaliacaoGrupo WHERE id=?';
     return this.db.executeSql(sql, [id])
       .then( response => {
         let avaliacoes = [];
@@ -126,19 +126,19 @@ export class DbServiceProvider {
       });
   }
 
-  createAvaliacaoAlunos(avaliacoes: any[]){
+  insertAvaliacaoAlunos(avaliacoes: any[]){
     for (let index = 0; index < avaliacoes.length; index++) {
-      let sql = 'INSERT INTO avaliacoesAlunos(date, resposta1, resposta2, resposta3, resposta4, resposta5, funcao, alunoId, avaliacaoId) VALUES(?,?,?,?,?,?,?,?,?)';
+      let sql = 'INSERT INTO avaliacaoAluno(createdDate, funcao, status, lastModifiedDate, respostas, alunoId, avaliacaoGrupoId) VALUES(?,?,?,?,?,?,?)';
       if(index == avaliacoes.length-1){
-        return this.db.executeSql(sql, [avaliacoes[index].date, avaliacoes[index].resposta1, avaliacoes[index].resposta2, avaliacoes[index].resposta3, avaliacoes[index].resposta4, avaliacoes[index].resposta5, avaliacoes[index].funcao, avaliacoes[index].alunoId, avaliacoes[index].avaliacaoId]);
+        return this.db.executeSql(sql, [avaliacoes[index].createdDate, avaliacoes[index].funcao, avaliacoes[index].status, avaliacoes[index].lastModifiedDate, avaliacoes[index].respostas, avaliacoes[index].alunoId, avaliacoes[index].avaliacaoGrupoId]);
       }else{
-        this.db.executeSql(sql, [avaliacoes[index].date, avaliacoes[index].resposta1, avaliacoes[index].resposta2, avaliacoes[index].resposta3, avaliacoes[index].resposta4, avaliacoes[index].resposta5, avaliacoes[index].funcao, avaliacoes[index].alunoId, avaliacoes[index].avaliacaoId]);
+        this.db.executeSql(sql, [avaliacoes[index].createdDate, avaliacoes[index].funcao, avaliacoes[index].status, avaliacoes[index].lastModifiedDate, avaliacoes[index].respostas, avaliacoes[index].alunoId, avaliacoes[index].avaliacaoGrupoId]);
       }
     }
   }
 
   getAllAvaliacoesAlunos(){
-    let sql = 'SELECT * FROM avaliacoesAlunos';
+    let sql = 'SELECT * FROM avaliacaoAluno';
     return this.db.executeSql(sql, [])
       .then(response => {
         let avaliacoes = [];
@@ -151,7 +151,7 @@ export class DbServiceProvider {
   }
 
   getAvAlunosByAvaliacaoId(avaliacaoId: any){
-    let sql = 'SELECT * FROM avaliacoesAlunos WHERE avaliacaoId=?';
+    let sql = 'SELECT * FROM avaliacaoAluno WHERE avaliacaoGrupoId=?';
     return this.db.executeSql(sql, [avaliacaoId])
       .then( response => {
         let avAlunos = [];
@@ -164,7 +164,7 @@ export class DbServiceProvider {
   }
 
   getAvAlunosByAlunoId(alunoId: any){
-    let sql = 'SELECT * FROM avaliacoesAlunos WHERE alunoId=?';
+    let sql = 'SELECT * FROM avaliacaoAluno WHERE alunoId=?';
     return this.db.executeSql(sql, [alunoId])
       .then( response => {
         let avAlunos = [];
@@ -177,7 +177,7 @@ export class DbServiceProvider {
   }
 
   getAvAlunosByFuncao(funcao: any){
-    let sql = 'SELECT * FROM avaliacoesAlunos WHERE funcao=?';
+    let sql = 'SELECT * FROM avaliacaoAluno WHERE funcao=?';
     return this.db.executeSql(sql, [funcao])
       .then( response => {
         let avAlunos = [];
@@ -191,7 +191,7 @@ export class DbServiceProvider {
 
 
   getAvaliacoesByGrupoId(grupoId: any){
-    let sql = 'SELECT * FROM avaliacoes WHERE grupoId=?';
+    let sql = 'SELECT * FROM avaliacaoGrupo WHERE grupoId=?';
     return this.db.executeSql(sql, [grupoId])
       .then( response => {
         let avaliacoes = [];
@@ -306,171 +306,172 @@ export class DbServiceProvider {
 
  //Inicio CRUD - Table Alunos
 
- insertAluno(aluno: AlunosPageModule){
-   let sql = 'INSERT INTO aluno(nome, dataNascimento, status, lastModifiedDate, userId, turmaId) VALUES(?,?,?,?,?,?)';
-   return this.db.executeSql(sql, [aluno.nome, aluno.dataNascimento, aluno.status, aluno.lastModifiedDate, aluno.userId, aluno.turmaId]);
- }
+   insertAluno(aluno: AlunosPageModule){
+     let sql = 'INSERT INTO aluno(nome, dataNascimento, status, lastModifiedDate, userId, turmaId) VALUES(?,?,?,?,?,?)';
+     return this.db.executeSql(sql, [aluno.nome, aluno.dataNascimento, aluno.status, aluno.lastModifiedDate, aluno.userId, aluno.turmaId]);
+   }
 
- updateAluno(aluno: any){
-   let sql = 'UPDATE aluno SET nome=?, dataNascimento=?, status=?, lastModifiedDate=?, userId=?, turmaId=? WHERE id=?';
-   return this.db.executeSql(sql, [aluno.nome, aluno.dataNascimento, aluno.status, aluno.lastModifiedDate, aluno.userId, aluno.turmaId, aluno.id]);
- }
+   updateAluno(aluno: any){
+     let sql = 'UPDATE aluno SET nome=?, dataNascimento=?, status=?, lastModifiedDate=?, userId=?, turmaId=? WHERE id=?';
+     return this.db.executeSql(sql, [aluno.nome, aluno.dataNascimento, aluno.status, aluno.lastModifiedDate, aluno.userId, aluno.turmaId, aluno.id]);
+   }
 
- deleteAluno(aluno: AlunosPageModule){
-   let sql = 'DELETE FROM aluno WHERE id=?';
-   return this.db.executeSql(sql, [aluno.id]);
- }
+   deleteAluno(aluno: AlunosPageModule){
+     let sql = 'DELETE FROM aluno WHERE id=?';
+     return this.db.executeSql(sql, [aluno.id]);
+   }
 
- getAlunoById(id: any){
-   let sql = 'SELECT * FROM aluno WHERE id=?';
-   return this.db.executeSql(sql, [id])
-     .then( response => {
-       let aluno = [];
-       for (let index = 0; index < response.rows.length; index++) {
-         aluno.push( response.rows.item(index) );
-       }
-       return Promise.resolve( aluno );
-     });
- }
+   getAlunoById(id: any){
+     let sql = 'SELECT * FROM aluno WHERE id=?';
+     return this.db.executeSql(sql, [id])
+       .then( response => {
+         let aluno = [];
+         for (let index = 0; index < response.rows.length; index++) {
+           aluno.push( response.rows.item(index) );
+         }
+         return Promise.resolve( aluno );
+       });
+   }
 
- getAlunosDoGrupo(alunoId1: any, alunoId2: any, alunoId3: any, alunoId4: any){
-   let sql = 'SELECT * FROM aluno WHERE id=? OR id=? OR id=? OR id=?';
-   return this.db.executeSql(sql, [alunoId1, alunoId2, alunoId3, alunoId4])
-     .then( response => {
-       let aluno = [];
-       for (let index = 0; index < response.rows.length; index++) {
-         aluno.push( response.rows.item(index) );
-       }
-       return Promise.resolve( aluno );
-     });
- }
+   getAlunosDoGrupo(alunoId1: any, alunoId2: any, alunoId3: any, alunoId4: any){
+     let sql = 'SELECT * FROM aluno WHERE id=? OR id=? OR id=? OR id=?';
+     return this.db.executeSql(sql, [alunoId1, alunoId2, alunoId3, alunoId4])
+       .then( response => {
+         let aluno = [];
+         for (let index = 0; index < response.rows.length; index++) {
+           aluno.push( response.rows.item(index) );
+         }
+         return Promise.resolve( aluno );
+       });
+   }
 
- getAlunosByTurmaId(turmaId: any){
-   let sql = 'SELECT * FROM aluno WHERE turmaId=?';
-   return this.db.executeSql(sql, [turmaId])
-     .then( response => {
-       let alunos = [];
-       for (let index = 0; index < response.rows.length; index++) {
-         alunos.push( response.rows.item(index) );
-       }
-       return Promise.resolve( alunos );
-     });
- }
+   getAlunosByTurmaId(turmaId: any){
+     let sql = 'SELECT * FROM aluno WHERE turmaId=?';
+     return this.db.executeSql(sql, [turmaId])
+       .then( response => {
+         let alunos = [];
+         for (let index = 0; index < response.rows.length; index++) {
+           alunos.push( response.rows.item(index) );
+         }
+         return Promise.resolve( alunos );
+       });
+   }
 
- getAlunosByEscola(escolaId: any){
-   let sql = 'SELECT * FROM turma WHERE escolaId=?'
-   return this.db.executeSql(sql, [escolaId])
-     .then( response => {
-       let turmas = [];
-       for (let index = 0; index < response.rows.length; index++) {
-         turmas.push( response.rows.item(index) );
-       }
+   getAlunosByEscola(escolaId: any){
+     let sql = 'SELECT * FROM turma WHERE escolaId=?'
+     return this.db.executeSql(sql, [escolaId])
+       .then( response => {
+         let turmas = [];
+         for (let index = 0; index < response.rows.length; index++) {
+           turmas.push( response.rows.item(index) );
+         }
 
-       let alunos = [];
-       for (let i = 0; i < turmas.length; i++) {
-         let sqlAlunos = 'SELECT * FROM aluno WHERE turmaId=?'
-         this.db.executeSql(sqlAlunos, [turmas[i].id])
-          .then (response => {
-            for (let index = 0; index < response.rows.length; index++) {
-              alunos.push( response.rows.item(index) );
-            }
-          })
-       }
-       return Promise.resolve( alunos );
-     });
- }
+         let alunos = [];
+         for (let i = 0; i < turmas.length; i++) {
+           let sqlAlunos = 'SELECT * FROM aluno WHERE turmaId=?'
+           this.db.executeSql(sqlAlunos, [turmas[i].id])
+            .then (response => {
+              for (let index = 0; index < response.rows.length; index++) {
+                alunos.push( response.rows.item(index) );
+              }
+            })
+         }
+         return Promise.resolve( alunos );
+       });
+   }
 
- getAllAlunos(){
-   let sql = 'SELECT * FROM aluno';
-   return this.db.executeSql(sql, [])
-     .then(response => {
-       let alunos = [];
-       for (let index = 0; index < response.rows.length; index++) {
-         alunos.push( response.rows.item(index) );
-       }
-       return Promise.resolve( alunos );
-     })
-     .catch(error => Promise.reject(error));
- }
+   getAllAlunos(){
+     let sql = 'SELECT * FROM aluno';
+     return this.db.executeSql(sql, [])
+       .then(response => {
+         let alunos = [];
+         for (let index = 0; index < response.rows.length; index++) {
+           alunos.push( response.rows.item(index) );
+         }
+         return Promise.resolve( alunos );
+       })
+       .catch(error => Promise.reject(error));
+   }
 
 //Fim CRUD - Table Alunos
 
 //Inicio CRUD - Table Grupos
 
-insertGrupo(grupo: GruposPageModule){
-  let sql = 'INSERT INTO grupo(nome, status, lastModifiedDate, userId, alunoId1, alunoId2, alunoId3, alunoId4, turmaId) VALUES(?,?,?,?,?,?,?,?,?)';
-  return this.db.executeSql(sql, [grupo.nome, grupo.status, grupo.lastModifiedDate, grupo.userId, grupo.alunoId1, grupo.alunoId2, grupo.alunoId3, grupo.alunoId4, grupo.turmaId]);
-}
+  insertGrupo(grupo: GruposPageModule){
+    let sql = 'INSERT INTO grupo(nome, status, lastModifiedDate, userId, alunoId1, alunoId2, alunoId3, alunoId4, turmaId) VALUES(?,?,?,?,?,?,?,?,?)';
+    return this.db.executeSql(sql, [grupo.nome, grupo.status, grupo.lastModifiedDate, grupo.userId, grupo.alunoId1, grupo.alunoId2, grupo.alunoId3, grupo.alunoId4, grupo.turmaId]);
+  }
 
-updateGrupo(grupo: any){
-  let sql = 'UPDATE grupo SET nome=?, status=?, lastModifiedDate=?, userId=?, alunoId1=?, alunoId2=?, alunoId3=?, alunoId4=?, turmaId=? WHERE Id=?';
-  return this.db.executeSql(sql, [grupo.nome, grupo.status, grupo.lastModifiedDate, grupo.userId, grupo.alunoId1, grupo.alunoId2, grupo.alunoId3, grupo.alunoId4, grupo.turmaId, grupo.id]);
-}
+  updateGrupo(grupo: any){
+    let sql = 'UPDATE grupo SET nome=?, status=?, lastModifiedDate=?, userId=?, alunoId1=?, alunoId2=?, alunoId3=?, alunoId4=?, turmaId=? WHERE Id=?';
+    return this.db.executeSql(sql, [grupo.nome, grupo.status, grupo.lastModifiedDate, grupo.userId, grupo.alunoId1, grupo.alunoId2, grupo.alunoId3, grupo.alunoId4, grupo.turmaId, grupo.id]);
+  }
 
-deleteGrupo(grupo: GruposPageModule){
-  let sql = 'DELETE FROM grupo WHERE id=?';
-  return this.db.executeSql(sql, [grupo.id]);
-}
+  deleteGrupo(grupo: GruposPageModule){
+    let sql = 'DELETE FROM grupo WHERE id=?';
+    return this.db.executeSql(sql, [grupo.id]);
+  }
 
-getAllGrupos(){
-  let sql = 'SELECT * FROM grupo';
-  return this.db.executeSql(sql, [])
-    .then(response => {
-      let grupos = [];
-      for (let index = 0; index < response.rows.length; index++) {
-        grupos.push( response.rows.item(index) );
-      }
-      return Promise.resolve( grupos );
-    })
-    .catch(error => Promise.reject(error));
-}
+  getAllGrupos(){
+    let sql = 'SELECT * FROM grupo';
+    return this.db.executeSql(sql, [])
+      .then(response => {
+        let grupos = [];
+        for (let index = 0; index < response.rows.length; index++) {
+          grupos.push( response.rows.item(index) );
+        }
+        return Promise.resolve( grupos );
+      })
+      .catch(error => Promise.reject(error));
+  }
 
-getGrupoById(id: any){
-  let sql = 'SELECT * FROM grupo WHERE id=?';
-  return this.db.executeSql(sql, [id])
-    .then( response => {
-      let grupo = [];
-      for (let index = 0; index < response.rows.length; index++) {
-        grupo.push( response.rows.item(index) );
-      }
-      return Promise.resolve( grupo );
-    });
-}
+  getGrupoById(id: any){
+    let sql = 'SELECT * FROM grupo WHERE id=?';
+    return this.db.executeSql(sql, [id])
+      .then( response => {
+        let grupo = [];
+        for (let index = 0; index < response.rows.length; index++) {
+          grupo.push( response.rows.item(index) );
+        }
+        return Promise.resolve( grupo );
+      });
+  }
 
-getGruposByTurmaId(turmaId: any){
-  let sql = 'SELECT * FROM grupo WHERE turmaId=?';
-  return this.db.executeSql(sql, [turmaId])
-    .then( response => {
-      let grupos = [];
-      for (let index = 0; index < response.rows.length; index++) {
-        grupos.push( response.rows.item(index) );
-      }
-      return Promise.resolve( grupos );
-    });
-}
+  getGruposByTurmaId(turmaId: any){
+    let sql = 'SELECT * FROM grupo WHERE turmaId=?';
+    return this.db.executeSql(sql, [turmaId])
+      .then( response => {
+        let grupos = [];
+        for (let index = 0; index < response.rows.length; index++) {
+          grupos.push( response.rows.item(index) );
+        }
+        return Promise.resolve( grupos );
+      });
+  }
 
-getGruposByEscola(escolaId: any){
-  let sql = 'SELECT * FROM turma WHERE escolaId=?'
-  return this.db.executeSql(sql, [escolaId])
-    .then( response => {
-      let turmas = [];
-      for (let index = 0; index < response.rows.length; index++) {
-        turmas.push( response.rows.item(index) );
-      }
+  getGruposByEscola(escolaId: any){
+    let sql = 'SELECT * FROM turma WHERE escolaId=?'
+    return this.db.executeSql(sql, [escolaId])
+      .then( response => {
+        let turmas = [];
+        for (let index = 0; index < response.rows.length; index++) {
+          turmas.push( response.rows.item(index) );
+        }
 
-      let grupos = [];
-      for (let i = 0; i < turmas.length; i++) {
-        let sqlGrupos = 'SELECT * FROM grupo WHERE turmaId=?'
-        this.db.executeSql(sqlGrupos, [turmas[i].id])
-         .then (response => {
-           for (let index = 0; index < response.rows.length; index++) {
-             grupos.push( response.rows.item(index) );
-           }
-         })
-      }
-      return Promise.resolve( grupos );
-    });
-}
+        let grupos = [];
+        for (let i = 0; i < turmas.length; i++) {
+          let sqlGrupos = 'SELECT * FROM grupo WHERE turmaId=?'
+          this.db.executeSql(sqlGrupos, [turmas[i].id])
+           .then (response => {
+             for (let index = 0; index < response.rows.length; index++) {
+               grupos.push( response.rows.item(index) );
+             }
+           })
+        }
+        return Promise.resolve( grupos );
+      });
+  }
+
 //Fim CRUD - Table Grupos
 
 }

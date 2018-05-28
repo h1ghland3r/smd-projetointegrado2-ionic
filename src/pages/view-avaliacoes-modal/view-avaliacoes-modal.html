@@ -19,7 +19,7 @@
     <ion-card-content>
       <ion-item>
         <ion-label>Data da avaliação:</ion-label>
-        <ion-input [readonly]="true" [(ngModel)]="date" type="text">{{date}}</ion-input>
+        <ion-input [readonly]="true" [(ngModel)]="createdDate" type="text">{{createdDate}}</ion-input>
       </ion-item>
 
       <ion-item>
@@ -35,6 +35,11 @@
       <ion-item>
         <ion-label>Grupo:</ion-label>
         <ion-input [readonly]="true" [(ngModel)]="grupoNome" type="text">{{grupoNome}}</ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Status:</ion-label>
+        <ion-input [readonly]="true" [(ngModel)]="statusNome" type="text">{{statusNome}}</ion-input>
       </ion-item>
     </ion-card-content>
   </ion-card>

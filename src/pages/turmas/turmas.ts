@@ -4,7 +4,6 @@ import { IonicPage, NavController, AlertController, ModalController } from 'ioni
 import { DbServiceProvider } from '../../providers/db-service/db-service';
 import { AddTurmaModalPage } from '../add-turma-modal/add-turma-modal'
 import { EditTurmaModalPage } from '../edit-turma-modal/edit-turma-modal'
-import { ViewTurmaModalPage } from '../view-turma-modal/view-turma-modal'
 
 
 @IonicPage()
@@ -110,14 +109,6 @@ export class TurmasPage {
         .catch( error => {
           console.error( error );
         })
-  }
-
-  public openModalView(turma, index){
-
-    let obj = {id: turma.id, nome: turma.nome, escolaId: turma.escolaId, index: index};
-    var modalPage = this.modalCtrl.create(ViewTurmaModalPage, obj);
-
-    modalPage.present();
   }
 
   public getAllTurmas(){
