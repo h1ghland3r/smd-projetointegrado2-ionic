@@ -13,6 +13,8 @@ import { RegisterPage } from '../pages/register/register'
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { AvaliacaoPage } from '../pages/avaliacao/avaliacao';
+import { AvaliacaoComCadastrosPage } from '../pages/avaliacao-com-cadastros/avaliacao-com-cadastros';
+import { AvaliacaoSemCadastrosPage } from '../pages/avaliacao-sem-cadastros/avaliacao-sem-cadastros';
 import { SobrePage } from '../pages/sobre/sobre';
 import { EscolasPage } from "../pages/escolas/escolas";
 import { TurmasPage } from "../pages/turmas/turmas";
@@ -34,8 +36,6 @@ import { EditTurmaModalPage } from '../pages/edit-turma-modal/edit-turma-modal';
 import { EditAlunoModalPage } from '../pages/edit-aluno-modal/edit-aluno-modal';
 import { EditGrupoModalPage } from '../pages/edit-grupo-modal/edit-grupo-modal';
 
-import { ViewEscolaModalPage } from '../pages/view-escola-modal/view-escola-modal'
-import { ViewTurmaModalPage } from '../pages/view-turma-modal/view-turma-modal';
 import { ViewAlunoModalPage } from '../pages/view-aluno-modal/view-aluno-modal';
 import { ViewGrupoModalPage } from '../pages/view-grupo-modal/view-grupo-modal';
 import { ViewAvaliacoesModalPage } from '../pages/view-avaliacoes-modal/view-avaliacoes-modal';
@@ -53,6 +53,8 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     HomePage,
     ListPage,
     AvaliacaoPage,
+    AvaliacaoComCadastrosPage,
+    AvaliacaoSemCadastrosPage,
     EscolasPage,
     TurmasPage,
     AlunosPage,
@@ -70,8 +72,6 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     EditTurmaModalPage,
     EditAlunoModalPage,
     EditGrupoModalPage,
-    ViewEscolaModalPage,
-    ViewTurmaModalPage,
     ViewAlunoModalPage,
     ViewGrupoModalPage,
     ViewAvaliacoesModalPage,
@@ -92,6 +92,8 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     HomePage,
     ListPage,
     AvaliacaoPage,
+    AvaliacaoComCadastrosPage,
+    AvaliacaoSemCadastrosPage,
     EscolasPage,
     TurmasPage,
     AlunosPage,
@@ -109,8 +111,6 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     EditTurmaModalPage,
     EditAlunoModalPage,
     EditGrupoModalPage,
-    ViewEscolaModalPage,
-    ViewTurmaModalPage,
     ViewAlunoModalPage,
     ViewGrupoModalPage,
     ViewAvaliacoesModalPage,

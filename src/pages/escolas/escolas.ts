@@ -4,7 +4,6 @@ import { IonicPage, NavController, AlertController, ModalController } from 'ioni
 import { DbServiceProvider } from '../../providers/db-service/db-service';
 import { AddEscolaModalPage } from '../add-escola-modal/add-escola-modal'
 import { EditEscolaModalPage } from '../edit-escola-modal/edit-escola-modal'
-import { ViewEscolaModalPage } from '../view-escola-modal/view-escola-modal'
 
 
 
@@ -79,14 +78,6 @@ export class EscolasPage {
         .catch( error => {
           console.error( error );
         })
-  }
-
-  public openModalView(escola, index){
-
-    let obj = {id: escola.id, nome: escola.nome, index: index};
-    var modalPage = this.modalCtrl.create(ViewEscolaModalPage, obj);
-
-    modalPage.present();
   }
 
   public getAllEscolas(){
