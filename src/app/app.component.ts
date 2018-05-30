@@ -114,6 +114,10 @@ export class MyApp {
     this.nav.push(page.component);
   }
 
+  logoutApp() {
+    this.nav.setRoot(LoginPage);
+  }
+
   private createDatabase(){
     this.sqlite.create({
       name: 'data.db',

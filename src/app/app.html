@@ -1,19 +1,39 @@
 <ion-menu [content]="content" persistent="true">
-  <ion-header>
-    <ion-toolbar>
-      <img src="/android_asset/www/assets/img/logo.png" class="logo-menu" />
-      <ion-title class="menu-header">SARE</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-header>
+        <ion-toolbar>
+            <img src="/android_asset/www/assets/img/logo.png" class="logo-menu" />
+            <!-- <img src="../../assets/img/logo.png" class="logo-menu" /> -->
+            <div class="toolbar-header-wrapper">
+                <ion-title class="menu-header">SARE</ion-title>
+                <div class="toolbar-logout" (click)="logoutApp()">
+                    <span class="menu_item_icon">
+                        <ion-icon name="exit" item-left></ion-icon>
+                    </span>
+                    <span class="menu_item_title" menuClose>Sair</span>
+                </div>
+            </div>
+        </ion-toolbar>
+    </ion-header>
 
-  <ion-content>
-    <ion-list>
-      <button [ngClass]="p.class" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" class="menu-list-background">
-        <span class="menu_item_icon"><ion-icon [name]="p.icon" item-left></ion-icon></span>
-        <span class="menu_item_title">{{p.title}}</span>
-      </button>
-    </ion-list>
-  </ion-content>
+    <ion-content>
+        <ion-list class="menu-actions-options">
+            <button [ngClass]="p.class" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" class="menu-list-background">
+                <span class="menu_item_icon">
+                    <ion-icon [name]="p.icon" item-left></ion-icon>
+                </span>
+                <span class="menu_item_title">{{p.title}}</span>
+            </button>
+        </ion-list>
+
+        <ion-list class="menu-item-sync">
+            <button menuClose ion-item class="menu-list-background">
+                <span class="menu_item_icon">
+                    <ion-icon name="sync" item-left></ion-icon>
+                </span>
+                <span class="menu_item_title">Sincronizar</span>
+            </button>
+        </ion-list>
+    </ion-content>
 
 </ion-menu>
 
