@@ -17,1347 +17,1409 @@
 
   <ion-slides #avaliacaoSlider>
 
-      <!--Construtor--> <!-- Slide 1 -->
+    <!--Construtor-->
+    <!-- Slide 1 -->
 
-      <ion-slide padding>
+    <ion-slide padding>
 
-        <ion-list no-lines>
+      <ion-list no-lines>
 
-          <!-- Ambos os metodos tem display NONE como default, precisa inserir uma
-            condicao dependendo do botao selecionado na pagina anterior setar
-            display BLOCK em uma das divs 'top-registed-user' ou 'top-new-user' -->
+        <!-- Metodo tradicional -->
+        <div *ngIf="tipoAvaliacao == 1" class="top-registered-user">
+          <ion-label margin-vertical color="black">
+            <ion-avatar class="user-details">
+              <img src="assets/img/avatar-sare.png" class="avatar-student" />
+              <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+              <span class="avatar-name">{{alunoContrutorNome}}</span>
+              <div class="button-right-action">
+                <button ion-button color="primary" (click)="alertAlunosList(1)">Escolher aluno(a)</button>
+              </div>
+            </ion-avatar>
+          </ion-label>
+        </div>
 
-          <!-- Metodo tradicional -->
-          <div *ngIf= "tipoAvaliacao == 1" class="top-registered-user">
-              <ion-label margin-vertical color="black">
-                <ion-avatar class="user-details">
-                  <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                  <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
-                  <span class="avatar-name">{{alunoContrutorNome}}</span>
-                  <div class="button-right-action">
-                      <button ion-button color="primary" (click)="alertAlunosList(1)">Escolher aluno(a)</button>
-                    </div>
-                </ion-avatar>
-              </ion-label>
-          </div>
+        <!-- Inicio rapido
+        <div *ngIf="tipoAvaliacao == 2" class="top-new-user">
+          <ion-label margin-vertical color="black">
+            <ion-avatar class="user-details">
+              <img src="assets/img/avatar-sare.png" class="avatar-student" />
+              <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" />
+              <span class="avatar-name">Aluno(a) construtor(a)</span>
+              <div class="button-right-action">
+                <button ion-button color="primary">Cadastrar Nome</button>
+              </div>
+            </ion-avatar>
+          </ion-label>
+        </div>
+        -->
+        
+        <!-- Questao -->
+        <div class="question-wrapper">
+          <ion-label margin-vertical color="black">
+            <h4 class="subtitle">
+              1ª Etapa:
+              <strong>Construtor</strong>
+            </h4>
+            <div class="progressbar">
+              <div class="bar1 active">
+                <span class="legenda-progresso">1ª</span>
+              </div>
+              <div class="bar2">
+                <span class="legenda-progresso">2ª</span>
+              </div>
+              <div class="bar3">
+                <span class="legenda-progresso">3ª</span>
+              </div>
+              <div class="bar4">
+                <span class="legenda-progresso">4ª</span>
+              </div>
+            </div>
+          </ion-label>
+        </div>
 
-          <!-- Inicio rapido -->
-          <div *ngIf= "tipoAvaliacao == 2" class="top-new-user">
-              <ion-label margin-vertical color="black">
-                  <ion-avatar class="user-details">
-                    <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                    <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
-                    <span class="avatar-name">Aluno(a) construtor(a)</span>
-                    <div class="button-right-action">
-                      <button ion-button color="primary">Cadastrar Nome</button>
-                    </div>
-                  </ion-avatar>
-              </ion-label>
-          </div>
+        <form [formGroup]="slideConstrutorQst1Form">
 
-          <!-- Questao -->
-          <div class="question-wrapper">
+          <ion-card margin-vertical>
+            <ion-card-header>
+              <ion-item>
+                <button ion-button icon-only item-right clear>
+                  <!--<ion-icon name="md-help"></ion-icon>-->
+                </button>
+                <span class="question-title">1. Interpretou corretamente as instruções do manual?</span>
+              </ion-item>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-list radio-group formControlName="construtorResposta1" [(ngModel)]="construtorResposta1">
+                <ion-item text-wrap>
+                  <ion-label>Não</ion-label>
+                  <ion-radio item-left value="nao"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Insuficiente</ion-label>
+                  <ion-radio item-left value="insuficiente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Parcialmente</ion-label>
+                  <ion-radio item-left value="parcialmente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio item-left value="sim"></ion-radio>
+                </ion-item>
+              </ion-list>
+
+              <button ion-button color="primary" class="button-top-margin" [disabled]="slideConstrutorQst1Form.invalid" (click)="next()"
+                full>Avançar</button>
+
+            </ion-card-content>
+          </ion-card>
+
+        </form>
+
+      </ion-list>
+
+    </ion-slide>
+
+
+    <ion-slide padding>
+      <!-- Slide 2 -->
+
+      <ion-list no-lines>
+
+        <div *ngIf="tipoAvaliacao == 1" class="top-registered-user">
             <ion-label margin-vertical color="black">
-                <h4 class="subtitle">
-                    1ª Etapa: <strong>Construtor</strong>
-                </h4>
-                <div class="progressbar">
-                    <div class="bar1 active"><span class="legenda-progresso">1ª</span></div>
-                    <div class="bar2"><span class="legenda-progresso">2ª</span></div>
-                    <div class="bar3"><span class="legenda-progresso">3ª</span></div>
-                    <div class="bar4"><span class="legenda-progresso">4ª</span></div>
-                </div>
+            <ion-avatar class="user-details">
+                <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                <span class="avatar-name">{{alunoContrutorNome}}</span>
+                <span class="current-category">Construtor</span>
+            </ion-avatar>
             </ion-label>
-          </div>
+        </div>
 
-            <form [formGroup]="slideConstrutorQst1Form">
+        <form [formGroup]="slideConstrutorQst2Form">
 
-                <ion-card margin-vertical>
-                  <ion-card-header>
-                    <ion-item>
-                      <button ion-button icon-only item-right clear>
-                        <!--<ion-icon name="md-help"></ion-icon>-->
-                      </button>
-                      <span class="question-title">1. Interpretou corretamente as instruções do manual?</span>
-                    </ion-item>
-                  </ion-card-header>
+          <ion-card margin-vertical>
+            <ion-card-header>
+              <ion-item>
+                <button ion-button icon-only item-right clear>
+                  <!--<ion-icon name="md-help"></ion-icon>-->
+                </button>
+                <span class="question-title">2. Seguiu a sequência das instruções de montagem?</span>
+              </ion-item>
+            </ion-card-header>
 
-                  <ion-card-content>
-                    <ion-list radio-group formControlName="construtorResposta1" [(ngModel)]="construtorResposta1">
-                      <ion-item text-wrap>
-                        <ion-label>Não</ion-label>
-                        <ion-radio item-left value="nao"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Insuficiente</ion-label>
-                        <ion-radio item-left value="insuficiente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Parcialmente</ion-label>
-                        <ion-radio item-left value="parcialmente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Sim</ion-label>
-                        <ion-radio item-left value="sim"></ion-radio>
-                      </ion-item>
-                    </ion-list>
+            <ion-card-content>
+              <ion-list radio-group formControlName="construtorResposta2" [(ngModel)]="construtorResposta2">
+                <ion-item text-wrap>
+                  <ion-label>Não</ion-label>
+                  <ion-radio item-left value="nao"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Insuficiente</ion-label>
+                  <ion-radio item-left value="insuficiente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Parcialmente</ion-label>
+                  <ion-radio item-left value="parcialmente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio item-left value="sim"></ion-radio>
+                </ion-item>
+              </ion-list>
 
-                    <button ion-button color="primary" class="button-top-margin" [disabled]="slideConstrutorQst1Form.invalid" (click)="next()" full>Avançar</button>
+              <button ion-button color="primary" class="button-top-margin" [disabled]="slideConstrutorQst2Form.invalid" (click)="next()"
+                full>Avançar</button>
+            </ion-card-content>
+          </ion-card>
 
-                  </ion-card-content>
-                </ion-card>
+        </form>
 
-            </form>
+      </ion-list>
 
-        </ion-list>
+    </ion-slide>
 
-      </ion-slide>
+    <ion-slide padding>
+      <!-- Slide 3 -->
 
+      <ion-list no-lines>
 
-      <ion-slide padding> <!-- Slide 2 -->
+        <div *ngIf="tipoAvaliacao == 1" class="top-registered-user">
+            <ion-label margin-vertical color="black">
+            <ion-avatar class="user-details">
+                <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                <span class="avatar-name">{{alunoContrutorNome}}</span>
+                <span class="current-category">Construtor</span>
+            </ion-avatar>
+            </ion-label>
+        </div>
 
-        <ion-list no-lines>
+        <form [formGroup]="slideConstrutorQst3Form">
 
-            <form [formGroup]="slideConstrutorQst2Form">
+          <ion-card margin-vertical>
+            <ion-card-header>
+              <ion-item>
+                <button ion-button icon-only item-right clear>
+                  <!--<ion-icon name="md-help"></ion-icon>-->
+                </button>
+                <span class="question-title">3. Conferiu as peças recebidas?</span>
+              </ion-item>
+            </ion-card-header>
 
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/img/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoContrutorNome}}</span>
-                  </ion-avatar>
-                </ion-label>
+            <ion-card-content>
+              <ion-list radio-group formControlName="construtorResposta3" [(ngModel)]="construtorResposta3">
+                <ion-item text-wrap>
+                  <ion-label>Não</ion-label>
+                  <ion-radio item-left value="nao"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Insuficiente</ion-label>
+                  <ion-radio item-left value="insuficiente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Parcialmente</ion-label>
+                  <ion-radio item-left value="parcialmente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio item-left value="sim"></ion-radio>
+                </ion-item>
+              </ion-list>
 
+              <button ion-button color="primary" class="button-top-margin" [disabled]="slideConstrutorQst3Form.invalid" (click)="next()"
+                full>Avançar</button>
 
-                <ion-card margin-vertical>
-                  <ion-card-header>
-                    <ion-item>
-                      <button ion-button icon-only item-right clear>
-                        <!--<ion-icon name="md-help"></ion-icon>-->
-                      </button>
-                      <span class="question-title">2. Seguiu a sequência das instruções de montagem?</span>
-                    </ion-item>
-                  </ion-card-header>
+            </ion-card-content>
+          </ion-card>
 
-                  <ion-card-content>
-                    <ion-list radio-group formControlName="construtorResposta2" [(ngModel)]="construtorResposta2">
-                      <ion-item text-wrap>
-                        <ion-label>Não</ion-label>
-                        <ion-radio item-left value="nao"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Insuficiente</ion-label>
-                        <ion-radio item-left value="insuficiente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Parcialmente</ion-label>
-                        <ion-radio item-left value="parcialmente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Sim</ion-label>
-                        <ion-radio item-left value="sim"></ion-radio>
-                      </ion-item>
-                    </ion-list>
+        </form>
 
-                    <button ion-button color="primary" class="button-top-margin" [disabled]="slideConstrutorQst2Form.invalid" (click)="next()" full>Avançar</button>
-                  </ion-card-content>
-                </ion-card>
+      </ion-list>
 
-            </form>
+    </ion-slide>
 
-        </ion-list>
+    <ion-slide padding>
+      <!-- Slide 4 -->
 
-      </ion-slide>
+      <ion-list no-lines>
 
-      <ion-slide padding> <!-- Slide 3 -->
-
-        <ion-list no-lines>
-
-            <form [formGroup]="slideConstrutorQst3Form">
-
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/img/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoContrutorNome}}</span>
-                  </ion-avatar>
-                </ion-label>
-
-
-                <ion-card margin-vertical>
-                  <ion-card-header>
-                    <ion-item>
-                      <button ion-button icon-only item-right clear>
-                        <!--<ion-icon name="md-help"></ion-icon>-->
-                      </button>
-                      <span class="question-title">3. Conferiu as peças recebidas?</span>
-                    </ion-item>
-                  </ion-card-header>
-
-                  <ion-card-content>
-                    <ion-list radio-group formControlName="construtorResposta3" [(ngModel)]="construtorResposta3">
-                      <ion-item text-wrap>
-                        <ion-label>Não</ion-label>
-                        <ion-radio item-left value="nao"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Insuficiente</ion-label>
-                        <ion-radio item-left value="insuficiente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Parcialmente</ion-label>
-                        <ion-radio item-left value="parcialmente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Sim</ion-label>
-                        <ion-radio item-left value="sim"></ion-radio>
-                      </ion-item>
-                    </ion-list>
-
-                    <button ion-button color="primary" class="button-top-margin" [disabled]="slideConstrutorQst3Form.invalid" (click)="next()" full>Avançar</button>
-
-                  </ion-card-content>
-                </ion-card>
-
-            </form>
-
-        </ion-list>
-
-      </ion-slide>
-
-      <ion-slide padding> <!-- Slide 4 -->
-
-        <ion-list no-lines>
-
-            <form [formGroup]="slideConstrutorQst4Form">
-
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/img/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoContrutorNome}}</span>
-                  </ion-avatar>
-                </ion-label>
-
-
-                <ion-card margin-vertical>
-                  <ion-card-header>
-                    <ion-item>
-                      <button ion-button icon-only item-right clear>
-                        <!--<ion-icon name="md-help"></ion-icon>-->
-                      </button>
-                      <span class="question-title">4. Seguiu a instrução de posicionamento das peças durante a montagem?</span>
-                    </ion-item>
-                  </ion-card-header>
-
-                  <ion-card-content>
-                    <ion-list radio-group formControlName="construtorResposta4" [(ngModel)]="construtorResposta4">
-                      <ion-item text-wrap>
-                        <ion-label>Não</ion-label>
-                        <ion-radio item-left value="nao"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Insuficiente</ion-label>
-                        <ion-radio item-left value="insuficiente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Parcialmente</ion-label>
-                        <ion-radio item-left value="parcialmente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Sim</ion-label>
-                        <ion-radio item-left value="sim"></ion-radio>
-                      </ion-item>
-                    </ion-list>
-
-                    <button ion-button color="primary" class="button-top-margin" [disabled]="slideConstrutorQst4Form.invalid" (click)="next()" full>Avançar</button>
-
-                  </ion-card-content>
-                </ion-card>
-
-            </form>
-
-        </ion-list>
-
-      </ion-slide>
-
-      <ion-slide padding> <!-- Slide 5 -->
-
-        <ion-list no-lines>
-
-            <form [formGroup]="slideConstrutorQst5Form">
-
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/img/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoContrutorNome}}</span>
-                  </ion-avatar>
-                </ion-label>
-
-
-                <ion-card margin-vertical>
-                  <ion-card-header>
-                    <ion-item>
-                      <button ion-button icon-only item-right clear>
-                        <!--<ion-icon name="md-help"></ion-icon>-->
-                      </button>
-                      <span class="question-title">5. Revisou as instruções anteriores em caso de erro?</span>
-                    </ion-item>
-                  </ion-card-header>
-
-                  <ion-card-content>
-                    <ion-list radio-group formControlName="construtorResposta5" [(ngModel)]="construtorResposta5">
-                      <ion-item text-wrap>
-                        <ion-label>Não</ion-label>
-                        <ion-radio item-left value="nao"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Insuficiente</ion-label>
-                        <ion-radio item-left value="insuficiente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Parcialmente</ion-label>
-                        <ion-radio item-left value="parcialmente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Sim</ion-label>
-                        <ion-radio item-left value="sim"></ion-radio>
-                      </ion-item>
-                    </ion-list>
-
-                    <button ion-button color="primary" class="button-top-margin" [disabled]="slideConstrutorQst5Form.invalid" (click)="next()" full>Concluir etapa</button>
-
-                  </ion-card-content>
-                </ion-card>
-
-            </form>
-
-        </ion-list>
-
-      </ion-slide>
-
-      <!--Organizador--> <!-- Slide 6 -->
-
-      <ion-slide padding>
-
-        <ion-list no-lines>
-
-          <!-- Metodo tradicional -->
-          <div *ngIf= "tipoAvaliacao == 1" class="top-registered-user">
-              <ion-label margin-vertical color="black">
+        <div *ngIf="tipoAvaliacao == 1" class="top-registered-user">
+            <ion-label margin-vertical color="black">
                 <ion-avatar class="user-details">
-                  <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                  <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
-                  <span class="avatar-name">{{alunoOrganizadorNome}}</span>
-                  <div class="button-right-action">
-                      <button ion-button color="primary" (click)="alertAlunosList(2)">Escolher aluno(a)</button>
-                    </div>
+                <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                <span class="avatar-name">{{alunoContrutorNome}}</span>
+                <span class="current-category">Construtor</span>
                 </ion-avatar>
-              </ion-label>
-          </div>
+            </ion-label>
+        </div>
 
+        <form [formGroup]="slideConstrutorQst4Form">
+
+          <ion-card margin-vertical>
+            <ion-card-header>
+              <ion-item>
+                <button ion-button icon-only item-right clear>
+                  <!--<ion-icon name="md-help"></ion-icon>-->
+                </button>
+                <span class="question-title">4. Seguiu a instrução de posicionamento das peças durante a montagem?</span>
+              </ion-item>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-list radio-group formControlName="construtorResposta4" [(ngModel)]="construtorResposta4">
+                <ion-item text-wrap>
+                  <ion-label>Não</ion-label>
+                  <ion-radio item-left value="nao"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Insuficiente</ion-label>
+                  <ion-radio item-left value="insuficiente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Parcialmente</ion-label>
+                  <ion-radio item-left value="parcialmente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio item-left value="sim"></ion-radio>
+                </ion-item>
+              </ion-list>
+
+              <button ion-button color="primary" class="button-top-margin" [disabled]="slideConstrutorQst4Form.invalid" (click)="next()"
+                full>Avançar</button>
+
+            </ion-card-content>
+          </ion-card>
+
+        </form>
+
+      </ion-list>
+
+    </ion-slide>
+
+    <ion-slide padding>
+      <!-- Slide 5 -->
+
+      <ion-list no-lines>
+
+        <div *ngIf="tipoAvaliacao == 1" class="top-registered-user">
+            <ion-label margin-vertical color="black">
+            <ion-avatar class="user-details">
+                <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                <span class="avatar-name">{{alunoContrutorNome}}</span>
+                <span class="current-category">Construtor</span>
+            </ion-avatar>
+            </ion-label>
+        </div>
+
+        <form [formGroup]="slideConstrutorQst5Form">
+
+          <ion-card margin-vertical>
+            <ion-card-header>
+              <ion-item>
+                <button ion-button icon-only item-right clear>
+                  <!--<ion-icon name="md-help"></ion-icon>-->
+                </button>
+                <span class="question-title">5. Revisou as instruções anteriores em caso de erro?</span>
+              </ion-item>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-list radio-group formControlName="construtorResposta5" [(ngModel)]="construtorResposta5">
+                <ion-item text-wrap>
+                  <ion-label>Não</ion-label>
+                  <ion-radio item-left value="nao"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Insuficiente</ion-label>
+                  <ion-radio item-left value="insuficiente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Parcialmente</ion-label>
+                  <ion-radio item-left value="parcialmente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio item-left value="sim"></ion-radio>
+                </ion-item>
+              </ion-list>
+
+              <button ion-button color="primary" class="button-top-margin" [disabled]="slideConstrutorQst5Form.invalid" (click)="next()"
+                full>Concluir etapa</button>
+
+            </ion-card-content>
+          </ion-card>
+
+        </form>
+
+      </ion-list>
+
+    </ion-slide>
+
+    <!--Organizador-->
+    
+    <ion-slide padding>
+    <!-- Slide 6 -->
+
+      <ion-list no-lines>
+
+        <!-- Metodo tradicional -->
+        <div *ngIf="tipoAvaliacao == 1" class="top-registered-user">
           <ion-label margin-vertical color="black">
-            <h4 class="subtitle">
-              2ª Etapa: <strong>Organizador</strong>
-            </h4>
-            <div class="progressbar">
-              <div class="bar1"><span class="legenda-progresso">1ª</span></div>
-              <div class="bar2 active"><span class="legenda-progresso">2ª</span></div>
-              <div class="bar3"><span class="legenda-progresso">3ª</span></div>
-              <div class="bar4"><span class="legenda-progresso">4ª</span></div>
-            </div>
+            <ion-avatar class="user-details">
+              <img src="assets/img/avatar-sare.png" class="avatar-student" />
+              <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+              <span class="avatar-name">{{alunoOrganizadorNome}}</span>
+              <div class="button-right-action">
+                <button ion-button color="primary" (click)="alertAlunosList(2)">Escolher aluno(a)</button>
+              </div>
+            </ion-avatar>
           </ion-label>
+        </div>
 
-                <!-- <form [formGroup]="slideOrganizadorForm">
-                <div class="border-bottom">
-                  <ion-item class="no-padding-left">
-                      <ion-label margin-top>Selecione o aluno</ion-label>
-                      <ion-select formControlName="alunoOrganizador" [(ngModel)]="alunoOrganizador">
-                        <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
-                      </ion-select>>
-                  </ion-item>
-                </div>
-
-                <button ion-button color="primary" class="button-top-margin" [disabled]="slideOrganizadorForm.invalid" (click)="next()" full>Iniciar</button>
-
-                </form> -->
-
-            <form [formGroup]="slideOrganizadorQst1Form">
-
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/img/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoOrganizadorNome}}</span>
-                  </ion-avatar>
-                </ion-label>
-
-
-                <ion-card margin-vertical>
-                  <ion-card-header>
-                    <ion-item>
-                      <button ion-button icon-only item-right clear>
-                        <!--<ion-icon name="md-help"></ion-icon>-->
-                      </button>
-                      <span class="question-title">1. Conhecia as peças (utilidade e nomenclatura)?</span>
-                    </ion-item>
-                  </ion-card-header>
-
-                  <ion-card-content>
-                    <ion-list radio-group formControlName="organizadorResposta1" [(ngModel)]="organizadorResposta1">
-                      <ion-item text-wrap>
-                        <ion-label>Não</ion-label>
-                        <ion-radio item-left value="nao"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Insuficiente</ion-label>
-                        <ion-radio item-left value="insuficiente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Parcialmente</ion-label>
-                        <ion-radio item-left value="parcialmente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Sim</ion-label>
-                        <ion-radio item-left value="sim"></ion-radio>
-                      </ion-item>
-                    </ion-list>
-
-                    <button ion-button color="primary" class="button-top-margin" [disabled]="slideOrganizadorQst1Form.invalid" (click)="next()" full>Avançar</button>
-                  </ion-card-content>
-                </ion-card>
-
-            </form>
-
-        </ion-list>
-
-      </ion-slide>
-
-      <ion-slide padding> <!-- Slide 7 -->
-
-        <ion-list no-lines>
-
-            <form [formGroup]="slideOrganizadorQst2Form">
-
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/avatars/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoOrganizadorNome}}</span>
-                  </ion-avatar>
-                </ion-label>
-
-
-                <ion-card margin-vertical>
-                  <ion-card-header>
-                    <ion-item>
-                      <button ion-button icon-only item-right clear>
-                        <!--<ion-icon name="md-help"></ion-icon>-->
-                      </button>
-                      <span class="question-title">2. Conhecia a localização das peças na maleta?</span>
-                    </ion-item>
-                  </ion-card-header>
-
-                  <ion-card-content>
-                    <ion-list radio-group formControlName="organizadorResposta2" [(ngModel)]="organizadorResposta2">
-                      <ion-item text-wrap>
-                        <ion-label>Não</ion-label>
-                        <ion-radio item-left value="nao"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Insuficiente</ion-label>
-                        <ion-radio item-left value="insuficiente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Parcialmente</ion-label>
-                        <ion-radio item-left value="parcialmente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Sim</ion-label>
-                        <ion-radio item-left value="sim"></ion-radio>
-                      </ion-item>
-                    </ion-list>
-
-                    <button ion-button color="primary" class="button-top-margin" [disabled]="slideOrganizadorQst2Form.invalid" (click)="next()" full>Avançar</button>
-                  </ion-card-content>
-                </ion-card>
-
-            </form>
-
-        </ion-list>
-
-      </ion-slide>
-
-      <ion-slide padding> <!-- Slide 8 -->
-
-        <ion-list no-lines>
-
-            <form [formGroup]="slideOrganizadorQst3Form">
-
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/avatars/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoOrganizadorNome}}</span>
-                  </ion-avatar>
-                </ion-label>
-
-
-                <ion-card margin-vertical>
-                  <ion-card-header>
-                    <ion-item>
-                      <button ion-button icon-only item-right clear>
-                        <!--<ion-icon name="md-help"></ion-icon>-->
-                      </button>
-                      <span class="question-title">3. Desenvolveu estratégia de trabalho?</span>
-                    </ion-item>
-                  </ion-card-header>
-
-                  <ion-card-content>
-                    <ion-list radio-group formControlName="organizadorResposta3" [(ngModel)]="organizadorResposta3">
-                      <ion-item text-wrap>
-                        <ion-label>Não</ion-label>
-                        <ion-radio item-left value="nao"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Insuficiente</ion-label>
-                        <ion-radio item-left value="insuficiente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Parcialmente</ion-label>
-                        <ion-radio item-left value="parcialmente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Sim</ion-label>
-                        <ion-radio item-left value="sim"></ion-radio>
-                      </ion-item>
-                    </ion-list>
-
-                    <button ion-button color="primary" class="button-top-margin" [disabled]="slideOrganizadorQst3Form.invalid" (click)="next()" full>Avançar</button>
-                  </ion-card-content>
-                </ion-card>
-
-            </form>
-
-        </ion-list>
-
-      </ion-slide>
-
-      <ion-slide padding> <!-- Slide 9 -->
-
-        <ion-list no-lines>
-
-            <form [formGroup]="slideOrganizadorQst4Form">
-
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/avatars/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoOrganizadorNome}}</span>
-                  </ion-avatar>
-                </ion-label>
-
-
-                <ion-card margin-vertical>
-                  <ion-card-header>
-                    <ion-item>
-                      <button ion-button icon-only item-right clear>
-                        <!--<ion-icon name="md-help"></ion-icon>-->
-                      </button>
-                      <span class="question-title">4. Utilizou a bandeja?</span>
-                    </ion-item>
-                  </ion-card-header>
-
-                  <ion-card-content>
-                    <ion-list radio-group formControlName="organizadorResposta4" [(ngModel)]="organizadorResposta4">
-                      <ion-item text-wrap>
-                        <ion-label>Não</ion-label>
-                        <ion-radio item-left value="nao"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Insuficiente</ion-label>
-                        <ion-radio item-left value="insuficiente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Parcialmente</ion-label>
-                        <ion-radio item-left value="parcialmente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Sim</ion-label>
-                        <ion-radio item-left value="sim"></ion-radio>
-                      </ion-item>
-                    </ion-list>
-
-                    <button ion-button color="primary" class="button-top-margin" [disabled]="slideOrganizadorQst4Form.invalid" (click)="next()" full>Avançar</button>
-                  </ion-card-content>
-                </ion-card>
-
-            </form>
-
-        </ion-list>
-
-      </ion-slide>
-
-      <ion-slide padding> <!-- Slide 10 -->
-
-        <ion-list no-lines>
-
-            <form [formGroup]="slideOrganizadorQst5Form">
-
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/avatars/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoOrganizadorNome}}</span>
-                  </ion-avatar>
-                </ion-label>
-
-
-                <ion-card margin-vertical>
-                  <ion-card-header>
-                    <ion-item>
-                      <button ion-button icon-only item-right clear>
-                        <!--<ion-icon name="md-help"></ion-icon>-->
-                      </button>
-                      <span class="question-title">5. Manteve a área de trabalho organizada?</span>
-                    </ion-item>
-                  </ion-card-header>
-
-                  <ion-card-content>
-                    <ion-list radio-group formControlName="organizadorResposta5" [(ngModel)]="organizadorResposta5">
-                      <ion-item text-wrap>
-                        <ion-label>Não</ion-label>
-                        <ion-radio item-left value="nao"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Insuficiente</ion-label>
-                        <ion-radio item-left value="insuficiente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Parcialmente</ion-label>
-                        <ion-radio item-left value="parcialmente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Sim</ion-label>
-                        <ion-radio item-left value="sim"></ion-radio>
-                      </ion-item>
-                    </ion-list>
-
-                    <button ion-button color="primary" class="button-top-margin" [disabled]="slideOrganizadorQst5Form.invalid" (click)="next()" full>Concluir etapa</button>
-                  </ion-card-content>
-                </ion-card>
-
-            </form>
-
-        </ion-list>
-
-      </ion-slide>
-
-      <!--Programador--> <!-- Slide 11 -->
-
-      <ion-slide padding>
-
-        <ion-list no-lines>
-
-          <!-- Metodo tradicional -->
-          <div *ngIf= "tipoAvaliacao == 1" class="top-registered-user">
-              <ion-label margin-vertical color="black">
-                <ion-avatar class="user-details">
-                  <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                  <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
-                  <span class="avatar-name">{{alunoProgramadorNome}}</span>
-                  <div class="button-right-action">
-                      <button ion-button color="primary" (click)="alertAlunosList(3)">Escolher aluno(a)</button>
-                    </div>
-                </ion-avatar>
-              </ion-label>
+        <ion-label margin-vertical color="black">
+          <h4 class="subtitle">
+            2ª Etapa:
+            <strong>Organizador</strong>
+          </h4>
+          <div class="progressbar">
+            <div class="bar1">
+              <span class="legenda-progresso">1ª</span>
+            </div>
+            <div class="bar2 active">
+              <span class="legenda-progresso">2ª</span>
+            </div>
+            <div class="bar3">
+              <span class="legenda-progresso">3ª</span>
+            </div>
+            <div class="bar4">
+              <span class="legenda-progresso">4ª</span>
+            </div>
           </div>
+        </ion-label>
 
-          <ion-label margin-vertical color="black">
-            <h4 class="subtitle">
-              3ª Etapa: <strong>Programador</strong>
-            </h4>
-            <div class="progressbar">
-              <div class="bar1"><span class="legenda-progresso">1ª</span></div>
-              <div class="bar2"><span class="legenda-progresso">2ª</span></div>
-              <div class="bar3 active"><span class="legenda-progresso">3ª</span></div>
-              <div class="bar4"><span class="legenda-progresso">4ª</span></div>
+        <!-- <form [formGroup]="slideOrganizadorForm">
+            <div class="border-bottom">
+                <ion-item class="no-padding-left">
+                    <ion-label margin-top>Selecione o aluno</ion-label>
+                    <ion-select formControlName="alunoOrganizador" [(ngModel)]="alunoOrganizador">
+                    <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
+                    </ion-select>>
+                </ion-item>
             </div>
+
+            <button ion-button color="primary" class="button-top-margin" [disabled]="slideOrganizadorForm.invalid" (click)="next()" full>Iniciar</button>
+        </form> -->
+
+        <form [formGroup]="slideOrganizadorQst1Form">
+
+          <ion-card margin-vertical>
+            <ion-card-header>
+              <ion-item>
+                <button ion-button icon-only item-right clear>
+                  <!--<ion-icon name="md-help"></ion-icon>-->
+                </button>
+                <span class="question-title">1. Conhecia as peças (utilidade e nomenclatura)?</span>
+              </ion-item>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-list radio-group formControlName="organizadorResposta1" [(ngModel)]="organizadorResposta1">
+                <ion-item text-wrap>
+                  <ion-label>Não</ion-label>
+                  <ion-radio item-left value="nao"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Insuficiente</ion-label>
+                  <ion-radio item-left value="insuficiente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Parcialmente</ion-label>
+                  <ion-radio item-left value="parcialmente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio item-left value="sim"></ion-radio>
+                </ion-item>
+              </ion-list>
+
+              <button ion-button color="primary" class="button-top-margin" [disabled]="slideOrganizadorQst1Form.invalid" (click)="next()"
+                full>Avançar</button>
+            </ion-card-content>
+          </ion-card>
+
+        </form>
+
+      </ion-list>
+
+    </ion-slide>
+
+    <ion-slide padding>
+      <!-- Slide 7 -->
+
+      <ion-list no-lines>
+
+        <div *ngIf="tipoAvaliacao == 1" class="top-registered-user">
+            <ion-label margin-vertical color="black">
+            <ion-avatar class="user-details">
+                <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                <span class="avatar-name">{{alunoOrganizadorNome}}</span>
+                <span class="current-category">Organizador</span>
+            </ion-avatar>
+            </ion-label>
+        </div>
+
+        <form [formGroup]="slideOrganizadorQst2Form">
+
+          <ion-card margin-vertical>
+            <ion-card-header>
+              <ion-item>
+                <button ion-button icon-only item-right clear>
+                  <!--<ion-icon name="md-help"></ion-icon>-->
+                </button>
+                <span class="question-title">2. Conhecia a localização das peças na maleta?</span>
+              </ion-item>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-list radio-group formControlName="organizadorResposta2" [(ngModel)]="organizadorResposta2">
+                <ion-item text-wrap>
+                  <ion-label>Não</ion-label>
+                  <ion-radio item-left value="nao"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Insuficiente</ion-label>
+                  <ion-radio item-left value="insuficiente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Parcialmente</ion-label>
+                  <ion-radio item-left value="parcialmente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio item-left value="sim"></ion-radio>
+                </ion-item>
+              </ion-list>
+
+              <button ion-button color="primary" class="button-top-margin" [disabled]="slideOrganizadorQst2Form.invalid" (click)="next()"
+                full>Avançar</button>
+            </ion-card-content>
+          </ion-card>
+
+        </form>
+
+      </ion-list>
+
+    </ion-slide>
+
+    <ion-slide padding>
+      <!-- Slide 8 -->
+
+      <ion-list no-lines>
+
+        <div *ngIf="tipoAvaliacao == 1" class="top-registered-user">
+            <ion-label margin-vertical color="black">
+            <ion-avatar class="user-details">
+                <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                <span class="avatar-name">{{alunoOrganizadorNome}}</span>
+                <span class="current-category">Organizador</span>
+            </ion-avatar>
+            </ion-label>
+        </div>
+
+        <form [formGroup]="slideOrganizadorQst3Form">
+
+          <ion-card margin-vertical>
+            <ion-card-header>
+              <ion-item>
+                <button ion-button icon-only item-right clear>
+                  <!--<ion-icon name="md-help"></ion-icon>-->
+                </button>
+                <span class="question-title">3. Desenvolveu estratégia de trabalho?</span>
+              </ion-item>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-list radio-group formControlName="organizadorResposta3" [(ngModel)]="organizadorResposta3">
+                <ion-item text-wrap>
+                  <ion-label>Não</ion-label>
+                  <ion-radio item-left value="nao"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Insuficiente</ion-label>
+                  <ion-radio item-left value="insuficiente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Parcialmente</ion-label>
+                  <ion-radio item-left value="parcialmente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio item-left value="sim"></ion-radio>
+                </ion-item>
+              </ion-list>
+
+              <button ion-button color="primary" class="button-top-margin" [disabled]="slideOrganizadorQst3Form.invalid" (click)="next()"
+                full>Avançar</button>
+            </ion-card-content>
+          </ion-card>
+
+        </form>
+
+      </ion-list>
+
+    </ion-slide>
+
+    <ion-slide padding>
+      <!-- Slide 9 -->
+
+      <ion-list no-lines>
+
+        <div *ngIf="tipoAvaliacao == 1" class="top-registered-user">
+            <ion-label margin-vertical color="black">
+            <ion-avatar class="user-details">
+                <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                <span class="avatar-name">{{alunoOrganizadorNome}}</span>
+                <span class="current-category">Organizador</span>
+            </ion-avatar>
+            </ion-label>
+        </div>
+
+        <form [formGroup]="slideOrganizadorQst4Form">
+
+          <ion-card margin-vertical>
+            <ion-card-header>
+              <ion-item>
+                <button ion-button icon-only item-right clear>
+                  <!--<ion-icon name="md-help"></ion-icon>-->
+                </button>
+                <span class="question-title">4. Utilizou a bandeja?</span>
+              </ion-item>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-list radio-group formControlName="organizadorResposta4" [(ngModel)]="organizadorResposta4">
+                <ion-item text-wrap>
+                  <ion-label>Não</ion-label>
+                  <ion-radio item-left value="nao"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Insuficiente</ion-label>
+                  <ion-radio item-left value="insuficiente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Parcialmente</ion-label>
+                  <ion-radio item-left value="parcialmente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio item-left value="sim"></ion-radio>
+                </ion-item>
+              </ion-list>
+
+              <button ion-button color="primary" class="button-top-margin" [disabled]="slideOrganizadorQst4Form.invalid" (click)="next()"
+                full>Avançar</button>
+            </ion-card-content>
+          </ion-card>
+
+        </form>
+
+      </ion-list>
+
+    </ion-slide>
+
+    <ion-slide padding>
+      <!-- Slide 10 -->
+
+      <ion-list no-lines>
+
+        <div *ngIf="tipoAvaliacao == 1" class="top-registered-user">
+            <ion-label margin-vertical color="black">
+            <ion-avatar class="user-details">
+                <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                <span class="avatar-name">{{alunoOrganizadorNome}}</span>
+                <span class="current-category">Organizador</span>
+            </ion-avatar>
+            </ion-label>
+        </div>
+
+        <form [formGroup]="slideOrganizadorQst5Form">
+
+          <ion-card margin-vertical>
+            <ion-card-header>
+              <ion-item>
+                <button ion-button icon-only item-right clear>
+                  <!--<ion-icon name="md-help"></ion-icon>-->
+                </button>
+                <span class="question-title">5. Manteve a área de trabalho organizada?</span>
+              </ion-item>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-list radio-group formControlName="organizadorResposta5" [(ngModel)]="organizadorResposta5">
+                <ion-item text-wrap>
+                  <ion-label>Não</ion-label>
+                  <ion-radio item-left value="nao"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Insuficiente</ion-label>
+                  <ion-radio item-left value="insuficiente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Parcialmente</ion-label>
+                  <ion-radio item-left value="parcialmente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio item-left value="sim"></ion-radio>
+                </ion-item>
+              </ion-list>
+
+              <button ion-button color="primary" class="button-top-margin" [disabled]="slideOrganizadorQst5Form.invalid" (click)="next()"
+                full>Concluir etapa</button>
+            </ion-card-content>
+          </ion-card>
+
+        </form>
+
+      </ion-list>
+
+    </ion-slide>
+
+    <!--Programador-->
+    <!-- Slide 11 -->
+
+    <ion-slide padding>
+
+      <ion-list no-lines>
+
+        <!-- Metodo tradicional -->
+        <div *ngIf="tipoAvaliacao == 1" class="top-registered-user">
+          <ion-label margin-vertical color="black">
+            <ion-avatar class="user-details">
+              <img src="assets/img/avatar-sare.png" class="avatar-student" />
+              <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+              <span class="avatar-name">{{alunoProgramadorNome}}</span>
+              <div class="button-right-action">
+                <button ion-button color="primary" (click)="alertAlunosList(3)">Escolher aluno(a)</button>
+              </div>
+            </ion-avatar>
           </ion-label>
+        </div>
 
-                <!-- <form [formGroup]="slideProgramadorForm">
-
-                <div class="border-bottom">
-                  <ion-item class="no-padding-left">
-                      <ion-label margin-top>Selecione o aluno</ion-label>
-                      <ion-select formControlName="alunoProgramador" [(ngModel)]="alunoProgramador">
-                        <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
-                      </ion-select>>
-                  </ion-item>
-                </div>
-
-                <button ion-button color="primary" class="button-top-margin" [disabled]="slideProgramadorForm.invalid" (click)="next()" full>Iniciar</button>
-
-            </form> -->
-
-            <form [formGroup]="slideProgramadorQst1Form">
-
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/img/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoProgramadorNome}}</span>
-                  </ion-avatar>
-                </ion-label>
-
-
-                <ion-card margin-vertical>
-                  <ion-card-header>
-                    <ion-item>
-                      <button ion-button icon-only item-right clear>
-                        <!--<ion-icon name="md-help"></ion-icon>-->
-                      </button>
-                      <span class="question-title">1. Conhecia os menus de blocos (nome, utilidade e localização)?</span>
-                    </ion-item>
-                  </ion-card-header>
-
-                  <ion-card-content>
-                    <ion-list radio-group formControlName="programadorResposta1" [(ngModel)]="programadorResposta1">
-                      <ion-item text-wrap>
-                        <ion-label>Não</ion-label>
-                        <ion-radio item-left value="nao"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Insuficiente</ion-label>
-                        <ion-radio item-left value="insuficiente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Parcialmente</ion-label>
-                        <ion-radio item-left value="parcialmente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Sim</ion-label>
-                        <ion-radio item-left value="sim"></ion-radio>
-                      </ion-item>
-                    </ion-list>
-
-                    <button ion-button color="primary" class="button-top-margin" [disabled]="slideProgramadorQst1Form.invalid" (click)="next()" full>Avançar</button>
-                  </ion-card-content>
-                </ion-card>
-
-            </form>
-
-        </ion-list>
-
-      </ion-slide>
-
-      <ion-slide padding> <!-- Slide 12 -->
-
-        <ion-list no-lines>
-
-            <form [formGroup]="slideProgramadorQst2Form">
-
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/avatars/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoProgramadorNome}}</span>
-                  </ion-avatar>
-                </ion-label>
-
-
-                <ion-card margin-vertical>
-                  <ion-card-header>
-                    <ion-item>
-                      <button ion-button icon-only item-right clear>
-                        <!--<ion-icon name="md-help"></ion-icon>-->
-                      </button>
-                      <span class="question-title">2. Entendeu a necessidade da configuração dos blocos?</span>
-                    </ion-item>
-                  </ion-card-header>
-
-                  <ion-card-content>
-                    <ion-list radio-group formControlName="programadorResposta2" [(ngModel)]="programadorResposta2">
-                      <ion-item text-wrap>
-                        <ion-label>Não</ion-label>
-                        <ion-radio item-left value="nao"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Insuficiente</ion-label>
-                        <ion-radio item-left value="insuficiente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Parcialmente</ion-label>
-                        <ion-radio item-left value="parcialmente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Sim</ion-label>
-                        <ion-radio item-left value="sim"></ion-radio>
-                      </ion-item>
-                    </ion-list>
-
-                    <button ion-button color="primary" class="button-top-margin" [disabled]="slideProgramadorQst2Form.invalid" (click)="next()" full>Avançar</button>
-                  </ion-card-content>
-                </ion-card>
-
-            </form>
-
-        </ion-list>
-
-      </ion-slide>
-
-      <ion-slide padding> <!-- Slide 13 -->
-
-        <ion-list no-lines>
-
-            <form [formGroup]="slideProgramadorQst3Form">
-
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/avatars/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoProgramadorNome}}</span>
-                  </ion-avatar>
-                </ion-label>
-
-
-                <ion-card margin-vertical>
-                  <ion-card-header>
-                    <ion-item>
-                      <button ion-button icon-only item-right clear>
-                        <!--<ion-icon name="md-help"></ion-icon>-->
-                      </button>
-                      <span class="question-title">3. Compreendeu a sequência lógica da linha de programação?</span>
-                    </ion-item>
-                  </ion-card-header>
-
-                  <ion-card-content>
-                    <ion-list radio-group formControlName="programadorResposta3" [(ngModel)]="programadorResposta3">
-                      <ion-item text-wrap>
-                        <ion-label>Não</ion-label>
-                        <ion-radio item-left value="nao"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Insuficiente</ion-label>
-                        <ion-radio item-left value="insuficiente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Parcialmente</ion-label>
-                        <ion-radio item-left value="parcialmente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Sim</ion-label>
-                        <ion-radio item-left value="sim"></ion-radio>
-                      </ion-item>
-                    </ion-list>
-
-                    <button ion-button color="primary" class="button-top-margin" [disabled]="slideProgramadorQst3Form.invalid" (click)="next()" full>Avançar</button>
-                  </ion-card-content>
-                </ion-card>
-
-            </form>
-
-        </ion-list>
-
-      </ion-slide>
-
-      <ion-slide padding> <!-- Slide 14 -->
-
-        <ion-list no-lines>
-
-            <form [formGroup]="slideProgramadorQst4Form">
-
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/avatars/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoProgramadorNome}}</span>
-                  </ion-avatar>
-                </ion-label>
-
-
-                <ion-card margin-vertical>
-                  <ion-card-header>
-                    <ion-item>
-                      <button ion-button icon-only item-right clear>
-                        <!--<ion-icon name="md-help"></ion-icon>-->
-                      </button>
-                      <span class="question-title">4. Demonstrou iniciativa na construção da linha de programação?</span>
-                    </ion-item>
-                  </ion-card-header>
-
-                  <ion-card-content>
-                    <ion-list radio-group formControlName="programadorResposta4" [(ngModel)]="programadorResposta4">
-                      <ion-item text-wrap>
-                        <ion-label>Não</ion-label>
-                        <ion-radio item-left value="nao"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Insuficiente</ion-label>
-                        <ion-radio item-left value="insuficiente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Parcialmente</ion-label>
-                        <ion-radio item-left value="parcialmente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Sim</ion-label>
-                        <ion-radio item-left value="sim"></ion-radio>
-                      </ion-item>
-                    </ion-list>
-
-                    <button ion-button color="primary" class="button-top-margin" [disabled]="slideProgramadorQst4Form.invalid" (click)="next()" full>Avançar</button>
-                  </ion-card-content>
-                </ion-card>
-
-            </form>
-
-        </ion-list>
-
-      </ion-slide>
-
-      <ion-slide padding> <!-- Slide 15 -->
-
-        <ion-list no-lines>
-
-            <form [formGroup]="slideProgramadorQst5Form">
-
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/avatars/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoProgramadorNome}}</span>
-                  </ion-avatar>
-                </ion-label>
-
-
-                <ion-card margin-vertical>
-                  <ion-card-header>
-                    <ion-item>
-                      <button ion-button icon-only item-right clear>
-                        <!--<ion-icon name="md-help"></ion-icon>-->
-                      </button>
-                      <span class="question-title">5. Otimizou a linha de programação (utiliza rotinas)?</span>
-                    </ion-item>
-                  </ion-card-header>
-
-                  <ion-card-content>
-                    <ion-list radio-group formControlName="programadorResposta5" [(ngModel)]="programadorResposta5">
-                      <ion-item text-wrap>
-                        <ion-label>Não</ion-label>
-                        <ion-radio item-left value="nao"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Insuficiente</ion-label>
-                        <ion-radio item-left value="insuficiente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Parcialmente</ion-label>
-                        <ion-radio item-left value="parcialmente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Sim</ion-label>
-                        <ion-radio item-left value="sim"></ion-radio>
-                      </ion-item>
-                    </ion-list>
-
-                    <button ion-button color="primary" class="button-top-margin" [disabled]="slideProgramadorQst5Form.invalid" (click)="next()" full>Concluir etapa</button>
-                  </ion-card-content>
-                </ion-card>
-
-            </form>
-
-        </ion-list>
-
-      </ion-slide>
-
-      <!--Líder--> <!-- Slide 16 -->
-
-      <ion-slide padding>
-
-        <ion-list no-lines>
-
-          <!-- Metodo tradicional -->
-          <div *ngIf= "tipoAvaliacao == 1" class="top-registered-user">
-              <ion-label margin-vertical color="black">
-                <ion-avatar class="user-details">
-                  <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                  <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
-                  <span class="avatar-name">{{alunoLiderNome}}</span>
-                  <div class="button-right-action">
-                      <button ion-button color="primary" (click)="alertAlunosList(4)">Escolher aluno(a)</button>
-                    </div>
-                </ion-avatar>
-              </ion-label>
+        <ion-label margin-vertical color="black">
+          <h4 class="subtitle">
+            3ª Etapa:
+            <strong>Programador</strong>
+          </h4>
+          <div class="progressbar">
+            <div class="bar1">
+              <span class="legenda-progresso">1ª</span>
+            </div>
+            <div class="bar2">
+              <span class="legenda-progresso">2ª</span>
+            </div>
+            <div class="bar3 active">
+              <span class="legenda-progresso">3ª</span>
+            </div>
+            <div class="bar4">
+              <span class="legenda-progresso">4ª</span>
+            </div>
           </div>
+        </ion-label>
 
-          <ion-label margin-vertical color="black">
-            <h4 class="subtitle">
-              4ª Etapa: <strong>Líder</strong>
-            </h4>
-            <div class="progressbar">
-              <div class="bar1"><span class="legenda-progresso">1ª</span></div>
-              <div class="bar2"><span class="legenda-progresso">2ª</span></div>
-              <div class="bar3"><span class="legenda-progresso">3ª</span></div>
-              <div class="bar4 active"><span class="legenda-progresso">4ª</span></div>
+        <!-- <form [formGroup]="slideProgramadorForm">
+
+            <div class="border-bottom">
+                <ion-item class="no-padding-left">
+                    <ion-label margin-top>Selecione o aluno</ion-label>
+                    <ion-select formControlName="alunoProgramador" [(ngModel)]="alunoProgramador">
+                    <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
+                    </ion-select>>
+                </ion-item>
             </div>
+
+            <button ion-button color="primary" class="button-top-margin" [disabled]="slideProgramadorForm.invalid" (click)="next()" full>Iniciar</button>
+
+        </form> -->
+
+        <form [formGroup]="slideProgramadorQst1Form">
+
+          <ion-card margin-vertical>
+            <ion-card-header>
+              <ion-item>
+                <button ion-button icon-only item-right clear>
+                  <!--<ion-icon name="md-help"></ion-icon>-->
+                </button>
+                <span class="question-title">1. Conhecia os menus de blocos (nome, utilidade e localização)?</span>
+              </ion-item>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-list radio-group formControlName="programadorResposta1" [(ngModel)]="programadorResposta1">
+                <ion-item text-wrap>
+                  <ion-label>Não</ion-label>
+                  <ion-radio item-left value="nao"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Insuficiente</ion-label>
+                  <ion-radio item-left value="insuficiente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Parcialmente</ion-label>
+                  <ion-radio item-left value="parcialmente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio item-left value="sim"></ion-radio>
+                </ion-item>
+              </ion-list>
+
+              <button ion-button color="primary" class="button-top-margin" [disabled]="slideProgramadorQst1Form.invalid" (click)="next()"
+                full>Avançar</button>
+            </ion-card-content>
+          </ion-card>
+
+        </form>
+
+      </ion-list>
+
+    </ion-slide>
+
+    <ion-slide padding>
+      <!-- Slide 12 -->
+
+      <ion-list no-lines>
+
+        <div *ngIf="tipoAvaliacao == 1" class="top-registered-user">
+            <ion-label margin-vertical color="black">
+            <ion-avatar class="user-details">
+                <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                <span class="avatar-name">{{alunoProgramadorNome}}</span>
+                <span class="current-category">Programador</span>
+            </ion-avatar>
+            </ion-label>
+        </div>
+
+        <form [formGroup]="slideProgramadorQst2Form">
+
+          <ion-card margin-vertical>
+            <ion-card-header>
+              <ion-item>
+                <button ion-button icon-only item-right clear>
+                  <!--<ion-icon name="md-help"></ion-icon>-->
+                </button>
+                <span class="question-title">2. Entendeu a necessidade da configuração dos blocos?</span>
+              </ion-item>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-list radio-group formControlName="programadorResposta2" [(ngModel)]="programadorResposta2">
+                <ion-item text-wrap>
+                  <ion-label>Não</ion-label>
+                  <ion-radio item-left value="nao"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Insuficiente</ion-label>
+                  <ion-radio item-left value="insuficiente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Parcialmente</ion-label>
+                  <ion-radio item-left value="parcialmente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio item-left value="sim"></ion-radio>
+                </ion-item>
+              </ion-list>
+
+              <button ion-button color="primary" class="button-top-margin" [disabled]="slideProgramadorQst2Form.invalid" (click)="next()"
+                full>Avançar</button>
+            </ion-card-content>
+          </ion-card>
+
+        </form>
+
+      </ion-list>
+
+    </ion-slide>
+
+    <ion-slide padding>
+      <!-- Slide 13 -->
+
+      <ion-list no-lines>
+
+        <div *ngIf="tipoAvaliacao == 1" class="top-registered-user">
+            <ion-label margin-vertical color="black">
+            <ion-avatar class="user-details">
+                <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                <span class="avatar-name">{{alunoProgramadorNome}}</span>
+                <span class="current-category">Programador</span>
+            </ion-avatar>
+            </ion-label>
+        </div>
+
+        <form [formGroup]="slideProgramadorQst3Form">
+
+          <ion-card margin-vertical>
+            <ion-card-header>
+              <ion-item>
+                <button ion-button icon-only item-right clear>
+                  <!--<ion-icon name="md-help"></ion-icon>-->
+                </button>
+                <span class="question-title">3. Compreendeu a sequência lógica da linha de programação?</span>
+              </ion-item>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-list radio-group formControlName="programadorResposta3" [(ngModel)]="programadorResposta3">
+                <ion-item text-wrap>
+                  <ion-label>Não</ion-label>
+                  <ion-radio item-left value="nao"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Insuficiente</ion-label>
+                  <ion-radio item-left value="insuficiente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Parcialmente</ion-label>
+                  <ion-radio item-left value="parcialmente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio item-left value="sim"></ion-radio>
+                </ion-item>
+              </ion-list>
+
+              <button ion-button color="primary" class="button-top-margin" [disabled]="slideProgramadorQst3Form.invalid" (click)="next()"
+                full>Avançar</button>
+            </ion-card-content>
+          </ion-card>
+
+        </form>
+
+      </ion-list>
+
+    </ion-slide>
+
+    <ion-slide padding>
+      <!-- Slide 14 -->
+
+      <ion-list no-lines>
+
+        <div *ngIf="tipoAvaliacao == 1" class="top-registered-user">
+            <ion-label margin-vertical color="black">
+            <ion-avatar class="user-details">
+                <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                <span class="avatar-name">{{alunoProgramadorNome}}</span>
+                <span class="current-category">Programador</span>
+            </ion-avatar>
+            </ion-label>
+        </div>
+
+        <form [formGroup]="slideProgramadorQst4Form">
+
+          <ion-card margin-vertical>
+            <ion-card-header>
+              <ion-item>
+                <button ion-button icon-only item-right clear>
+                  <!--<ion-icon name="md-help"></ion-icon>-->
+                </button>
+                <span class="question-title">4. Demonstrou iniciativa na construção da linha de programação?</span>
+              </ion-item>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-list radio-group formControlName="programadorResposta4" [(ngModel)]="programadorResposta4">
+                <ion-item text-wrap>
+                  <ion-label>Não</ion-label>
+                  <ion-radio item-left value="nao"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Insuficiente</ion-label>
+                  <ion-radio item-left value="insuficiente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Parcialmente</ion-label>
+                  <ion-radio item-left value="parcialmente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio item-left value="sim"></ion-radio>
+                </ion-item>
+              </ion-list>
+
+              <button ion-button color="primary" class="button-top-margin" [disabled]="slideProgramadorQst4Form.invalid" (click)="next()"
+                full>Avançar</button>
+            </ion-card-content>
+          </ion-card>
+
+        </form>
+
+      </ion-list>
+
+    </ion-slide>
+
+    <ion-slide padding>
+      <!-- Slide 15 -->
+
+      <ion-list no-lines>
+
+        <div *ngIf="tipoAvaliacao == 1" class="top-registered-user">
+            <ion-label margin-vertical color="black">
+            <ion-avatar class="user-details">
+                <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                <span class="avatar-name">{{alunoProgramadorNome}}</span>
+                <span class="current-category">Programador</span>
+            </ion-avatar>
+            </ion-label>
+        </div>
+
+        <form [formGroup]="slideProgramadorQst5Form">
+
+          <ion-card margin-vertical>
+            <ion-card-header>
+              <ion-item>
+                <button ion-button icon-only item-right clear>
+                  <!--<ion-icon name="md-help"></ion-icon>-->
+                </button>
+                <span class="question-title">5. Otimizou a linha de programação (utiliza rotinas)?</span>
+              </ion-item>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-list radio-group formControlName="programadorResposta5" [(ngModel)]="programadorResposta5">
+                <ion-item text-wrap>
+                  <ion-label>Não</ion-label>
+                  <ion-radio item-left value="nao"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Insuficiente</ion-label>
+                  <ion-radio item-left value="insuficiente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Parcialmente</ion-label>
+                  <ion-radio item-left value="parcialmente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio item-left value="sim"></ion-radio>
+                </ion-item>
+              </ion-list>
+
+              <button ion-button color="primary" class="button-top-margin" [disabled]="slideProgramadorQst5Form.invalid" (click)="next()"
+                full>Concluir etapa</button>
+            </ion-card-content>
+          </ion-card>
+
+        </form>
+
+      </ion-list>
+
+    </ion-slide>
+
+    <!--Líder-->
+    <!-- Slide 16 -->
+
+    <ion-slide padding>
+
+      <ion-list no-lines>
+
+        <!-- Metodo tradicional -->
+        <div *ngIf="tipoAvaliacao == 1" class="top-registered-user">
+          <ion-label margin-vertical color="black">
+            <ion-avatar class="user-details">
+              <img src="assets/img/avatar-sare.png" class="avatar-student" />
+              <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+              <span class="avatar-name">{{alunoLiderNome}}</span>
+              <div class="button-right-action">
+                <button ion-button color="primary" (click)="alertAlunosList(4)">Escolher aluno(a)</button>
+              </div>
+            </ion-avatar>
           </ion-label>
-
-                <!-- <form [formGroup]="slideLiderForm">
-
-                <div class="border-bottom">
-                  <ion-item class="no-padding-left">
-                      <ion-label margin-top>Selecione o aluno</ion-label>
-                      <ion-select formControlName="alunoLider" [(ngModel)]="alunoLider">
-                        <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
-                      </ion-select>>
-                  </ion-item>
-                </div>
-
-                <button ion-button color="primary" class="button-top-margin" [disabled]="slideLiderForm.invalid" (click)="next()" full>Iniciar</button>
-
-            </form> -->
-
-            <form [formGroup]="slideLiderQst1Form">
-
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/img/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoLiderNome}}</span>
-                  </ion-avatar>
-                </ion-label>
-
-
-                <ion-card margin-vertical>
-                  <ion-card-header>
-                    <ion-item>
-                      <button ion-button icon-only item-right clear>
-                        <!--<ion-icon name="md-help"></ion-icon>-->
-                      </button>
-                      <span class="question-title">1. Teve boa expressão oral (fala articulada, boa entonação etc)?</span>
-                    </ion-item>
-                  </ion-card-header>
-
-                  <ion-card-content>
-                    <ion-list radio-group formControlName="liderResposta1" [(ngModel)]="liderResposta1">
-                      <ion-item text-wrap>
-                        <ion-label>Não</ion-label>
-                        <ion-radio item-left value="nao"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Insuficiente</ion-label>
-                        <ion-radio item-left value="insuficiente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Parcialmente</ion-label>
-                        <ion-radio item-left value="parcialmente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Sim</ion-label>
-                        <ion-radio item-left value="sim"></ion-radio>
-                      </ion-item>
-                    </ion-list>
-
-                    <button ion-button color="primary" class="button-top-margin" [disabled]="slideLiderQst1Form.invalid" (click)="next()" full>Avançar</button>
-                  </ion-card-content>
-                </ion-card>
-
-            </form>
-
-        </ion-list>
-
-      </ion-slide>
-
-      <ion-slide padding> <!-- Slide 17 -->
-
-        <ion-list no-lines>
-
-            <form [formGroup]="slideLiderQst2Form">
-
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/avatars/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoLiderNome}}</span>
-                  </ion-avatar>
-                </ion-label>
-
-
-                <ion-card margin-vertical>
-                  <ion-card-header>
-                    <ion-item>
-                      <button ion-button icon-only item-right clear>
-                        <!--<ion-icon name="md-help"></ion-icon>-->
-                      </button>
-                      <span class="question-title">2. Apresentou o projeto divulgando as informações necessárias?</span>
-                    </ion-item>
-                  </ion-card-header>
-
-                  <ion-card-content>
-                    <ion-list radio-group formControlName="liderResposta2" [(ngModel)]="liderResposta2">
-                      <ion-item text-wrap>
-                        <ion-label>Não</ion-label>
-                        <ion-radio item-left value="nao"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Insuficiente</ion-label>
-                        <ion-radio item-left value="insuficiente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Parcialmente</ion-label>
-                        <ion-radio item-left value="parcialmente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Sim</ion-label>
-                        <ion-radio item-left value="sim"></ion-radio>
-                      </ion-item>
-                    </ion-list>
-
-                    <button ion-button color="primary" class="button-top-margin" [disabled]="slideLiderQst2Form.invalid" (click)="next()" full>Avançar</button>
-                  </ion-card-content>
-                </ion-card>
-
-            </form>
-
-        </ion-list>
-
-      </ion-slide>
-
-      <ion-slide padding> <!-- Slide 18 -->
-
-        <ion-list no-lines>
-
-            <form [formGroup]="slideLiderQst3Form">
-
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/avatars/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoLiderNome}}</span>
-                  </ion-avatar>
-                </ion-label>
-
-
-                <ion-card margin-vertical>
-                  <ion-card-header>
-                    <ion-item>
-                      <button ion-button icon-only item-right clear>
-                        <!--<ion-icon name="md-help"></ion-icon>-->
-                      </button>
-                      <span class="question-title">3. Demonstrou o projeto?</span>
-                    </ion-item>
-                  </ion-card-header>
-
-                  <ion-card-content>
-                    <ion-list radio-group formControlName="liderResposta3" [(ngModel)]="liderResposta3">
-                      <ion-item text-wrap>
-                        <ion-label>Não</ion-label>
-                        <ion-radio item-left value="nao"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Insuficiente</ion-label>
-                        <ion-radio item-left value="insuficiente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Parcialmente</ion-label>
-                        <ion-radio item-left value="parcialmente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Sim</ion-label>
-                        <ion-radio item-left value="sim"></ion-radio>
-                      </ion-item>
-                    </ion-list>
-
-                    <button ion-button color="primary" class="button-top-margin" [disabled]="slideLiderQst3Form.invalid" (click)="next()" full>Avançar</button>
-                  </ion-card-content>
-                </ion-card>
-
-            </form>
-
-        </ion-list>
-
-      </ion-slide>
-
-      <ion-slide padding> <!-- Slide 19 -->
-
-        <ion-list no-lines>
-
-            <form [formGroup]="slideLiderQst4Form">
-
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/avatars/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoLiderNome}}</span>
-                  </ion-avatar>
-                </ion-label>
-
-
-                <ion-card margin-vertical>
-                  <ion-card-header>
-                    <ion-item>
-                      <button ion-button icon-only item-right clear>
-                        <!--<ion-icon name="md-help"></ion-icon>-->
-                      </button>
-                      <span class="question-title">4. Forneceu informações extras sobre o projeto?</span>
-                    </ion-item>
-                  </ion-card-header>
-
-                  <ion-card-content>
-                    <ion-list radio-group formControlName="liderResposta4" [(ngModel)]="liderResposta4">
-                      <ion-item text-wrap>
-                        <ion-label>Não</ion-label>
-                        <ion-radio item-left value="nao"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Insuficiente</ion-label>
-                        <ion-radio item-left value="insuficiente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Parcialmente</ion-label>
-                        <ion-radio item-left value="parcialmente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Sim</ion-label>
-                        <ion-radio item-left value="sim"></ion-radio>
-                      </ion-item>
-                    </ion-list>
-
-                    <button ion-button color="primary" class="button-top-margin" [disabled]="slideLiderQst4Form.invalid" (click)="next()" full>Avançar</button>
-                  </ion-card-content>
-                </ion-card>
-
-            </form>
-
-        </ion-list>
-
-      </ion-slide>
-
-      <ion-slide padding> <!-- Slide 20 -->
-
-        <ion-list no-lines>
-
-            <form [formGroup]="slideLiderQst5Form">
-
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/avatars/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoLiderNome}}</span>
-                  </ion-avatar>
-                </ion-label>
-
-
-                <ion-card margin-vertical>
-                  <ion-card-header>
-                    <ion-item>
-                      <button ion-button icon-only item-right clear>
-                        <!--<ion-icon name="md-help"></ion-icon>-->
-                      </button>
-                      <span class="question-title">5. Respondeu à questionamentos?</span>
-                    </ion-item>
-                  </ion-card-header>
-
-                  <ion-card-content>
-                    <ion-list radio-group formControlName="liderResposta5" [(ngModel)]="liderResposta5">
-                      <ion-item text-wrap>
-                        <ion-label>Não</ion-label>
-                        <ion-radio item-left value="nao"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Insuficiente</ion-label>
-                        <ion-radio item-left value="insuficiente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Parcialmente</ion-label>
-                        <ion-radio item-left value="parcialmente"></ion-radio>
-                      </ion-item>
-                      <ion-item text-wrap>
-                        <ion-label>Sim</ion-label>
-                        <ion-radio item-left value="sim"></ion-radio>
-                      </ion-item>
-                    </ion-list>
-
-                    <button ion-button color="primary" class="button-top-margin" [disabled]="slideLiderQst5Form.invalid" (click)="next()" full>Finalizar</button>
-                  </ion-card-content>
-                </ion-card>
-
-            </form>
-
-        </ion-list>
-
-      </ion-slide>
-
-      <!--Resultado--> <!-- Slide 21 -->
-
-      <ion-slide padding>
-
-        <ion-list no-lines>
-
-
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">Resultado: {{grupoNome}}</h4>
-                </ion-label>
-
-
-                <ion-card margin-vertical>
-                  <ion-card-header>
-                    Análise de resultados
-                  </ion-card-header>
-
-                  <ion-card-content>
-
-                    <h2>{{alunoContrutorNome}} - Construtor</h2>
-                    <canvas #barCanvas></canvas><br>
-
-                    <h2>{{alunoOrganizadorNome}} - Organizador</h2>
-                    <canvas #barCanvasOrgan></canvas><br>
-
-                    <h2>{{alunoProgramadorNome}} - Programador</h2>
-                    <canvas #barCanvasProg></canvas><br>
-
-                    <h2>{{alunoLiderNome}} - Líder</h2>
-                    <canvas #barCanvasLider></canvas><br>
-
-                    <!-- <button ion-button icon-right color="darkgrey" class="button-top-margin" full>
-                      Exportar
-                      <ion-icon name="share"></ion-icon>
-                    </button> -->
-                    <button ion-button icon-right color="darkgrey" (click)="realizarOutraAvaliacao()" class="button-top-margin" full>
-                      Realizar outra avaliação
-                    </button>
-                    <button ion-button icon-right color="darkgrey" (click)="verAvaliacoes()" class="button-top-margin" full>
-                      Ver todas as avaliações
-                    </button>
-                  </ion-card-content>
-                </ion-card>
-
-
-        </ion-list>
-
-      </ion-slide>
-
-    </ion-slides>
+        </div>
+
+        <ion-label margin-vertical color="black">
+          <h4 class="subtitle">
+            4ª Etapa:
+            <strong>Líder</strong>
+          </h4>
+          <div class="progressbar">
+            <div class="bar1">
+              <span class="legenda-progresso">1ª</span>
+            </div>
+            <div class="bar2">
+              <span class="legenda-progresso">2ª</span>
+            </div>
+            <div class="bar3">
+              <span class="legenda-progresso">3ª</span>
+            </div>
+            <div class="bar4 active">
+              <span class="legenda-progresso">4ª</span>
+            </div>
+          </div>
+        </ion-label>
+
+        <!-- <form [formGroup]="slideLiderForm">
+
+            <div class="border-bottom">
+                <ion-item class="no-padding-left">
+                    <ion-label margin-top>Selecione o aluno</ion-label>
+                    <ion-select formControlName="alunoLider" [(ngModel)]="alunoLider">
+                    <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
+                    </ion-select>>
+                </ion-item>
+            </div>
+
+            <button ion-button color="primary" class="button-top-margin" [disabled]="slideLiderForm.invalid" (click)="next()" full>Iniciar</button>
+
+        </form> -->
+
+        <form [formGroup]="slideLiderQst1Form">
+
+          <ion-card margin-vertical>
+            <ion-card-header>
+              <ion-item>
+                <button ion-button icon-only item-right clear>
+                  <!--<ion-icon name="md-help"></ion-icon>-->
+                </button>
+                <span class="question-title">1. Teve boa expressão oral (fala articulada, boa entonação etc)?</span>
+              </ion-item>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-list radio-group formControlName="liderResposta1" [(ngModel)]="liderResposta1">
+                <ion-item text-wrap>
+                  <ion-label>Não</ion-label>
+                  <ion-radio item-left value="nao"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Insuficiente</ion-label>
+                  <ion-radio item-left value="insuficiente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Parcialmente</ion-label>
+                  <ion-radio item-left value="parcialmente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio item-left value="sim"></ion-radio>
+                </ion-item>
+              </ion-list>
+
+              <button ion-button color="primary" class="button-top-margin" [disabled]="slideLiderQst1Form.invalid" (click)="next()" full>Avançar</button>
+            </ion-card-content>
+          </ion-card>
+
+        </form>
+
+      </ion-list>
+
+    </ion-slide>
+
+    <ion-slide padding>
+      <!-- Slide 17 -->
+
+      <ion-list no-lines>
+
+        <div *ngIf="tipoAvaliacao == 1" class="top-registered-user">
+            <ion-label margin-vertical color="black">
+            <ion-avatar class="user-details">
+                <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                <span class="avatar-name">{{alunoLiderNome}}</span>
+                <span class="current-category">Líder</span>
+            </ion-avatar>
+            </ion-label>
+        </div>
+
+        <form [formGroup]="slideLiderQst2Form">
+
+          <ion-card margin-vertical>
+            <ion-card-header>
+              <ion-item>
+                <button ion-button icon-only item-right clear>
+                  <!--<ion-icon name="md-help"></ion-icon>-->
+                </button>
+                <span class="question-title">2. Apresentou o projeto divulgando as informações necessárias?</span>
+              </ion-item>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-list radio-group formControlName="liderResposta2" [(ngModel)]="liderResposta2">
+                <ion-item text-wrap>
+                  <ion-label>Não</ion-label>
+                  <ion-radio item-left value="nao"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Insuficiente</ion-label>
+                  <ion-radio item-left value="insuficiente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Parcialmente</ion-label>
+                  <ion-radio item-left value="parcialmente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio item-left value="sim"></ion-radio>
+                </ion-item>
+              </ion-list>
+
+              <button ion-button color="primary" class="button-top-margin" [disabled]="slideLiderQst2Form.invalid" (click)="next()" full>Avançar</button>
+            </ion-card-content>
+          </ion-card>
+
+        </form>
+
+      </ion-list>
+
+    </ion-slide>
+
+    <ion-slide padding>
+      <!-- Slide 18 -->
+
+      <ion-list no-lines>
+
+        <div *ngIf="tipoAvaliacao == 1" class="top-registered-user">
+            <ion-label margin-vertical color="black">
+            <ion-avatar class="user-details">
+                <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                <span class="avatar-name">{{alunoLiderNome}}</span>
+                <span class="current-category">Líder</span>
+            </ion-avatar>
+            </ion-label>
+        </div>
+
+        <form [formGroup]="slideLiderQst3Form">
+
+          <ion-card margin-vertical>
+            <ion-card-header>
+              <ion-item>
+                <button ion-button icon-only item-right clear>
+                  <!--<ion-icon name="md-help"></ion-icon>-->
+                </button>
+                <span class="question-title">3. Demonstrou o projeto?</span>
+              </ion-item>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-list radio-group formControlName="liderResposta3" [(ngModel)]="liderResposta3">
+                <ion-item text-wrap>
+                  <ion-label>Não</ion-label>
+                  <ion-radio item-left value="nao"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Insuficiente</ion-label>
+                  <ion-radio item-left value="insuficiente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Parcialmente</ion-label>
+                  <ion-radio item-left value="parcialmente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio item-left value="sim"></ion-radio>
+                </ion-item>
+              </ion-list>
+
+              <button ion-button color="primary" class="button-top-margin" [disabled]="slideLiderQst3Form.invalid" (click)="next()" full>Avançar</button>
+            </ion-card-content>
+          </ion-card>
+
+        </form>
+
+      </ion-list>
+
+    </ion-slide>
+
+    <ion-slide padding>
+      <!-- Slide 19 -->
+
+      <ion-list no-lines>
+
+        <div *ngIf="tipoAvaliacao == 1" class="top-registered-user">
+            <ion-label margin-vertical color="black">
+            <ion-avatar class="user-details">
+                <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                <span class="avatar-name">{{alunoLiderNome}}</span>
+                <span class="current-category">Líder</span>
+            </ion-avatar>
+            </ion-label>
+        </div>
+
+        <form [formGroup]="slideLiderQst4Form">
+
+          <ion-card margin-vertical>
+            <ion-card-header>
+              <ion-item>
+                <button ion-button icon-only item-right clear>
+                  <!--<ion-icon name="md-help"></ion-icon>-->
+                </button>
+                <span class="question-title">4. Forneceu informações extras sobre o projeto?</span>
+              </ion-item>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-list radio-group formControlName="liderResposta4" [(ngModel)]="liderResposta4">
+                <ion-item text-wrap>
+                  <ion-label>Não</ion-label>
+                  <ion-radio item-left value="nao"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Insuficiente</ion-label>
+                  <ion-radio item-left value="insuficiente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Parcialmente</ion-label>
+                  <ion-radio item-left value="parcialmente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio item-left value="sim"></ion-radio>
+                </ion-item>
+              </ion-list>
+
+              <button ion-button color="primary" class="button-top-margin" [disabled]="slideLiderQst4Form.invalid" (click)="next()" full>Avançar</button>
+            </ion-card-content>
+          </ion-card>
+
+        </form>
+
+      </ion-list>
+
+    </ion-slide>
+
+    <ion-slide padding>
+      <!-- Slide 20 -->
+
+      <ion-list no-lines>
+
+        <div *ngIf="tipoAvaliacao == 1" class="top-registered-user">
+            <ion-label margin-vertical color="black">
+            <ion-avatar class="user-details">
+                <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                <span class="avatar-name">{{alunoLiderNome}}</span>
+                <span class="current-category">Líder</span>
+            </ion-avatar>
+            </ion-label>
+        </div>
+
+        <form [formGroup]="slideLiderQst5Form">
+
+          <ion-card margin-vertical>
+            <ion-card-header>
+              <ion-item>
+                <button ion-button icon-only item-right clear>
+                  <!--<ion-icon name="md-help"></ion-icon>-->
+                </button>
+                <span class="question-title">5. Respondeu à questionamentos?</span>
+              </ion-item>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-list radio-group formControlName="liderResposta5" [(ngModel)]="liderResposta5">
+                <ion-item text-wrap>
+                  <ion-label>Não</ion-label>
+                  <ion-radio item-left value="nao"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Insuficiente</ion-label>
+                  <ion-radio item-left value="insuficiente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Parcialmente</ion-label>
+                  <ion-radio item-left value="parcialmente"></ion-radio>
+                </ion-item>
+                <ion-item text-wrap>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio item-left value="sim"></ion-radio>
+                </ion-item>
+              </ion-list>
+
+              <button ion-button color="primary" class="button-top-margin" [disabled]="slideLiderQst5Form.invalid" (click)="next()" full>Finalizar</button>
+            </ion-card-content>
+          </ion-card>
+
+        </form>
+
+      </ion-list>
+
+    </ion-slide>
+
+    <!--Resultado-->
+    <!-- Slide 21 -->
+
+    <ion-slide padding>
+
+      <ion-list no-lines>
+
+        <div class="top-registered-user">
+            <ion-label margin-vertical color="black">
+            <ion-avatar class="user-details">
+                <span class="current-group">Resultado: {{grupoNome}}</span>
+            </ion-avatar>
+            </ion-label>
+        </div>
+
+
+        <ion-card margin-vertical>
+          <ion-card-header>
+            Análise de resultados
+          </ion-card-header>
+
+          <ion-card-content>
+
+            <h2>{{alunoContrutorNome}} - Construtor</h2>
+            <canvas #barCanvas></canvas>
+            <br>
+
+            <h2>{{alunoOrganizadorNome}} - Organizador</h2>
+            <canvas #barCanvasOrgan></canvas>
+            <br>
+
+            <h2>{{alunoProgramadorNome}} - Programador</h2>
+            <canvas #barCanvasProg></canvas>
+            <br>
+
+            <h2>{{alunoLiderNome}} - Líder</h2>
+            <canvas #barCanvasLider></canvas>
+            <br>
+
+            <!-- <button ion-button icon-right color="darkgrey" class="button-top-margin" full>
+                Exportar
+                <ion-icon name="share"></ion-icon>
+            </button> -->
+
+            <button ion-button icon-right color="darkgrey" (click)="realizarOutraAvaliacao()" class="button-top-margin" full>
+              Realizar outra avaliação
+            </button>
+            <button ion-button icon-right color="darkgrey" (click)="verAvaliacoes()" class="button-top-margin" full>
+              Ver todas as avaliações
+            </button>
+          </ion-card-content>
+        </ion-card>
+
+
+      </ion-list>
+
+    </ion-slide>
+
+  </ion-slides>
 
 </ion-content>
