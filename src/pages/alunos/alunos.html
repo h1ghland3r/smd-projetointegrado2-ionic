@@ -4,7 +4,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="sm-margin-top">
 
   <ion-card>
     <ion-card-header class="titleSearch" (click)="toggleBusca(isExpand)">Busca
@@ -42,12 +42,13 @@
     <ion-item >
       <ion-label>{{ aluno.nome }}</ion-label>
       <ion-icon item-right class="delete" name="trash" (click)="confirmDelete(aluno, i)"></ion-icon>
-      <ion-icon item-right name="create" (click)="openModalEdit(aluno, i)"></ion-icon>
+      <ion-icon item-right class="edit" name="create" (click)="openModalEdit(aluno, i)"></ion-icon>
+      <ion-icon item-right class="see" name="eye" (click)="openModalView(aluno, i)"></ion-icon>
     </ion-item>
   </ion-list>
 
   <ion-content padding>
-    <button ion-button icon-left color="darkgrey" class="button-graphic" (click)="openModalAdd()" full>
+    <button ion-button icon-left color="primary" class="button-graphic" (click)="openModalAdd()" full>
       <ion-icon name="add"></ion-icon>
       Cadastrar aluno
     </button>

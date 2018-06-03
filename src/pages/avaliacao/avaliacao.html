@@ -19,7 +19,7 @@
         <ion-list no-lines margin-top>
 
             <form [formGroup]="initialForm">
-                <div class="border-bottom">
+                <div class="border-bottom-grey">
                   <ion-item class="no-padding-left" margin-vertical>
                       <ion-label>Escola</ion-label>
                       <ion-select formControlName="escola" (ngModelChange)="getTurmasByEscolaId($event)" [(ngModel)]="escolaId">
@@ -28,7 +28,7 @@
                   </ion-item>
                 </div>
 
-                <div class="border-bottom">
+                <div class="border-bottom-grey">
                   <ion-item class="no-padding-left" margin-vertical>
                       <ion-label>Turma</ion-label>
                       <ion-select formControlName="turma" (ngModelChange)="getGruposByTurmaId($event)" [(ngModel)]="turmaId">
@@ -37,7 +37,7 @@
                   </ion-item>
                 </div>
 
-                <div class="border-bottom">
+                <div class="border-bottom-grey">
                   <ion-item class="no-padding-left" margin-vertical>
                       <ion-label>Grupo</ion-label>
                       <ion-select formControlName="grupo" [(ngModel)]="grupoId">

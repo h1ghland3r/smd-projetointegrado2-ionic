@@ -1,10 +1,12 @@
 <ion-header>
-  <ion-navbar>
-      <ion-title>Editar escola</ion-title>
-      <ion-buttons end>
-        <button ion-button (click)="closeModal()">Fechar</button>
-      </ion-buttons>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-buttons start>
+            <button ion-button block (click)="closeModal()">
+                <ion-icon name="close"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>Editar escola</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content padding>
@@ -12,9 +14,9 @@
   <ion-list>
     <form [formGroup]="editEscolaForm">
 
-      <p *ngIf="submitAttempt" style="color: #ea6153;">Por favor preencha todos os campos abaixo.</p>
+      <p *ngIf="submitAttempt" style="color: #ea6153;">Por favor, preencha todos os campos abaixo.</p>
 
-      <div class="border-bottom">
+      <div>
         <ion-item class="no-padding-left">
           <ion-label>Nome da Escola:</ion-label>
           <ion-input formControlName="nome" type="text" text-right>{{nome}}</ion-input>
@@ -27,8 +29,8 @@
 
     </form>
 
-    <button ion-button color="darkgrey" class="button-top-margin" (click)="saveEscolaEdit()" full>Salvar</button>
-
+    <button ion-button color="primary" class="button-top-margin" (click)="saveEscolaEdit()" padding full>Salvar</button>
+    
   </ion-list>
 
 </ion-content>

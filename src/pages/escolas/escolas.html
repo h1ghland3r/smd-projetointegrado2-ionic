@@ -4,7 +4,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="sm-margin-top">
   <ion-list *ngFor="let escola of escolas; let i = index" >
     <ion-item *ngIf="escolas.length == 0">
       Nenhuma escola cadastrada.
@@ -18,7 +18,7 @@
   </ion-list>
 
   <ion-content padding>
-    <button ion-button icon-left color="darkgrey" class="button-graphic" (click)="openModalAdd()" full>
+    <button ion-button icon-left color="primary" class="button-graphic" (click)="openModalAdd()" full>
       <ion-icon name="add"></ion-icon>
       Cadastrar escola
     </button>

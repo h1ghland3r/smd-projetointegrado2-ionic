@@ -1,12 +1,12 @@
 <ion-header>
-
-<ion-navbar>
-    <ion-title>Editar grupo</ion-title>
-    <ion-buttons end>
-    <button ion-button (click)="closeModal()">Fechar</button>
-    </ion-buttons>
-</ion-navbar>
-
+    <ion-navbar>
+        <ion-buttons start>
+            <button ion-button block (click)="closeModal()">
+                <ion-icon name="close"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>Editar grupo</ion-title>
+    </ion-navbar>
 </ion-header>
 
 
@@ -15,9 +15,9 @@
   <ion-list>
     <form [formGroup]="editGrupoForm">
 
-      <p *ngIf="submitAttempt" style="color: #ea6153;">Por favor preencha todos os campos abaixo.</p>
+      <p *ngIf="submitAttempt" style="color: #ea6153;">Por favor, preencha todos os campos abaixo.</p>
 
-      <div class="border-bottom">
+      <div>
         <ion-item class="no-padding-left">
           <ion-label>Nome do Grupo:</ion-label>
           <ion-input formControlName="nome" type="text" text-right></ion-input>
@@ -96,7 +96,7 @@
 
     </form>
 
-  <button ion-button color="darkgrey" class="button-top-margin" (click)="saveGrupoEdit()" full>Salvar</button>
+  <button ion-button color="primary" class="button-top-margin" (click)="saveGrupoEdit()" full>Salvar</button>
 
 </ion-list>
 
