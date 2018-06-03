@@ -1,15 +1,15 @@
 <ion-menu [content]="content" persistent="true">
     <ion-header>
         <ion-toolbar>
-            <img src="/android_asset/www/assets/img/logo.png" class="logo-menu" />
-            <!-- <img src="../../assets/img/logo.png" class="logo-menu" /> -->
+            <!-- <img src="/android_asset/www/assets/img/logo.png" class="logo-menu" /> -->
+            <img src="../../assets/img/logo.png" class="logo-menu" />
             <div class="toolbar-header-wrapper">
                 <ion-title class="menu-header">SARE</ion-title>
-                <div class="toolbar-logout" (click)="logoutApp()">
+                <div class="toolbar-logout" menuClose (click)="logoutApp()">
                     <span class="menu_item_icon">
                         <ion-icon name="exit" item-left></ion-icon>
                     </span>
-                    <span class="menu_item_title" menuClose>Sair</span>
+                    <span class="menu_item_title">Sair</span>
                 </div>
             </div>
         </ion-toolbar>

@@ -145,6 +145,14 @@
     padding-right: 0 !important;
 }
 
+.no-margin-left {
+    margin-left: 0 !important;
+}
+
+.sm-margin-top {
+    margin-top: 10px;
+}
+
 .sm-margin-bottom {
     margin-bottom: 10px;
 }
@@ -157,6 +165,10 @@
 
 .border-bottom {
     border-bottom: 1px solid color($colors, primary, base) !important;
+}
+
+.border-bottom-grey {
+    border-bottom: 1px solid color($colors, lightgrey, base);
 }
 
 .button-actions {
