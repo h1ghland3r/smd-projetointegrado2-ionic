@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DbServiceProvider } from '../../providers/db-service/db-service';
 
 import { AlunosPageModule } from '../alunos/alunos.module';
+import { Status } from '../enums/enum';
 
 import moment from 'moment'
 /**
@@ -81,7 +82,7 @@ export class AddAlunoModalPage {
 
       itemDb.nome = this.addAlunoForm.controls.nome.value;
       itemDb.dataNascimento = this.addAlunoForm.controls.dataNascimento.value;
-      itemDb.status = "ADDED";
+      itemDb.status = Status.added;
       itemDb.userId = 1;
       itemDb.lastModifiedDate = moment().toDate();
       itemDb.turmaId = this.addAlunoForm.controls.turmaId.value;

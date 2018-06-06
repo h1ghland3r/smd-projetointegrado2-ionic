@@ -1,10 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { ListAvaliacoesPage } from '../list-avaliacoes/list-avaliacoes';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Chart, ElementRef } from 'chart.js';
 import moment from 'moment'
 import { DbServiceProvider } from '../../providers/db-service/db-service';
+
+import { AlunosPageModule } from '../alunos/alunos.module';
+import { GruposPageModule } from '../grupos/grupos.module';
+import { TipoAluno } from '../enums/enum';
+import { Status } from '../enums/enum';
 
 @IonicPage()
 @Component({
@@ -63,16 +68,19 @@ export class AvaliacaoSemCadastrosPage {
   alunoProgramadorNome;
   alunoLiderNome;
 
+  nomeAluno;
+  funcaoAluno;
+
+  nomeAlunoTemp;
+  idAlunoTemp;
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public formBuilder: FormBuilder,
-              public dbService: DbServiceProvider) {
+              public dbService: DbServiceProvider,
+              public alertCtrl: AlertController) {
 
-    this.slide1Form = formBuilder.group({
-        escola: ['', Validators.required],
-        turma: ['', Validators.required],
-        grupo: ['', Validators.required]
-    });
+    this.funcaoAluno = TipoAluno.construtor;
 
     //Respostas do Aluno Construtor
 
@@ -180,6 +188,286 @@ export class AvaliacaoSemCadastrosPage {
 
   }
 
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad AvaliacaoPage');
+    this.avaliacaoSlider.lockSwipes(true);
+  }
+
+  // Navigation
+
+  next(){
+    this.avaliacaoSlider.lockSwipes(false);
+    this.avaliacaoSlider.slideNext();
+    this.avaliacaoSlider.lockSwipes(true);
+
+    if(this.avaliacaoSlider.getActiveIndex() == 1){
+      this.createGrupo();
+    }
+    else if(this.avaliacaoSlider.getActiveIndex() == 2){
+      this.verificaTipoAluno(this.funcaoAluno);
+      console.log(this.slideConstrutorForm.value.alunoConstrutor);
+      this.funcaoAluno = TipoAluno.organizador;
+    }
+    else if(this.avaliacaoSlider.getActiveIndex() == 8){
+      this.verificaTipoAluno(this.funcaoAluno);
+      console.log(this.slideOrganizadorForm.value.alunoOrganizador);
+      this.funcaoAluno = TipoAluno.programador;
+    }
+    else if(this.avaliacaoSlider.getActiveIndex() == 14){
+      this.verificaTipoAluno(this.funcaoAluno);
+      console.log(this.slideProgramadorForm.value.alunoProgramador);
+      this.funcaoAluno = TipoAluno.lider;
+    }
+    else if(this.avaliacaoSlider.getActiveIndex() == 20){
+      this.verificaTipoAluno(this.funcaoAluno);
+      console.log(this.slideLiderForm.value.alunoLider);
+    }
+    else if(this.avaliacaoSlider.getActiveIndex() == 25){
+      this.updateGrupo();
+      this.save();
+      this.graficos();
+    }
+  }
+
+  prev(){
+      this.avaliacaoSlider.slidePrev();
+  }
+
+  realizarOutraAvaliacao(){
+    //this.navCtrl.push(AvaliacaoPage);
+  }
+
+  verAvaliacoes(){
+    this.navCtrl.push(ListAvaliacoesPage);
+  }
+
+  // Inserção, Edição ou Busca de dados
+
+  getAllAvaliacoesAlunos(){
+    this.dbService.getAllAvaliacoesAlunos()
+      .then(avaliacoesAlunos => {
+        console.log(avaliacoesAlunos);
+      })
+      .catch( error => {
+        console.error( error );
+      });
+  }
+
+  getAllAvaliacoes(){
+    this.dbService.getAllAvaliacoes()
+      .then(avaliacoes => {
+        console.log(avaliacoes);
+      })
+      .catch( error => {
+        console.error( error );
+      });
+  }
+
+  cadastrarAluno() {
+    let alert = this.alertCtrl.create();
+    alert.setTitle('Cadastrar aluno');
+
+    //Campos serão: Nome e Foto (TODO Verificar como fazer upload da foto)
+
+    alert.addInput({
+      name: this.nomeAluno,
+      placeholder: 'Nome do Aluno'
+    });
+
+    alert.addButton('Cancelar');
+    alert.addButton({
+      text: 'OK',
+      handler: data => {
+        this.createAluno();
+      }
+    });
+    alert.present();
+  }
+
+  createAluno(){
+    let item = new AlunosPageModule();
+    item.nome = this.nomeAluno;
+    item.status = Status.added;
+    item.lastModifiedDate = moment().toDate();
+    item.userId = 1;
+
+    this.dbService.insertAluno(item)
+      .then(response => {
+        console.log(response);
+        this.idAlunoTemp = response.id;
+        this.nomeAlunoTemp = response.nome;
+      })
+      .catch( error => {
+        console.error( error );
+      })
+
+      this.nomeAluno = "";
+  }
+
+  createGrupo(){
+    let item = new GruposPageModule();
+    item.nome = "Grupo " + moment().year + moment().month +
+                moment().day + moment().hour + moment().minutes +
+                moment().milliseconds;
+    item.status = Status.added;
+    item.lastModifiedDate = moment().toDate();
+    item.userId = 1;
+
+    this.dbService.insertGrupo(item)
+      .then(response => {
+        console.log(response);
+        this.grupoNome = response.nome;
+
+        this.createAvaliacao(response.id);
+      })
+      .catch( error => {
+        console.error( error );
+      })
+  }
+
+  createAvaliacao(idGrupo: number){
+
+    let date = moment().format('DD/MM/YYYY');
+    console.log(date);
+
+    //let codigo = Math.floor((Math.random() * 100) + 1);
+
+    let nome = "Avaliação Rápida " + moment().year + moment().month +
+                moment().day + moment().hour + moment().minutes +
+                moment().milliseconds + ": " + this.grupoNome + " - " + date;
+
+    let avaliacao = {
+      nome: nome,
+      createdDate: moment().format('DD/MM/YYYY'),
+      status: Status.added,
+      lastModifiedDate: moment().toDate(),
+      userId: 1,
+      grupoId: idGrupo
+    }
+
+    this.dbService.insertAvaliacaoGrupo(avaliacao)
+      .then( response => {
+        let avaliacao = {
+          id: response.insertId
+        }
+
+        this.avaliacao = avaliacao;
+        console.log(this.avaliacao);
+        this.getAllAvaliacoes(); //TODO por que eu to fazendo isso??
+                                //verificar a necessidade desse método
+      })
+  }
+
+  updateGrupo(){
+
+    let item = new GruposPageModule();
+    item.alunoId1 = this.slideConstrutorForm.value.alunoConstrutor;
+    item.alunoId2 = this.slideOrganizadorForm.value.alunoOrganizador;
+    item.alunoId3 = this.slideProgramadorForm.value.alunoProgramador;
+    item.alunoId4 = this.slideLiderForm.value.alunoLider;
+
+    this.dbService.updateAlunoGrupo(item)
+      .then( response => {
+        console.log( response );
+      })
+      .catch( error => {
+        console.error( error );
+      })
+  }
+
+  save() {
+
+    let avaliacaoConstrutor = {
+      alunoId: this.slideConstrutorForm.value.alunoConstrutor,
+      date: new Date().toISOString(),
+      funcao: 1,
+      avaliacaoId: this.avaliacao.id,
+      resposta1: this.slideConstrutorQst1Form.value.construtorResposta1,
+      resposta2: this.slideConstrutorQst2Form.value.construtorResposta2,
+      resposta3: this.slideConstrutorQst3Form.value.construtorResposta3,
+      resposta4: this.slideConstrutorQst4Form.value.construtorResposta4,
+      resposta5: this.slideConstrutorQst5Form.value.construtorResposta5
+    }
+
+    let avaliacaoOrganizador = {
+      alunoId: this.slideOrganizadorForm.value.alunoOrganizador,
+      date: new Date().toISOString(),
+      funcao: 2,
+      avaliacaoId: this.avaliacao.id,
+      resposta1: this.slideOrganizadorQst1Form.value.organizadorResposta1,
+      resposta2: this.slideOrganizadorQst2Form.value.organizadorResposta2,
+      resposta3: this.slideOrganizadorQst3Form.value.organizadorResposta3,
+      resposta4: this.slideOrganizadorQst4Form.value.organizadorResposta4,
+      resposta5: this.slideOrganizadorQst5Form.value.organizadorResposta5
+    }
+
+    let avaliacaoProgramador = {
+      alunoId: this.slideProgramadorForm.value.alunoProgramador,
+      date: new Date().toISOString(),
+      funcao: 3,
+      avaliacaoId: this.avaliacao.id,
+      resposta1: this.slideProgramadorQst1Form.value.programadorResposta1,
+      resposta2: this.slideProgramadorQst2Form.value.programadorResposta2,
+      resposta3: this.slideProgramadorQst3Form.value.programadorResposta3,
+      resposta4: this.slideProgramadorQst4Form.value.programadorResposta4,
+      resposta5: this.slideProgramadorQst5Form.value.programadorResposta5
+    }
+
+    let avaliacaoLider = {
+      alunoId: this.slideLiderForm.value.alunoLider,
+      date: new Date().toISOString(),
+      funcao: 4,
+      avaliacaoId: this.avaliacao.id,
+      resposta1: this.slideLiderQst1Form.value.liderResposta1,
+      resposta2: this.slideLiderQst2Form.value.liderResposta2,
+      resposta3: this.slideLiderQst3Form.value.liderResposta3,
+      resposta4: this.slideLiderQst4Form.value.liderResposta4,
+      resposta5: this.slideLiderQst5Form.value.liderResposta5
+    }
+
+    console.log(avaliacaoConstrutor);
+    console.log(avaliacaoOrganizador);
+    console.log(avaliacaoProgramador);
+    console.log(avaliacaoLider);
+
+    let avaliacoes: any[] = [];
+
+    avaliacoes.push( avaliacaoConstrutor );
+    avaliacoes.push( avaliacaoOrganizador );
+    avaliacoes.push( avaliacaoProgramador );
+    avaliacoes.push( avaliacaoLider );
+
+    this.dbService.insertAvaliacaoAlunos(avaliacoes)
+      .then(response => {
+        console.log(response);
+        this.getAllAvaliacoesAlunos();
+      })
+      .catch( error => {
+        console.error( error );
+      })
+
+  }
+
+  verificaTipoAluno(funcaoAluno: TipoAluno){
+    if(funcaoAluno == TipoAluno.construtor){
+      this.slideConstrutorForm.controls.alunoConstrutor.setValue(this.idAlunoTemp);
+      this.alunoContrutorNome = this.nomeAlunoTemp;
+    }
+    else if(funcaoAluno == TipoAluno.organizador){
+      this.slideOrganizadorForm.controls.alunoOrganizador.setValue(this.idAlunoTemp);
+      this.alunoOrganizadorNome = this.nomeAlunoTemp;
+    }
+    else if(funcaoAluno == TipoAluno.programador){
+      this.slideProgramadorForm.controls.alunoProgramador.setValue(this.idAlunoTemp);
+      this.alunoProgramadorNome = this.nomeAlunoTemp;
+    }
+    else if(funcaoAluno == TipoAluno.lider){
+      this.slideLiderForm.controls.alunoLider.setValue(this.idAlunoTemp);
+      this.alunoLiderNome = this.nomeAlunoTemp;
+    }
+  }
+
+
   // Graphics
 
   @ViewChild('barCanvas') barCanvas: ElementRef;
@@ -191,39 +479,33 @@ export class AvaliacaoSemCadastrosPage {
   barChartProg: any;
   barChartLider: any;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AvaliacaoPage');
-    this.getAllEscolas();
-    this.avaliacaoSlider.lockSwipes(true);
-  }
+  respConstrutor = {
+    respNao: 0,
+    respInsuficiente: 0,
+    respParcialmente: 0,
+    respSim: 0
+  };
 
-    respConstrutor = {
-      respNao: 0,
-      respInsuficiente: 0,
-      respParcialmente: 0,
-      respSim: 0
-    };
+  respOrganizador = {
+    respNao: 0,
+    respInsuficiente: 0,
+    respParcialmente: 0,
+    respSim: 0
+  };
 
-    respOrganizador = {
-      respNao: 0,
-      respInsuficiente: 0,
-      respParcialmente: 0,
-      respSim: 0
-    };
+  respProgramador = {
+    respNao: 0,
+    respInsuficiente: 0,
+    respParcialmente: 0,
+    respSim: 0
+  };
 
-    respProgramador = {
-      respNao: 0,
-      respInsuficiente: 0,
-      respParcialmente: 0,
-      respSim: 0
-    };
-
-    respLider = {
-      respNao: 0,
-      respInsuficiente: 0,
-      respParcialmente: 0,
-      respSim: 0
-    };
+  respLider = {
+    respNao: 0,
+    respInsuficiente: 0,
+    respParcialmente: 0,
+    respSim: 0
+  };
 
   verificaRepostas(respostas: any[], tipoAluno: number){
     let respNaoCount = 0;
@@ -476,271 +758,6 @@ export class AvaliacaoSemCadastrosPage {
     this.graficoOrganizador();
     this.graficoProgramador();
     this.graficoLider();
-  }
-
-  // Navigation
-
-  next(){
-    this.avaliacaoSlider.lockSwipes(false);
-    this.avaliacaoSlider.slideNext();
-    this.avaliacaoSlider.lockSwipes(true);
-
-    if(this.avaliacaoSlider.getActiveIndex() == 1){
-      console.log(this.slide1Form.value.grupo);
-      this.getGrupoById(this.slide1Form.value.grupo);
-    }
-    else if(this.avaliacaoSlider.getActiveIndex() == 2){
-      console.log(this.slideConstrutorForm.value.alunoConstrutor);
-      for (let i = 0; i < this.alunos.length; i++) {
-        if(this.alunos[i].id == this.slideConstrutorForm.value.alunoConstrutor){
-          this.alunos.splice(i, 1);
-        }
-      }
-      console.log(this.alunos);
-      this.getAlunoNome(1, this.slideConstrutorForm.value.alunoConstrutor);
-    }
-    else if(this.avaliacaoSlider.getActiveIndex() == 8){
-      console.log(this.slideOrganizadorForm.value.alunoOrganizador);
-      for (let i = 0; i < this.alunos.length; i++) {
-        if(this.alunos[i].id == this.slideOrganizadorForm.value.alunoOrganizador){
-          this.alunos.splice(i, 1);
-        }
-      }
-      console.log(this.alunos);
-      this.getAlunoNome(2, this.slideOrganizadorForm.value.alunoOrganizador);
-    }
-    else if(this.avaliacaoSlider.getActiveIndex() == 14){
-      console.log(this.slideProgramadorForm.value.alunoProgramador);
-      for (let i = 0; i < this.alunos.length; i++) {
-        if(this.alunos[i].id == this.slideProgramadorForm.value.alunoProgramador){
-          this.alunos.splice(i, 1);
-        }
-      }
-      console.log(this.alunos);
-      this.getAlunoNome(3, this.slideProgramadorForm.value.alunoProgramador);
-    }
-    else if(this.avaliacaoSlider.getActiveIndex() == 20){
-      console.log(this.slideLiderForm.value.alunoLider);
-      for (let i = 0; i < this.alunos.length; i++) {
-        if(this.alunos[i].id == this.slideLiderForm.value.alunoLider){
-          this.alunos.splice(i, 1);
-        }
-      }
-      console.log(this.alunos);
-      this.getAlunoNome(4, this.slideLiderForm.value.alunoLider);
-    }
-    else if(this.avaliacaoSlider.getActiveIndex() == 25){
-      this.save();
-      this.graficos();
-    }
-  }
-
-  prev(){
-      this.avaliacaoSlider.slidePrev();
-  }
-
-  save() {
-
-    let avaliacaoConstrutor = {
-      alunoId: this.slideConstrutorForm.value.alunoConstrutor,
-      date: new Date().toISOString(),
-      funcao: 1,
-      avaliacaoId: this.avaliacao.id,
-      resposta1: this.slideConstrutorQst1Form.value.construtorResposta1,
-      resposta2: this.slideConstrutorQst2Form.value.construtorResposta2,
-      resposta3: this.slideConstrutorQst3Form.value.construtorResposta3,
-      resposta4: this.slideConstrutorQst4Form.value.construtorResposta4,
-      resposta5: this.slideConstrutorQst5Form.value.construtorResposta5
-    }
-
-    let avaliacaoOrganizador = {
-      alunoId: this.slideOrganizadorForm.value.alunoOrganizador,
-      date: new Date().toISOString(),
-      funcao: 2,
-      avaliacaoId: this.avaliacao.id,
-      resposta1: this.slideOrganizadorQst1Form.value.organizadorResposta1,
-      resposta2: this.slideOrganizadorQst2Form.value.organizadorResposta2,
-      resposta3: this.slideOrganizadorQst3Form.value.organizadorResposta3,
-      resposta4: this.slideOrganizadorQst4Form.value.organizadorResposta4,
-      resposta5: this.slideOrganizadorQst5Form.value.organizadorResposta5
-    }
-
-    let avaliacaoProgramador = {
-      alunoId: this.slideProgramadorForm.value.alunoProgramador,
-      date: new Date().toISOString(),
-      funcao: 3,
-      avaliacaoId: this.avaliacao.id,
-      resposta1: this.slideProgramadorQst1Form.value.programadorResposta1,
-      resposta2: this.slideProgramadorQst2Form.value.programadorResposta2,
-      resposta3: this.slideProgramadorQst3Form.value.programadorResposta3,
-      resposta4: this.slideProgramadorQst4Form.value.programadorResposta4,
-      resposta5: this.slideProgramadorQst5Form.value.programadorResposta5
-    }
-
-    let avaliacaoLider = {
-      alunoId: this.slideLiderForm.value.alunoLider,
-      date: new Date().toISOString(),
-      funcao: 4,
-      avaliacaoId: this.avaliacao.id,
-      resposta1: this.slideLiderQst1Form.value.liderResposta1,
-      resposta2: this.slideLiderQst2Form.value.liderResposta2,
-      resposta3: this.slideLiderQst3Form.value.liderResposta3,
-      resposta4: this.slideLiderQst4Form.value.liderResposta4,
-      resposta5: this.slideLiderQst5Form.value.liderResposta5
-    }
-
-    console.log(avaliacaoConstrutor);
-    console.log(avaliacaoOrganizador);
-    console.log(avaliacaoProgramador);
-    console.log(avaliacaoLider);
-
-    let avaliacoes: any[] = [];
-
-    avaliacoes.push( avaliacaoConstrutor );
-    avaliacoes.push( avaliacaoOrganizador );
-    avaliacoes.push( avaliacaoProgramador );
-    avaliacoes.push( avaliacaoLider );
-
-    this.dbService.insertAvaliacaoAlunos(avaliacoes)
-      .then(response => {
-        console.log(response);
-        this.getAllAvaliacoesAlunos();
-      })
-      .catch( error => {
-        console.error( error );
-      })
-
-  }
-
-  createAvaliacao(){
-
-    let date = moment().format('DD/MM/YYYY');
-    console.log(date);
-
-    let nome = this.grupoNome + " - " + date;
-
-    let avaliacao = {
-      nome: nome,
-      date: moment().format('DD/MM/YYYY'),
-      grupoId: this.slide1Form.value.grupo
-    }
-
-    /*
-    this.dbService.createAvaliacao(avaliacao)
-      .then( response => {
-
-        let avaliacao = {
-          nome: nome,
-          date: moment().format('DD/MM/YYYY'),
-          id: response.insertId
-        }
-
-        this.avaliacao = avaliacao;
-        console.log(this.avaliacao);
-        this.getAllAvaliacoes();
-      })
-      */
-
-  }
-
-  getAllAvaliacoesAlunos(){
-    this.dbService.getAllAvaliacoesAlunos()
-      .then(avaliacoesAlunos => {
-        console.log(avaliacoesAlunos);
-      })
-      .catch( error => {
-        console.error( error );
-      });
-  }
-
-  getAllAvaliacoes(){
-    this.dbService.getAllAvaliacoes()
-      .then(avaliacoes => {
-        console.log(avaliacoes);
-      })
-      .catch( error => {
-        console.error( error );
-      });
-  }
-
-  getAllEscolas(){
-    this.dbService.getAllEscolas()
-      .then(escolas => {
-        console.log(escolas);
-        this.escolas = escolas;
-      })
-      .catch( error => {
-        console.error( error );
-      });
-  }
-
-  getTurmasByEscolaId(escolaId){
-    this.dbService.getTurmasByEscolaId(escolaId)
-      .then(turmas => {
-        console.log(turmas);
-        this.turmas = turmas;
-      })
-      .catch( error => {
-        console.error( error );
-      });
-  }
-
-  getGruposByTurmaId(turmaId){
-    this.dbService.getGruposByTurmaId(turmaId)
-      .then(grupos => {
-        console.log(grupos);
-        this.grupos = grupos;
-      })
-      .catch( error => {
-        console.error( error );
-      });
-  }
-
-  getGrupoById(grupoId){
-    this.dbService.getGrupoById(grupoId)
-      .then(grupo => {
-        console.log(grupo);
-        this.grupoNome = grupo[0].nome;
-        this.getAlunosDoGrupo(grupo[0].alunoId1, grupo[0].alunoId2, grupo[0].alunoId3, grupo[0].alunoId4);
-        this.createAvaliacao();
-      })
-  }
-
-  getAlunosDoGrupo(alunoId1, alunoId2, alunoId3, alunoId4){
-    this.dbService.getAlunosDoGrupo(alunoId1, alunoId2, alunoId3, alunoId4)
-      .then(alunosDB => {
-        console.log(alunosDB);
-        for (let index = 0; index < alunosDB.length; index++) {
-          this.alunos.push( alunosDB[index] );
-        }
-      })
-      .catch( error => {
-        console.error( error );
-      });
-  }
-
-  getAlunoNome(tipoAluno, alunoId){
-    this.dbService.getAlunoById(alunoId)
-      .then(aluno => {
-        console.log(aluno[0]);
-        if(tipoAluno == 1){ //constructor
-          this.alunoContrutorNome = aluno[0].nome;
-        } else if (tipoAluno == 2){
-          this.alunoOrganizadorNome = aluno[0].nome;
-        } else if (tipoAluno == 3){
-          this.alunoProgramadorNome = aluno[0].nome;
-        } else{
-          this.alunoLiderNome = aluno[0].nome;
-        }
-      })
-  }
-
-  realizarOutraAvaliacao(){
-    //this.navCtrl.push(AvaliacaoPage);
-  }
-
-  verAvaliacoes(){
-    this.navCtrl.push(ListAvaliacoesPage);
   }
 
 }

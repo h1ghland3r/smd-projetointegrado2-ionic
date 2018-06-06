@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DbServiceProvider } from '../../providers/db-service/db-service';
 
 import { EscolasPageModule } from '../escolas/escolas.module';
+import { Status } from '../enums/enum';
 
 import moment from 'moment'
 
@@ -49,7 +50,7 @@ export class AddEscolaModalPage {
       var itemDb = new EscolasPageModule();
 
       itemDb.nome = this.addEscolaForm.controls.nome.value;
-      itemDb.status = "ADDED";
+      itemDb.status = Status.added;
       itemDb.userId = 1;
       itemDb.lastModifiedDate = moment().toDate();
 

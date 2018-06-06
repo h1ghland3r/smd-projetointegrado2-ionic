@@ -50,27 +50,23 @@ export class AvaliacaoPage {
 
   iniciarAvaliacao(tipo: number){
 
-    if(this.initialForm.valid){
-
-      if(tipo == 1){
-        this.tipoAvaliacao = Avaliacao.avComCadastros;
-        this.navCtrl.push(AvaliacaoComCadastrosPage, {
-          tipoAvaliacao: tipo,
-          escola: this.initialForm.controls.escola.value,
-          turma: this.initialForm.controls.turma.value,
-          grupo: this.initialForm.controls.grupo.value
-        });
-      }
-      else if(tipo == 2){
-        this.tipoAvaliacao = Avaliacao.avSemCadastros;
-        this.navCtrl.push(AvaliacaoSemCadastrosPage, {
-          tipoAvaliacao: tipo
-        });
-      }
-
+    if(this.initialForm.valid && tipo == 1){
+      this.tipoAvaliacao = Avaliacao.avComCadastros;
+      this.navCtrl.push(AvaliacaoComCadastrosPage, {
+        tipoAvaliacao: tipo,
+        escola: this.initialForm.controls.escola.value,
+        turma: this.initialForm.controls.turma.value,
+        grupo: this.initialForm.controls.grupo.value
+      });
     }
-
+    else if(tipo == 2){
+      this.tipoAvaliacao = Avaliacao.avSemCadastros;
+      this.navCtrl.push(AvaliacaoSemCadastrosPage, {
+        tipoAvaliacao: tipo
+      });
+    }
   }
+
 
   getAllEscolas(){
     this.dbService.getAllEscolas()

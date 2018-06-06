@@ -16,12 +16,12 @@ import { GruposPage } from './grupos';
 export class GruposPageModule {
   id: number;
   nome: string;
-  status: string;
+  status: number;
   lastModifiedDate: Date;
   userId: number;
   turmaId: number;
   alunoId1: number;
 	alunoId2: number;
 	alunoId3: number;
-	alunoId4: number; 
+	alunoId4: number;
 }

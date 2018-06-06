@@ -16,7 +16,7 @@ import { TurmasPage } from './turmas';
 export class TurmasPageModule {
   id: number;
   nome: string;
-  status: string;
+  status: number;
   lastModifiedDate: Date;
   userId: number;
   escolaId: number;

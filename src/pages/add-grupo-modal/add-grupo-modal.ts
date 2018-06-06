@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DbServiceProvider } from '../../providers/db-service/db-service';
 
 import { GruposPageModule } from '../grupos/grupos.module';
+import { Status } from '../enums/enum';
 
 import moment from 'moment'
 
@@ -106,7 +107,7 @@ export class AddGrupoModalPage {
       var itemDb = new GruposPageModule();
 
       itemDb.nome = this.addGrupoForm.controls.nome.value;
-      itemDb.status = "ADDED";
+      itemDb.status = Status.added;
       itemDb.userId = 1;
       itemDb.alunoId1 = this.addGrupoForm.controls.alunoId1.value;
       itemDb.alunoId2 = this.addGrupoForm.controls.alunoId2.value;
