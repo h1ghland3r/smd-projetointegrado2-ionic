@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 import { ModalController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { PasswordPage } from '../password/password';
 import { RegisterPage } from '../register/register'
+import { DbServiceProvider } from '../../providers/db-service/db-service';
 
 /**
  * Generated class for the LoginPage page.
@@ -19,10 +20,36 @@ import { RegisterPage } from '../register/register'
 })
 export class LoginPage {
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private nativePageTransitions: NativePageTransitions, private modalCtrl: ModalController) {}
+    email;
+    password;
+
+    constructor(public navCtrl: NavController,
+                public navParams: NavParams,
+                public dbService: DbServiceProvider,
+                private menu: MenuController,
+                private nativePageTransitions: NativePageTransitions,
+                private modalCtrl: ModalController) {}
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad LoginPage');
+    }
+
+    ionViewDidEnter() {
+        this.menu.swipeEnable(false);
+    }
+
+    ionViewWillLeave() {
+        this.menu.swipeEnable(true);
+    }
+
+    checkLogin(){
+      this.dbService.checkLogin(this.email, this.password)
+        .then(result => {
+          console.log(result);
+        })
+        .catch( error => {
+          console.error( error );
+        });
     }
 
     public abrirHome() {
@@ -47,4 +74,3 @@ export class LoginPage {
     }
 
 }
-

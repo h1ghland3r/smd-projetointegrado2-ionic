@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DbServiceProvider } from '../../providers/db-service/db-service';
 
+import { Status } from '../enums/enum';
 import moment from 'moment'
 /**
  * Generated class for the EditTurmaModalPage page.
@@ -56,7 +57,7 @@ export class EditTurmaModalPage {
         index: this.index,
         id: this.id,
         nome: this.editTurmaForm.controls.nome.value,
-        status: "UPDATED",
+        status: Status.updated,
         userId: 1,
         lastModifiedDate: moment().toDate(),
         escolaId: this.editTurmaForm.controls.escolaId.value

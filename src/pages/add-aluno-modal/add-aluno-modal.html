@@ -1,12 +1,12 @@
 <ion-header>
-
-<ion-navbar>
-    <ion-title>Adicionar aluno</ion-title>
-    <ion-buttons end>
-    <button ion-button (click)="closeModal()">Fechar</button>
-    </ion-buttons>
-</ion-navbar>
-
+    <ion-navbar>
+        <ion-buttons start>
+            <button ion-button block (click)="closeModal()">
+                <ion-icon name="close"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>Adicionar aluno</ion-title>
+    </ion-navbar>
 </ion-header>
 
 
@@ -16,7 +16,7 @@
 
   <form [formGroup]="addAlunoForm">
 
-    <p *ngIf="submitAttempt" style="color: #ea6153;">Por favor preencha todos os campos abaixo.</p>
+    <p *ngIf="submitAttempt" style="color: #ea6153;">Por favor, preencha todos os campos abaixo.</p>
 
     <ion-item class="no-padding-left">
       <ion-label>Nome do Aluno*</ion-label>
@@ -60,7 +60,7 @@
 
   </form>
 
-  <button ion-button color="darkgrey" class="button-top-margin" (click)="saveAluno()" full>Salvar</button>
+  <button ion-button color="primary" class="button-top-margin" (click)="saveAluno()" full>Salvar</button>
 
 </ion-list>
 

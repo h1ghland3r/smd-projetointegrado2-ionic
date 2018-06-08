@@ -16,7 +16,7 @@ import { EscolasPage } from './escolas';
 export class EscolasPageModule {
     id: number;
     nome: string;
-    status: string;
+    status: number;
     lastModifiedDate: Date;
     userId: number;
 }

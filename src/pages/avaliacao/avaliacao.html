@@ -13,12 +13,13 @@
 
         <ion-label margin-vertical color="black">
           <h4 class="subtitle">iniciar avaliação a partir de dados cadastrados</h4>
+          <h5 class="subtitle-note">Os dados do grupo avaliado devem ser inseridos antes do início da avaliação</h5>
         </ion-label>
 
         <ion-list no-lines margin-top>
 
             <form [formGroup]="initialForm">
-                <div class="border-bottom">
+                <div class="border-bottom-grey">
                   <ion-item class="no-padding-left" margin-vertical>
                       <ion-label>Escola</ion-label>
                       <ion-select formControlName="escola" (ngModelChange)="getTurmasByEscolaId($event)" [(ngModel)]="escolaId">
@@ -27,7 +28,7 @@
                   </ion-item>
                 </div>
 
-                <div class="border-bottom">
+                <div class="border-bottom-grey">
                   <ion-item class="no-padding-left" margin-vertical>
                       <ion-label>Turma</ion-label>
                       <ion-select formControlName="turma" (ngModelChange)="getGruposByTurmaId($event)" [(ngModel)]="turmaId">
@@ -36,7 +37,7 @@
                   </ion-item>
                 </div>
 
-                <div class="border-bottom">
+                <div class="border-bottom-grey">
                   <ion-item class="no-padding-left" margin-vertical>
                       <ion-label>Grupo</ion-label>
                       <ion-select formControlName="grupo" [(ngModel)]="grupoId">
@@ -56,7 +57,7 @@
 
           <ion-label margin-vertical color="black">
               <h4 class="subtitle">iniciar avaliação sem cadastros</h4>
-              <h5 class="subtitle-note">Os dados serão inseridos durante a avaliação</h5>
+              <h5 class="subtitle-note">Os dados serão solicitados durante a avaliação</h5>
           </ion-label>
 
           <!--atualizar metodo do botao abaixo -->

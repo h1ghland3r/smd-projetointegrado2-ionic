@@ -35,6 +35,8 @@ export class AlunosPage {
     this.getAllEscolas();
   }
 
+  //TODO Busca por alunos que nao possuem cadastro completo (resultado da avaliação rapida)
+
   toggleBusca(state){
     if(state == false){
       this.isExpand = true;

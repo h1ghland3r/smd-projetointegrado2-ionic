@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DbServiceProvider } from '../../providers/db-service/db-service';
 
 import { TurmasPageModule } from '../turmas/turmas.module';
+import { Status } from '../enums/enum';
 
 import moment from 'moment'
 
@@ -65,7 +66,7 @@ export class AddTurmaModalPage {
       var itemDb = new TurmasPageModule();
 
       itemDb.nome = this.addTurmaForm.controls.nome.value;
-      itemDb.status = "ADDED";
+      itemDb.status = Status.added;
       itemDb.userId = 1;
       itemDb.lastModifiedDate = moment().toDate();
       itemDb.escolaId = this.addTurmaForm.controls.escolaId.value;

@@ -700,9 +700,11 @@ export class AvaliacaoComCadastrosPage {
 
     let date = moment().format('DD/MM/YYYY');
     console.log(date);
-    let codigo = Math.floor((Math.random() * 100) + 1);
+    //let codigo = Math.floor((Math.random() * 100) + 1);
 
-    let nome = codigo + ": " + this.grupoNome + " - " + date;
+    let nome = "Avaliação " + moment().year() + (moment().month()+1) +
+                moment().date() + moment().hour() + moment().minutes() +
+                moment().milliseconds() + ": " + this.grupoNome + " - " + date;
 
     let avaliacao = {
       nome: nome,
@@ -716,6 +718,7 @@ export class AvaliacaoComCadastrosPage {
     this.dbService.insertAvaliacaoGrupo(avaliacao)
       .then( response => {
 
+        //TODO Verificar a necessidade dos atributos 'nome' e 'date'
         let avaliacao = {
           nome: nome,
           date: moment().format('DD/MM/YYYY'),
