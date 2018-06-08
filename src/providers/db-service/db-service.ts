@@ -100,7 +100,6 @@ export class DbServiceProvider {
 
   updateEscola(escola: any) {
     let sql = 'UPDATE escola SET nome=?, status=?, lastModifiedDate=?, userId=? WHERE id=?';
-    //TODO testar a necessidade de incluir o campo 'id' no update
     return this.db.executeSql(sql, [escola.nome, escola.status, escola.lastModifiedDate, escola.userId, escola.id]);
   }
 
@@ -145,7 +144,6 @@ export class DbServiceProvider {
 
   updateTurma(turma: any) {
     let sql = 'UPDATE turma SET nome=?, status=?, lastModifiedDate=?, userId=?, escolaId=? WHERE id=?';
-    //TODO testar a necessidade de incluir o campo 'id' no update
     return this.db.executeSql(sql, [turma.nome, turma.status, turma.lastModifiedDate, turma.userId, turma.escolaId, turma.id]);
   }
 
@@ -202,7 +200,6 @@ export class DbServiceProvider {
 
   updateAluno(aluno: any) {
     let sql = 'UPDATE aluno SET nome=?, dataNascimento=?, status=?, lastModifiedDate=?, userId=?, turmaId=? WHERE id=?';
-    //TODO testar a necessidade de incluir o campo 'id' no update
     return this.db.executeSql(sql, [aluno.nome, aluno.dataNascimento, aluno.status, aluno.lastModifiedDate, aluno.userId, aluno.turmaId, aluno.id]);
   }
 
@@ -300,7 +297,7 @@ export class DbServiceProvider {
 
   updateAlunoGrupo(grupo: any) {
     let sql = 'UPDATE grupo SET alunoId1=?, alunoId2=?, alunoId3=?, alunoId4=? WHERE Id=?';
-    return this.db.executeSql(sql, [grupo.alunoId1, grupo.alunoId2, grupo.alunoId3, grupo.alunoId4]);
+    return this.db.executeSql(sql, [grupo.alunoId1, grupo.alunoId2, grupo.alunoId3, grupo.alunoId4, grupo.id]);
   }
 
   deleteGrupo(grupo: GruposPageModule) {
@@ -445,7 +442,7 @@ export class DbServiceProvider {
     for (let index = 0; index < avaliacoes.length; index++) {
       let sql = 'INSERT INTO avaliacaoAluno(createdDate, funcao, status, lastModifiedDate, respostas, alunoId, avaliacaoGrupoId) VALUES(?,?,?,?,?,?,?)';
       if (index == avaliacoes.length - 1) {
-        return this.db.executeSql(sql, [avaliacoes[index].createdDate, avaliacoes[index].funcao, avaliacoes[index].status, avaliacoes[index].lastModifiedDate, avaliacoes[index].respostas, avaliacoes[index].alunoId, avaliacoes[index].avaliacaoGrupoId]);
+        return this.db.executeSql(sql, [avaliacoes[index].createdDate, avaliacoes[index].funcao, avaliacoes[index].status, avaliacoes[index].lastModifiedDate, avaliacoes[index].respostas, avaliacoes[index].alunoId, avaliacoes[index].avaliacaoGrupoId]);        
       } else {
         this.db.executeSql(sql, [avaliacoes[index].createdDate, avaliacoes[index].funcao, avaliacoes[index].status, avaliacoes[index].lastModifiedDate, avaliacoes[index].respostas, avaliacoes[index].alunoId, avaliacoes[index].avaliacaoGrupoId]);
       }

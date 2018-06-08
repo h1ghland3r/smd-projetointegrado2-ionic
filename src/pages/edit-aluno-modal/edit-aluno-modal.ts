@@ -115,7 +115,7 @@ export class EditAlunoModalPage {
     this.dbService.getTurmaById(turmaId)
       .then( result => {
         this.editAlunoForm.controls['escolaId'].setValue(result[0].escolaId);
-        this.getTurmasByEscolaId(this.escolaId);
+        this.getTurmasByEscolaId(this.editAlunoForm.controls.escolaId.value);
       })
   }
 

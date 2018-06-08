@@ -62,6 +62,7 @@ export class AvaliacaoSemCadastrosPage {
   avaliacao: any;
 
   grupoNome;
+  grupoId;
 
   alunoContrutorNome;
   alunoOrganizadorNome;
@@ -202,27 +203,29 @@ export class AvaliacaoSemCadastrosPage {
 
     if(this.avaliacaoSlider.getActiveIndex() == 1){
       this.createGrupo();
-    }
-    else if(this.avaliacaoSlider.getActiveIndex() == 2){
       this.verificaTipoAluno(this.funcaoAluno);
       console.log(this.slideConstrutorForm.value.alunoConstrutor);
       this.funcaoAluno = TipoAluno.organizador;
+      this.nomeAluno = "";
     }
-    else if(this.avaliacaoSlider.getActiveIndex() == 8){
+    else if(this.avaliacaoSlider.getActiveIndex() == 6){
       this.verificaTipoAluno(this.funcaoAluno);
       console.log(this.slideOrganizadorForm.value.alunoOrganizador);
       this.funcaoAluno = TipoAluno.programador;
+      this.nomeAluno = "";
     }
-    else if(this.avaliacaoSlider.getActiveIndex() == 14){
+    else if(this.avaliacaoSlider.getActiveIndex() == 11){
       this.verificaTipoAluno(this.funcaoAluno);
       console.log(this.slideProgramadorForm.value.alunoProgramador);
       this.funcaoAluno = TipoAluno.lider;
+      this.nomeAluno = "";
     }
-    else if(this.avaliacaoSlider.getActiveIndex() == 20){
+    else if(this.avaliacaoSlider.getActiveIndex() == 16){
       this.verificaTipoAluno(this.funcaoAluno);
       console.log(this.slideLiderForm.value.alunoLider);
+      this.nomeAluno = "";
     }
-    else if(this.avaliacaoSlider.getActiveIndex() == 25){
+    else if(this.avaliacaoSlider.getActiveIndex() == 20){
       this.updateGrupo();
       this.save();
       this.graficos();
@@ -270,7 +273,7 @@ export class AvaliacaoSemCadastrosPage {
     //Campos serão: Nome e Foto (TODO Verificar como fazer upload da foto)
 
     alert.addInput({
-      name: this.nomeAluno,
+      name: 'nomeAluno',
       placeholder: 'Nome do Aluno'
     });
 
@@ -278,15 +281,15 @@ export class AvaliacaoSemCadastrosPage {
     alert.addButton({
       text: 'OK',
       handler: data => {
-        this.createAluno();
+        this.createAluno(data.nomeAluno);
       }
     });
     alert.present();
   }
 
-  createAluno(){
+  createAluno(nomeAluno: string){
     let item = new AlunosPageModule();
-    item.nome = this.nomeAluno;
+    item.nome = nomeAluno;
     item.status = Status.added;
     item.lastModifiedDate = moment().toDate();
     item.userId = 1;
@@ -294,21 +297,27 @@ export class AvaliacaoSemCadastrosPage {
     this.dbService.insertAluno(item)
       .then(response => {
         console.log(response);
-        this.idAlunoTemp = response.id;
-        this.nomeAlunoTemp = response.nome;
+
+        this.dbService.getAlunoById(response.insertId)
+        .then(aluno => {
+          console.log(aluno);
+          this.idAlunoTemp = aluno[0].id;
+          this.nomeAlunoTemp = aluno[0].nome;
+
+          this.nomeAluno = aluno[0].nome;
+        })
       })
       .catch( error => {
         console.error( error );
       })
-
-      this.nomeAluno = "";
   }
 
   createGrupo(){
+
     let item = new GruposPageModule();
-    item.nome = "Grupo " + moment().year + moment().month +
-                moment().day + moment().hour + moment().minutes +
-                moment().milliseconds;
+    item.nome = "Grupo " + moment().year() + (moment().month()+1) +
+                moment().date() + moment().hour() + moment().minutes() +
+                moment().milliseconds();
     item.status = Status.added;
     item.lastModifiedDate = moment().toDate();
     item.userId = 1;
@@ -316,9 +325,16 @@ export class AvaliacaoSemCadastrosPage {
     this.dbService.insertGrupo(item)
       .then(response => {
         console.log(response);
-        this.grupoNome = response.nome;
 
-        this.createAvaliacao(response.id);
+        this.dbService.getGrupoById(response.insertId)
+        .then(grupo => {
+          console.log("Grupo cadastrado: " + grupo);
+          this.grupoNome = grupo[0].nome;
+          this.grupoId = grupo[0].id;
+
+          this.createAvaliacao(grupo[0].id);
+        })
+
       })
       .catch( error => {
         console.error( error );
@@ -330,11 +346,9 @@ export class AvaliacaoSemCadastrosPage {
     let date = moment().format('DD/MM/YYYY');
     console.log(date);
 
-    //let codigo = Math.floor((Math.random() * 100) + 1);
-
-    let nome = "Avaliação Rápida " + moment().year + moment().month +
-                moment().day + moment().hour + moment().minutes +
-                moment().milliseconds + ": " + this.grupoNome + " - " + date;
+    let nome = "Avaliação Rápida " + moment().year() + (moment().month()+1) +
+                moment().date() + moment().hour() + moment().minutes() +
+                moment().milliseconds() + ": " + this.grupoNome + " - " + date;
 
     let avaliacao = {
       nome: nome,
@@ -361,6 +375,7 @@ export class AvaliacaoSemCadastrosPage {
   updateGrupo(){
 
     let item = new GruposPageModule();
+    item.id = this.grupoId;
     item.alunoId1 = this.slideConstrutorForm.value.alunoConstrutor;
     item.alunoId2 = this.slideOrganizadorForm.value.alunoOrganizador;
     item.alunoId3 = this.slideProgramadorForm.value.alunoProgramador;
@@ -376,53 +391,61 @@ export class AvaliacaoSemCadastrosPage {
   }
 
   save() {
-
+    //TODO Verificar se é melhor usar o new Date().toISOString() ou moment().toDate()
     let avaliacaoConstrutor = {
+      createdDate: new Date().toISOString(),
+      lastModifiedDate: new Date().toISOString(),
+      status: Status.added,
+      funcao: TipoAluno.construtor,
       alunoId: this.slideConstrutorForm.value.alunoConstrutor,
-      date: new Date().toISOString(),
-      funcao: 1,
-      avaliacaoId: this.avaliacao.id,
-      resposta1: this.slideConstrutorQst1Form.value.construtorResposta1,
-      resposta2: this.slideConstrutorQst2Form.value.construtorResposta2,
-      resposta3: this.slideConstrutorQst3Form.value.construtorResposta3,
-      resposta4: this.slideConstrutorQst4Form.value.construtorResposta4,
-      resposta5: this.slideConstrutorQst5Form.value.construtorResposta5
+      avaliacaoGrupoId: this.avaliacao.id,
+      respostas: this.slideConstrutorQst1Form.value.construtorResposta1 + ";" +
+                 this.slideConstrutorQst2Form.value.construtorResposta2 + ";" +
+                 this.slideConstrutorQst3Form.value.construtorResposta3 + ";" +
+                 this.slideConstrutorQst4Form.value.construtorResposta4 + ";" +
+                 this.slideConstrutorQst5Form.value.construtorResposta5
     }
 
     let avaliacaoOrganizador = {
+      createdDate: new Date().toISOString(),
+      lastModifiedDate: new Date().toISOString(),
+      status: Status.added,
+      funcao: TipoAluno.organizador,
       alunoId: this.slideOrganizadorForm.value.alunoOrganizador,
-      date: new Date().toISOString(),
-      funcao: 2,
-      avaliacaoId: this.avaliacao.id,
-      resposta1: this.slideOrganizadorQst1Form.value.organizadorResposta1,
-      resposta2: this.slideOrganizadorQst2Form.value.organizadorResposta2,
-      resposta3: this.slideOrganizadorQst3Form.value.organizadorResposta3,
-      resposta4: this.slideOrganizadorQst4Form.value.organizadorResposta4,
-      resposta5: this.slideOrganizadorQst5Form.value.organizadorResposta5
+      avaliacaoGrupoId: this.avaliacao.id,
+      respostas: this.slideOrganizadorQst1Form.value.organizadorResposta1 + ";" +
+                 this.slideOrganizadorQst2Form.value.organizadorResposta2 + ";" +
+                 this.slideOrganizadorQst3Form.value.organizadorResposta3 + ";" +
+                 this.slideOrganizadorQst4Form.value.organizadorResposta4 + ";" +
+                 this.slideOrganizadorQst5Form.value.organizadorResposta5
     }
 
     let avaliacaoProgramador = {
+      createdDate: new Date().toISOString(),
+      lastModifiedDate: new Date().toISOString(),
+      status: Status.added,
+      funcao: TipoAluno.programador,
       alunoId: this.slideProgramadorForm.value.alunoProgramador,
-      date: new Date().toISOString(),
-      funcao: 3,
-      avaliacaoId: this.avaliacao.id,
-      resposta1: this.slideProgramadorQst1Form.value.programadorResposta1,
-      resposta2: this.slideProgramadorQst2Form.value.programadorResposta2,
-      resposta3: this.slideProgramadorQst3Form.value.programadorResposta3,
-      resposta4: this.slideProgramadorQst4Form.value.programadorResposta4,
-      resposta5: this.slideProgramadorQst5Form.value.programadorResposta5
+      avaliacaoGrupoId: this.avaliacao.id,
+      respostas: this.slideProgramadorQst1Form.value.programadorResposta1 + ";" +
+                 this.slideProgramadorQst2Form.value.programadorResposta2 + ";" +
+                 this.slideProgramadorQst3Form.value.programadorResposta3 + ";" +
+                 this.slideProgramadorQst4Form.value.programadorResposta4 + ";" +
+                 this.slideProgramadorQst5Form.value.programadorResposta5
     }
 
     let avaliacaoLider = {
+      createdDate: new Date().toISOString(),
+      lastModifiedDate: new Date().toISOString(),
+      status: Status.added,
+      funcao: TipoAluno.lider,
       alunoId: this.slideLiderForm.value.alunoLider,
-      date: new Date().toISOString(),
-      funcao: 4,
-      avaliacaoId: this.avaliacao.id,
-      resposta1: this.slideLiderQst1Form.value.liderResposta1,
-      resposta2: this.slideLiderQst2Form.value.liderResposta2,
-      resposta3: this.slideLiderQst3Form.value.liderResposta3,
-      resposta4: this.slideLiderQst4Form.value.liderResposta4,
-      resposta5: this.slideLiderQst5Form.value.liderResposta5
+      avaliacaoGrupoId: this.avaliacao.id,
+      respostas: this.slideLiderQst1Form.value.liderResposta1 + ";" +
+                 this.slideLiderQst2Form.value.liderResposta2 + ";" +
+                 this.slideLiderQst3Form.value.liderResposta3 + ";" +
+                 this.slideLiderQst4Form.value.liderResposta4 + ";" +
+                 this.slideLiderQst5Form.value.liderResposta5
     }
 
     console.log(avaliacaoConstrutor);

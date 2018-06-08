@@ -702,9 +702,9 @@ export class AvaliacaoComCadastrosPage {
     console.log(date);
     //let codigo = Math.floor((Math.random() * 100) + 1);
 
-    let nome = "Avaliação " + moment().year + moment().month +
-                moment().day + moment().hour + moment().minutes +
-                moment().milliseconds + ": " + this.grupoNome + " - " + date;
+    let nome = "Avaliação " + moment().year() + (moment().month()+1) +
+                moment().date() + moment().hour() + moment().minutes() +
+                moment().milliseconds() + ": " + this.grupoNome + " - " + date;
 
     let avaliacao = {
       nome: nome,
