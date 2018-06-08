@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DbServiceProvider } from '../../providers/db-service/db-service';
 
+import { Status } from '../enums/enum';
 import moment from 'moment'
 /**
  * Generated class for the EditAlunoModalPage page.
@@ -67,7 +68,7 @@ export class EditAlunoModalPage {
         id: this.id,
         nome: this.editAlunoForm.controls.nome.value,
         dataNascimento: this.editAlunoForm.controls.dataNascimento.value,
-        status: "UPDATED",
+        status: Status.updated,
         userId: 1,
         lastModifiedDate: moment().toDate(),
         turmaId: this.editAlunoForm.controls.turmaId.value
@@ -113,8 +114,8 @@ export class EditAlunoModalPage {
   getEscolaByTurmaId(turmaId){
     this.dbService.getTurmaById(turmaId)
       .then( result => {
-        this.editAlunoForm.controls['escolaId'].setValue(result[0].escolaId);     
-        this.getTurmasByEscolaId(this.escolaId);
+        this.editAlunoForm.controls['escolaId'].setValue(result[0].escolaId);
+        this.getTurmasByEscolaId(this.editAlunoForm.controls.escolaId.value);
       })
   }
 

@@ -17,7 +17,7 @@ export class AlunosPageModule {
   id: number;
   nome: string;
   dataNascimento: Date;
-  status: string;
+  status: number;
   lastModifiedDate: Date;
   userId: number;
   turmaId: number;

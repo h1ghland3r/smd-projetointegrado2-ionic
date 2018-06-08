@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DbServiceProvider } from '../../providers/db-service/db-service';
 
+import { Status } from '../enums/enum';
 import moment from 'moment'
 /**
  * Generated class for the EditGrupoModalPage page.
@@ -77,7 +78,7 @@ export class EditGrupoModalPage {
         id: this.id,
         nome: this.editGrupoForm.controls.nome.value,
         turmaId: this.editGrupoForm.controls.turmaId.value,
-        status: "UPDATED",
+        status: Status.updated,
         userId: 1,
         lastModifiedDate: moment().toDate(),
         alunoId1: this.editGrupoForm.controls.alunoId1.value,

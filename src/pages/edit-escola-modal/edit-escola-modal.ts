@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DbServiceProvider } from '../../providers/db-service/db-service';
 
+import { Status } from '../enums/enum';
 import moment from 'moment'
 
 /**
@@ -53,7 +54,7 @@ export class EditEscolaModalPage {
         id: this.id,
         index: this.index,
         nome: this.editEscolaForm.controls.nome.value,
-        status: "UPDATED",
+        status: Status.updated,
         userId: 1,
         lastModifiedDate: moment().toDate()
       };

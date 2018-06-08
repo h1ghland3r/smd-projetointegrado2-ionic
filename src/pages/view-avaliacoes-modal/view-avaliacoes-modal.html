@@ -3,7 +3,9 @@
 <ion-navbar>
     <ion-title>{{nome}}</ion-title>
     <ion-buttons end>
-    <button ion-button (click)="closeModal()">Fechar</button>
+    <button ion-button block (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+    </button>
     </ion-buttons>
 </ion-navbar>
 
@@ -17,6 +19,11 @@
       Informações Gerais
     </ion-card-header>
     <ion-card-content>
+      <ion-item>
+        <ion-label>Nome da avaliação:</ion-label>
+        <ion-input [readonly]="true" [(ngModel)]="nome" type="text">{{nome}}</ion-input>
+      </ion-item>
+
       <ion-item>
         <ion-label>Data da avaliação:</ion-label>
         <ion-input [readonly]="true" [(ngModel)]="createdDate" type="text">{{createdDate}}</ion-input>

@@ -89,11 +89,16 @@ export class ViewAvaliacoesModalPage {
         this.grupoNome = grupo[0].nome;
         this.dbService.getTurmaById(grupo[0].turmaId)
           .then(turma => {
-            this.turmaNome = turma[0].nome;
-            this.dbService.getEscolaById(turma[0].escolaId)
-              .then(escola => {
-                this.escolaNome = escola[0].nome;
-              })
+            if (turma.length > 0) {
+              this.turmaNome = turma[0].nome;
+              this.dbService.getEscolaById(turma[0].escolaId)
+                .then(escola => {
+                  this.escolaNome = escola[0].nome;
+                })
+            } else {
+              this.turmaNome = "";
+              this.escolaNome = "";
+            }
           })
       })
       .catch( error => {
