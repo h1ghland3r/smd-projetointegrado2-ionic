@@ -42,6 +42,8 @@ import { ViewAvaliacoesModalPage } from '../pages/view-avaliacoes-modal/view-ava
 import { ViewAvaliacaoAlunoModalPage } from '../pages/view-avaliacao-aluno-modal/view-avaliacao-aluno-modal';
 import { ViewAvaliacoesGraficoPage } from '../pages/view-avaliacoes-grafico/view-avaliacoes-grafico';
 
+import { RegisterPageModule } from '../pages/register/register.module';
+
 import { DbServiceProvider } from '../providers/db-service/db-service';
 
 @NgModule({
@@ -81,7 +83,7 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -124,7 +126,19 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     NativePageTransitions,
     SQLite,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DbServiceProvider
+    DbServiceProvider,
   ]
 })
-export class AppModule {}
+export class AppModule {
+
+  private static usuarioLogado: RegisterPageModule;
+
+  static getUsuarioLogado(){
+     return this.usuarioLogado;
+  }
+
+  static setUsuarioLogado(usuario: RegisterPageModule){
+    this.usuarioLogado = usuario;
+  }
+
+}
