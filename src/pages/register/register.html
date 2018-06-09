@@ -51,7 +51,7 @@
                             <ion-input type="password" placeholder="Senha" formControlName="password" maxlength="30" required>{{password}}</ion-input>
                         </ion-item>
 
-                        <ion-item *ngIf="(errorSenha && submitAttempt)">
+                        <ion-item *ngIf="(errorPassword && submitAttempt)">
                           <p>O campo "Senha" é obrigatório.</p>
                         </ion-item>
 

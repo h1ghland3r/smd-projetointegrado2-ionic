@@ -147,7 +147,7 @@ export class RegisterPage {
           this.errorEmail = true;
         }
         if (this.registroForm.controls.password.value == "") {
-          this.password = true;
+          this.errorPassword = true;
         }
       }
     }
