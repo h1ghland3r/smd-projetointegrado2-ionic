@@ -384,7 +384,32 @@ export class DbServiceProvider {
 
   insertUsuario(usuario: any) {
     let sql = 'INSERT INTO usuarios(nome, email, login, senha, status, lastModifiedDate) VALUES(?,?,?,?,?,?)';
-    return this.db.executeSql(sql, [usuario.nome, usuario.email, usuario.login, usuario.senha, usuario.status, usuario.lastModifiedDate]);
+    return this.db.executeSql(sql, [usuario.nome, usuario.email, usuario.login, usuario.password, usuario.status, usuario.lastModifiedDate]);
+  }
+
+  getAllUsuarios() {
+    let sql = 'SELECT * FROM usuarios';
+    return this.db.executeSql(sql, [])
+      .then(response => {
+        let usuarios = [];
+        for (let index = 0; index < response.rows.length; index++) {
+          usuarios.push(response.rows.item(index));
+        }
+        return Promise.resolve(usuarios);
+      })
+      .catch(error => Promise.reject(error));
+  }
+
+  getUsuarioById(id: any) {
+    let sql = 'SELECT * FROM usuarios WHERE id=?';
+    return this.db.executeSql(sql, [id])
+      .then(response => {
+        let usuarios = [];
+        for (let index = 0; index < response.rows.length; index++) {
+          usuarios.push(response.rows.item(index));
+        }
+        return Promise.resolve(usuarios);
+      });
   }
 
   // Fim CRUD - Table usuarios
@@ -442,7 +467,7 @@ export class DbServiceProvider {
     for (let index = 0; index < avaliacoes.length; index++) {
       let sql = 'INSERT INTO avaliacaoAluno(createdDate, funcao, status, lastModifiedDate, respostas, alunoId, avaliacaoGrupoId) VALUES(?,?,?,?,?,?,?)';
       if (index == avaliacoes.length - 1) {
-        return this.db.executeSql(sql, [avaliacoes[index].createdDate, avaliacoes[index].funcao, avaliacoes[index].status, avaliacoes[index].lastModifiedDate, avaliacoes[index].respostas, avaliacoes[index].alunoId, avaliacoes[index].avaliacaoGrupoId]);        
+        return this.db.executeSql(sql, [avaliacoes[index].createdDate, avaliacoes[index].funcao, avaliacoes[index].status, avaliacoes[index].lastModifiedDate, avaliacoes[index].respostas, avaliacoes[index].alunoId, avaliacoes[index].avaliacaoGrupoId]);
       } else {
         this.db.executeSql(sql, [avaliacoes[index].createdDate, avaliacoes[index].funcao, avaliacoes[index].status, avaliacoes[index].lastModifiedDate, avaliacoes[index].respostas, avaliacoes[index].alunoId, avaliacoes[index].avaliacaoGrupoId]);
       }

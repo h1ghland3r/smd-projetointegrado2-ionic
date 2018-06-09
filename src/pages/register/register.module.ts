@@ -13,4 +13,12 @@ import { RegisterPage } from './register';
     RegisterPage
   ]
 })
-export class RegisterPageModule {}
+export class RegisterPageModule {
+  id: number;
+  nome: string;
+  email: string;
+  login: string;
+  password: string;
+  status: number;
+  lastModifiedDate: Date;
+}

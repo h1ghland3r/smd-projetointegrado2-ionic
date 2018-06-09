@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 import { AvaliacaoPage } from '../avaliacao/avaliacao';
 import { CadastrosPage } from '../cadastros/cadastros';
 
+import { AppModule } from '../../app/app.module';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -11,6 +13,7 @@ export class HomePage {
   avaliacaoInicio = AvaliacaoPage;
 
   constructor(public navCtrl: NavController) {
+    console.log(AppModule.getUsuarioLogado());
   }
 
   iniciarAvaliacao() {
