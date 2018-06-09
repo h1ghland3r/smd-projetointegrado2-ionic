@@ -21,24 +21,38 @@
 <ion-content padding>
 
     <div class="signup-box">
-        <form>
+        <form [formGroup]="registroForm">
             <ion-row>
                 <ion-col col-12 text-center class="form-inputs">
                     <ion-list>
 
+                        <p *ngIf="submitAttempt" style="color: #ea6153;">Por favor, preencha todos os campos abaixo.</p>
+
                         <ion-item no-line margin-bottom class="signup-input-wrapper">
                             <ion-label><ion-icon name="person" text-center></ion-icon></ion-label>
-                            <ion-input type="text" placeholder="Nome" name="name" maxlength="70" required></ion-input>
+                            <ion-input type="text" placeholder="Nome" formControlName="name" maxlength="70" required>{{name}}</ion-input>
+                        </ion-item>
+
+                        <ion-item *ngIf="(errorNome && submitAttempt)">
+                          <p>O campo "Nome" é obrigatório.</p>
                         </ion-item>
 
                         <ion-item no-line margin-bottom class="signup-input-wrapper">
                             <ion-label><ion-icon name="mail" text-center></ion-icon></ion-label>
-                            <ion-input type="text" placeholder="Email" name="email" maxlength="50" required></ion-input>
+                            <ion-input type="text" placeholder="Email" formControlName="email" maxlength="50" required>{{email}}</ion-input>
+                        </ion-item>
+
+                        <ion-item *ngIf="(errorEmail && submitAttempt)">
+                          <p>O campo "Email" é obrigatório.</p>
                         </ion-item>
 
                         <ion-item margin-bottom class="signup-input-wrapper">
                             <ion-label><ion-icon name="lock" text-center></ion-icon></ion-label>
-                            <ion-input type="password" placeholder="Senha" name="password" maxlength="30" required></ion-input>
+                            <ion-input type="password" placeholder="Senha" formControlName="password" maxlength="30" required>{{password}}</ion-input>
+                        </ion-item>
+
+                        <ion-item *ngIf="(errorPassword && submitAttempt)">
+                          <p>O campo "Senha" é obrigatório.</p>
                         </ion-item>
 
                         <div class="signup-password-description">
@@ -51,7 +65,7 @@
 
             <ion-row class="row-signup">
                 <ion-col col-12 text-center>
-                    <button ion-button color="primary" class="button-actions" type="submit">Cadastrar</button>
+                    <button ion-button color="primary" class="button-actions" (click)="cadastrarNovoUsuario()">Cadastrar</button>
                 </ion-col>
             </ion-row>
 
