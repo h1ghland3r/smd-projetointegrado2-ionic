@@ -45,7 +45,7 @@ export class LoginPage {
     checkLogin(){
       this.dbService.checkLogin(this.email, this.password)
         .then(result => {
-          console.log(result);
+          console.log("Resultado: " + result);
         })
         .catch( error => {
           console.error( error );
@@ -53,6 +53,7 @@ export class LoginPage {
     }
 
     public abrirHome() {
+        this.checkLogin();
         let options: NativeTransitionOptions = {
             direction: 'left',
             duration: 500,

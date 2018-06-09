@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from 'ionic-angular';
@@ -44,6 +44,7 @@ export class RegisterPage {
                 public navParams: NavParams,
                 public formBuilder: FormBuilder,
                 public nativePageTransitions: NativePageTransitions,
+                private menu: MenuController,
                 public dbService: DbServiceProvider,
                 public viewCtrl: ViewController) {
 
@@ -58,6 +59,14 @@ export class RegisterPage {
     ionViewDidLoad() {
         console.log('ionViewDidLoad RegisterPage');
         this.getAllUsuarios();
+    }
+
+    ionViewDidEnter() {
+        this.menu.swipeEnable(false);
+    }
+
+    ionViewWillLeave() {
+        this.menu.swipeEnable(true);
     }
 
     cadastrarNovoUsuario(){
@@ -78,7 +87,8 @@ export class RegisterPage {
             .then(usuario => {
               console.log(usuario);
               this.createObjetoUser(usuario);
-              AppModule.setUsuarioLogado(this.usuarioCriado)
+              AppModule.setUsuarioLogado(this.usuarioCriado);
+              this.closeModal()
               this.abrirHome();
             })
           })
