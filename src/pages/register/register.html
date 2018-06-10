@@ -28,6 +28,8 @@
 
                         <p *ngIf="submitAttempt" style="color: #ea6153;">Por favor, preencha todos os campos abaixo.</p>
 
+                        <p *ngIf="emailExistente" style="color: #ea6153;">Esse email já está cadastrado.</p>
+
                         <ion-item no-line margin-bottom class="signup-input-wrapper">
                             <ion-label><ion-icon name="person" text-center></ion-icon></ion-label>
                             <ion-input type="text" placeholder="Nome" formControlName="name" maxlength="70" required>{{name}}</ion-input>
