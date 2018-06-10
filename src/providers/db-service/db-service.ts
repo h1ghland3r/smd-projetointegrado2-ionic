@@ -412,6 +412,18 @@ export class DbServiceProvider {
       });
   }
 
+  getUsuarioByEmail(email: string) {
+    let sql = 'SELECT * FROM usuarios WHERE email=?';
+    return this.db.executeSql(sql, [email])
+      .then(response => {
+        let usuarios = [];
+        for (let index = 0; index < response.rows.length; index++) {
+          usuarios.push(response.rows.item(index));
+        }
+        return Promise.resolve(usuarios);
+      });
+  }
+
   // Fim CRUD - Table usuarios
 
   //Inicio - Avaliaçao do Grupo
