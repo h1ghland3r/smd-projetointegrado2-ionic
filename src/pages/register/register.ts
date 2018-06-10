@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { App, IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from 'ionic-angular';
@@ -41,7 +41,8 @@ export class RegisterPage {
     errorEmail= false;
     errorPassword = false;
 
-    constructor(public navCtrl: NavController,
+    constructor(public appCtrl: App,
+                public navCtrl: NavController,
                 public navParams: NavParams,
                 public formBuilder: FormBuilder,
                 public nativePageTransitions: NativePageTransitions,
@@ -68,6 +69,21 @@ export class RegisterPage {
 
     ionViewWillLeave() {
         this.menu.swipeEnable(true);
+    }
+
+    closeModal() {
+        this.viewCtrl.dismiss();
+    }
+    
+    public abrirHome() {
+        let options: NativeTransitionOptions = {
+            direction: 'left',
+            duration: 500,
+            slowdownfactor: -1,
+            iosdelay: 50
+        }
+        this.nativePageTransitions.slide(options);
+        this.appCtrl.getRootNav().setRoot(HomePage);
     }
 
     cadastrarNovoUsuario(){
@@ -136,17 +152,6 @@ export class RegisterPage {
       this.usuarioCriado.lastModifiedDate = user[0].lastModifiedDate;
     }
 
-    public abrirHome() {
-        let options: NativeTransitionOptions = {
-            direction: 'left',
-            duration: 500,
-            slowdownfactor: -1,
-            iosdelay: 50
-        }
-        this.nativePageTransitions.slide(options);
-        this.navCtrl.setRoot(HomePage);
-    }
-
     getAllUsuarios(){
       this.dbService.getAllUsuarios()
         .then(usuarios => {
@@ -156,10 +161,6 @@ export class RegisterPage {
         .catch( error => {
           console.error( error );
         });
-    }
-
-    closeModal() {
-        this.viewCtrl.dismiss();
     }
 
     validarEmailExistente(){
