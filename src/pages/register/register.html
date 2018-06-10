@@ -26,15 +26,13 @@
                 <ion-col col-12 text-center class="form-inputs">
                     <ion-list>
 
-                        <p *ngIf="submitAttempt" style="color: #ea6153;">Por favor, preencha todos os campos abaixo.</p>
-
                         <ion-item no-line margin-bottom class="signup-input-wrapper">
                             <ion-label><ion-icon name="person" text-center></ion-icon></ion-label>
                             <ion-input type="text" placeholder="Nome" formControlName="name" maxlength="70" required>{{name}}</ion-input>
                         </ion-item>
 
-                        <ion-item *ngIf="(errorNome && submitAttempt)">
-                          <p>O campo "Nome" é obrigatório.</p>
+                        <ion-item class="no-padding-left" *ngIf="(errorNome && submitAttempt)">
+                          <p class="validation-message">O campo "Nome" é obrigatório.</p>
                         </ion-item>
 
                         <ion-item no-line margin-bottom class="signup-input-wrapper">
@@ -42,8 +40,8 @@
                             <ion-input type="text" placeholder="Email" formControlName="email" maxlength="50" required>{{email}}</ion-input>
                         </ion-item>
 
-                        <ion-item *ngIf="(errorEmail && submitAttempt)">
-                          <p>O campo "Email" é obrigatório.</p>
+                        <ion-item class="no-padding-left" *ngIf="(errorEmail && submitAttempt)">
+                          <p class="validation-message">O campo "Email" é obrigatório.</p>
                         </ion-item>
 
                         <ion-item margin-bottom class="signup-input-wrapper">
@@ -51,8 +49,8 @@
                             <ion-input type="password" placeholder="Senha" formControlName="password" maxlength="30" required>{{password}}</ion-input>
                         </ion-item>
 
-                        <ion-item *ngIf="(errorPassword && submitAttempt)">
-                          <p>O campo "Senha" é obrigatório.</p>
+                        <ion-item class="no-padding-left" *ngIf="(errorPassword && submitAttempt)">
+                          <p class="validation-message">O campo "Senha" é obrigatório.</p>
                         </ion-item>
 
                         <div class="signup-password-description">
@@ -62,6 +60,8 @@
                     </ion-list>
                 </ion-col>
             </ion-row>
+
+            <p *ngIf="submitAttempt" margin-top margin-bottom class="validation-message">Por favor, preencha todos os campos.</p>
 
             <ion-row class="row-signup">
                 <ion-col col-12 text-center>
