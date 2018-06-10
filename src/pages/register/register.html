@@ -58,10 +58,12 @@
                         </div>
 
                     </ion-list>
+                    <p *ngIf="emailExistente" margin-top class="validation-message">Esse email já está cadastrado.</p>
+        
+                    <p *ngIf="submitAttempt" margin-top margin-bottom class="validation-message">Por favor, preencha todos os campos.</p>
                 </ion-col>
             </ion-row>
 
-            <p *ngIf="submitAttempt" margin-top margin-bottom class="validation-message">Por favor, preencha todos os campos.</p>
 
             <ion-row class="row-signup">
                 <ion-col col-12 text-center>

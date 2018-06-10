@@ -36,6 +36,7 @@ export class RegisterPage {
     registroForm: FormGroup;
 
     submitAttempt = false;
+    emailExistente = false;
     errorNome = false;
     errorEmail= false;
     errorPassword = false;
@@ -72,6 +73,8 @@ export class RegisterPage {
     cadastrarNovoUsuario(){
 
       if(this.registroForm.valid){
+        this.submitAttempt = false;
+        this.emailExistente = false;
         let item = new RegisterPageModule();
         item.nome = this.registroForm.controls.name.value;
         item.email = this.registroForm.controls.email.value;
@@ -80,22 +83,43 @@ export class RegisterPage {
         item.status = Status.added;
         item.lastModifiedDate = moment().toDate();
 
-        this.dbService.insertUsuario(item)
-          .then(response => {
-            console.log(response);
-            this.dbService.getUsuarioById(response.insertId)
-            .then(usuario => {
-              console.log(usuario);
-              this.createObjetoUser(usuario);
-              AppModule.setUsuarioLogado(this.usuarioCriado);
-              this.closeModal()
-              this.abrirHome();
-            })
-          })
-          .catch( error => {
-            console.error( error );
-          })
-      } else {
+        this.dbService.getUsuarioByEmail(this.registroForm.controls.email.value)
+        .then(usuarios => {
+          console.log(usuarios);
+          if(usuarios.length > 0){
+
+            this.emailExistente = true;
+
+          }
+          else {
+
+            if(!this.emailExistente){
+
+              this.dbService.insertUsuario(item)
+                .then(response => {
+                  console.log(response);
+                  this.dbService.getUsuarioById(response.insertId)
+                  .then(usuario => {
+                    console.log(usuario);
+                    this.createObjetoUser(usuario);
+                    AppModule.setUsuarioLogado(this.usuarioCriado);
+                    this.closeModal()
+                    this.abrirHome();
+                    this.emailExistente = false;
+                  })
+                })
+                .catch( error => {
+                  console.error( error );
+                })
+            }
+          }
+        })
+        .catch( error => {
+          console.error( error );
+        });
+
+      }
+      else {
         this.submitAttempt = true;
         this.validarCampos();
       }
@@ -136,6 +160,19 @@ export class RegisterPage {
 
     closeModal() {
         this.viewCtrl.dismiss();
+    }
+
+    validarEmailExistente(){
+      this.dbService.getUsuarioByEmail(this.registroForm.controls.email.value)
+      .then(usuarios => {
+        console.log(usuarios);
+        if(usuarios.length > 0){
+          this.emailExistente = true;
+        }
+      })
+      .catch( error => {
+        console.error( error );
+      });
     }
 
     validarCampos(){
