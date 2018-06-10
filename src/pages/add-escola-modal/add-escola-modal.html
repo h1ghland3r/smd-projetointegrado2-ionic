@@ -16,16 +16,18 @@
 
     <form [formGroup]="addEscolaForm">
 
-      <p *ngIf="submitAttempt" style="color: #ea6153;">Por favor, preencha todos os campos abaixo.</p>
+      <p class="hint-message" text-right>* obrigatório</p>
 
       <ion-item class="no-padding-left">
-        <ion-label>Nome da Escola*</ion-label>
-        <ion-input formControlName="nome" type="text" text-right></ion-input>
+        <ion-label stacked>Nome da Escola *</ion-label>
+        <ion-input formControlName="nome" type="text"></ion-input>
       </ion-item>
 
-      <ion-item *ngIf="(errorNome && submitAttempt)">
-        <p>O campo "Nome" é obrigatório.</p>
+      <ion-item class="no-padding-left" *ngIf="(errorNome && submitAttempt)">
+        <p class="validation-message">O campo "Nome" é obrigatório.</p>
       </ion-item>
+
+    <!-- <p *ngIf="submitAttempt" margin-top margin-bottom class="validation-message">Por favor, preencha todos os campos.</p> -->
 
     </form>
 

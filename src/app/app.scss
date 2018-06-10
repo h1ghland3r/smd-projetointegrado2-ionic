@@ -186,6 +186,16 @@ ion-select {
   padding-left: 0!important;
 }
 
+.hint-message {
+    font-size: 1.2rem;
+    color: #ea6153 !important;
+}
+
+.validation-message {
+    color: #ea6153 !important;
+    font-size: 1.6rem !important;
+}
+
 /* Modal custom */
 
 ion-buttons button[icon-only].icon-left-side {

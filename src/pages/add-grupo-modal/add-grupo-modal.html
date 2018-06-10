@@ -16,82 +16,84 @@
 
     <form [formGroup]="addGrupoForm">
 
-      <p *ngIf="submitAttempt" style="color: #ea6153;">Por favor, preencha todos os campos abaixo.</p>
+        <p class="hint-message" text-right>* obrigatório</p>
 
         <ion-item class="no-padding-left">
-          <ion-label>Nome do Grupo*</ion-label>
+          <ion-label stacked>Nome do Grupo *</ion-label>
           <ion-input formControlName="nome" type="text" text-right>{{nome}}</ion-input>
         </ion-item>
 
-        <ion-item *ngIf="(errorNome && submitAttempt)">
-          <p>O campo "Nome" é obrigatório.</p>
+        <ion-item class="no-padding-left" *ngIf="(errorNome && submitAttempt)">
+          <p class="validation-message">O campo "Nome" é obrigatório.</p>
         </ion-item>
 
         <ion-item class="no-padding-left">
-          <ion-label>Escola*</ion-label>
-          <ion-select formControlName="escolaId" (ngModelChange)="getTurmasByEscolaId($event)">
+          <ion-label stacked>Escola *</ion-label>
+          <ion-select formControlName="escolaId" (ngModelChange)="getTurmasByEscolaId($event)" okText="Ok" cancelText="Cancelar">
             <ion-option *ngFor="let escola of escolas" [value]="escola.id">{{escola.nome}}</ion-option>
           </ion-select>
         </ion-item>
 
-        <ion-item *ngIf="(errorEscolaId && submitAttempt)">
-          <p>Selecione uma escola.</p>
+        <ion-item class="no-padding-left" *ngIf="(errorEscolaId && submitAttempt)">
+          <p class="validation-message">Selecione uma escola.</p>
         </ion-item>
 
         <ion-item class="no-padding-left">
-            <ion-label>Turma*</ion-label>
-            <ion-select formControlName="turmaId" (ngModelChange)="getAlunosByTurmaId($event)">
+            <ion-label stacked>Turma *</ion-label>
+            <ion-select formControlName="turmaId" (ngModelChange)="getAlunosByTurmaId($event)" okText="Ok" cancelText="Cancelar">
               <ion-option *ngFor="let turma of turmas" [value]="turma.id" >{{turma.nome}}</ion-option>
             </ion-select>
         </ion-item>
 
-        <ion-item *ngIf="(errorTurmaId && submitAttempt)">
-          <p>Selecione uma turma.</p>
+        <ion-item class="no-padding-left" *ngIf="(errorTurmaId && submitAttempt)">
+          <p class="validation-message">Selecione uma turma.</p>
         </ion-item>
 
         <ion-item class="no-padding-left">
-            <ion-label>Aluno 1*</ion-label>
-            <ion-select formControlName="alunoId1">
+            <ion-label stacked>Aluno 1 *</ion-label>
+            <ion-select formControlName="alunoId1" okText="Ok" cancelText="Cancelar">
               <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
             </ion-select>
         </ion-item>
 
-        <ion-item *ngIf="(errorAlunoId1 && submitAttempt)">
-          <p>Selecione um aluno.</p>
+        <ion-item class="no-padding-left" *ngIf="(errorAlunoId1 && submitAttempt)">
+          <p class="validation-message">Selecione um aluno.</p>
         </ion-item>
 
         <ion-item class="no-padding-left">
-            <ion-label>Aluno 2*</ion-label>
-            <ion-select formControlName="alunoId2">
+            <ion-label stacked>Aluno 2 *</ion-label>
+            <ion-select formControlName="alunoId2" okText="Ok" cancelText="Cancelar">
               <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
             </ion-select>
         </ion-item>
 
-        <ion-item *ngIf="(errorAlunoId2 && submitAttempt)">
-          <p>Selecione um aluno.</p>
+        <ion-item class="no-padding-left" *ngIf="(errorAlunoId2 && submitAttempt)">
+          <p class="validation-message">Selecione um aluno.</p>
         </ion-item>
 
         <ion-item class="no-padding-left">
-            <ion-label>Aluno 3*</ion-label>
-            <ion-select formControlName="alunoId3">
+            <ion-label stacked>Aluno 3 *</ion-label>
+            <ion-select formControlName="alunoId3" okText="Ok" cancelText="Cancelar">
               <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
             </ion-select>
         </ion-item>
 
-        <ion-item *ngIf="(errorAlunoId3 && submitAttempt)">
-          <p>Selecione um aluno.</p>
+        <ion-item class="no-padding-left" *ngIf="(errorAlunoId3 && submitAttempt)">
+          <p class="validation-message">Selecione um aluno.</p>
         </ion-item>
 
         <ion-item class="no-padding-left">
-            <ion-label>Aluno 4*</ion-label>
-            <ion-select formControlName="alunoId4">
+            <ion-label stacked>Aluno 4 *</ion-label>
+            <ion-select formControlName="alunoId4" okText="Ok" cancelText="Cancelar">
               <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
             </ion-select>
         </ion-item>
 
-        <ion-item *ngIf="(errorAlunoId4 && submitAttempt)">
-          <p>Selecione um aluno.</p>
+        <ion-item class="no-padding-left" *ngIf="(errorAlunoId4 && submitAttempt)">
+          <p class="validation-message">Selecione um aluno.</p>
         </ion-item>
+
+        <p *ngIf="submitAttempt" margin-top margin-bottom class="validation-message">Por favor, preencha todos os campos.</p>
 
       </form>
 
