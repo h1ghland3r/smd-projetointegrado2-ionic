@@ -22,7 +22,7 @@
                 <div class="border-bottom-grey">
                   <ion-item class="no-padding-left" margin-vertical>
                       <ion-label>Escola</ion-label>
-                      <ion-select formControlName="escola" (ngModelChange)="getTurmasByEscolaId($event)" [(ngModel)]="escolaId">
+                      <ion-select formControlName="escola" (ngModelChange)="getTurmasByEscolaId($event)" [(ngModel)]="escolaId" okText="Ok" cancelText="Cancelar">
                         <ion-option *ngFor="let escola of escolas" [value]="escola.id">{{escola.nome}}</ion-option>
                       </ion-select>
                   </ion-item>
@@ -31,7 +31,7 @@
                 <div class="border-bottom-grey">
                   <ion-item class="no-padding-left" margin-vertical>
                       <ion-label>Turma</ion-label>
-                      <ion-select formControlName="turma" (ngModelChange)="getGruposByTurmaId($event)" [(ngModel)]="turmaId">
+                      <ion-select formControlName="turma" (ngModelChange)="getGruposByTurmaId($event)" [(ngModel)]="turmaId" okText="Ok" cancelText="Cancelar">
                         <ion-option *ngFor="let turma of turmas" [value]="turma.id">{{turma.nome}}</ion-option>
                       </ion-select>
                   </ion-item>
@@ -40,7 +40,7 @@
                 <div class="border-bottom-grey">
                   <ion-item class="no-padding-left" margin-vertical>
                       <ion-label>Grupo</ion-label>
-                      <ion-select formControlName="grupo" [(ngModel)]="grupoId">
+                      <ion-select formControlName="grupo" [(ngModel)]="grupoId" okText="Ok" cancelText="Cancelar">
                         <ion-option *ngFor="let grupo of grupos" [value]="grupo.id">{{grupo.nome}}</ion-option>
                       </ion-select>>
                   </ion-item>
