@@ -23,10 +23,6 @@
 
         <ion-list no-lines>
 
-          <!-- Ambos os metodos tem display NONE como default, precisa inserir uma
-            condicao dependendo do botao selecionado na pagina anterior setar
-            display BLOCK em uma das divs 'top-registed-user' ou 'top-new-user' -->
-
           <!-- Inicio rapido -->
           <div class="top-new-user">
               <ion-label margin-vertical color="black">
@@ -104,17 +100,18 @@
 
         <ion-list no-lines>
 
-            <form [formGroup]="slideConstrutorQst2Form">
-
+            <div class="top-new-user">
                 <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/img/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoContrutorNome}}</span>
-                  </ion-avatar>
+                    <ion-avatar class="user-details">
+                        <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                        <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                        <span class="avatar-name">{{alunoContrutorNome}}</span>
+                        <span class="current-category">Construtor</span>
+                    </ion-avatar>
                 </ion-label>
+            </div>
 
+            <form [formGroup]="slideConstrutorQst2Form">
 
                 <ion-card margin-vertical>
                   <ion-card-header>
@@ -160,17 +157,18 @@
 
         <ion-list no-lines>
 
-            <form [formGroup]="slideConstrutorQst3Form">
-
+            <div class="top-new-user">
                 <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/img/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoContrutorNome}}</span>
-                  </ion-avatar>
+                    <ion-avatar class="user-details">
+                        <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                        <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                        <span class="avatar-name">{{alunoContrutorNome}}</span>
+                        <span class="current-category">Construtor</span>
+                    </ion-avatar>
                 </ion-label>
+            </div>
 
+            <form [formGroup]="slideConstrutorQst3Form">
 
                 <ion-card margin-vertical>
                   <ion-card-header>
@@ -217,17 +215,18 @@
 
         <ion-list no-lines>
 
-            <form [formGroup]="slideConstrutorQst4Form">
-
+            <div class="top-new-user">
                 <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/img/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoContrutorNome}}</span>
-                  </ion-avatar>
+                    <ion-avatar class="user-details">
+                        <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                        <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                        <span class="avatar-name">{{alunoContrutorNome}}</span>
+                        <span class="current-category">Construtor</span>
+                    </ion-avatar>
                 </ion-label>
+            </div>
 
+            <form [formGroup]="slideConstrutorQst4Form">
 
                 <ion-card margin-vertical>
                   <ion-card-header>
@@ -274,17 +273,18 @@
 
         <ion-list no-lines>
 
-            <form [formGroup]="slideConstrutorQst5Form">
-
+            <div class="top-new-user">
                 <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/img/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoContrutorNome}}</span>
-                  </ion-avatar>
+                    <ion-avatar class="user-details">
+                        <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                        <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                        <span class="avatar-name">{{alunoContrutorNome}}</span>
+                        <span class="current-category">Construtor</span>
+                    </ion-avatar>
                 </ion-label>
+            </div>
 
+            <form [formGroup]="slideConstrutorQst5Form">
 
                 <ion-card margin-vertical>
                   <ion-card-header>
@@ -359,31 +359,7 @@
             </div>
           </ion-label>
 
-                <!-- <form [formGroup]="slideOrganizadorForm">
-                <div class="border-bottom">
-                  <ion-item class="no-padding-left">
-                      <ion-label margin-top>Selecione o aluno</ion-label>
-                      <ion-select formControlName="alunoOrganizador" [(ngModel)]="alunoOrganizador">
-                        <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
-                      </ion-select>>
-                  </ion-item>
-                </div>
-
-                <button ion-button color="primary" class="button-top-margin" [disabled]="slideOrganizadorForm.invalid" (click)="next()" full>Iniciar</button>
-
-                </form> -->
-
             <form [formGroup]="slideOrganizadorQst1Form">
-
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/img/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoOrganizadorNome}}</span>
-                  </ion-avatar>
-                </ion-label>
-
 
                 <ion-card margin-vertical>
                   <ion-card-header>
@@ -429,17 +405,18 @@
 
         <ion-list no-lines>
 
-            <form [formGroup]="slideOrganizadorQst2Form">
-
+            <div class="top-new-user">
                 <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/avatars/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoOrganizadorNome}}</span>
-                  </ion-avatar>
+                    <ion-avatar class="user-details">
+                        <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                        <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                        <span class="avatar-name">{{alunoOrganizadorNome}}</span>
+                        <span class="current-category">Organizador</span>
+                    </ion-avatar>
                 </ion-label>
+            </div>
 
+            <form [formGroup]="slideOrganizadorQst2Form">
 
                 <ion-card margin-vertical>
                   <ion-card-header>
@@ -485,17 +462,18 @@
 
         <ion-list no-lines>
 
-            <form [formGroup]="slideOrganizadorQst3Form">
-
+            <div class="top-new-user">
                 <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/avatars/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoOrganizadorNome}}</span>
-                  </ion-avatar>
+                    <ion-avatar class="user-details">
+                        <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                        <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                        <span class="avatar-name">{{alunoOrganizadorNome}}</span>
+                        <span class="current-category">Organizador</span>
+                    </ion-avatar>
                 </ion-label>
+            </div>
 
+            <form [formGroup]="slideOrganizadorQst3Form">
 
                 <ion-card margin-vertical>
                   <ion-card-header>
@@ -541,17 +519,18 @@
 
         <ion-list no-lines>
 
-            <form [formGroup]="slideOrganizadorQst4Form">
-
+            <div class="top-new-user">
                 <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/avatars/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoOrganizadorNome}}</span>
-                  </ion-avatar>
+                    <ion-avatar class="user-details">
+                        <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                        <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                        <span class="avatar-name">{{alunoOrganizadorNome}}</span>
+                        <span class="current-category">Organizador</span>
+                    </ion-avatar>
                 </ion-label>
+            </div>
 
+            <form [formGroup]="slideOrganizadorQst4Form">
 
                 <ion-card margin-vertical>
                   <ion-card-header>
@@ -597,17 +576,18 @@
 
         <ion-list no-lines>
 
-            <form [formGroup]="slideOrganizadorQst5Form">
-
+            <div class="top-new-user">
                 <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/avatars/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoOrganizadorNome}}</span>
-                  </ion-avatar>
+                    <ion-avatar class="user-details">
+                        <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                        <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                        <span class="avatar-name">{{alunoOrganizadorNome}}</span>
+                        <span class="current-category">Organizador</span>
+                    </ion-avatar>
                 </ion-label>
+            </div>
 
+            <form [formGroup]="slideOrganizadorQst5Form">
 
                 <ion-card margin-vertical>
                   <ion-card-header>
@@ -681,32 +661,7 @@
             </div>
           </ion-label>
 
-                <!-- <form [formGroup]="slideProgramadorForm">
-
-                <div class="border-bottom">
-                  <ion-item class="no-padding-left">
-                      <ion-label margin-top>Selecione o aluno</ion-label>
-                      <ion-select formControlName="alunoProgramador" [(ngModel)]="alunoProgramador">
-                        <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
-                      </ion-select>>
-                  </ion-item>
-                </div>
-
-                <button ion-button color="primary" class="button-top-margin" [disabled]="slideProgramadorForm.invalid" (click)="next()" full>Iniciar</button>
-
-            </form> -->
-
             <form [formGroup]="slideProgramadorQst1Form">
-
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/img/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoProgramadorNome}}</span>
-                  </ion-avatar>
-                </ion-label>
-
 
                 <ion-card margin-vertical>
                   <ion-card-header>
@@ -752,17 +707,18 @@
 
         <ion-list no-lines>
 
-            <form [formGroup]="slideProgramadorQst2Form">
-
+            <div class="top-new-user">
                 <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/avatars/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoProgramadorNome}}</span>
-                  </ion-avatar>
+                    <ion-avatar class="user-details">
+                        <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                        <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                        <span class="avatar-name">{{alunoProgramadorNome}}</span>
+                        <span class="current-category">Programador</span>
+                    </ion-avatar>
                 </ion-label>
+            </div>
 
+            <form [formGroup]="slideProgramadorQst2Form">
 
                 <ion-card margin-vertical>
                   <ion-card-header>
@@ -808,17 +764,18 @@
 
         <ion-list no-lines>
 
-            <form [formGroup]="slideProgramadorQst3Form">
-
+            <div class="top-new-user">
                 <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/avatars/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoProgramadorNome}}</span>
-                  </ion-avatar>
+                    <ion-avatar class="user-details">
+                        <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                        <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                        <span class="avatar-name">{{alunoProgramadorNome}}</span>
+                        <span class="current-category">Programador</span>
+                    </ion-avatar>
                 </ion-label>
+            </div>
 
+            <form [formGroup]="slideProgramadorQst3Form">
 
                 <ion-card margin-vertical>
                   <ion-card-header>
@@ -864,17 +821,18 @@
 
         <ion-list no-lines>
 
-            <form [formGroup]="slideProgramadorQst4Form">
-
+            <div class="top-new-user">
                 <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/avatars/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoProgramadorNome}}</span>
-                  </ion-avatar>
+                    <ion-avatar class="user-details">
+                        <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                        <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                        <span class="avatar-name">{{alunoProgramadorNome}}</span>
+                        <span class="current-category">Programador</span>
+                    </ion-avatar>
                 </ion-label>
+            </div>
 
+            <form [formGroup]="slideProgramadorQst4Form">
 
                 <ion-card margin-vertical>
                   <ion-card-header>
@@ -920,17 +878,18 @@
 
         <ion-list no-lines>
 
-            <form [formGroup]="slideProgramadorQst5Form">
-
+            <div class="top-new-user">
                 <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/avatars/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoProgramadorNome}}</span>
-                  </ion-avatar>
+                    <ion-avatar class="user-details">
+                        <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                        <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                        <span class="avatar-name">{{alunoProgramadorNome}}</span>
+                        <span class="current-category">Programador</span>
+                    </ion-avatar>
                 </ion-label>
+            </div>
 
+            <form [formGroup]="slideProgramadorQst5Form">
 
                 <ion-card margin-vertical>
                   <ion-card-header>
@@ -1004,32 +963,7 @@
             </div>
           </ion-label>
 
-                <!-- <form [formGroup]="slideLiderForm">
-
-                <div class="border-bottom">
-                  <ion-item class="no-padding-left">
-                      <ion-label margin-top>Selecione o aluno</ion-label>
-                      <ion-select formControlName="alunoLider" [(ngModel)]="alunoLider">
-                        <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
-                      </ion-select>>
-                  </ion-item>
-                </div>
-
-                <button ion-button color="primary" class="button-top-margin" [disabled]="slideLiderForm.invalid" (click)="next()" full>Iniciar</button>
-
-            </form> -->
-
             <form [formGroup]="slideLiderQst1Form">
-
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/img/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoLiderNome}}</span>
-                  </ion-avatar>
-                </ion-label>
-
 
                 <ion-card margin-vertical>
                   <ion-card-header>
@@ -1074,18 +1008,19 @@
       <ion-slide padding> <!-- Slide 17 -->
 
         <ion-list no-lines>
+            
+            <div class="top-new-user">
+                <ion-label margin-vertical color="black">
+                    <ion-avatar class="user-details">
+                        <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                        <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                        <span class="avatar-name">{{alunoLiderNome}}</span>
+                        <span class="current-category">Líder</span>
+                    </ion-avatar>
+                </ion-label>
+            </div>
 
             <form [formGroup]="slideLiderQst2Form">
-
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/avatars/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoLiderNome}}</span>
-                  </ion-avatar>
-                </ion-label>
-
 
                 <ion-card margin-vertical>
                   <ion-card-header>
@@ -1131,17 +1066,18 @@
 
         <ion-list no-lines>
 
-            <form [formGroup]="slideLiderQst3Form">
-
+            <div class="top-new-user">
                 <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/avatars/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoLiderNome}}</span>
-                  </ion-avatar>
+                    <ion-avatar class="user-details">
+                        <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                        <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                        <span class="avatar-name">{{alunoLiderNome}}</span>
+                        <span class="current-category">Líder</span>
+                    </ion-avatar>
                 </ion-label>
+            </div>
 
+            <form [formGroup]="slideLiderQst3Form">
 
                 <ion-card margin-vertical>
                   <ion-card-header>
@@ -1187,17 +1123,18 @@
 
         <ion-list no-lines>
 
-            <form [formGroup]="slideLiderQst4Form">
-
+            <div class="top-new-user">
                 <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/avatars/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoLiderNome}}</span>
-                  </ion-avatar>
+                    <ion-avatar class="user-details">
+                        <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                        <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                        <span class="avatar-name">{{alunoLiderNome}}</span>
+                        <span class="current-category">Líder</span>
+                    </ion-avatar>
                 </ion-label>
+            </div>
 
+            <form [formGroup]="slideLiderQst4Form">
 
                 <ion-card margin-vertical>
                   <ion-card-header>
@@ -1243,17 +1180,18 @@
 
         <ion-list no-lines>
 
-            <form [formGroup]="slideLiderQst5Form">
-
+            <div class="top-new-user">
                 <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">{{grupoNome}}</h4>
-                  <ion-avatar>
-                      <!--<img src="../../assets/avatars/avatar-sare.png" class="avatar-student" />-->
-                      <img src="assets/img/avatar-sare.png" class="avatar-student" />
-                      <span class="avatar-name">{{alunoLiderNome}}</span>
-                  </ion-avatar>
+                    <ion-avatar class="user-details">
+                        <img src="assets/img/avatar-sare.png" class="avatar-student" />
+                        <!-- <img src="/android_asset/www/assets/img/avatar-sare.png" class="avatar-student" /> -->
+                        <span class="avatar-name">{{alunoLiderNome}}</span>
+                        <span class="current-category">Líder</span>
+                    </ion-avatar>
                 </ion-label>
+            </div>
 
+            <form [formGroup]="slideLiderQst5Form">
 
                 <ion-card margin-vertical>
                   <ion-card-header>
@@ -1301,18 +1239,17 @@
 
         <ion-list no-lines>
 
-
-                <ion-label margin-vertical color="black">
-                  <h4 class="subtitle">Resultado: {{grupoNome}}</h4>
-                </ion-label>
-
+                <div class="top-new-user">
+                    <ion-label margin-vertical color="black">
+                    <ion-avatar class="user-details">
+                        <span class="current-group">Resultado: {{grupoNome}}</span>
+                    </ion-avatar>
+                    </ion-label>
+                </div>
 
                 <ion-card margin-vertical>
-                  <ion-card-header>
-                    Análise de resultados
-                  </ion-card-header>
 
-                  <ion-card-content>
+                    <ion-card-content>
 
                     <h2>{{alunoContrutorNome}} - Construtor</h2>
                     <canvas #barCanvas></canvas><br>

@@ -403,19 +403,6 @@
           </div>
         </ion-label>
 
-        <!-- <form [formGroup]="slideOrganizadorForm">
-            <div class="border-bottom-grey">
-                <ion-item class="no-padding-left">
-                    <ion-label margin-top>Selecione o aluno</ion-label>
-                    <ion-select formControlName="alunoOrganizador" [(ngModel)]="alunoOrganizador">
-                    <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
-                    </ion-select>>
-                </ion-item>
-            </div>
-
-            <button ion-button color="primary" class="button-top-margin" [disabled]="slideOrganizadorForm.invalid" (click)="next()" full>Iniciar</button>
-        </form> -->
-
         <form [formGroup]="slideOrganizadorQst1Form">
 
           <ion-card margin-vertical>
@@ -1379,9 +1366,6 @@
 
 
         <ion-card margin-vertical>
-          <ion-card-header>
-            Análise de resultados
-          </ion-card-header>
 
           <ion-card-content>
 
