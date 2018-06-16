@@ -75,6 +75,8 @@ export class AvaliacaoSemCadastrosPage {
   nomeAlunoTemp;
   idAlunoTemp;
 
+  isDisabled: boolean = true;
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public formBuilder: FormBuilder,
@@ -207,23 +209,27 @@ export class AvaliacaoSemCadastrosPage {
       console.log(this.slideConstrutorForm.value.alunoConstrutor);
       this.funcaoAluno = TipoAluno.organizador;
       this.nomeAluno = "";
+      this.isDisabled = true;
     }
     else if(this.avaliacaoSlider.getActiveIndex() == 6){
       this.verificaTipoAluno(this.funcaoAluno);
       console.log(this.slideOrganizadorForm.value.alunoOrganizador);
       this.funcaoAluno = TipoAluno.programador;
       this.nomeAluno = "";
+      this.isDisabled = true;
     }
     else if(this.avaliacaoSlider.getActiveIndex() == 11){
       this.verificaTipoAluno(this.funcaoAluno);
       console.log(this.slideProgramadorForm.value.alunoProgramador);
       this.funcaoAluno = TipoAluno.lider;
       this.nomeAluno = "";
+      this.isDisabled = true;
     }
     else if(this.avaliacaoSlider.getActiveIndex() == 16){
       this.verificaTipoAluno(this.funcaoAluno);
       console.log(this.slideLiderForm.value.alunoLider);
       this.nomeAluno = "";
+      this.isDisabled = true;
     }
     else if(this.avaliacaoSlider.getActiveIndex() == 20){
       this.updateGrupo();
@@ -282,6 +288,7 @@ export class AvaliacaoSemCadastrosPage {
       text: 'OK',
       handler: data => {
         this.createAluno(data.nomeAluno);
+        this.isDisabled = false;
       }
     });
     alert.present();

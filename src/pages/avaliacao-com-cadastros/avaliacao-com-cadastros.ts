@@ -68,6 +68,8 @@ export class AvaliacaoComCadastrosPage {
   alunoProgramadorNome;
   alunoLiderNome;
 
+  isDisabled: boolean = true;
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public formBuilder: FormBuilder,
@@ -258,6 +260,7 @@ export class AvaliacaoComCadastrosPage {
         console.log(data);
         this.dbService.getAlunoById(data)
           .then(aluno => {
+            this.isDisabled = false;
             if(tipoAluno == TipoAluno.construtor){ //constructor
               this.alunoContrutorNome = aluno[0].nome;
               this.slideConstrutorForm.controls.alunoConstrutor.setValue(data);
@@ -574,6 +577,7 @@ export class AvaliacaoComCadastrosPage {
       }
       console.log(this.alunos);
       this.getAlunoNome(1, this.slideConstrutorForm.value.alunoConstrutor);
+      this.isDisabled = true;
     }
     else if(this.avaliacaoSlider.getActiveIndex() == 6){
       console.log(this.slideOrganizadorForm.value.alunoOrganizador);
@@ -584,6 +588,7 @@ export class AvaliacaoComCadastrosPage {
       }
       console.log(this.alunos);
       this.getAlunoNome(2, this.slideOrganizadorForm.value.alunoOrganizador);
+      this.isDisabled = true;
     }
     else if(this.avaliacaoSlider.getActiveIndex() == 11){
       console.log(this.slideProgramadorForm.value.alunoProgramador);
@@ -594,6 +599,7 @@ export class AvaliacaoComCadastrosPage {
       }
       console.log(this.alunos);
       this.getAlunoNome(3, this.slideProgramadorForm.value.alunoProgramador);
+      this.isDisabled = true;
     }
     else if(this.avaliacaoSlider.getActiveIndex() == 16){
       console.log(this.slideLiderForm.value.alunoLider);
@@ -604,6 +610,7 @@ export class AvaliacaoComCadastrosPage {
       }
       console.log(this.alunos);
       this.getAlunoNome(4, this.slideLiderForm.value.alunoLider);
+      this.isDisabled = true;
     }
     else if(this.avaliacaoSlider.getActiveIndex() == 20){
       this.save();
