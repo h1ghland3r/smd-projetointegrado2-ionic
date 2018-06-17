@@ -1,6 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, AlertController, ModalController } from 'ionic-angular';
-import { Chart, ElementRef } from 'chart.js';
+import { Chart } from 'chart.js';
 import { DbServiceProvider } from '../../providers/db-service/db-service';
 
 /**
@@ -30,6 +30,10 @@ export class GraficoPorAlunoPage {
 
   isExpand: Boolean = false;
 
+  mensagemConstrutor: Boolean = false;
+  mensagemOrganizador: Boolean = false;
+  mensagemProgramador: Boolean = false;
+  mensagemLider: Boolean = false;
 
   constructor(public navCtrl: NavController,
               public dbService: DbServiceProvider,
@@ -160,12 +164,15 @@ export class GraficoPorAlunoPage {
   };
 
   @ViewChild('barCanvas') barCanvas: ElementRef;
-  @ViewChild('barCanvasOrgan') barCanvasOrgan: ElementRef;
-  @ViewChild('barCanvasProg') barCanvasProg: ElementRef;
-  @ViewChild('barCanvasLider') barCanvasLider: ElementRef;
   barChart: any;
+
+  @ViewChild('barCanvasOrgan') barCanvasOrgan: ElementRef;
   barChartOrgan: any;
+
+  @ViewChild('barCanvasProg') barCanvasProg: ElementRef;
   barChartProg: any;
+
+  @ViewChild('barCanvasLider') barCanvasLider: ElementRef;
   barChartLider: any;
 
   graficoConstrutorShow: Boolean = true;
@@ -222,6 +229,9 @@ export class GraficoPorAlunoPage {
        this.respConstrutor.respSim > 0) {
 
        this.graficoConstrutor();
+       this.mensagemConstrutor = false;
+    } else {
+      this.mensagemConstrutor = true;
     }
 
     if(this.respOrganizador.respInsuficiente > 0 ||
@@ -230,7 +240,9 @@ export class GraficoPorAlunoPage {
        this.respOrganizador.respSim > 0) {
 
        this.graficoOrganizador();
-
+       this.mensagemOrganizador = false;
+    } else {
+      this.mensagemOrganizador = true;
     }
 
     if(this.respProgramador.respInsuficiente > 0 ||
@@ -239,7 +251,9 @@ export class GraficoPorAlunoPage {
        this.respProgramador.respSim > 0) {
 
        this.graficoProgramador();
-
+       this.mensagemProgramador = false;
+    } else {
+      this.mensagemProgramador = true;
     }
 
     if(this.respLider.respInsuficiente > 0 ||
@@ -248,12 +262,13 @@ export class GraficoPorAlunoPage {
        this.respLider.respSim > 0) {
 
        this.graficoLider();
-
+       this.mensagemLider = false;
+    } else {
+      this.mensagemLider = true;
     }
   }
 
   graficoConstrutor(){
-
     this.graficoConstrutorShow = true;
     this.barChart = new Chart(this.barCanvas.nativeElement, {
 
@@ -437,12 +452,7 @@ export class GraficoPorAlunoPage {
     this.dbService.getAvAlunosByAlunoId(alunoId)
       .then( response => {
         for(let i = 0; i < response.length; i++){
-          let respostas = [];
-          respostas.push(response[i].resposta1);
-          respostas.push(response[i].resposta2);
-          respostas.push(response[i].resposta3);
-          respostas.push(response[i].resposta4);
-          respostas.push(response[i].resposta5);
+          let respostas = response[i].respostas.split(';');
           this.verificaRepostas(respostas, response[i].funcao);
           console.log(this.respConstrutor);
           console.log(this.respOrganizador);
@@ -465,21 +475,25 @@ export class GraficoPorAlunoPage {
   limparGraficos(){
     if(this.barChart != undefined){
       this.graficoConstrutorShow = false;
+      this.mensagemConstrutor = false;
       this.barChart.destroy();
     }
 
     if(this.barChartOrgan != undefined){
       this.graficoOrganizadorShow = false;
+      this.mensagemOrganizador = false;
       this.barChartOrgan.destroy();
     }
 
     if(this.barChartProg != undefined){
       this.graficoProgramadorShow = false;
+      this.mensagemProgramador = false;
       this.barChartProg.destroy();
     }
 
     if(this.barChartLider != undefined){
       this.graficoLiderShow = false;
+      this.mensagemLider = false;
       this.barChartLider.destroy();
     }
   }

@@ -387,6 +387,11 @@ export class DbServiceProvider {
     return this.db.executeSql(sql, [usuario.nome, usuario.email, usuario.login, usuario.password, usuario.status, usuario.lastModifiedDate]);
   }
 
+  updateSenhaUsuario(email: any, novaSenha: any) {
+    let sql = 'UPDATE usuarios SET senha=? WHERE email=?';
+    return this.db.executeSql(sql, [novaSenha, email]);
+  }
+
   getAllUsuarios() {
     let sql = 'SELECT * FROM usuarios';
     return this.db.executeSql(sql, [])
