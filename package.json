@@ -31,7 +31,7 @@
     "@ionic-native/status-bar": "3.10.2",
     "@ionic/storage": "2.0.1",
     "@ngx-translate/http-loader": "^0.1.0",
-    "chart.js": "^2.6.0",
+    "chart.js": "^2.7.2",
     "com.telerik.plugins.nativepagetransitions": "^0.6.5",
     "cordova-android": "6.2.3",
     "cordova-plugin-console": "^1.0.5",

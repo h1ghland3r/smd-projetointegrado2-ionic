@@ -55,19 +55,23 @@
       Gráficos
     </ion-card-header>
 
-    <ion-card-content >
+    <ion-card-content>
 
       <h2 *ngIf="graficoConstrutorShow" class="subtitleGraphics">Construtor</h2>
+      <h2 *ngIf="mensagemConstrutor" class="subtitleGraphics">O aluno selecionado não possui nenhuma avaliação como construtor</h2>
       <canvas #barCanvas ></canvas><br>
 
       <h2 *ngIf="graficoOrganizadorShow" class="subtitleGraphics">Organizador</h2>
-      <canvas #barCanvasOrgan></canvas><br>
+      <h2 *ngIf="mensagemOrganizador" class="subtitleGraphics">O aluno selecionado não possui nenhuma avaliação como organizador</h2>
+      <canvas #barCanvasOrgan ></canvas><br>
 
       <h2 *ngIf="graficoProgramadorShow" class="subtitleGraphics">Programador</h2>
-      <canvas #barCanvasProg></canvas><br>
+      <h2 *ngIf="mensagemProgramador" class="subtitleGraphics">O aluno selecionado não possui nenhuma avaliação como programador</h2>
+      <canvas #barCanvasProg ></canvas><br>
 
       <h2 *ngIf="graficoLiderShow" class="subtitleGraphics">Líder</h2>
-      <canvas #barCanvasLider></canvas><br>
+      <h2 *ngIf="mensagemLider" class="subtitleGraphics">O aluno selecionado não possui nenhuma avaliação como líder</h2>
+      <canvas #barCanvasLider ></canvas><br>
 
     </ion-card-content>
   </ion-card>
