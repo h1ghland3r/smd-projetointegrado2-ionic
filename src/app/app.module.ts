@@ -5,6 +5,7 @@ import { SQLite } from '@ionic-native/sqlite';
 import { NativePageTransitions } from '@ionic-native/native-page-transitions';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { SMS } from '@ionic-native/sms';
 
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
@@ -125,6 +126,7 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     SplashScreen,
     NativePageTransitions,
     SQLite,
+    SMS,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DbServiceProvider,
   ]

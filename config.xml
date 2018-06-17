@@ -88,4 +88,5 @@
     <plugin name="com.telerik.plugins.nativepagetransitions" spec="^0.6.5" />
     <plugin name="com.telerik.plugins.nativepagetransitions" spec="^0.6.5" />
     <engine name="android" spec="6.2.3" />
+    <plugin name="cordova-sms-plugin" spec="~0.1.11" />
 </widget>
