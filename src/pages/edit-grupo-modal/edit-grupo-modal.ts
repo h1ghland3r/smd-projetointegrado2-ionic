@@ -150,6 +150,11 @@ export class EditGrupoModalPage {
         this.turmas = turmas;
         if(this.alunos.length > 0){
           this.alunos = [];
+          this.editGrupoForm.controls.turmaId.setValue('');
+          this.editGrupoForm.controls.alunoId1.setValue('');
+          this.editGrupoForm.controls.alunoId2.setValue('');
+          this.editGrupoForm.controls.alunoId3.setValue('');
+          this.editGrupoForm.controls.alunoId4.setValue('');
         }
       })
   }
@@ -159,6 +164,10 @@ export class EditGrupoModalPage {
       .then(alunos => {
         console.log(alunos);
         this.alunos = alunos;
+        this.editGrupoForm.controls.alunoId1.setValue('');
+        this.editGrupoForm.controls.alunoId2.setValue('');
+        this.editGrupoForm.controls.alunoId3.setValue('');
+        this.editGrupoForm.controls.alunoId4.setValue('');
       })
       .catch( error => {
         console.error( error );
@@ -170,7 +179,6 @@ export class EditGrupoModalPage {
     console.log('ionViewDidLoad EditGrupoModalPage');
     this.getAllEscolas();
     this.getEscolaByTurmaId(this.editGrupoForm.controls.turmaId.value);
-    //this.getAlunosByTurmaId(this.editGrupoForm.controls.turmaId.value);
   }
 
 }

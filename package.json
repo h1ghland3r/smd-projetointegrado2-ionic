@@ -16,7 +16,7 @@
     "ionic:serve": "ionic-app-scripts serve"
   },
   "dependencies": {
-    "@angular/common": "4.1.2",
+    "@angular/common": "^6.0.4",
     "@angular/compiler": "4.1.2",
     "@angular/compiler-cli": "4.1.2",
     "@angular/core": "4.1.2",
@@ -30,6 +30,7 @@
     "@ionic-native/sqlite": "^3.12.1",
     "@ionic-native/status-bar": "3.10.2",
     "@ionic/storage": "2.0.1",
+    "@ngx-translate/http-loader": "^0.1.0",
     "chart.js": "^2.6.0",
     "com.telerik.plugins.nativepagetransitions": "^0.6.5",
     "cordova-android": "6.2.3",

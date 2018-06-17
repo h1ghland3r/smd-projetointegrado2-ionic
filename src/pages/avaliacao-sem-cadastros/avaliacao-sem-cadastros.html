@@ -68,19 +68,19 @@
                     <ion-list radio-group formControlName="construtorResposta1" [(ngModel)]="construtorResposta1">
                       <ion-item text-wrap>
                         <ion-label>Não</ion-label>
-                        <ion-radio item-left value="nao"></ion-radio>
+                        <ion-radio item-left value="nao" [disabled]="isDisabled"></ion-radio>
                       </ion-item>
                       <ion-item text-wrap>
                         <ion-label>Insuficiente</ion-label>
-                        <ion-radio item-left value="insuficiente"></ion-radio>
+                        <ion-radio item-left value="insuficiente" [disabled]="isDisabled"></ion-radio>
                       </ion-item>
                       <ion-item text-wrap>
                         <ion-label>Parcialmente</ion-label>
-                        <ion-radio item-left value="parcialmente"></ion-radio>
+                        <ion-radio item-left value="parcialmente" [disabled]="isDisabled"></ion-radio>
                       </ion-item>
                       <ion-item text-wrap>
                         <ion-label>Sim</ion-label>
-                        <ion-radio item-left value="sim"></ion-radio>
+                        <ion-radio item-left value="sim" [disabled]="isDisabled"></ion-radio>
                       </ion-item>
                     </ion-list>
 
@@ -375,19 +375,19 @@
                     <ion-list radio-group formControlName="organizadorResposta1" [(ngModel)]="organizadorResposta1">
                       <ion-item text-wrap>
                         <ion-label>Não</ion-label>
-                        <ion-radio item-left value="nao"></ion-radio>
+                        <ion-radio item-left value="nao" [disabled]="isDisabled"></ion-radio>
                       </ion-item>
                       <ion-item text-wrap>
                         <ion-label>Insuficiente</ion-label>
-                        <ion-radio item-left value="insuficiente"></ion-radio>
+                        <ion-radio item-left value="insuficiente" [disabled]="isDisabled"></ion-radio>
                       </ion-item>
                       <ion-item text-wrap>
                         <ion-label>Parcialmente</ion-label>
-                        <ion-radio item-left value="parcialmente"></ion-radio>
+                        <ion-radio item-left value="parcialmente" [disabled]="isDisabled"></ion-radio>
                       </ion-item>
                       <ion-item text-wrap>
                         <ion-label>Sim</ion-label>
-                        <ion-radio item-left value="sim"></ion-radio>
+                        <ion-radio item-left value="sim" [disabled]="isDisabled"></ion-radio>
                       </ion-item>
                     </ion-list>
 
@@ -677,19 +677,19 @@
                     <ion-list radio-group formControlName="programadorResposta1" [(ngModel)]="programadorResposta1">
                       <ion-item text-wrap>
                         <ion-label>Não</ion-label>
-                        <ion-radio item-left value="nao"></ion-radio>
+                        <ion-radio item-left value="nao" [disabled]="isDisabled"></ion-radio>
                       </ion-item>
                       <ion-item text-wrap>
                         <ion-label>Insuficiente</ion-label>
-                        <ion-radio item-left value="insuficiente"></ion-radio>
+                        <ion-radio item-left value="insuficiente" [disabled]="isDisabled"></ion-radio>
                       </ion-item>
                       <ion-item text-wrap>
                         <ion-label>Parcialmente</ion-label>
-                        <ion-radio item-left value="parcialmente"></ion-radio>
+                        <ion-radio item-left value="parcialmente" [disabled]="isDisabled"></ion-radio>
                       </ion-item>
                       <ion-item text-wrap>
                         <ion-label>Sim</ion-label>
-                        <ion-radio item-left value="sim"></ion-radio>
+                        <ion-radio item-left value="sim" [disabled]="isDisabled"></ion-radio>
                       </ion-item>
                     </ion-list>
 
@@ -979,19 +979,19 @@
                     <ion-list radio-group formControlName="liderResposta1" [(ngModel)]="liderResposta1">
                       <ion-item text-wrap>
                         <ion-label>Não</ion-label>
-                        <ion-radio item-left value="nao"></ion-radio>
+                        <ion-radio item-left value="nao" [disabled]="isDisabled"></ion-radio>
                       </ion-item>
                       <ion-item text-wrap>
                         <ion-label>Insuficiente</ion-label>
-                        <ion-radio item-left value="insuficiente"></ion-radio>
+                        <ion-radio item-left value="insuficiente" [disabled]="isDisabled"></ion-radio>
                       </ion-item>
                       <ion-item text-wrap>
                         <ion-label>Parcialmente</ion-label>
-                        <ion-radio item-left value="parcialmente"></ion-radio>
+                        <ion-radio item-left value="parcialmente" [disabled]="isDisabled"></ion-radio>
                       </ion-item>
                       <ion-item text-wrap>
                         <ion-label>Sim</ion-label>
-                        <ion-radio item-left value="sim"></ion-radio>
+                        <ion-radio item-left value="sim" [disabled]="isDisabled"></ion-radio>
                       </ion-item>
                     </ion-list>
 
@@ -1008,7 +1008,7 @@
       <ion-slide padding> <!-- Slide 17 -->
 
         <ion-list no-lines>
-            
+
             <div class="top-new-user">
                 <ion-label margin-vertical color="black">
                     <ion-avatar class="user-details">

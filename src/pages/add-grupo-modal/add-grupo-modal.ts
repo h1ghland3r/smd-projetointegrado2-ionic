@@ -78,7 +78,11 @@ export class AddGrupoModalPage {
   getTurmasByEscolaId(escolaId){
     this.dbService.getTurmasByEscolaId(escolaId)
       .then(turmas => {
-        this.turmas = turmas;
+        this.turmas = turmas;        
+        this.addGrupoForm.controls.alunoId1.setValue('');
+        this.addGrupoForm.controls.alunoId2.setValue('');
+        this.addGrupoForm.controls.alunoId3.setValue('');
+        this.addGrupoForm.controls.alunoId4.setValue('');
       })
   }
 
@@ -87,6 +91,10 @@ export class AddGrupoModalPage {
       .then(alunos => {
         console.log(alunos);
         this.alunos = alunos;
+        this.addGrupoForm.controls.alunoId1.setValue('');
+        this.addGrupoForm.controls.alunoId2.setValue('');
+        this.addGrupoForm.controls.alunoId3.setValue('');
+        this.addGrupoForm.controls.alunoId4.setValue('');
       })
       .catch( error => {
         console.error( error );
