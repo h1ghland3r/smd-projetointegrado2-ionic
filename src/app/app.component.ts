@@ -1,10 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ComponentFactoryResolver, ElementRef, Inject, InjectionToken, Renderer, ViewChild, ViewContainerRef } from '@angular/core';
 import { Nav, Platform, App, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SQLite } from '@ionic-native/sqlite';
 import { DbServiceProvider } from '../providers/db-service/db-service';
-
+import { Observable, of } from 'rxjs';
 
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
