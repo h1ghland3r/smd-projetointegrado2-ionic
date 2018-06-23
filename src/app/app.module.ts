@@ -1,19 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule, InjectionToken } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SQLite } from '@ionic-native/sqlite';
 import { NativePageTransitions } from '@ionic-native/native-page-transitions';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SMS } from '@ionic-native/sms';
-import { Deeplinks } from '@ionic-native/deeplinks';
 
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { PasswordPage } from '../pages/password/password'
 import { RegisterPage } from '../pages/register/register'
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { AvaliacaoPage } from '../pages/avaliacao/avaliacao';
 import { AvaliacaoComCadastrosPage } from '../pages/avaliacao-com-cadastros/avaliacao-com-cadastros';
 import { AvaliacaoSemCadastrosPage } from '../pages/avaliacao-sem-cadastros/avaliacao-sem-cadastros';
@@ -51,8 +49,36 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
 @NgModule({
   declarations: [
     MyApp,
+    LoginPage,
+    PasswordPage,
+    RegisterPage,
     HomePage,
-    ListPage
+    AvaliacaoPage,
+    AvaliacaoComCadastrosPage,
+    AvaliacaoSemCadastrosPage,
+    EscolasPage,
+    TurmasPage,
+    AlunosPage,
+    GruposPage,
+    CadastrosPage,
+    GraficosPage,
+    GraficoPorAlunoPage,
+    GraficoPorFuncaoPage,
+    ListAvaliacoesPage,
+    AddEscolaModalPage,
+    AddTurmaModalPage,
+    AddAlunoModalPage,
+    AddGrupoModalPage,
+    EditEscolaModalPage,
+    EditTurmaModalPage,
+    EditAlunoModalPage,
+    EditGrupoModalPage,
+    ViewAlunoModalPage,
+    ViewGrupoModalPage,
+    ViewAvaliacoesModalPage,
+    ViewAvaliacaoAlunoModalPage,
+    ViewAvaliacoesGraficoPage,
+    SobrePage
   ],
   imports: [
     BrowserModule,
@@ -65,7 +91,6 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     PasswordPage,
     RegisterPage,
     HomePage,
-    ListPage,
     AvaliacaoPage,
     AvaliacaoComCadastrosPage,
     AvaliacaoSemCadastrosPage,
@@ -100,12 +125,10 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     SQLite,
     SMS,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DbServiceProvider,
+    DbServiceProvider
   ]
 })
 export class AppModule {
-
-  constructor(private deeplinks: Deeplinks) { }
 
   private static usuarioLogado: RegisterPageModule;
 
@@ -115,50 +138,6 @@ export class AppModule {
 
   static setUsuarioLogado(usuario: RegisterPageModule){
     this.usuarioLogado = usuario;
-  }
-
-  ngAfterViewInit() {
-    this.deeplinks.route({
-        '/login': LoginPage,
-        '/login/registro': RegisterPage,
-        '/login/esqueciasenha': PasswordPage,
-        '/home': HomePage,
-        '/sobre': SobrePage,
-        '/listar': ListPage,
-        '/avaliacao': AvaliacaoPage,
-        '/avaliacao/comcadastros': AvaliacaoComCadastrosPage,
-        '/avaliacao/semcadastros': AvaliacaoSemCadastrosPage,
-        '/avaliacao/listar': ListAvaliacoesPage,
-        '/avaliacao/viewavaliacoes': ViewAvaliacoesModalPage,
-        '/avaliacao/viewavaliacoesalunos': ViewAvaliacaoAlunoModalPage,
-        '/avaliacao/viewavaliacoesgrafico': ViewAvaliacoesGraficoPage,
-        '/graficos': GraficosPage,
-        '/graficos/poraluno': GraficoPorAlunoPage,
-        '/graficos/porfuncao': GraficoPorFuncaoPage,
-        '/cadastros': CadastrosPage,
-        '/cadastros/escolas': EscolasPage,
-        '/cadastros/turmas': TurmasPage,
-        '/cadastros/alunos': AlunosPage,
-        '/cadastros/grupos': GruposPage,
-        '/cadastros/addescola': AddEscolaModalPage,
-        '/cadastros/addturma': AddTurmaModalPage,
-        '/cadastros/addaluno': AddAlunoModalPage,
-        '/cadastros/addgrupo': AddGrupoModalPage,
-        '/cadastros/editescola': EditEscolaModalPage,
-        '/cadastros/editturma': EditTurmaModalPage,
-        '/cadastros/editaluno': EditAlunoModalPage,
-        '/cadastros/editgrupo': EditGrupoModalPage,
-        '/cadastros/viewaluno': ViewAlunoModalPage,
-        '/cadastros/viewgrupo': ViewGrupoModalPage,
-      }).subscribe((match) => {
-        // match.$route - the route we matched, which is the matched entry from the arguments to route()
-        // match.$args - the args passed in the link
-        // match.$link - the full link data
-        console.log('Successfully matched route', match);
-      }, (nomatch) => {
-        // nomatch.$link - the full link data
-        console.error('Got a deeplink that didn\'t match', nomatch);
-      });
   }
 
 }

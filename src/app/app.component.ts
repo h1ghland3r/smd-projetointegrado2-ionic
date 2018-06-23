@@ -1,10 +1,11 @@
 import { Component, ComponentFactoryResolver, ElementRef, Inject, InjectionToken, Renderer, ViewChild, ViewContainerRef } from '@angular/core';
-import { Nav, Platform, App, AlertController } from 'ionic-angular';
+import { Nav, Platform, App, IonicApp, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SQLite } from '@ionic-native/sqlite';
 import { DbServiceProvider } from '../providers/db-service/db-service';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
@@ -13,6 +14,7 @@ import { CadastrosPage } from '../pages/cadastros/cadastros';
 import { SobrePage } from '../pages/sobre/sobre';
 import { GraficosPage } from '../pages/graficos/graficos';
 import { ListAvaliacoesPage } from '../pages/list-avaliacoes/list-avaliacoes';
+import { GraficoPorAlunoPage } from '../pages/grafico-por-aluno/grafico-por-aluno';
 
 @Component({
   templateUrl: 'app.html'
@@ -27,6 +29,7 @@ export class MyApp {
               public statusBar: StatusBar,
               public splashScreen: SplashScreen,
               public app: App,
+              private ionicApp: IonicApp,
               public alertCtrl: AlertController,
               public dbService: DbServiceProvider,
               public sqlite: SQLite) {
@@ -56,7 +59,7 @@ export class MyApp {
       },
       {
         title: 'Gráficos',
-        component: GraficosPage,
+        component: GraficoPorAlunoPage,
         icon: 'pie'
       },
       {
@@ -78,9 +81,13 @@ export class MyApp {
       }, 300);
       this.platform.registerBackButtonAction(() => {
         let nav = this.app.getActiveNav();
+        let activeModal = this.ionicApp._modalPortal.getActive();
 
         if (nav.canGoBack()) {
           this.nav.pop();
+        } else if (activeModal) {
+            activeModal.dismiss();
+            return;
         } else {
 
         let confirm = this.alertCtrl.create({
