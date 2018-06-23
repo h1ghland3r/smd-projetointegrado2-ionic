@@ -24,7 +24,8 @@
 
                         <ion-item margin-bottom class="login-input-wrapper">
                             <ion-label><ion-icon name="lock" text-center></ion-icon></ion-label>
-                            <ion-input type="password" placeholder="Senha" formControlName="password" maxlength="30" required>{{password}}</ion-input>
+                            <ion-input type="password" placeholder="Senha" formControlName="password" [type]="passwordType" maxlength="30" clearOnEdit="false" required>{{password}}</ion-input>
+                            <ion-icon item-end [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()'></ion-icon>
                         </ion-item>
 
                         <ion-item class="no-padding-left" *ngIf="(errorPassword && submitAttempt)">

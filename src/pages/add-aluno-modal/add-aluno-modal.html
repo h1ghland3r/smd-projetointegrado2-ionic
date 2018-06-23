@@ -20,7 +20,7 @@
 
     <ion-item class="no-padding-left">
       <ion-label stacked>Nome do Aluno *</ion-label>
-      <ion-input formControlName="nome" type="text" text-right>{{nome}}</ion-input>
+      <ion-input formControlName="nome" type="text">{{nome}}</ion-input>
     </ion-item>
 
     <ion-item class="no-padding-left" *ngIf="(errorNome && submitAttempt)">
@@ -29,7 +29,7 @@
 
     <ion-item class="no-padding-left">
       <ion-label stacked>Data de Nascimento *</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" formControlName="dataNascimento" type="dataNascimento" doneText="Ok" cancelText="Cancelar">{{dataNascimento}}</ion-datetime>
+      <ion-datetime text-left displayFormat="DD/MM/YYYY" formControlName="dataNascimento" type="dataNascimento" doneText="Ok" cancelText="Cancelar">{{dataNascimento}}</ion-datetime>
     </ion-item>
 
     <ion-item class="no-padding-left" *ngIf="(errorDataNascimento && submitAttempt)">
@@ -38,7 +38,7 @@
 
     <ion-item class="no-padding-left">
       <ion-label stacked>Escola *</ion-label>
-      <ion-select formControlName="escolaId" type="number" (ngModelChange)="getTurmasByEscolaId($event)" okText="Ok" cancelText="Cancelar">
+      <ion-select text-left formControlName="escolaId" type="number" (ngModelChange)="getTurmasByEscolaId($event)" okText="Ok" cancelText="Cancelar">
         <ion-option *ngFor="let escola of escolas" [value]="escola.id">{{escola.nome}}</ion-option>
       </ion-select>
     </ion-item>
@@ -49,7 +49,7 @@
 
     <ion-item class="no-padding-left">
         <ion-label stacked>Turma *</ion-label>
-        <ion-select formControlName="turmaId" type="number" okText="Ok" cancelText="Cancelar">
+        <ion-select text-left formControlName="turmaId" type="number" okText="Ok" cancelText="Cancelar">
           <ion-option *ngFor="let turma of turmas" [value]="turma.id">{{turma.nome}}</ion-option>
         </ion-select>
     </ion-item>
@@ -63,7 +63,7 @@
 
   </form>
 
-  <button ion-button color="primary" class="button-top-margin" (click)="saveAluno()" full>Salvar</button>
+  <button ion-button color="primary" class="button-top-margin button-actions" (click)="saveAluno()" full>Salvar</button>
 
 </ion-list>
 

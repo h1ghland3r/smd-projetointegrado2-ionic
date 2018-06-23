@@ -33,6 +33,12 @@ page-login {
                 padding: 5px 0;
                 color: color($colors, primary, base);
             }
+            .passwordIcon{
+                font-size: 2rem !important;
+                position: absolute;
+                right: 5px;
+                margin: 0 auto !important;
+             }
             .login-forgot-password-wrapper {
                 position: relative;
                 top: 0px;

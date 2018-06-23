@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 import { ViewController } from 'ionic-angular';
 import { SMS } from '@ionic-native/sms';
 import { DbServiceProvider } from '../../providers/db-service/db-service';
