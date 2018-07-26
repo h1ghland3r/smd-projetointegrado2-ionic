@@ -1,11 +1,12 @@
 # SARE
 ###Sistema de Avaliação em Robótica Educativa
-
+<p>
+    <img src="src/assets/img/avatar-sare.png" width="100" height="100" />
+</p>
+<br/>
 Aplicativo que auxilia professores da disciplina de robótica a acompanhar o desenvolvimento dos seus alunos em práticas de sala.
 
 <br/><br/>
-
-<img src="src/assets/img/logo.png" />
 
 **Developed using**
 - Ionic Framework v3
