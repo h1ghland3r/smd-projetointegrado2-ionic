@@ -2,14 +2,17 @@
 ###Sistema de Avaliação em Robótica Educativa
 
 Aplicativo que auxilia professores da disciplina de robótica a acompanhar o desenvolvimento dos seus alunos em práticas de sala.
-<br />
-![SARE Logo](src/assets/img/logo.png)
+
+<br/><br/>
+
+<img src="src/assets/img/logo.png" />
 
 **Developed using**
 - Ionic Framework v3
 - Database: SQLite
 
-<br />
+<br/><br/>
+
 **UI**
 
 <p align="center">
