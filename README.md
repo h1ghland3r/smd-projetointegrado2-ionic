@@ -4,7 +4,7 @@
     <img src="src/assets/img/avatar-sare.png" width="100" height="100" />
 </p>
 <br/>
-Aplicativo que auxilia professores da disciplina de robótica a acompanhar o desenvolvimento dos seus alunos em práticas de sala.<br/> Application to usage by professors in the robotic courses to help to follow up the development of the students in practical classes.
+Aplicativo que auxilia professores da disciplina de robótica a acompanhar o desenvolvimento dos seus alunos em práticas de sala.<br/> Application to help professors in the robotic courses to follow up the development of the students in practical classes.
 
 <br/><br/>
 
