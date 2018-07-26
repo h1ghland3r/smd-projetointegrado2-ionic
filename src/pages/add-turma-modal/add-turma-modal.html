@@ -29,7 +29,7 @@
 
       <ion-item class="no-padding-left" margin-vertical>
           <ion-label stacked>Escola *</ion-label>
-          <ion-select formControlName="escolaId">
+          <ion-select text-left formControlName="escolaId">
             <ion-option *ngFor="let escola of escolas" [value]="escola.id">{{escola.nome}}</ion-option>
           </ion-select>
       </ion-item>
@@ -42,7 +42,7 @@
 
     </form>
 
-  <button ion-button color="primary" class="button-top-margin" (click)="saveTurma()" full>Salvar</button>
+  <button ion-button color="primary" class="button-top-margin button-actions" (click)="saveTurma()" full>Salvar</button>
 
 
 </ion-list>

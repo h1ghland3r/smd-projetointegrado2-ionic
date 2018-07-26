@@ -62,6 +62,14 @@ export class LoginPage {
         this.menu.swipeEnable(true);
     }
 
+    passwordType: string = 'password';
+    passwordIcon: string = 'eye-off';
+
+    hideShowPassword() {
+        this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+        this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+    }
+
     checkLogin(){
 
       if(this.loginForm.valid){

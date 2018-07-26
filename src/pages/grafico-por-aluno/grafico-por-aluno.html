@@ -1,14 +1,14 @@
 
 <ion-header>
   <ion-navbar>
-    <ion-title>Gráfico por aluno</ion-title>
+    <ion-title>Gráficos</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
   <ion-card>
-    <ion-card-header class="titleSearch" (click)="toggleBusca(isExpand)">Busca
+    <ion-card-header class="titleSearch" (click)="toggleBusca(isExpand)">Filtrar
       <ion-icon item-right class="iconRight" name="ios-arrow-down" *ngIf="!isExpand"></ion-icon>
       <ion-icon item-right class="iconRight" name="ios-arrow-up" *ngIf="isExpand"></ion-icon>
     </ion-card-header>
@@ -48,6 +48,8 @@
 
     </ion-card-content>
   </ion-card>
+
+  <div padding>Escolha o aluno desejado no campo acima para visualizar o gráfico de respostas.</div>
 
   <ion-card margin-vertical >
     <ion-card-header class="titleGraphic">

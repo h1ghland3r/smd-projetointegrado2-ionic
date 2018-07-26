@@ -12,7 +12,6 @@ import { LoginPage } from '../pages/login/login';
 import { PasswordPage } from '../pages/password/password'
 import { RegisterPage } from '../pages/register/register'
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { AvaliacaoPage } from '../pages/avaliacao/avaliacao';
 import { AvaliacaoComCadastrosPage } from '../pages/avaliacao-com-cadastros/avaliacao-com-cadastros';
 import { AvaliacaoSemCadastrosPage } from '../pages/avaliacao-sem-cadastros/avaliacao-sem-cadastros';
@@ -54,7 +53,6 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     PasswordPage,
     RegisterPage,
     HomePage,
-    ListPage,
     AvaliacaoPage,
     AvaliacaoComCadastrosPage,
     AvaliacaoSemCadastrosPage,
@@ -93,7 +91,6 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     PasswordPage,
     RegisterPage,
     HomePage,
-    ListPage,
     AvaliacaoPage,
     AvaliacaoComCadastrosPage,
     AvaliacaoSemCadastrosPage,
@@ -128,7 +125,7 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     SQLite,
     SMS,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DbServiceProvider,
+    DbServiceProvider
   ]
 })
 export class AppModule {

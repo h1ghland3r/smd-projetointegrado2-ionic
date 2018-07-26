@@ -74,6 +74,14 @@ export class RegisterPage {
     closeModal() {
         this.viewCtrl.dismiss();
     }
+
+    passwordType: string = 'password';
+    passwordIcon: string = 'eye-off';
+
+    hideShowPassword() {
+        this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+        this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+    }
     
     public abrirHome() {
         let options: NativeTransitionOptions = {

@@ -20,7 +20,7 @@
 
         <ion-item class="no-padding-left">
           <ion-label stacked>Nome do Grupo *</ion-label>
-          <ion-input formControlName="nome" type="text" text-right>{{nome}}</ion-input>
+          <ion-input formControlName="nome" type="text">{{nome}}</ion-input>
         </ion-item>
 
         <ion-item class="no-padding-left" *ngIf="(errorNome && submitAttempt)">
@@ -29,7 +29,7 @@
 
         <ion-item class="no-padding-left">
           <ion-label stacked>Escola *</ion-label>
-          <ion-select formControlName="escolaId" (ngModelChange)="getTurmasByEscolaId($event)" okText="Ok" cancelText="Cancelar">
+          <ion-select text-left formControlName="escolaId" (ngModelChange)="getTurmasByEscolaId($event)" okText="Ok" cancelText="Cancelar">
             <ion-option *ngFor="let escola of escolas" [value]="escola.id">{{escola.nome}}</ion-option>
           </ion-select>
         </ion-item>
@@ -40,7 +40,7 @@
 
         <ion-item class="no-padding-left">
             <ion-label stacked>Turma *</ion-label>
-            <ion-select formControlName="turmaId" (ngModelChange)="getAlunosByTurmaId($event)" okText="Ok" cancelText="Cancelar">
+            <ion-select text-left formControlName="turmaId" (ngModelChange)="getAlunosByTurmaId($event)" okText="Ok" cancelText="Cancelar">
               <ion-option *ngFor="let turma of turmas" [value]="turma.id" >{{turma.nome}}</ion-option>
             </ion-select>
         </ion-item>
@@ -51,7 +51,7 @@
 
         <ion-item class="no-padding-left">
             <ion-label stacked>Aluno 1 *</ion-label>
-            <ion-select formControlName="alunoId1" okText="Ok" cancelText="Cancelar">
+            <ion-select text-left formControlName="alunoId1" okText="Ok" cancelText="Cancelar">
               <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
             </ion-select>
         </ion-item>
@@ -62,7 +62,7 @@
 
         <ion-item class="no-padding-left">
             <ion-label stacked>Aluno 2 *</ion-label>
-            <ion-select formControlName="alunoId2" okText="Ok" cancelText="Cancelar">
+            <ion-select text-left formControlName="alunoId2" okText="Ok" cancelText="Cancelar">
               <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
             </ion-select>
         </ion-item>
@@ -73,7 +73,7 @@
 
         <ion-item class="no-padding-left">
             <ion-label stacked>Aluno 3 *</ion-label>
-            <ion-select formControlName="alunoId3" okText="Ok" cancelText="Cancelar">
+            <ion-select text-left formControlName="alunoId3" okText="Ok" cancelText="Cancelar">
               <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
             </ion-select>
         </ion-item>
@@ -84,7 +84,7 @@
 
         <ion-item class="no-padding-left">
             <ion-label stacked>Aluno 4 *</ion-label>
-            <ion-select formControlName="alunoId4" okText="Ok" cancelText="Cancelar">
+            <ion-select text-left formControlName="alunoId4" okText="Ok" cancelText="Cancelar">
               <ion-option *ngFor="let aluno of alunos" [value]="aluno.id">{{aluno.nome}}</ion-option>
             </ion-select>
         </ion-item>
@@ -97,7 +97,7 @@
 
       </form>
 
-  <button ion-button color="primary" class="button-top-margin" (click)="saveGrupo()" full>Salvar</button>
+  <button ion-button color="primary" class="button-top-margin button-actions" (click)="saveGrupo()" full>Salvar</button>
 
 
 </ion-list>
